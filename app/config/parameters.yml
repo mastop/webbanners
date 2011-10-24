@@ -1,0 +1,20 @@
+parameters:
+  mongo_server: mongodb://localhost:27017
+  mongo_server_prod: mongodb://localhost:27017
+  mongo_database: tuvais
+
+#  mailer_transport: gmail
+#  mailer_host: localhost
+#  mailer_user: meu@gmail.com
+#  mailer_password: 123gmail
+  mailer_transport: smtp
+  mailer_host: localhost
+  mailer_user: ~
+  mailer_password: ~
+
+  locale: pt_BR
+
+  secret: MastopInternetDevelopment_OhMyGodThisIsSoSecret
+  secretRemember: MastopInternetDevelopment_OhGoshThisIsSOSecret
+
+  themes_dir: %kernel.root_dir%/../src/Tuvais/CoreBundle/Resources/views/themes

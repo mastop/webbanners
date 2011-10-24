@@ -1,0 +1,32 @@
+core_frontend:
+    resource: "@TuvaisCoreBundle/Controller/Frontend/CoreController.php"
+    type: annotation
+city_frontend:
+    resource: "@TuvaisCoreBundle/Controller/Frontend/CityController.php"
+    type: annotation
+content_frontend:
+    resource: "@TuvaisCoreBundle/Controller/Frontend/ContentController.php"
+    type: annotation
+mailing_frontend:
+    resource: "@TuvaisCoreBundle/Controller/Frontend/MailingController.php"
+    type: annotation
+    prefix:   /mailing
+mailing_backend:
+    resource: "@TuvaisCoreBundle/Controller/Backend/MailingController.php"
+    type: annotation
+    prefix:   admin/mailing
+banner_backend:
+    resource: "@TuvaisCoreBundle/Controller/Backend/BannerController.php"
+    type: annotation
+    prefix:   admin/banner
+city_backend:
+    resource: "@TuvaisCoreBundle/Controller/Backend/CityController.php"
+    type: annotation
+    prefix:   /admin/cidade
+content_backend:
+    resource: "@TuvaisCoreBundle/Controller/Backend/ContentController.php"
+    type: annotation
+    prefix:   /admin/paginas
+html_frontend:
+    resource: "@TuvaisCoreBundle/Controller/Frontend/HtmlController.php"
+    type: annotation

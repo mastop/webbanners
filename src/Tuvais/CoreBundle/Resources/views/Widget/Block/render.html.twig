@@ -1,0 +1,23 @@
+{%for block in blocks%}
+{%if block.title is defined %}
+<div class="block{%if area == 'topL' or area == 'topR'%}Top{%endif%}">
+{%endif%}
+    {%if block.title is defined %}
+        <div class="block{%if area == 'topL' or area == 'topR'%}Top{%endif%}Title">{{block.title|raw}}</div>
+    {%endif%}
+    <div class="block{%if area == 'topL' or area == 'topR'%}Top{%endif%}Content">
+    {%if block.content is defined%}
+        {{block.content|raw}}   
+    {%endif%}
+    {%if block.widget is defined%}
+        {%if block.opts%}
+            {% render block.widget with block.opts %}
+        {%else%}
+            {% render block.widget %}
+        {%endif%}
+    {%endif%}
+    </div>
+{%if block.title is defined %}
+</div>
+{%endif%}
+{%endfor%}

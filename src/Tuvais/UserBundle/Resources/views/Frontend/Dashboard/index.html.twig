@@ -1,0 +1,40 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets '@TuvaisCoreBundle/Resources/views/themes/tuvais/Frontend/css/bundles/user/*' filter='?yui_css' output='static/system/css/user.all.css' %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="clear"></div>
+    <div class="grid_12">
+        <!-- the tabs -->
+        <ul class="tabs">
+            {% for k, tabs in tabs %}
+                <li>
+                    <a href="#{{k}}">{{tabs}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- tab "panes" -->
+        <div class="panes">
+            {% for pane in panes %}
+                <div>
+                    {% render pane %}
+                    <div class='clear'></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascriptsHead %}
+    {% javascripts output='static/system/js/core.abas.js'
+                   '@TuvaisCoreBundle/Resources/public/js/tabs/jquery.tools.min.js'
+                   '@TuvaisUserBundle/Resources/public/js/Frontend/dashboard.js'
+                   %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

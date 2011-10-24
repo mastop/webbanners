@@ -1,0 +1,9 @@
+web/bundles/
+web/themes/
+web/static/
+web/uploads/
+app/bootstrap*
+app/cache/*
+app/logs/*
+build/
+vendor/

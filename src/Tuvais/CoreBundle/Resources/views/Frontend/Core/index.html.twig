@@ -1,0 +1,17 @@
+{% extends '::frontend.html.twig' %}
+
+{% block content %}
+<div class="grid_6">
+{% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topL'} %}
+</div>
+<div class="grid_6">
+{% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topR'} %}
+</div>
+<div class="clear"></div>
+<div class="grid_8">
+CORPO DO SITE
+</div>
+<div class="grid_4">
+{% render 'TuvaisCoreBundle:Widget\\Block:render' %}
+</div>
+{% endblock %}

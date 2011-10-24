@@ -1,0 +1,21 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}{{ "Detalhes do usuário %username%"|trans({'%username%' : usuario.getUsername()}) }}{% endblock %}
+{% block content %}
+<div class="grid_12">
+    <h1>{{ "Detalhes do usuário %email%"|trans({'%email%' : usuario.getEmail()}) }}</h1>
+    {{ "<b>Nome: </b>"}} {{ usuario.getName() }}
+    <br />
+    {{ "<b>Email: </b>"}} {{ usuario.getEmail() }}    
+    <br />
+    {{ "<b>Data de cadastro: </b>"}} {{ usuario.getCreated() }}    
+    <br />
+    {{ "<b>Último login: </b>"}}
+    {% if  usuario.getLastLogin( )== 0 %}
+        {{ "Nunca"|trans }}
+    {% else %}
+        {{ usuario.getLastLogin() }}
+    {% endif %}
+    <div class='clear'></div>
+    <button class='button red' onclick='javascript:history.go(-1); return false;'>{{"Voltar"|trans}}</button>
+</div>
+{% endblock content %}  

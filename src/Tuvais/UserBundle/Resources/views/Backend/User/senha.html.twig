@@ -1,0 +1,13 @@
+{% extends '::backend.html.twig' %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+{% block content %}
+<div class="box grid_12 round_all">
+        <form class="block"  action="{{ path('admin_user_user_savepass')  }}" method="post" {{ form_enctype(form) }}>
+        
+    {{ form_widget(form) }}
+            <button class="button_colour"><span>{{ "Salvar"|trans }}</span></button>
+        </form>
+</div>
+{% endblock content %}  
