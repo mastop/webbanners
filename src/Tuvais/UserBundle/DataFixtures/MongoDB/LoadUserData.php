@@ -2,12 +2,13 @@
 
 namespace Tuvais\UserBundle\DataFixtures\MongoDB;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\UserBundle\Document\User;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface {
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
     private $container;
 
@@ -46,6 +47,10 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface {
         $user->setPassword("5wqjnkXHoGQ2ni1eOT8f83+uGjykKiVr35hfM90oSMX779xWoRxJQL6EYd8Mx4lV/bedVbWbQVhMBtMXoQC2JA==");
         $manager->persist($user);
         $manager->flush();
+    }
+    
+    public function getOrder() {
+        return 1;
     }
 
 }

@@ -2,12 +2,13 @@
 
 namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\CoreBundle\Document\City;
 
-class LoadCityData implements FixtureInterface, ContainerAwareInterface {
+class LoadCityData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
 
     private $container;
 
@@ -16,7 +17,7 @@ class LoadCityData implements FixtureInterface, ContainerAwareInterface {
     }
 
     public function load($manager) {
-        $cidadesEspeciais = array('Oferta Nacional', 'São Paulo', 'Rio de Janeiro', 'Campinas', 'Curitiba', 'Belo Horizonte');
+        $cidadesEspeciais = array('Evento Nacional', 'São Paulo', 'Rio de Janeiro', 'Campinas', 'Curitiba', 'Belo Horizonte');
         $cidadesNormais = array(
             'Americana',
             'Aracaju',
@@ -61,7 +62,7 @@ class LoadCityData implements FixtureInterface, ContainerAwareInterface {
             $City = new City();
             $City->setName($cidade);
             $City->setSpecial(1);
-            if($cidade == 'Oferta Nacional'){
+            if($cidade == 'Evento Nacional'){
                 $City->setOrder(0);
             }else{
                 $City->setOrder(1);
@@ -75,6 +76,10 @@ class LoadCityData implements FixtureInterface, ContainerAwareInterface {
             $manager->persist($City);
         }
         $manager->flush();
+    }
+
+    public function getOrder() {
+        return 0;
     }
 
 }
