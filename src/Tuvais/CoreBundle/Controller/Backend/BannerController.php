@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Tuvais\CoreBundle\Form\BannerType;
 use Tuvais\CoreBundle\Form\BannerOfferType;
 use Tuvais\CoreBundle\Document\Banner;
-use Tuvais\DealBundle\Document\Deal;
 use Tuvais\CoreBundle\Util\Upload;
 
 /**
@@ -61,11 +60,6 @@ class BannerController extends BaseController
         if('POST' == $request->getMethod()){
             $form->bindRequest($request);
             $query = $request->request->get($form->getName());
-            if(isset($query['deal'])){
-                $deal = $this->mongo('TuvaisDealBundle:Deal')->find($query['deal']);
-                $banner->setDeal($deal);
-                $banner->setCity($deal->getSource()->getCity());
-            }
             $data = $request->request->get($form->getName());
             $fileData = $request->files->get($form->getName());
             if($fileData['logo'] != null){
@@ -143,7 +137,6 @@ class BannerController extends BaseController
     public function scriptAction() {
         $script = '
             var ajaxPath = "' . $this->generateUrl('admin_core_banner_ajax', array(), true) . '";
-            var ajaxPath2 = "' . $this->generateUrl('admin_core_banner_ajax2', array(), true) . '";
             var errorMsg = "' . $this->trans('Erro ao executar o Ajax.') . '";
             ';
         return new Response($script);
@@ -179,26 +172,5 @@ class BannerController extends BaseController
         }else{
             return $this->redirectFlash($this->generateUrl('_home'), $this->trans('Área restrita!'), 'error');
         }
-    }
-    
-    /**
-     * Ajax das ofertas do user
-     * 
-     * @route("/ajax2/{user}", name="admin_core_banner_ajax2", defaults={"user" = null})
-     */
-    public function ajax2Action($user = null)
-    {
-        $dm = $this->dm();
-        $deal = $this->mongo('TuvaisDealBundle:Deal')->findByUser($user, true, true);
-        $radios = '';
-        if($deal && count($deal) > 0){
-            foreach($deal as $k => $v){
-                $radios .= '<label><input type="radio" name="banner[deal]" class="radioDeal" id="banner_deal_' . $v->getId() . '" value="' . $v->getId() . '" style="float:left; margin-right:5px;" /> ' . $v->getSource()->getTitle(70) . "</label><br />";
-            }    
-        }else{
-            $radios .= '<div class="alert alert_red">Este usuário não possui nenhuma oferta ativa. Selecione outro usuário.</div><div class="clearfix"></div>';
-        }
-        
-        return new Response($radios);
     }
 }

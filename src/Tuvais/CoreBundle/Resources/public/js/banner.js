@@ -11,11 +11,6 @@ $(function(){
     });
     $("#banner_user").result(function(event, data, formatted) {
         $('#userName').html(data[0]);
-        $('#userDeal').load(ajaxPath2 + "/" + data[1]);
-        $('#userDeal').slideDown('fast', function(){$('#banner_active').focus();});
         $("#bannerEnviar").addClass('hidden');
-    });
-    $(".radioDeal").live('click', function (){
-        $("#bannerEnviar").removeClass('hidden');
     });
 });

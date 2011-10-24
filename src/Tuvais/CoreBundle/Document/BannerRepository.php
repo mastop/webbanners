@@ -43,18 +43,7 @@ class BannerRepository extends BaseRepository
                 ->sort('name', 'asc')
                 ->getQuery()->execute();
     }
-    
-    /**
-     * Ativa / Desativa um banner à partir de um ID de Oferta
-     */
-    public function updateActiveByDeal($dealid, $active = false){
-        return $this->createQueryBuilder()
-                ->update()
-                ->field('deal.id')->equals($dealid)
-                ->field('active')->set($active)
-                ->getQuery()
-                ->execute();
-    }
+
     
     /**
      * Retorna um número específico de banners ativos por cidade

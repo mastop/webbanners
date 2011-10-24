@@ -66,14 +66,6 @@ class Banner
     protected $active = true;
 
     /**
-     * A oferta que será o banner
-     *
-     * @var object
-     * @ODM\ReferenceOne(targetDocument="Tuvais\DealBundle\Document\Deal")
-     */
-    protected $deal;
-    
-    /**
      * Cidade do Banner
      *
      * @ODM\ReferenceOne(targetDocument="Tuvais\CoreBundle\Document\City")
@@ -215,26 +207,6 @@ class Banner
         return $this->active;
     }
 
-    /**
-     * Set deal
-     *
-     * @param Tuvais\DealBundle\Document\Deal $deal
-     */
-    public function setDeal(\Tuvais\DealBundle\Document\Deal $deal)
-    {
-        $this->deal = $deal;
-    }
-
-    /**
-     * Get deal
-     *
-     * @return Tuvais\DealBundle\Document\Deal $deal
-     */
-    public function getDeal()
-    {
-        return $this->deal;
-    }
-    
     /**
      * Set city
      *

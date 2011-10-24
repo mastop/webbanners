@@ -67,10 +67,6 @@ doctrine_mongodb:
             server: %mongo_server_prod%
             options:
                 connect: true
-        crawler:
-            server: %mongo_server_prod%
-            options:
-                connect: true
     default_database: %mongo_database%_%kernel.environment%
     document_managers:
         default:
@@ -78,14 +74,6 @@ doctrine_mongodb:
             mappings:
                 StofDoctrineExtensionsBundle: false
             metadata_cache_driver: apc # array, apc, xcache, memcache
-        crawler:
-            connection: crawler
-            database: %mongo_database_crawler%_prod
-            auto_mapping: true
-            mappings:
-                StofDoctrineExtensionsBundle: false
-            metadata_cache_driver: apc # array, apc, xcache, memcache
-
 stof_doctrine_extensions:
     default_locale: pt_BR
     mongodb:

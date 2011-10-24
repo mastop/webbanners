@@ -23,17 +23,15 @@ class DashboardController extends BaseController
         $title = 'Minha Conta';
         $tabs = array(
             'mydata' => 'Meus Dados',
-            'myorders' => 'Minhas Compras',
-            'mydeals' => 'Minhas Ofertas',
-            'mysales' => 'Minhas Vendas',
-            'mybalance' => 'Meu Financeiro',
+            //'myorders' => 'Minhas Compras',
+            //'mysales' => 'Minhas Vendas',
+            //'mybalance' => 'Meu Financeiro',
         );
         $panes = array(
             'TuvaisUserBundle:Widget\\MyData:dashboard',
-            'TuvaisOrderBundle:Widget\\MyOrders:dashboard',
-            'TuvaisDealBundle:Widget\\MyDeals:dashboard',
-            'TuvaisOrderBundle:Widget\\MySales:dashboard',
-            'TuvaisOrderBundle:Widget\\MyBalance:dashboard',
+            //'TuvaisOrderBundle:Widget\\MyOrders:dashboard',
+            //'TuvaisOrderBundle:Widget\\MySales:dashboard',
+            //'TuvaisOrderBundle:Widget\\MyBalance:dashboard',
         );
         return array(
             'title' => $title,
