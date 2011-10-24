@@ -26,3 +26,5 @@ EXTENSÕES PHP:
 - intl
 - sqlite3 ou pdo_sqlite
 - json
+
+teste
