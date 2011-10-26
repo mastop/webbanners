@@ -21,6 +21,7 @@ class KernelRequestListener
     {
         if(HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
             if ($session = $event->getRequest()->getSession()) {
+                // Pegar a cidade
                 if(!$session->has('tuvais.user.city')) {
                     $ip2city = new IPtoCity($this->container, $_SERVER['REMOTE_ADDR']);
                     $cidade = (string)$this->container->get('mastop')->slugify($ip2city->getCity());
@@ -58,6 +59,7 @@ class KernelRequestListener
                 $locale = $this->container->get('request')->request->get('locale', 'pt_BR');
                 $this->container->get('translator')->setLocale($locale);
             }
+            //Pegar o father do usuário
         }
     }
 }

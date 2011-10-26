@@ -13,95 +13,201 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface {
 
-    /** @ODM\Id */
+    /**
+     * Id do usuário
+     * 
+     * @ODM\Id 
+     */
     protected $id;
 
-    /** @ODM\String */
+    /**
+     * Nome do usuário
+     * 
+     * @ODM\String
+     */
     protected $name;
 
-    /** @ODM\String */
+    /**
+     * Username do usuário
+     * 
+     * @ODM\String
+     */
     protected $username;
 
-    /** @ODM\String */
+    /**
+     * Senha do usuário
+     * 
+     * @ODM\String
+     */
     protected $password;
 
-    /** @ODM\String */
-    protected $actkey;  //se actkey preenchido e mailOk false quer dizer que usuario não ativo, se actkey preenchido e mailOk true quer dizer que quer recuperar a senha
-    /** @ODM\boolean */
+    /**
+     * se actkey preenchido e mailOk false quer dizer que usuario não ativo, se actkey preenchido e mailOk true quer dizer que quer recuperar a senha
+     * 
+     * @ODM\String
+     */
+    protected $actkey;
+    
+    /**
+     * Confirmação do e-mail
+     * 
+     * @ODM\boolean
+     */
     protected $mailOk;
 
-    /** @ODM\Int */
+    /**
+     * Status do usuário
+     * 
+     * @ODM\Int
+     */
     protected $status;
 
-    /** @ODM\String */
+    /**
+     * Endereõ do avatar
+     * 
+     * @ODM\String
+     */
     protected $avatar;
 
-    /** @ODM\String */
+    /**
+     * Linguagem do usuário
+     * 
+     * @ODM\String
+     */
     protected $lang;
 
-    /** @ODM\String */
+    /**
+     * Tema do usuário
+     * 
+     * @ODM\String
+     */
     protected $theme;
 
-    /** @ODM\Date */
+    /**
+     * Ultimo login do usuário
+     * 
+     * @ODM\Date
+     */
     protected $lastLogin;
 
-    /** @ODM\Date */
+    /**
+     * Data de cadastro do usuário
+     * 
+     * @ODM\Date
+     */
     protected $created;
 
-    /** @ODM\Date */
+    /**
+     * Data de edição do usuário
+     * 
+     * @ODM\Date
+     */
     protected $edited;
 
-    /** @ODM\String */
+    /**
+     * Permissões do usuário
+     * 
+     * @ODM\String
+     */
     protected $roles;
 
     /**
-     * Usuário dono da Oferta
+     * Cidade do uuário
      *
      * @ODM\ReferenceOne(targetDocument="Tuvais\CoreBundle\Document\City")
      */
     protected $city;
 
-    /** @ODM\String */
+    /**
+     * CPF do usuário
+     * 
+     * @ODM\String
+     */
     protected $cpf;
 
-    /** @ODM\String @ODM\UniqueIndex */
+    /**
+     * E-mail do usuário
+     * 
+     * @ODM\String @ODM\UniqueIndex
+     */
     protected $email;
 
-    /** @ODM\Date */
+    /**
+     * Data de nascimento do usuário
+     * 
+     * @ODM\Date
+     */
     protected $birth;
 
-    /** @ODM\String */
+    /**
+     * Gênero do usuário
+     * 
+     * @ODM\String
+     */
     protected $gender;
 
-    /** @ODM\Float */
-    protected $moneyFree;
-
-    /** @ODM\Float */
-    protected $moneyBlock;
-
-    /** @ODM\boolean */
+    /**
+     * Se quer receber e-mail do sistema
+     * 
+     * @ODM\boolean
+     */
     protected $newsletters;
 
-    /** @ODM\String */
+    /**
+     * Id do facebook do usuário
+     * 
+     * @ODM\String
+     */
     protected $facebookid;
 
-    /** @ODM\String */
+    /**
+     * Token do facebook
+     * 
+     * @ODM\String
+     */
     protected $facebookToken;
 
-    /** @ODM\String */
+    /**
+     * Id do twitter do usuário
+     * 
+     * @ODM\String
+     */
     protected $twitterid;
 
-    /** @ODM\String */
+    /**
+     * Twitter do usuário
+     * 
+     * @ODM\String
+     */
     protected $twitter;
 
-    /** @ODM\String */
+    /**
+     * Token do twitter
+     * 
+     * @ODM\String
+     */
     protected $twToken;
 
-    /** @ODM\String */
+    /**
+     * Chave do twitter
+     * 
+     * @ODM\String
+     */
     protected $twSecret;
     
-    /** @ODM\EmbedOne(targetDocument="Tuvais\UserBundle\Document\BankData") */
+    /**
+     * Informações bancarias do usuário
+     * 
+     * @ODM\EmbedOne(targetDocument="Tuvais\UserBundle\Document\BankData")
+     */
     protected $bankData;
+    
+    /**
+     * Usuário que "chamou" o usuário para o sistema
+     *
+     * @ODM\ReferenceOne(targetDocument="Tuvais\UserBundle\Document\User")
+     */
+    protected $father;
 
     public function getTwitter() {
         return $this->twitter;
@@ -455,5 +561,25 @@ class User implements UserInterface {
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set father
+     *
+     * @param Tuvais\UserBundle\Document\User $father
+     */
+    public function setFather(\Tuvais\UserBundle\Document\User $father)
+    {
+        $this->father = $father;
+    }
+
+    /**
+     * Get father
+     *
+     * @return Tuvais\UserBundle\Document\User $father
+     */
+    public function getFather()
+    {
+        return $this->father;
     }
 }
