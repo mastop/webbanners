@@ -60,6 +60,11 @@ class KernelRequestListener
                 $this->container->get('translator')->setLocale($locale);
             }
             //Pegar o father do usuário
+            if($this->container->get('request')->query->get('u')){
+                if(!$this->container->get('request')->getSession()->get('u')){
+                    $this->container->get('request')->getSession()->set('u', $this->container->get('request')->query->get('u'));
+                }
+            }
         }
     }
 }

@@ -456,6 +456,10 @@ class UserController extends BaseController {
                     $user->setMailOk(true);
                     $user->setStatus(4);
                 }
+                $father = $this->get('request')->getSession()->get('u');
+                if($father){
+                    
+                }
                 $user->setAvatar('');
                 $user->setLang('pt_BR');
                 $user->setTheme('');

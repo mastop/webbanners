@@ -21,6 +21,13 @@ class User implements UserInterface {
     protected $id;
 
     /**
+     * Código do usuário
+     * 
+     * @ODM\String
+     */
+    protected $code;
+    
+    /**
      * Nome do usuário
      * 
      * @ODM\String
@@ -581,5 +588,25 @@ class User implements UserInterface {
     public function getFather()
     {
         return $this->father;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string $code
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }
