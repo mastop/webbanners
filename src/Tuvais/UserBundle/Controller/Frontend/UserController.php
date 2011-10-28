@@ -456,10 +456,18 @@ class UserController extends BaseController {
                     $user->setMailOk(true);
                     $user->setStatus(4);
                 }
+                $code = $this->mastop()->generateCode();
+                while($this->mongo('TuvaisUserBundle:User')->has('code', $code)){
+                    $code = $this->mastop()->generateCode();
+                }
                 $father = $this->get('request')->getSession()->get('u');
                 if($father){
-                    
+                    $father = $this->mongo('TuvaisUserBundle:User')->findByCode($father);
+                    if($father){
+                        $user->setFather($father);
+                    }
                 }
+                $user->setCode($code);
                 $user->setAvatar('');
                 $user->setLang('pt_BR');
                 $user->setTheme('');
