@@ -32,6 +32,9 @@ assetic:
 #        testejs: css/text.css
     filters:
         cssrewrite: ~
+        less:
+            node: /usr/local/bin/node
+            node_paths: [/usr/local/lib/node]
         sass:
             apply_to: "\.sass$"
         yui_css:
@@ -112,8 +115,8 @@ mastop_system:
 tuvais_core:
     default_city: "sao-paulo"
     quova:
-      apikey: "200.1.MDAxODAwMDAwMHM0UzVQQUFV.MDAxODAwMDAwMHM0UzVQQUFV.rAS8PTJOuQYZ1g5QzZ4H94L4fIkXFfEC"
-      secret: "nhmR2vdE"
+      apikey: "100.hrh7drfjbhx87nt8avnz"
+      secret: "Qp9HKWZU"
       
 services:
   text.twig.extension:

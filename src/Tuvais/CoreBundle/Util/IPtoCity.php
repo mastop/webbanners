@@ -27,8 +27,8 @@ class IPtoCity {
             $timestamp = gmdate('U'); // 1200603038
             // echo $timestamp;   
             $sig = md5($apikey . $secret . $timestamp);
-            //$service = 'http://api.quova.com/'; // Chave em desenvolvimento
-            $service = 'http://api.quova.com/geodirectory/'; // Chave em produção
+            $service = 'http://api.quova.com/'; // Chave em desenvolvimento
+            //$service = 'http://api.quova.com/geodirectory/'; // Chave em produção
             $url = $service . $ver. $method. $ip . '?apikey=' . $apikey . '&sig='.$sig . '&format=xml';
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
