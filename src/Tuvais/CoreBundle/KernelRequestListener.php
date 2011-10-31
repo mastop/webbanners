@@ -4,6 +4,8 @@ namespace Tuvais\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Tuvais\CoreBundle\Util\IPtoCity;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,6 +68,28 @@ class KernelRequestListener
                     $this->container->getResponse()->setCookie('u', $this->container->get('request')->query->get('u'));
                 }
             }
+        }
+    }
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
+            return;
+        }
+
+        $response = $event->getResponse();
+        $request = $event->getRequest();
+        // se é ajax, vaza
+        if ($request->isXmlHttpRequest()) {
+            return;
+        }
+        
+        if($request->get('u')){ // Se tem U no request (POST, GET, o que for)
+            $response->setContent('<h1>Achei o U! '.$request->get('u').'</h1>');
+            $response->headers->setCookie(new Cookie(
+                'tuvaisU',
+                $request->get('u'),
+                time() + 15552000
+            ));
         }
     }
 }
