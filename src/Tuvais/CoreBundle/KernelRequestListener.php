@@ -61,13 +61,6 @@ class KernelRequestListener
                 $locale = $this->container->get('request')->request->get('locale', 'pt_BR');
                 $this->container->get('translator')->setLocale($locale);
             }
-            //Pegar o father do usuário
-            if($this->container->get('request')->query->get('u')){
-                if(!$this->container->get('request')->getSession()->get('u')){
-                    //$this->container->get('request')->getSession()->set('u', $this->container->get('request')->query->get('u'));
-                    $this->container->getResponse()->setCookie('u', $this->container->get('request')->query->get('u'));
-                }
-            }
         }
     }
     public function onKernelResponse(FilterResponseEvent $event)
@@ -84,11 +77,10 @@ class KernelRequestListener
         }
         
         if($request->get('u')){ // Se tem U no request (POST, GET, o que for)
-            $response->setContent('<h1>Achei o U! '.$request->get('u').'</h1>');
             $response->headers->setCookie(new Cookie(
                 'tuvaisU',
                 $request->get('u'),
-                time() + 15552000
+                time() + 604800
             ));
         }
     }
