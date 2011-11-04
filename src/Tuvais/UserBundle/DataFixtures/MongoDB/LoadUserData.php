@@ -14,7 +14,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
-    }
+    } 
 
     public function load($manager) {
         $citySP = $manager->getRepository('TuvaisCoreBundle:City')->findBySlug('sao-paulo');
