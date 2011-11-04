@@ -82,7 +82,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setName('twitterappid');
         $child->setTitle('ID Consumer key do Twitter');
         $child->setDesc('Código do aplicativo criado no twitter developers');
-        $child->setValue('gfOuKj8MmG8Wc2wGyGyDCg');
+        $child->setValue('G1WitELkS2NakPjyEsuAtw');
         $child->setOrder(6);
         $param->addChildren($child);
         
@@ -90,7 +90,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setName('twitterappsecret');
         $child->setTitle('Código Consumer secret no Twitter');
         $child->setDesc('Código gerado no site de developers do Twitter.');
-        $child->setValue('rJCedVjsmmnED4ZLgHiyUPNNBQ6vtTzkObarciVhs');
+        $child->setValue('mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM');
         $child->setOrder(7);
         $param->addChildren($child);
         
