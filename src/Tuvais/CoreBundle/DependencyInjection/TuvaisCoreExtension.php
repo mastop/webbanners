@@ -15,6 +15,7 @@ class TuvaisCoreExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('twig.xml');
         $loader->load('listener.xml');
+        $loader->load('services_googlemaps.xml');
         
         $processor = new Processor();
         $configuration = new Configuration();
