@@ -184,24 +184,4 @@ class City {
         return $this->state;
     }
 
-
-    /**
-     * Set coordinates
-     *
-     * @param Tuvais\CoreBundle\Document\Coordinates $coordinates
-     */
-    public function setCoordinates(\Tuvais\CoreBundle\Document\Coordinates $coordinates)
-    {
-        $this->coordinates = $coordinates;
-    }
-
-    /**
-     * Get coordinates
-     *
-     * @return Tuvais\CoreBundle\Document\Coordinates $coordinates
-     */
-    public function getCoordinates()
-    {
-        return $this->coordinates;
-    }
 }

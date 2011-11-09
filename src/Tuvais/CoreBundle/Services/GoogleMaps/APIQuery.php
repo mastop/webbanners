@@ -2,11 +2,12 @@
 namespace Tuvais\CoreBundle\Services\GoogleMaps;
 
 use Tuvais\CoreBundle\Services\GoogleMaps\Service\Result;
+use Tuvais\CoreBundle\Services\GoogleMaps\Service\QueryAbstract;
 use Tuvais\CoreBundle\Document\City;
 use Tuvais\CoreBundle\Document\Coordinates;
 
 
-class GeocodeAPIQuery extends QueryAbstract
+class APIQuery extends QueryAbstract
 {
     protected $serviceUri = 'http://maps.googleapis.com/maps/api/geocode/';
 
@@ -23,7 +24,7 @@ class GeocodeAPIQuery extends QueryAbstract
 */
     protected function parseResponse($response)
     {
-        switch(mb_strtolower($this->format)) {
+        switch($this->format) {
             case 'json':
                 $this->parseJson($response);
             break;
@@ -98,55 +99,23 @@ class GeocodeAPIQuery extends QueryAbstract
     private function buildResult(array $arrayData, $status)
     {
         $address = new City();
-        if (array_key_exists('street_number', $arrayData['address'])) {
-            $address->setStreetNumber($arrayData['address']['street_number']['long_name']);
+         if (array_key_exists('name', $arrayData['address'])) {
+            $address->setName($arrayData['address']['name']['long_name']);
+        }
+        if (array_key_exists('state', $arrayData['address'])) {
+            $address->setState($arrayData['address']['state']['long_name']);
         }
         
 
-        $corrdinates = new Coosdinates();
-        $coodinates->setLatitude($arrayData['coordinates']['latitude']);
+        $coordinates = new Coordinates();
+        $coordinates->setLatitude($arrayData['coordinates']['latitude']);
         $coordinates->setLongitude($arrayData['coordinates']['longitude']);
 
         $this->result->setAddress($address);
         $this->result->setCoordinates($coordinates);
-        $this->result->setSuccess(true);
+        //$this->result->setSuccess(true);
 
-        $this->buildStatus($status);
 
         return $this->result;
-    }
-
-    protected function buildStatus($status)
-    {
-        switch(mb_strtolower($status)) {
-            case 'ok':
-                $this->setResultStatus(Result::STATUS_OK, true);
-            break;
-
-            case 'zero_results':
-                $this->setResultStatus(Result::STATUS_ZERO_RESULTS, false);
-            break;
-
-            case 'over_query_limit':
-                $this->setResultStatus(Result::STATUS_OVER_QUERY_LIMIT, false);
-            break;
-
-            case 'request_denied':
-                $this->setResultStatus(Result::STATUS_REQUEST_DENIED, false);
-            break;
-
-            case 'invalid_request':
-                $this->setResultStatus(Result::STATUS_INVALID_REQUEST, false);
-            break;
-
-            default:
-                $this->setResultStatus(Result::STATUS_INVALID_RESPONSE, false);
-        }
-    }
-
-    protected function setResultStatus($status, $success)
-    {
-        $this->result->setStatus($status);
-        $this->result->setSuccess($success);
     }
 }
