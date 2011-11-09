@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tuvais\CoreBundle\Document\City;
 use Tuvais\CoreBundle\Document\Coordinates;
 use Tuvais\CoreBundle\Form\CityType;
+use Tuvais\CoreBundle\Form\CityEditType;
 use Tuvais\CoreBundle\Services\GoogleMaps\APIQuery;
 
 /**
@@ -39,25 +40,28 @@ class CityController extends BaseController {
         $msg = ($city) ? "Cidade Alterada" : "Cidade Criada";
         if (!$city) {
             $city = new City();
+            $form = $this->createForm(new CityType(), $city);
+        }else{
+            $form = $this->createForm(new CityEditType(), $city);
         }
-        $form = $this->createForm(new CityType(), $city);
         $request = $this->get('request');
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
-                //Google Maps Service
-                $geo = new APIQuery(array(
-                            'address' => $city->getName() . ',' . $city->getState() . ',' . 'Brazil',
-                            'sensor' => 'false',
-                        ));
-                $lat = $geo->getResult()->getCoordinates()->getLatitude();
-                $long = $geo->getResult()->getCoordinates()->getLongitude();
-                
-                $coordinates = new Coordinates();
-                $coordinates->setLatitude($lat);
-                $coordinates->setLongitude($long);
-                $city->setCoordinates($coordinates);
-                
+                if ($city->getId() == '' ) {
+                    //Google Maps Service  
+                    $geo = new APIQuery(array(
+                                'address' => $city->getName() . ',' . $city->getState() . ',' . 'Brazil',
+                                'sensor' => 'false',
+                            ));
+                    $lat = $geo->getResult()->getCoordinates()->getLatitude();
+                    $long = $geo->getResult()->getCoordinates()->getLongitude();
+
+                    $coordinates = new Coordinates();
+                    $coordinates->setLatitude($lat);
+                    $coordinates->setLongitude($long);
+                    $city->setCoordinates($coordinates);
+                }
                 $dm->persist($city);
                 $dm->flush();
                 return $this->redirectFlash($this->generateUrl('admin_core_city_index'), $msg);
