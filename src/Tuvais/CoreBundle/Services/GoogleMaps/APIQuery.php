@@ -113,7 +113,6 @@ class APIQuery extends QueryAbstract
 
         $this->result->setAddress($address);
         $this->result->setCoordinates($coordinates);
-        //$this->result->setSuccess(true);
 
 
         return $this->result;

@@ -4,7 +4,6 @@ namespace Tuvais\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
-use Tuvais\CoreBundle\Document\City;
 
 class CityEditType extends AbstractType {
 
