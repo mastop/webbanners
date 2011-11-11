@@ -23,6 +23,10 @@ city_backend:
     resource: "@TuvaisCoreBundle/Controller/Backend/CityController.php"
     type: annotation
     prefix:   /admin/cidade
+category_backend:
+    resource: "@TuvaisCoreBundle/Controller/Backend/CategoryController.php"
+    type: annotation
+    prefix:   /admin/categoria
 content_backend:
     resource: "@TuvaisCoreBundle/Controller/Backend/ContentController.php"
     type: annotation
