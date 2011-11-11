@@ -23,6 +23,7 @@ class KernelRequestListener
     {
         if(HttpKernelInterface::MASTER_REQUEST === $event->getRequestType()) {
             if ($session = $event->getRequest()->getSession()) {
+                // Pegar a cidade
                 if(!$session->has('tuvais.user.city')) {
                     $ip2city = new IPtoCity($this->container, $_SERVER['REMOTE_ADDR']);
                     $cidade = (string)$this->container->get('mastop')->slugify($ip2city->getCity());
@@ -76,11 +77,10 @@ class KernelRequestListener
         }
         
         if($request->get('u')){ // Se tem U no request (POST, GET, o que for)
-            $response->setContent('<h1>Achei o U! '.$request->get('u').'</h1>');
             $response->headers->setCookie(new Cookie(
                 'tuvaisU',
                 $request->get('u'),
-                time() + 15552000
+                time() + 604800
             ));
         }
     }

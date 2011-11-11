@@ -456,6 +456,18 @@ class UserController extends BaseController {
                     $user->setMailOk(true);
                     $user->setStatus(4);
                 }
+                $code = $this->mastop()->generateCode();
+                while($this->mongo('TuvaisUserBundle:User')->has('code', $code)){
+                    $code = $this->mastop()->generateCode();
+                }
+                $father = $this->get('request')->cookies->get('tuvaisU');
+                if($father){
+                    $father = $this->mongo('TuvaisUserBundle:User')->findByCode($father);
+                    if($father){
+                        $user->setFather($father);
+                    }
+                }
+                $user->setCode($code);
                 $user->setAvatar('');
                 $user->setLang('pt_BR');
                 $user->setTheme('');
@@ -695,6 +707,16 @@ class UserController extends BaseController {
                 $user->setRoles('ROLE_USER');
                 $city = $this->mongo('TuvaisCoreBundle:City')->findOneById($cityId);
                 $user->setCity($city);
+                while($this->mongo('TuvaisUserBundle:User')->has('code', $code)){
+                    $code = $this->mastop()->generateCode();
+                }
+                $father = $this->get('request')->cookies->get('tuvaisU');
+                if($father){
+                    $father = $this->mongo('TuvaisUserBundle:User')->findByCode($father);
+                    if($father){
+                        $user->setFather($father);
+                    }
+                }
                 $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
                 $chars = "abcdefghijkmnopqrstuvwxyz023456789";
                 srand((double) microtime() * 1000000);
@@ -862,6 +884,17 @@ class UserController extends BaseController {
                         $user->setTheme('');
                         $user->setCreated(new \DateTime());
                         $user->setRoles('ROLE_USER');
+                        $code = $this->mastop()->generateCode();
+                        while($this->mongo('TuvaisUserBundle:User')->has('code', $code)){
+                            $code = $this->mastop()->generateCode();
+                        }
+                        $father = $this->get('request')->cookies->get('tuvaisU');
+                        if($father){
+                            $father = $this->mongo('TuvaisUserBundle:User')->findByCode($father);
+                            if($father){
+                                $user->setFather($father);
+                            }
+                        }
                         $city = $this->mongo('TuvaisCoreBundle:City')->findOneById($cityId);
                         $user->setCity($city);
                         $user->setCpf('');
