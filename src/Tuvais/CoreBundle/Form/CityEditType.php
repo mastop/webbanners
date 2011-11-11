@@ -5,7 +5,7 @@ namespace Tuvais\CoreBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class CityType extends AbstractType {
+class CityEditType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder->add('id', 'hidden');
@@ -16,6 +16,7 @@ class CityType extends AbstractType {
             'required' => false,
         ));
         $builder->add('order', 'text', array('label'=>'Ordem', 'attr'=>array('class'=>'small')));
+        $builder->add('coordinates', new CoordinatesType(), array('label'=>'Coordenadas'));
     }
 
     public function getDefaultOptions(array $options) {
