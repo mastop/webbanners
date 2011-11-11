@@ -133,5 +133,4 @@ class UserRepository extends BaseRepository implements UserProviderInterface {
     public function supportsClass($class) {
         return $class === 'Tuvais\UserBundle\Document\User';
     }
-
 }

@@ -609,4 +609,19 @@ class User implements UserInterface {
     {
         return $this->code;
     }
+    
+    /**
+     * Pegar se o usuário se cadastrou com uma rede social.
+     * 
+     * @return String
+     */
+    public function getSocial(){
+        if($this->getTwitter()){
+            return "Twitter";
+        }elseif($this->getFacebookid()){
+            return "Facebook";
+        }else{
+            return "-";
+        }
+    }
 }
