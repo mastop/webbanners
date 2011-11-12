@@ -28,10 +28,6 @@ class APIQuery extends QueryAbstract
             case 'json':
                 $this->parseJson($response);
             break;
-
-            case 'xml':
-                $this->parseXml($response);
-            break;
         }
 
         return $this->result;
@@ -40,29 +36,9 @@ class APIQuery extends QueryAbstract
     protected function parseJson($json)
     {
         $response = json_decode($json, true);
-        if (!is_array($response)) {
-            $this->setResultStatus(Result::STATUS_INVALID_RESPONSE, false);
-            return;
-        }
         
-        if (!array_key_exists('results', $response) || !array_key_exists('status', $response)) {
-            $this->setResultStatus(Result::STATUS_INVALID_RESPONSE, false);
-            return;
-        }
-
-        $resultCount = count($response['results']);
-        if ($resultCount <= 0) {
-            $this->setResultStatus(Result::STATUS_ZERO_RESULTS, false);
-            return;
-        }
-
-        if ($resultCount > 1) {
-            $this->setResultStatus(Result::STATUS_NOT_SPECIFIC_ENOUGH, false);
-            return;
-        }
-
         $data = $response['results'][0];
-        $status = $response['status'];
+        //$status = $response['status'];
 
         $arrayData = array(
             'address' => array(),
@@ -87,16 +63,11 @@ class APIQuery extends QueryAbstract
         // parsing coordinates
         $arrayData['coordinates']['latitude'] = $data['geometry']['location']['lat'];
         $arrayData['coordinates']['longitude'] = $data['geometry']['location']['lng'];
-
-        return $this->buildResult($arrayData, $status);
+        
+        return $this->buildResult($arrayData/*, $status*/);
     }
 
-    private function parseXml($xml)
-    {
-        // TODO
-    }
-
-    private function buildResult(array $arrayData, $status)
+    private function buildResult(array $arrayData/*, $status*/)
     {
         $address = new City();
          if (array_key_exists('name', $arrayData['address'])) {
@@ -106,7 +77,6 @@ class APIQuery extends QueryAbstract
             $address->setState($arrayData['address']['state']['long_name']);
         }
         
-
         $coordinates = new Coordinates();
         $coordinates->setLatitude($arrayData['coordinates']['latitude']);
         $coordinates->setLongitude($arrayData['coordinates']['longitude']);

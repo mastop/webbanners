@@ -6,6 +6,7 @@ use Tuvais\CoreBundle\Document\City;
 use Tuvais\CoreBundle\Document\Coordinates;
 
 class Result {
+    /*
     const STATUS_OK = 'OK';
     const STATUS_ZERO_RESULTS = 'ZERO_RESULTS';
     const STATUS_OVER_QUERY_LIMIT = 'OVER_QUERY_LIMIT';
@@ -13,7 +14,7 @@ class Result {
     const STATUS_INVALID_REQUEST = 'INVALID_REQUEST';
     const STATUS_INVALID_RESPONSE = 'INVALID_RESPONSE';
     const STATUS_NOT_SPECIFIC_ENOUGH = 'NOT_SPECIFIC_ENOUGH';
-
+*/
     /* @var City */
 
     protected $address;
