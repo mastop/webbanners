@@ -29,6 +29,15 @@ class UserRepository extends BaseRepository implements UserProviderInterface {
     public function findByUsername($username) {
         return $this->findOneBy(array('username' => $username));
     }
+    
+    /**
+     * Encontra o user com o code fornecido
+     * @param string $code
+     * @return object 
+     */
+    public function findByCode($code) {
+        return $this->findOneBy(array('code' => $code));
+    }
 
     /**
      * Encontra o user com o email fornecido
@@ -124,5 +133,4 @@ class UserRepository extends BaseRepository implements UserProviderInterface {
     public function supportsClass($class) {
         return $class === 'Tuvais\UserBundle\Document\User';
     }
-
 }
