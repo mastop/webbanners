@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             
             new Mastop\SystemBundle\MastopSystemBundle(),
             new Tuvais\UserBundle\TuvaisUserBundle(),
+            new Tuvais\TicketBundle\TuvaisTicketBundle(),
             new Mastop\TesteBundle\MastopTesteBundle(),
             new Mastop\MenuBundle\MastopMenuBundle(),
             new Symfony\Bundle\DoctrineMigrationsBundle\DoctrineMigrationsBundle(),

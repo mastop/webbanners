@@ -1,0 +1,10 @@
+user_frontend:
+    resource: "@TuvaisUserBundle/Controller/Frontend/UserController.php"
+    type: annotation
+user_dashboard_frontend:
+    resource: "@TuvaisUserBundle/Controller/Frontend/DashboardController.php"
+    type: annotation
+user_backend:
+    resource: "@TuvaisUserBundle/Controller/Backend/UserController.php"
+    type: annotation
+    prefix:   /admin/usuario
