@@ -1,0 +1,23 @@
+{% extends '::backend.html.twig' %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+{% block content %}
+    <div class="box grid_12 round_all">
+        {% if usuario %}
+            <form class="block" action="{{ path('admin_user_user_save',{ 'id':usuario.getId() }) }}" method="post" {{ form_enctype(form) }}>
+        {% else %}
+            <form class="block" action="{{ path('admin_user_user_save') }}" method="post" {{ form_enctype(form) }}>
+        {% endif%}
+        {{ form_widget(form) }}
+                <button class="button_colour"><span>{{ "Salvar"|trans }}</span></button>
+            </form>
+</div>
+{% endblock content %}  
+{% block javascripts %}
+        <script type="text/javascript" src="{{ path('user_user_script') }}"></script>
+        {% javascripts output='static/system/js/newuser.js' 
+                '@TuvaisUserBundle/Resources/public/js/Frontend/newUser.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+{% endblock %}

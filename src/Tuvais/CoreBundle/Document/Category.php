@@ -32,6 +32,7 @@ Class Category {
      * Nome da Categoria
      * 
      * @var string
+     * @Gedmo\Sluggable
      * @ODM\String
      */
     protected $name;
