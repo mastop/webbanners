@@ -1,7 +1,7 @@
 services:
     mastop.user:
         class: Tuvais\UserBundle\Security\DocumentUserProvider
-        arguments: [@doctrine.odm.mongodb.security.user.document_manager, Tuvais\UserBundle\Document\User]
+        arguments: [@doctrine.odm.mongodb, Tuvais\UserBundle\Document\User]
     mastop.user.success_handler:
         class: Tuvais\UserBundle\Security\SuccessHandler
         arguments: [@router]

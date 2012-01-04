@@ -34,7 +34,7 @@ assetic:
         cssrewrite: ~
         less:
             node: /usr/local/bin/node
-            node_paths: [/usr/local/lib/node]
+            node_paths: [/usr/local/lib/node_modules]
         sass:
             apply_to: "\.sass$"
         yui_css:
@@ -115,8 +115,8 @@ mastop_system:
 tuvais_core:
     default_city: "sao-paulo"
     quova:
-      apikey: "100.hrh7drfjbhx87nt8avnz"
-      secret: "Qp9HKWZU"
+      apikey: "100.gp863cz2gt3gk6p2nxay"
+      secret: "cqTd9Psm"
       
 services:
   text.twig.extension:
