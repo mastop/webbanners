@@ -1,4 +1,6 @@
 TuvaisCoreBundle:
+    resource: "@TuvaisTicketBundle/Resources/config/routing/routing.yml"
+TuvaisCoreBundle:
     resource: "@TuvaisCoreBundle/Resources/config/routing/routing.yml"
 TuvaisUserBundle:
    resource:  "@TuvaisUserBundle/Resources/config/routing/routing.yml"

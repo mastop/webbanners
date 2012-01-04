@@ -56,6 +56,6 @@ mastop_system:
     active_theme: "tuvais"
     twitter:
        file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
-       consumer_key: JUTf0s1U3zU8x0yhAWvUYw
-       consumer_secret: 7AQZGatGKntBoJBS2l1GS8kYzCxHq9affitEYbHsoNs
+       consumer_key: G1WitELkS2NakPjyEsuAtw
+       consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
        callback_url: http://tuvais/usuario/twitter/back

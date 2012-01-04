@@ -4,6 +4,7 @@ namespace Tuvais\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Tuvais\CoreBundle\Document\Coordinates;
 
 /**
  * Representa uma cidade
@@ -18,8 +19,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *   @ODM\Index(keys={"special"="desc", "order"="asc", "name"="asc"})
  * })
  */
-class City
-{
+class City {
+
     /**
      * ID da Cidade
      *
@@ -46,7 +47,7 @@ class City
      * @ODM\String
      */
     protected $slug;
-    
+
     /**
      * Ordem
      *
@@ -54,7 +55,7 @@ class City
      * @ODM\Int
      */
     protected $order = 0;
-    
+
     /**
      * Destaque
      *
@@ -63,8 +64,24 @@ class City
      */
     protected $special = false;
 
-    public function isSpecial()
-    {
+    /**
+     * Estado
+     *
+     * @var string
+     * @ODM\string
+     */
+    protected $state;
+
+    /**
+     * Coordenadas
+     * 
+     * 
+     * @var float
+     *  @ODM\EmbedOne( targetDocument ="Tuvais\CoreBundle\Document\Coordinates") 
+     */
+    protected $coordinates;
+
+    public function isSpecial() {
         return ($this->getSpecial()) ? "Sim" : "Não";
     }
 
@@ -73,8 +90,7 @@ class City
      *
      * @return id $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -83,8 +99,7 @@ class City
      *
      * @param string $name
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
@@ -93,8 +108,7 @@ class City
      *
      * @return string $name
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -103,8 +117,7 @@ class City
      *
      * @param string $slug
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
     }
 
@@ -113,8 +126,7 @@ class City
      *
      * @return string $slug
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -123,8 +135,7 @@ class City
      *
      * @param int $order
      */
-    public function setOrder($order)
-    {
+    public function setOrder($order) {
         $this->order = $order;
     }
 
@@ -133,8 +144,7 @@ class City
      *
      * @return int $order
      */
-    public function getOrder()
-    {
+    public function getOrder() {
         return $this->order;
     }
 
@@ -143,8 +153,7 @@ class City
      *
      * @param boolean $special
      */
-    public function setSpecial($special)
-    {
+    public function setSpecial($special) {
         $this->special = $special;
     }
 
@@ -153,8 +162,46 @@ class City
      *
      * @return boolean $special
      */
-    public function getSpecial()
-    {
+    public function getSpecial() {
         return $this->special;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     */
+    public function setState($state) {
+        $this->state = $state;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string $state
+     */
+    public function getState() {
+        return $this->state;
+    }
+
+
+    /**
+     * Set coordinates
+     *
+     * @param Tuvais\CoreBundle\Document\Coordinates $coordinates
+     */
+    public function setCoordinates(\Tuvais\CoreBundle\Document\Coordinates $coordinates)
+    {
+        $this->coordinates = $coordinates;
+    }
+
+    /**
+     * Get coordinates
+     *
+     * @return Tuvais\CoreBundle\Document\Coordinates $coordinates
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
     }
 }
