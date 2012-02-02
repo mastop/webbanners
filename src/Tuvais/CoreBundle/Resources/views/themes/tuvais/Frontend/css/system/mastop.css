@@ -1,71 +1,7 @@
 /*Fonte para a linha abaixo: http://www.vcarrer.com/2009/06/1-line-css-grid-framework.html */
 .dp50 {width:50%;  float:left;  display: inline;  *margin-right:-1px; }
 /* Geral */
-body {
-  font-family: arial,helvetica,freesans,sans-serif;
-  background-color: #FFF;
-  color: #666;
-  background: url(../images/header/bg.png) repeat-x;
-}
-
-a {
-  color: #2072A5;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #D87D08;
-}
-
-strong
-{
-    font-weight: bold;
-}
-
-em
-{
-    font-style: italic;
-}
-
-h1, h2, h3
-{
-    color: #666;
-    margin: 10px 0;
-}
-h1 span, h2 span, h3 span{color:#000;}
-#closeNL{margin-top:6px;}
-.closeAlert, #closeNL{float: right; background: url('../images/sprite.png') no-repeat -4px -26px; width: 30px; height: 30px; text-indent: -9999em; overflow: hidden; outline: none;}
-.closeAlert:hover, #closeNL:hover{background-position: -4px -56px;}
-.alert{
-    color: #FFF;
-    height: 40px;
-    display: none;
-    font-size: 1.2em;
-}
-.alert div.container_12 {
-    height: 26px;
-    padding: 7px 0;
-}
-.alert_error{
-      background: #a60000;
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eb0000', endColorstr='#a60000');
-      background: -webkit-gradient(linear, left top, left bottom, from(#eb0000), to(#a60000));
-      background: -moz-linear-gradient(top, #eb0000, #a60000);
-}
-.alert_success{
-      background: #007b03;
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#08b40d', endColorstr='#007b03');
-      background: -webkit-gradient(linear, left top, left bottom, from(#08b40d), to(#007b03));
-      background: -moz-linear-gradient(top, #08b40d, #007b03);   
-}
-.alert_notice{
-      background: #00388b;
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#146aea', endColorstr='#00388b');
-      background: -webkit-gradient(linear, left top, left bottom, from(#146aea), to(#00388b));
-      background: -moz-linear-gradient(top, #146aea, #00388b);   
-}
 .noBG{background: transparent; border: 0; text-shadow:none;}
-.hidden{display: none;}
 span.arrow{float: left; background: url('../images/sprite.png') no-repeat -5px -3px; width: 30px; height: 19px; margin-top: 5px; margin-right: 10px;}
 .floatL{float: left}
 .floatR{float: right}
@@ -81,19 +17,6 @@ span.arrow{float: left; background: url('../images/sprite.png') no-repeat -5px -
 .aR{text-align: right;}
 .strong{font-weight: 700;}
 
-.info{
-    background: #f2f2f2 url('../images/info.png') 5px center no-repeat;
-    padding: 3px 3px 3px 30px;
-    font-size: 12px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border: 1px solid #dfdfdf;
-    margin-bottom: 10px;
-    
-
-}
-
 .loading, .ac_loading{background: #f2f2f2 url('/bundles/mastopsystem/images/load.gif') center center no-repeat !important}
 
 /* Tabelas */
@@ -104,54 +27,18 @@ td{padding: 3px;}
 /*/Geral */
 
 /* Header */
-#labelNL{color: #FFF; font-size: 1.2em; float: left; line-height: 30px; margin-right: 10px; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);}
-#topNL{
-  background: #c770008;
-  /* for non-css3 browsers */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF8C00', endColorstr='#c77000');
-  /* for IE */
-  background: -webkit-gradient(linear, left top, left bottom, from(#FF8C00), to(#c77000));
-  /* for webkit browsers */
-  background: -moz-linear-gradient(top, #FF8C00, #c77000);
-  /* for firefox 3.6+ */
-  height: 40px;
-  display: none;
-}
-#cityNL{width: 200px;}
-#mailNL{
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    font-size: 15px;
-    margin-left: 5px;
-    height: 23px;
-    margin-top: -5px;
-}
-#mailNL.idleField{
-    color: #999;
-    border: 2px solid #DF7F06;
-    padding: 1px 1px 1px 9px;
-    background: #FFF;
-}
-#mailNL.focusField{
-    color: #666;
-    border: 2px solid #c56e00;
-    padding: 1px 1px 1px 9px;
-    background: #fff4e6;
-}
-#formNL{padding: 5px 0; height: 30px;}
-#hd_wrap { /* Div que cobre todo o header */
-
+header{
+    margin-top: 10px;
 }
 #hd {/* Div que cobre o header 960 */}
 
 
-#logo {height: 87px;}
-#logo a{height: 87px; width: 380px; float: left; background: url(../images/header/ReUrbano.png) no-repeat; text-indent: -9999em; overflow: hidden;}
-#cities{height: 58px; line-height: 40px;}
+#logo{height: 110px; width: 202px; float: left; background: url(../images/header/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
 #login{height: 28px; text-align: right;}
-#menuTop, #menuMain{height: 34px;}
-#menuMain{}
+#menuTop{padding-top: 10px;}
+#search{margin-top: 18px;}
+#menuMain{background-color: #333; padding:5px; margin-bottom: 20px; color:#F00;}
+#menuMain h1, #menuMain h1 small{color:#FFF;}
 #breadcrumbs{height: 25px; padding-top: 10px;}
 #breadcrumbs div{float: left; margin-right: 5px;}
 #breadcrumbs div span{font-weight: 700; font-size: 1.1em;}
@@ -166,28 +53,7 @@ td{padding: 3px;}
 #headUser{text-align: right; margin-top: 5px; height: 32px;}
 #headUser span{margin-right: 5px}
 
-#search{height: 83px;}
-#search form{margin-left: 45px; height: 65px; padding-top: 18px;}
-#searchDiv{float: right; position: relative; width: 400px;}
-#searchDiv button{position: absolute; right: 3px; margin-top: 6px;}
-#search #q{width: 317px; padding-left: 10px; height: 29px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-	font-size: 15px;
-}
-#search #q.idleField{
-    color: #999;
-    border: 1px solid #d9d9d9;
-    padding: 2px 72px 2px 10px;
-    background: #f6f6f6;
-}
-#search #q.focusField{
-    color: #666;
-    border: 2px solid #d9d9d9;
-    padding: 1px 71px 1px 9px;
-    background: #FFF;
-}
+
 .twLoginBtn, .fbLoginBtn{margin-top: 5px; float: left; background: url('../images/sprite.png') no-repeat; width: 136px; height: 22px; text-indent: -9999em; overflow: hidden; line-height: 500px;}
 .twLoginBtn{background-position: -181px -31px;}
 .twLoginBtn:hover{background-position: -181px -4px;}
@@ -256,22 +122,7 @@ td{padding: 3px;}
     border: 1px solid #333;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-#sellButton{
-
-}
-#sellButton a{
-   -webkit-border-radius: 3px;
-   -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 3px rgba(199, 112, 0, 0.4);
-    -moz-box-shadow: 0 1px 3px rgba(199, 112, 0, 0.4);
-    box-shadow: 0 1px 3px rgba(199, 112, 0, 0.4);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    height: 14px;
-    width: 118px;
-    padding: 10px;
-    text-align: center;
-}
+#call-to-action{font-size: 17px;}
 /* /Header */
 
 /* Body */
@@ -514,52 +365,6 @@ div.blockTopContent div.dealExpires{
     background: url(../images/twitter-bloco.gif) no-repeat;
     overflow: hidden;
 }
-/* Forms */
-input.errorField {
-    border-color: #F00 !important;
-}
-input[type="search"] {
-  -webkit-appearance: textfield;
-}
-input[type="text"],input[type="password"],input[type="email"],input[type="number"],textarea{
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    margin: 3px 0;
-    width: 200px;
-}
-input.idleField, textarea.idleField{
-    color: #999;
-    border: 1px solid #d9d9d9;
-    padding: 3px 3px 3px 5px;
-    background: #f6f6f6;
-}
-input.focusField, textarea.focusField{
-    color: #666;
-    border: 2px solid #d9d9d9;
-    padding: 2px 2px 2px 4px;
-    background: #FFF;
-}
-input.small, textarea.small{width: 50px;}
-input.medium, textarea.medium{width: 350px;}
-input.big, textarea.big{width: 460px;} /* O suficiente para caber em um grid_6 */
-label{
-    font-weight: 700;
-    display: block;
-    margin: 3px 0;
-}
-label small{
-    font-weight: 400;
-    display: block;
-    font-size: 0.9em;
-}
-label input{
-    float: left;
-    margin-top: 1px;
-}
-
-#paymentForm{text-align: center; margin-top: 30px;}
-
 /* Página do Deal */
 #dealTitle{font-size: 20px; margin: 0; line-height: 1.1em;}
 #dealShare{text-align: right; margin-bottom: 15px;}
@@ -613,12 +418,12 @@ table#dealCart td{
   background: url(../images/footer/bg.png) repeat-x;
 }
 #ft {/* Div que cobre o footer 960 */}
-#ftBelt{height: 118px; margin-bottom: 15px;}
-#ftBelt a{width: 300px; height: 118px; float: left; background: url(../images/footer/ReUrbano.png) no-repeat; text-indent: -9999em; overflow: hidden;}
+#ftLogo{height: 118px; margin-bottom: 15px;}
+#ftLogo a{width: 107px; height: 93px; float: left; background: url(../images/footer/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
 #navFoot{text-align: left; border-bottom: 1px solid #BBB; margin-bottom: 10px;}
 #navFoot ul li{list-style: none outside none; margin-left: 15px;}
 
-#copyright {text-shadow: 1px 1px 0 #FFF;color: #999;}
+#copyright {text-shadow: 1px 1px 0 #FFF;color: #999; font-family: "museo-sans-rounded",sans-serif;}
 #poweredBy{text-align: right;}
 #poweredBy a{width: 177px; height: 28px; float: right; background: url(../images/footer/mastop-internet-development.png) no-repeat; line-height: 999em; overflow: hidden;}
 /* /Footer */

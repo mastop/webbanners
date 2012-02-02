@@ -26,15 +26,15 @@
 
 {% block widget_choice_options %}
 {% spaceless %}
-    {% for choice, label in options %}
-        {% if _form_is_choice_group(label) %}
-            <optgroup label="{{ choice|trans }}">
-                {% for nestedChoice, nestedLabel in label %}
-                    <option value="{{ nestedChoice }}"{% if _form_is_choice_selected(form, nestedChoice) %} selected="selected"{% endif %}>{{ nestedLabel|trans }}</option>
+    {% for index, choice in options %}
+        {% if _form_is_choice_group(choice) %}
+            <optgroup label="{{ index|trans({}, translation_domain) }}">
+                {% for nested_choice in choice %}
+                    <option value="{{ nested_choice.value }}"{% if _form_is_choice_selected(form, nested_choice) %} selected="selected"{% endif %}>{{ nested_choice.label|trans({}, translation_domain) }}</option>
                 {% endfor %}
             </optgroup>
         {% else %}
-            <option value="{{ choice }}"{% if _form_is_choice_selected(form, choice) %} selected="selected"{% endif %}>{{ label|trans }}</option>
+            <option value="{{ choice.value }}"{% if _form_is_choice_selected(form, choice) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
         {% endif %}
     {% endfor %}
 {% endspaceless %}
@@ -52,12 +52,12 @@
     {% else %}
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
-            <option value="">{{ empty_value|trans }}</option>
+            <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
         {% if preferred_choices|length > 0 %}
             {% set options = preferred_choices %}
             {{ block('widget_choice_options') }}
-            {% if choices|length > 0 %}
+            {% if choices|length > 0 and separator is not none %}
                 <option disabled="disabled">{{ separator }}</option>
             {% endif %}
         {% endif %}
@@ -73,7 +73,7 @@
     {% if required %}
         {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
     {% endif %}
-            <label class="mT5 mB5"><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> <small>{{ label|trans }}</small></label>
+            <div class="clearfix inputs-list aR"><label><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans }} </label></div>
 {% endspaceless %}
 {% endblock checkbox_widget %}
 
@@ -82,7 +82,7 @@
     {% if required %}
         {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
     {% endif %}
-    <label class="mT5 mB5"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> <small>{{ label|trans }}</small></label>
+                    <div class="clearfix inputs-list aR"><label><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans }} </label></div>
 {% endspaceless %}
 {% endblock radio_widget %}
 
@@ -231,10 +231,12 @@
 
 {% block field_row %}
 {% spaceless %}
-    <div>
+     <div class="clearfix">
         {{ form_label(form, label|default(null)) }}
-        {{ form_errors(form) }}
+        <div class="input">
         {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        </div>
     </div>
 {% endspaceless %}
 {% endblock field_row %}

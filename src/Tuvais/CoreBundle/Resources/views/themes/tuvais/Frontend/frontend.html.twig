@@ -2,9 +2,8 @@
 {% form_theme form ':Form:form.html.twig' %}
 {% endif %}
 {% set protocol = mastop_protocol() %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="pt_BR" lang="pt_BR">
-<head>
+{% set redirURL = app.session.get('_security.target_path') %}
+<!doctype html>
 <!--
                                              ,d                              
                                              88                              
@@ -18,224 +17,238 @@
 
 Mastop Internet Development                          http://www.mastop.com.br
 
--->    
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta http-equiv="content-language" content="{% block contentLanguage "pt_BR" %}" />
-<meta name="robots" content="index,follow" />
-<meta name="keywords" content="{% block metaKeywords mastop_param('system.seo.keywords') %}" />
-<meta name="description" content="{% block metaDescription mastop_param('system.seo.description') %}" />
-<meta name="rating" content="general" />
-<meta name="author" content="Mastop Internet Development" />
-<meta name="copyright" content="Copyright © 2003-{{ "now"|date('Y') }}" />
-<meta name="generator" content="Mastop Internet Development" />
-<link href="{% block favicon asset('/favicon.ico') %}" rel="SHORTCUT ICON" />
-<title>{% block title title|default(mastop_param('system.site.name'))|trans %} - {%if app.request.attributes.get('_route') == '_home'%}{{mastop_param('system.site.slogan')}}{%else%}{{mastop_param('system.site.name')}}{%endif%}</title>
-{% stylesheets 'tuvais/Frontend/css/system/*.css' filter='?yui_css' output='themes/tuvais/css/packed.css' %}
-<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-{% endstylesheets %}
-{% block stylesheets %}{% endblock %}
-<!-- Load JQuery -->
-<script type="text/javascript" src="{{protocol}}ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-<script type="text/javascript">
-var facebookRedir="{{ app.session.get('_security.target_path')|default(mastop_current_url()) }}";
-var facebookAppId="{{ mastop_param('user.all.faceappid') }}";
-var facebookUrl="{{url("user_user_facebook")}}";
-</script>
-{% javascripts '@TuvaisUserBundle/Resources/public/js/Frontend/facebookScripts.js' '@TuvaisCoreBundle/Resources/public/js/chosen/chosen.jquery.min.js' '@TuvaisCoreBundle/Resources/public/js/jquery.color.js' '@TuvaisCoreBundle/Resources/public/js/jquery.pulse.js' '@TuvaisCoreBundle/Resources/public/js/jquery.cookie.js' '@TuvaisCoreBundle/Resources/public/js/core.js' filter='yui_js' output='static/system/js/packed.js' %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{%if app.request.attributes.get('_route') == '_home' or  app.request.attributes.get('_route') == 'core_city_index' %}
-{% javascripts '@TuvaisCoreBundle/Resources/public/js/slidejs/slides.min.jquery.js' filter='yui_js' output='static/js/slidejs/slides.packed.js' %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-<script type="text/javascript">
-$(function(){
-        $('#slides').slides({
-                preload: true,
-                preloadImage: '{{ asset('themes/tuvais/images/slides/loading.gif') }}',
-                play: 5000,
-                pause: 2500,
-                hoverPause: true
-        });
-});
-</script>
-{% endjavascripts %}
-{%endif%}
-{% block javascriptsHead null %}
-{{ mastop_param('system.script.head') }}
+-->
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt-BR"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="pt-BR"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-BR"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>{% block title title|default(mastop_param('system.site.name'))|trans %} - {%if app.request.attributes.get('_route') == '_home'%}{{mastop_param('system.site.slogan')}}{%else%}{{mastop_param('system.site.name')}}{%endif%}</title>
+  <meta name="description" content="{% block metaDescription mastop_param('system.seo.description') %}">
+  <meta name="author" content="Mastop Internet Development">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <script src="//use.typekit.com/fun5ons.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  
+  <!-- CSS Tema -->
+  {% stylesheets 'tuvais/Frontend/css/system/*.css' filter='?yui_css' output='themes/tuvais/css/packed.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
+  
+  <!-- Bootstrap LESS -->
+  {% stylesheets filter='less,?yui_css' '@TuvaisCoreBundle/Resources/views/themes/tuvais/Frontend/twitter-bootstrap/less/bootstrap.less' '@TuvaisCoreBundle/Resources/views/themes/tuvais/Frontend/twitter-bootstrap/less/responsive.less' output='themes/tuvais/twitter-bootstrap/css/bootstrap.css' %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+  {% endstylesheets %}
+  <!-- CSS System -->
+  {% block stylesheets null%}
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build incl. Respond.js
+       Respond is a polyfill for min/max-width media queries. Modernizr enables HTML5 elements & feature detects; 
+       for optimal performance, create your own custom Modernizr build: www.modernizr.com/download/ -->
+  {% javascripts '@TuvaisCoreBundle/Resources/public/js/libs/modernizr-2.0.6.min.js' filter='yui_js' output='static/system/js/modernizr.js' %}
+    <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  {% block javascriptsHead null %}
+  {{ mastop_param('system.script.head') }}
 </head>
 <body>
-{# Mensagens do Sistema #}
-{% if app.session.hasFlash('error') %}
-<div class="alert alert_error">
-    <div class="container_12">
-        <div class="grid_10">
-            <strong>Erro: </strong> {{ app.session.flash('error')|trans|raw }}
-        </div>
-        <div class="grid_2">
-            <a class="closeAlert" href="#">Fechar</a>
-        </div>
-    </div>
-</div>
-{% endif %}
-{% if app.session.hasFlash('ok') %}
-<div class="alert alert_success">
-    <div class="container_12">
-        <div class="grid_10">
-            {{ app.session.flash('ok')|trans|raw }}
-        </div>
-        <div class="grid_2">
-            <a class="closeAlert" href="#">Fechar</a>
-        </div>
-    </div>
-</div>
-{% endif %}
-{% if app.session.hasFlash('notice') %}
-<div class="alert alert_notice">
-    <div class="container_12">
-        <div class="grid_10">
-            <strong>Aviso: </strong> {{ app.session.flash('notice')|trans|raw }}
-        </div>
-        <div class="grid_2">
-            <a class="closeAlert" href="#">Fechar</a>
-        </div>
-    </div>
-</div>
-{% endif %}
-{# /Mensagens do Sistema #}
-{%if app.request.cookies.get('hideNL') is null and is_granted('ROLE_USER') == false%}
-    <div id="topNL">
-        <div class="container_12">
-            <div class="grid_11">
-                <form id="formNL" action="{{ path('core_mailing_new') }}" method="post"><span class="arrow">&nbsp;</span> <span id="labelNL">Receba o que mais vendeu em </span><div class="floatL">{{tuvais_select_city('cityNL', 'cityNL', 'chzn-select')}}</div><div class="floatL"> <input type="text" id="mailNL" name="email" placeholder="Digite seu email" /> <button type="submit" class="button gray">Enviar</button></div></form>
-            </div>
-            <div class="grid_1">
-                <a id="closeNL" href="#">Fechar</a>
-            </div>
-        </div>
-    </div>
-{%endif%}
-{# Main #}
-<div id="main">
-    
 {# Header #}
-<div id="hd_wrap">
-    <div id="hd" class="container_12">
-    {% block header %}
-        <div class="grid_5">
-            <div id="logo">
-            <a id="logo" href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+{% block header %}
+<header id="hd" class="container">
+    {%if is_granted('ROLE_USER') %}
+        <div class="alert alert-message">
+            <span>Olá, <strong>{{ app.user.name|default(app.user.username) }}</strong>! <small>(não é você? <a href="{{path('_logout')}}">clique aqui</a>)</small></span> <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>
+        </div>
+    {%endif%}
+    <div class="row mB10">
+    <div class="span3">
+        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+    </div>
+    <div class="span9">
+        <div class="row">
+            <div id="menuTop" class="span7">
+                {{mastop_menu('system-head', null, null, 0, 'list', {'id':'navTop'})}}
             </div>
-            <div id="cities">
-                <span id="cityLabel">em</span> <div class="chzn-container  chzn-container-single" id="cityCombo"><a title="Selecione a cidade" class="chzn-single" href="#"><span>{{app.session.get('tuvais.user.cityName')}}</span><div><b></b></div></a></div>
+            <div class="span2 aR">
+                <a id="call-to-action" class="btn btn-large btn-success" href="#">Criar Evento</a>
             </div>
         </div>
-        <div class="grid_7">
-            <div id="login">
-                {%if is_granted('ROLE_USER') == false%}<div class="floatR"><a href="{{path('user_user_twitterconect')}}" class="twLoginBtn">Logar com Twitter</a> <a href="#" class="fbLoginBtn">Logar com Facebook</a></div>{%else%}<span>Olá, <strong>{{ app.user.name|default(app.user.username) }}</strong>! <small>(não é você? <a href="{{path('_logout')}}">clique aqui</a>)</small></span> <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>{%endif%}
-            </div>
-            <div id="menuTop">
-            {{mastop_menu('system-head', null, null, 0, 'list', {'id':'navTop'})}}
-            </div>
-            <div id="search">
+        <div class="row">
+            <div id="search" class="span9">
                 {% set isSearch = (app.request.query.get('q') is not null) ? app.request.query.get('q') : false %}
-                    <form action="{# path('deal_deal_search') #}" method="get" id="searchForm"> <div id="searchDiv"><button type="submit" class="button primary silver">Pega!</button><input type="text" name="q" id="q" class="{%if isSearch%}focusField{%else%}idleField{%endif%}" value="{%if isSearch%}{{ isSearch }}{%endif%}" placeholder="Encontre cupons de compra coletiva"  /></div></form>
+                <form class="form-search floatR mB10" action="{# path('deal_deal_search') #}" method="get" id="searchForm">
+                    <div class="input-prepend">
+                        <span class="add-on">Eventos em</span>
+                        <input type="text" size="16" id="citySearch" class="span2" value="{{ app.session.get('tuvais.user.cityName') }}">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on">Buscar por</span>
+                        <input type="text" size="16" class="span3" name="q" id="q" value="{%if isSearch%}{{ isSearch }}{%endif%}" placeholder="Digite o nome da empresa ou evento">
+                    </div>
+                    <button class="btn" type="submit"><i class="icon-search"></i></button>
+                </form>
             </div>
         </div>
-        
-        {# Lista de cidades #}
-        {% set cities = tuvais_get_cities() %}
-        <div id="listCities">
-            <a href="#" id="closeCities" title="Fechar" class="floatR button primary small orange">X</a>
-            <h2>Principais cidades</h2>
-            <ul class="highCities clearfix">
-                {% for city in cities['special'] %}
-                  <li><a title="Ofertas de {{city.getName()}}"{%if city.getSlug() == app.session.get('tuvais.user.city') %} class="selected"{%else%} href="{{ path('core_city_index', {'slug':city.getSlug()}) }}"{%endif%}>{{city.getName()}}</a></li>
-                {% endfor %}
-            </ul>
-            <br>
-            <h2>Outras cidades</h2>
-            <ul>
-                {% for city in cities['other'] %}
-                  <li><a title="Ofertas de {{city.getName()}}"{%if city.getSlug() == app.session.get('tuvais.user.city') %} class="selected"{%else%} href="{{ path('core_city_index', {'slug':city.getSlug()}) }}"{%endif%}>{{city.getName()}}</a></li>
-                {% endfor %}
-            </ul>
+
     </div>
-        {# /Lista de cidades #}
-        
-        <div class="grid_10" id="menuMain">
-            {%if cat is defined %}
-            {# render 'TuvaisDealBundle:Widget\\Category:menu' with {'selected': cat.getSlug }#}
-            {%else%}
-            {# render 'TuvaisDealBundle:Widget\\Category:menu' with {'selected': app.request.get('slug') }#}
-            {%endif%}
-        </div>
-        <div class="grid_2 omega" id="sellButton">
-            <a href="{#url('deal_sell_index')#}" class="button primary orange">Vender Cupom</a>
-        </div>
-        {%if breadcrumbs is defined%}
-        <div class="grid_12" id="breadcrumbs">
-            <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                <a href="{{path('_home')}}" itemprop="url">
-                <span itemprop="title">Home</span>
-                </a> › 
-            </div>  
-        {%for item in breadcrumbs%}
-            <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                {%if item.url is defined%}<a href="{{item.url}}" itemprop="url">{%endif%}
-                <span itemprop="title">{{item.title}}</span>
-                {%if item.url is defined%}</a> {%endif%}{%if loop.last == false%} › {%endif%}
-            </div>
-        {%endfor%}
-        </div>
-        {%endif%}
-        {%if app.request.attributes.get('_route') == '_home' or app.request.attributes.get('_route') == 'core_city_index' %}
-        {# Só exibe o banner se estiver na home ou na página da cidade #}
-        <div class="clear"></div>   
-        <div class="grid_12" id="bannerHome">
-            {% render 'TuvaisCoreBundle:Widget\\Block:banner'%}
-        </div>
-        {%endif%}
-        <div class="clear"></div>
-    {% endblock%}
     </div>
-</div>
+    
+  <!-- Menu -->
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div style="width: auto;" class="container">
+        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Categoria 1</a></li>
+            <li><a href="#">Categoria 2</a></li>
+            <li><a href="#">Categoria 3</a></li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Mais Categorias <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Categoria 4</a></li>
+                <li><a href="#">Categoria 5</a></li>
+                <li><a href="#">Categoria 6</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Super Categoria</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="#">Link</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Ajuda <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Sobre o Tuvais</a></li>
+                <li><a href="#">Como Comprar Ingressos</a></li>
+                <li><a href="#">Como Criar Eventos</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Contato</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div>
+  <!-- /Menu -->
+        
+</header>
+{%endblock%}
 {# /Header #}
 {# Body #}
 {% block body %}
-<div id="bd_wrap">
-    <div id="bd" class="container_12">
-
+  <div role="main" class="container">
+    {# Mensagens do Sistema #}
+    {% if app.session.hasFlash('error') %}
+    <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {{ app.session.flash('error')|trans|raw }}
+    </div>
+    {% endif %}
+    {% if app.session.hasFlash('ok') %}
+    <div class="alert alert-success">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {{ app.session.flash('ok')|trans|raw }}
+    </div>
+    {% endif %}
+    {% if app.session.hasFlash('notice') %}
+    <div class="alert alert-info">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {{ app.session.flash('notice')|trans|raw }}
+    </div>
+    {% endif %}
+    {% if app.session.hasFlash('warning') %}
+    <div class="alert alert-warning">
+            <a class="close" data-dismiss="alert" href="#">&times;</a>
+            {{ app.session.flash('warning')|trans|raw }}
+    </div>
+    {% endif %}
+    {# /Mensagens do Sistema #}
     {# Conteúdo #}
     {% block content null %}
     {# /Conteúdo #}
-    <div class="clear"></div>    
-    </div>
-</div>
-{% endblock body %}
+  </div>
+{%endblock%}
 {# /Body #}
-
-{# Footer #}
-<div id="ft_wrap">
-    <div class="clearfix"></div>
-    <div id="ft" class="container_12">
-        <div id="ftBelt" class="grid_4 prefix_4 suffix_4"><a href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a></div>
-   </div>
-   {{mastop_menu('system-foot', null, null, 0, 'footer', {'id':'navFoot'})}}
-    <div class="container_12">
-        <div id="copyright" class="grid_9">
-            {% block footer %} {{ mastop_param('system.site.footer') }} {% endblock%}
-        </div>
-        <div id="poweredBy" class="grid_3">
-            <a href="http://www.mastop.com.br" title="Produzido por Mastop Internet Development">Mastop Devenvolvimento e Consultoria Web</a>
-        </div>
-    </div>
-</div>
-{# /Footer #}
-</div>
-{#/Main #}
 {# Facebook div #}
 <div id="fb-root" class="hidden"></div>
 {#/Facebook div #}
+<footer id="ft" class="container">
+<div class="row">
+<div class="span4">
+    <div id="ftLogo"><a href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a></div>
+</div>
+<div class="span8">
+{{mastop_menu('system-foot', null, null, 0, 'TuvaisCoreBundle:Menu:footer.html.twig', {'id':'navFoot'})}}
+</div>
+</div>
+<div class="row">
+   <div id="copyright" class="span8">
+            {% block footer %} {{ mastop_param('system.site.footer') }} {% endblock%}
+   </div>
+   <div id="poweredBy" class="span4">
+        <a href="http://www.mastop.com.br" title="Produzido por Mastop Internet Development">Mastop Devenvolvimento e Consultoria Web</a>
+   </div>
+</div>
+</footer>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  {% javascripts '@TuvaisCoreBundle/Resources/public/js/libs/jquery-1.7.1.min.js' filter='yui_js' output='static/system/js/jquery-1.7.1.js' %}
+    <script>window.jQuery || document.write('<script src="{{ asset_url }}"><\/script>')</script>
+  {% endjavascripts %}
+
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  
+    <!-- Le javascript -->
+    {% javascripts 'tuvais/Frontend/twitter-bootstrap/js/bootstrap-tooltip.js' 'tuvais/Frontend/twitter-bootstrap/js/bootstrap-*.js' filter='yui_js' output='static/system/js/bootstrap.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    var facebookRedir="{{ redirURL|default(mastop_current_url()) }}";
+    var facebookAppId="{{ mastop_param('user.all.faceappid') }}";
+    var facebookUrl="{{url("user_user_facebook")}}";
+    </script>
+    
+    {% javascripts '@TuvaisUserBundle/Resources/public/js/Frontend/facebookScripts.js' '@TuvaisCoreBundle/Resources/public/js/chosen/chosen.jquery.min.js' '@TuvaisCoreBundle/Resources/public/js/jquery.color.js' '@TuvaisCoreBundle/Resources/public/js/jquery.pulse.js' '@TuvaisCoreBundle/Resources/public/js/jquery.cookie.js' '@TuvaisCoreBundle/Resources/public/js/core.js' filter='yui_js' output='static/system/js/packed.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+  
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
 {# Javascripts #}
 {% block javascripts null%}
 {{ mastop_param('system.script.foot') }}

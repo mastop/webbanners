@@ -1,3 +1,34 @@
+// usage: log('inside coolFunc', this, arguments);
+// paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
+window.log = function(){
+  log.history = log.history || [];   // store logs to an array for reference
+  log.history.push(arguments);
+  if(this.console) {
+    arguments.callee = arguments.callee.caller;
+    var newarr = [].slice.call(arguments);
+    (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
+  }
+};
+
+// make it safe to use console.log always
+(function(b){function c(){}for(var d="assert,clear,count,debug,dir,dirxml,error,exception,firebug,group,groupCollapsed,groupEnd,info,log,memoryProfile,memoryProfileEnd,profile,profileEnd,table,time,timeEnd,timeStamp,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c}})((function(){try
+{console.log();return window.console;}catch(err){return window.console={};}})());
+
+
+// place any jQuery/helper plugins in here, instead of separate, slower script files.
+
+
+// Tooltips
+$("a[rel=tooltip]").tooltip();
+// Popovers
+$("a[rel=popover]").popover({offset: 10});
+// Alerts
+$(".alert-message").alert();
+
+
+
+
+
 $(function(){
     // Todos os alertas são exibidos após o carregamento da página
     $('.alert').slideDown('slow');
@@ -51,22 +82,6 @@ $(function(){
             return false;
         }
         return true;
-    });
-    // Todos os inputs do tipo text tem um class "idleField" por padrão e ganham um "focusField" quando o elemento ganha foco
-    $('input[type="text"],input[type="password"],input[type="email"],input[type="number"],input[type="search"],textarea').not('.focusField').addClass("idleField")
-    .focus(function() {
-        $(this).removeClass("idleField").addClass("focusField");
-        if (this.value == this.defaultValue){
-            this.select();
-        }
-
-    })
-    .blur(function() {
-        if ($.trim(this.value) == this.defaultValue){
-            this.value = (this.defaultValue ? this.defaultValue : '');
-            $(this).removeClass("focusField").addClass("idleField");
-        }
-        $(this).removeClass("errorField");
     });
     // Todos os selects com class "chzn-select" são ransformados em "chosen" (plugin jquery)
     $("select.chzn-select").chosen();

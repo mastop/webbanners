@@ -67,10 +67,10 @@ class BlockController extends BaseController {
                 $c++;
                 break;
         }
-        $ret[$c]['content'] = '<a id="twitterBlock" href="http://twitter.com/tuvais" target="_blank" title="Siga o Tuvais no Twitter!">Siga o Tuvais no Twitter!</a>';
-        $c++;
-        $ret[$c]['widget'] = 'TuvaisCoreBundle:Widget\\Block:facebookFans';
-        $ret[$c]['opts'] = array('profile' => '188401247891549', 'url' => 'http://www.facebook.com/tuvais', 'css' => 'http://www.mastop.com.br/fernando/css/facebook.css');
+        //$ret[$c]['content'] = '<a id="twitterBlock" href="http://twitter.com/tuvais" target="_blank" title="Siga o Tuvais no Twitter!">Siga o Tuvais no Twitter!</a>';
+        //$c++;
+        //$ret[$c]['widget'] = 'TuvaisCoreBundle:Widget\\Block:facebookFans';
+        //$ret[$c]['opts'] = array('profile' => '188401247891549', 'url' => 'http://www.facebook.com/recompracoletiva', 'css' => 'http://www.mastop.com.br/fernando/css/facebook.css');
         //$ret[$c]['widget'] = 'TuvaisCoreBundle:Widget\\Block:facebook';
         //$ret[$c]['opts'] = array('url' => 'http://www.facebook.com/recompracoletiva', 'width' => '292', 'border' => '#FFFFFF');
         return array('blocks' => $ret, 'area' => $area);

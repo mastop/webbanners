@@ -1,17 +1,98 @@
 {% extends '::frontend.html.twig' %}
 
 {% block content %}
-<div class="grid_6">
-{% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topL'} %}
+<div class="row">
+    <div class="span6">
+    {% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topL'} %}
+    </div>
+    <div class="span6">
+    {% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topR'} %}
+    </div>
 </div>
-<div class="grid_6">
-{% render 'TuvaisCoreBundle:Widget\\Block:render' with {'area': 'topR'} %}
-</div>
-<div class="clear"></div>
-<div class="grid_8">
-CORPO DO SITE
-</div>
-<div class="grid_4">
-{% render 'TuvaisCoreBundle:Widget\\Block:render' %}
+<div class="row">
+    <div class="span8">
+    CORPO DO SITE 
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary"><i class="icon-plus icon-white"></i> Botão de Teste</a>
+          <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+            <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+            <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><i class="i"></i> Make admin</a></li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <a href="#" data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div>
+    
+        <div class="subnav">
+        <ul class="nav nav-pills">
+        <li class="dropdown active">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Buttons <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li class="active"><a href="#buttonGroups">Button groups</a></li>
+            <li class=""><a href="#buttonDropdowns">Button dropdowns</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Navigation <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li class=""><a href="#navs">Nav, tabs, pills</a></li>
+            <li class=""><a href="#navbar">Navbar</a></li>
+            <li class=""><a href="#breadcrumbs">Breadcrumbs</a></li>
+            <li class=""><a href="#pagination">Pagination</a></li>
+            </ul>
+        </li>
+        <li class=""><a href="#labels">Labels</a></li>
+        <li class=""><a href="#thumbnails">Thumbnails</a></li>
+        <li><a href="#alerts">Alerts</a></li>
+        <li><a href="#progress">Progress bars</a></li>
+        <li><a href="#misc">Miscellaneous</a></li>
+        </ul>
+    </div>
+    
+    <a href="#" rel='tooltip' title='Não esquecer de fazer o menu'>Tip Cima</a> <a href="#" data-placement="bottom" rel='tooltip' title='Não esquecer de fazer o menu'>Tip Baixo</a>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    </div>
+    <div class="span4">
+    {% render 'TuvaisCoreBundle:Widget\\Block:render' %}
+    </div>
 </div>
 {% endblock %}

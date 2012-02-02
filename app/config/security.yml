@@ -1,13 +1,13 @@
 services:
     mastop.user:
         class: Tuvais\UserBundle\Security\DocumentUserProvider
-        arguments: [@doctrine.odm.mongodb, Tuvais\UserBundle\Document\User]
+        arguments: [@mastop.dm, Tuvais\UserBundle\Document\User]
     mastop.user.success_handler:
         class: Tuvais\UserBundle\Security\SuccessHandler
         arguments: [@router]
     mastop.user.security.interactive_login_listener:
         class: Tuvais\UserBundle\Security\InteractiveLoginListener
-        arguments: [@mastop.user]
+        arguments: [@mastop.user, @service_container]
         tags:
           - {name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin}
     

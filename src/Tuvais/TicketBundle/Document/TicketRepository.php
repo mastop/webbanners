@@ -5,6 +5,6 @@ namespace Tuvais\TicketBundle\Document;
 use Mastop\SystemBundle\Document\BaseRepository;
 use Tuvais\TIcketBundle\Document\TIcket;
 
-class TicketRepository {
+class TicketRepository extends BaseRepository {
     
 }
