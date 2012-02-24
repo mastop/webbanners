@@ -4,6 +4,7 @@ namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\CoreBundle\Document\Banner;
@@ -16,7 +17,7 @@ class LoadBannerData extends AbstractFixture implements OrderedFixtureInterface,
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $path = $this->container->get('kernel')->getRootDir() . "/../web/uploads/tuvaiscore/banner";
         for($i = 1; $i <= 6; $i++){
             $banner = new Banner();

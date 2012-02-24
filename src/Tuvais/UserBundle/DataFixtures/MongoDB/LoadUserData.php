@@ -4,6 +4,7 @@ namespace Tuvais\UserBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\UserBundle\Document\User;
@@ -16,7 +17,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $container;
     } 
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $citySP = $manager->getRepository('TuvaisCoreBundle:City')->findBySlug('sao-paulo');
         $user = new User();
         $user->setName('Suporte Mastop');

@@ -2,6 +2,7 @@
 namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\CoreBundle\Document\Category;
@@ -14,7 +15,7 @@ class LoadCategoryData implements FixtureInterface, ContainerAwareInterface {
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $categorias = array('Bares & Restaurantes', 'Beleza & Saúde', 'Lazer', 'Serviços', 'Outros');
         foreach ($categorias as $cat) {
             $Category = new Category();

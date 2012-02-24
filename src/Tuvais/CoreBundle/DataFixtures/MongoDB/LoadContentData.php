@@ -25,6 +25,7 @@
 namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\CoreBundle\Document\Content;
@@ -37,7 +38,7 @@ class LoadContentData implements FixtureInterface, ContainerAwareInterface {
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $paginas = array('FAQ', 'Como Comprar', 'Como Vender', 'Sobre o Tuvais', 'Privacidade', 'Termos e Condições');
         foreach ($paginas as $pg) {
             $Content = new Content();

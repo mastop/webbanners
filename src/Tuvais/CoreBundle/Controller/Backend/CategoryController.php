@@ -24,7 +24,7 @@ class CategoryController extends BaseController {
         return array(
             'categorias' => $categorias,
             'title' =>$title,
-            'current' => 'admin_core_core_index',
+            'current' => 'admin_core_category_index',
         );
     }
 
@@ -63,7 +63,7 @@ class CategoryController extends BaseController {
             'cat' => $cat,
             'title' => $title,
             'breadcrumbs'=>array(1=>array('name'=>$this->trans('Categorias'),'url'=>$this->generateUrl('admin_core_category_index'))),
-            'current' => 'admin_core_core_index'
+            'current' => 'admin_core_category_index'
             ,);
     }
 

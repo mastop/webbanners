@@ -1,4 +1,9 @@
 <?php
+
+namespace Tuvais\CoreBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Representa uma Categoria
  * 
@@ -12,12 +17,8 @@
  * @ODM\Index(keys={"order"="asc", "name"="asc"})
  * })
  */
-namespace Tuvais\CoreBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Gedmo\Mapping\Annotation as Gedmo;
-
-Class Category {
+class Category {
 
     /**
      *  ID da Categoria
@@ -69,7 +70,7 @@ Class Category {
      * 
      * 
      * @var string
-     *  @ODM\ReferenceOne( targetDocument ="Category") 
+     *  @ODM\ReferenceOne(targetDocument ="Category") 
      */
     protected $parent;
     

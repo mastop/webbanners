@@ -4,6 +4,7 @@ namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Tuvais\CoreBundle\Document\City;
@@ -16,7 +17,7 @@ class LoadCityData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $cidadesEspeciais = array('Evento Nacional', 'São Paulo', 'Rio de Janeiro', 'Campinas', 'Curitiba', 'Belo Horizonte');
         $cidadesNormais = array(
             'Americana',

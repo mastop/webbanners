@@ -33,7 +33,7 @@ header{
 #hd {/* Div que cobre o header 960 */}
 
 
-#logo{height: 110px; width: 202px; float: left; background: url(../images/header/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
+#logo{height: 95px; width: 170px; float: left; background: url(../images/header/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
 #login{height: 28px; text-align: right;}
 #menuTop{padding-top: 10px;}
 #search{margin-top: 18px;}
@@ -419,7 +419,7 @@ table#dealCart td{
 }
 #ft {/* Div que cobre o footer 960 */}
 #ftLogo{height: 118px; margin-bottom: 15px;}
-#ftLogo a{width: 107px; height: 93px; float: left; background: url(../images/footer/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
+#ftLogo a{width: 170px; height: 53px; float: left; background: url(../images/footer/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
 #navFoot{text-align: left; border-bottom: 1px solid #BBB; margin-bottom: 10px;}
 #navFoot ul li{list-style: none outside none; margin-left: 15px;}
 

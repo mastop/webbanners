@@ -4,6 +4,7 @@ namespace Tuvais\CoreBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Mastop\SystemBundle\Document\Parameters;
@@ -17,7 +18,7 @@ class LoadParametersData extends AbstractFixture implements OrderedFixtureInterf
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $param = new Parameters();
         $param->setName('banner');
         $param->setTitle('Banners');

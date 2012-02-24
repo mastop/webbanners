@@ -4,6 +4,7 @@ namespace Tuvais\UserBundle\DataFixtures\MongoDB;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Mastop\MenuBundle\Document\Menu;
@@ -17,7 +18,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->container = $container;
     }
 
-    public function load($manager) {
+    public function load(ObjectManager $manager) {
         $repo = $manager->getRepository('MastopMenuBundle:Menu');
         // Pega menu Pai System-Admin
         $menu = $repo->findByBundleCode('system', 'admin');

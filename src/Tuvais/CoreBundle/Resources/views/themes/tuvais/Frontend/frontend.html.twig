@@ -70,12 +70,12 @@ Mastop Internet Development                          http://www.mastop.com.br
         </div>
     {%endif%}
     <div class="row mB10">
-    <div class="span3">
+    <div class="span2">
         <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
     </div>
-    <div class="span9">
+    <div class="span10">
         <div class="row">
-            <div id="menuTop" class="span7">
+            <div id="menuTop" class="span8">
                 {{mastop_menu('system-head', null, null, 0, 'list', {'id':'navTop'})}}
             </div>
             <div class="span2 aR">
@@ -83,7 +83,7 @@ Mastop Internet Development                          http://www.mastop.com.br
             </div>
         </div>
         <div class="row">
-            <div id="search" class="span9">
+            <div id="search" class="span10">
                 {% set isSearch = (app.request.query.get('q') is not null) ? app.request.query.get('q') : false %}
                 <form class="form-search floatR mB10" action="{# path('deal_deal_search') #}" method="get" id="searchForm">
                     <div class="input-prepend">
@@ -191,10 +191,10 @@ Mastop Internet Development                          http://www.mastop.com.br
 {#/Facebook div #}
 <footer id="ft" class="container">
 <div class="row">
-<div class="span4">
+<div class="span2">
     <div id="ftLogo"><a href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a></div>
 </div>
-<div class="span8">
+<div class="span10">
 {{mastop_menu('system-foot', null, null, 0, 'TuvaisCoreBundle:Menu:footer.html.twig', {'id':'navFoot'})}}
 </div>
 </div>
