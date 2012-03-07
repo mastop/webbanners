@@ -4,7 +4,7 @@ README
 Sistema Tuvais
 
 1 - Baixou
-2 - No terminal: $ bin/vendors.sh
+2 - No terminal: $ curl -s http://getcomposer.org/installer | php && php composer.phar install
 3 - Edite o app/parameters.ini e o app/config.yml de acordo com suas necessidades.
 
 REQUISITOS:
@@ -26,3 +26,4 @@ EXTENSÕES PHP:
 - intl
 - sqlite3 ou pdo_sqlite
 - json
+

@@ -21,16 +21,15 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             
             new Mastop\SystemBundle\MastopSystemBundle(),
-            new Tuvais\UserBundle\TuvaisUserBundle(),
-            new Tuvais\TicketBundle\TuvaisTicketBundle(),
             new Mastop\TesteBundle\MastopTesteBundle(),
             new Mastop\MenuBundle\MastopMenuBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
             new Tuvais\CoreBundle\TuvaisCoreBundle(),
+            new Tuvais\UserBundle\TuvaisUserBundle(),
+            new Tuvais\EventBundle\TuvaisEventBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

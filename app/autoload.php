@@ -1,52 +1,36 @@
 <?php
 
-use Symfony\Component\ClassLoader\UniversalClassLoader;
+if (!$loader = include __DIR__.'/../vendor/.composer/autoload.php') {
+    $nl = PHP_SAPI === 'cli' ? PHP_EOL : '<br />';
+    echo "$nl$nl";
+    if (is_writable(dirname(__DIR__)) && $installer = @file_get_contents('http://getcomposer.org/installer')) {
+        echo 'You must set up the project dependencies.'.$nl;
+        $installerPath = dirname(__DIR__).'/install-composer.php';
+        file_put_contents($installerPath, $installer);
+        echo 'The composer installer has been downloaded in '.$installerPath.$nl;
+        die('Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
+            'php install-composer.php'.$nl.
+            'php composer.phar install'.$nl);
+    }
+    die('You must set up the project dependencies.'.$nl.
+        'Run the following commands in '.dirname(__DIR__).':'.$nl.$nl.
+        'curl -s http://getcomposer.org/installer | php'.$nl.
+        'php composer.phar install'.$nl);
+}
+
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Symfony' => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
-    'Sensio' => __DIR__.'/../vendor/bundles',
-    'JMS' => __DIR__.'/../vendor/bundles',
-    'CG'               => __DIR__.'/../vendor/cg-library/src',
-    'Doctrine\\Bundle' => __DIR__.'/../vendor/bundles',
-    'Doctrine\\Common' => __DIR__.'/../vendor/doctrine-common/lib',
-    'Doctrine\\DBAL' => __DIR__.'/../vendor/doctrine-dbal/lib',
-    'Doctrine\\DBAL\\Migrations' => __DIR__.'/../vendor/migrations/lib',
-    'Doctrine' => __DIR__.'/../vendor/doctrine/lib',
-    'Monolog' => __DIR__.'/../vendor/monolog/src',
-    'Assetic' => __DIR__.'/../vendor/assetic/src',
-    'Metadata' => __DIR__.'/../vendor/metadata/src',
+// intl
+if (!function_exists('intl_get_error_code')) {
+    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
-    'Mastop'           => __DIR__.'/../vendor/bundles',
-    
-    'Doctrine\\MongoDB'       => __DIR__.'/../vendor/doctrine-mongodb/lib',
-    'Doctrine\\ODM\\MongoDB'  => __DIR__.'/../vendor/doctrine-mongodb-odm/lib',
+    $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
+}
 
-    'Doctrine\\Common\\DataFixtures' => __DIR__.'/../vendor/data-fixtures/lib',
-    'Stof'  => __DIR__.'/../vendor/bundles',
-    'Gedmo' => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
-    ));
-$loader->registerPrefixes(array(
-    'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
-    'Twig_' => __DIR__.'/../vendor/twig/lib',
-));
-$loader->registerPrefixFallbacks(array(
-    __DIR__.'/../vendor/symfony/src/Symfony/Component/Locale/Resources/stubs',
-));
-$loader->registerNamespaceFallbacks(array(
-    __DIR__.'/../src',
-));
-$loader->register();
-
-AnnotationRegistry::registerLoader(function($class) use ($loader) {
-    $loader->loadClass($class);
-    return class_exists($class, false);
-});
-//AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php');
-AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine-mongodb-odm/lib/Doctrine/ODM/MongoDB/Mapping/Annotations/DoctrineAnnotations.php');
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine/mongodb-odm/lib/Doctrine/ODM/MongoDB/Mapping/Annotations/DoctrineAnnotations.php');
 
 // Swiftmailer needs a special autoloader to allow
 // the lazy loading of the init file (which is expensive)
-require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
-Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
+require_once __DIR__.'/../vendor/swiftmailer/swiftmailer/lib/classes/Swift.php';
+Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/swiftmailer/lib/swift_init.php');

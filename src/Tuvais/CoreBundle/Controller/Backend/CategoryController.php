@@ -62,9 +62,7 @@ class CategoryController extends BaseController {
             'form' => $form->createView(),
             'cat' => $cat,
             'title' => $title,
-            'breadcrumbs'=>array(1=>array('name'=>$this->trans('Categorias'),'url'=>$this->generateUrl('admin_core_category_index'))),
-            'current' => 'admin_core_category_index'
-            ,);
+            );
     }
 
     /**
