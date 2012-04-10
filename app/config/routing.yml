@@ -1,0 +1,31 @@
+BannerCoreBundle:
+    resource: "@BannerCoreBundle/Resources/config/routing/routing.yml"
+BannerUserBundle:
+   resource:  "@BannerUserBundle/Resources/config/routing/routing.yml"
+BannerOrderBundle:
+   resource:  "@BannerOrderBundle/Resources/config/routing/routing.yml"
+
+
+MastopSystemBundle:
+  resource: "@MastopSystemBundle/Resources/config/routing/routing.yml"
+MastopMenuBundle:
+  resource: "@MastopMenuBundle/Resources/config/routing/routing.yml"
+MastopTesteBundle:
+    resource: "@MastopTesteBundle/Resources/config/routing/teste.yml"
+   
+_login:
+    resource: "@BannerUserBundle/Controller/Frontend/SecurityController.php"
+    type:     annotation
+    requirements:
+        _scheme:  https
+_logout:
+    resource: "@BannerUserBundle/Controller/Frontend/SecurityController.php"
+    type:     annotation
+login_check:
+    pattern:   /login_check
+
+_home:
+    pattern:  /
+    defaults: { _controller: BannerCoreBundle:Frontend\Core:index }
+    requirements:
+      _scheme: http

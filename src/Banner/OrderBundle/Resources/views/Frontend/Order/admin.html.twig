@@ -1,0 +1,46 @@
+{% extends '::frontend.html.twig' %}
+
+{% block javascripts%}
+{% javascripts output='static/system/js/sell.contact.js'
+                   '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+                   %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <table class="table table-striped">
+            <tr>
+                <th>Cliente</th>
+                <th>Projeto</th>
+                <th>Designer</th>
+            </tr>
+            <form action="{{path('_order_order_admin')}}" method="post">
+{% for order in orders %}
+                <tr>
+                    <td>{{order.user.name}}</td>
+                    <td>{{order.name}}</td>
+                    <td>
+                        <select name="{{order.id}}">
+                        {% for designer in designers %}
+                            <option value="{{designer.id}}">
+                                {{designer.name}}
+                            </option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+{% else %}
+                <tr><td colspan="3">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+{% endfor %} 
+                <tr>
+                    <td colspan="2"></td>
+                    <td><input type="submit" value="Ok" /></td>
+                </tr>
+            </form>
+        </table>
+    </div>
+</div>
+{% endblock %}

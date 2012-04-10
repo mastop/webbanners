@@ -1,0 +1,44 @@
+a.rm{    
+    margin: 3px 3px 2px 2px;
+    padding: 0 5px;
+}   
+span.x{    
+    background: none repeat scroll 0 0 #EEEEEE;
+    cursor: default;
+    font-size:20px;
+    float: left;
+    font-style: normal;
+    height: 33px;
+    line-height: 36px;
+    margin: 0 2px 0 0;
+    padding: 0 5px;
+    width: 9px;
+}   
+.height{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 none;
+    color: #2B2B2B;
+    float: left;
+    font-size: 16px;
+    height: 17px;
+    padding: 7px 4px 9px 0;
+    text-align: center;
+    margin: 0 0 0 -3px;
+    width: 35px;    
+    outline: medium none;
+    vertical-align: middle;
+}
+.width{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 none;
+    color: #2B2B2B;
+    float: left;
+    font-size: 16px;
+    height: 17px;
+    padding: 7px 4px 9px 0;
+    text-align: center;
+    margin: 1px 1px 1px 1px;
+    width: 35px;    
+    outline: medium none;
+    vertical-align: middle;
+}

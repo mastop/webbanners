@@ -1,0 +1,46 @@
+{% extends '::frontend.html.twig' %}
+
+{% block javascripts%}
+{% javascripts output='static/system/js/sell.contact.js'
+                   '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+                   %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+<div class="row-fluid">
+    <form class="block" action="{{ path('_order_order_save') }}" method="post" {{ form_enctype(formUpload)}} >
+    <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
+        <div class="span6">
+            <div id="newBanner">
+                <div id="banner0">
+                    <input type="hidden" value="0" />
+                    <input class="width" id="width0" name=" banner[0][width] " maxlength="3" value="728" type="number" required="required" />
+                    <span class="x">x</span>
+                    <input class="height" id="height0" name=" banner[0][height] " maxlength="3" value="90" type="number" required="required" />
+                    <input class="psd" id="psd0" name=" banner[0][psd] " type="checkbox"/> PSD +
+                    <BR /><BR />
+                </div>
+            </div>
+            <div id="btnnew">
+                <a id="novo" href="#" class="btn">+</a>
+            </div>
+        </div>
+        <div class="span5">
+            {% if not is_granted('ROLE_USER') %}
+                {{ form_row(formUser.email) }}
+            {% endif %}    
+
+            {{ form_row(formOrder.name) }}
+            {{ form_row(formOrder.notes) }}
+            {{ form_row(formOrder.quantity) }}
+
+            <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
+            <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+        </div>
+    </form>
+</div>
+</div>
+{% endblock %}

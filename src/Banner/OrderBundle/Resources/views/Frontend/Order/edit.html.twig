@@ -1,0 +1,91 @@
+{% extends '::frontend.html.twig' %}
+
+{% block javascripts%}
+{% javascripts output='static/system/js/sell.contact.js'
+                   '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+                   %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="row">
+            <div class="span7">
+                <table class="table">
+                    <tr>
+                        <th class="span2">{{order.getId()}}</th>
+                        <th class="span3">{{order.name}}</th>
+                        <th class="span1">Criado: {{order.formatCreated()}}</th>
+                        <th class="span1">Expira: {{order.formatExpires()}}</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"  class="span2">
+                        {% for upload in order.upload %}
+                            <img src='{{upload.getWebPath()}}{{upload.getPath}}' class="thumbnail" width="100%" /><br>
+                        {% endfor %}
+                        </td>
+                        <td colspan="3">{{order.notes}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                        {% for banner in order.banner %}
+                        {{banner.width}}x{{banner.height}}
+                        {% if banner.psd %}
+                                com PSD
+                        {% endif %}
+                                <br />
+                        {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="span3">
+            </div>
+        </div>
+        <div class="row">
+            <div class="span7">
+                <table class="table">
+                    <tr>
+                        <th colspan="2"><h4>Conversa</h4></th>
+                    </tr>
+
+            {% for talk in order.talk %}
+                    <tr> 
+                        <th>{{talk.user.username}}</th>
+                        <th>{{talk.formatCreated()}}</th>
+                    </tr>
+                    <tr> 
+                        <td colspan="2">{{talk.message}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="span1">
+                        {% for upload in talk.upload %}
+                            <img src='{{upload.getWebPath()}}{{upload.getPath}}' width="10%"  class="thumbnail" />
+                        {% endfor%}
+                        </th>
+                   </tr>
+            {% else %}
+                    <tr> 
+                <td colspan="3">Não existe conversa para esse pedido</td>
+                    </tr>
+            {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span7">
+                <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name}) }}" method="post" {{ form_enctype(formUpload)}} >
+                    <input type="hidden" value="{{order.name}}" name="order">
+                    <div id="upload">
+                        <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
+                    </div>
+                    {{ form_widget(formTalk) }}
+                    <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
