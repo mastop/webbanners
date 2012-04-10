@@ -1,9 +1,11 @@
-TuvaisCoreBundle:
-    resource: "@TuvaisTicketBundle/Resources/config/routing/routing.yml"
-TuvaisCoreBundle:
-    resource: "@TuvaisCoreBundle/Resources/config/routing/routing.yml"
-TuvaisUserBundle:
-   resource:  "@TuvaisUserBundle/Resources/config/routing/routing.yml"
+BannerCoreBundle:
+    resource: "@BannerCoreBundle/Resources/config/routing/routing.yml"
+BannerUserBundle:
+   resource:  "@BannerUserBundle/Resources/config/routing/routing.yml"
+BannerOrderBundle:
+   resource:  "@BannerOrderBundle/Resources/config/routing/routing.yml"
+
+
 MastopSystemBundle:
   resource: "@MastopSystemBundle/Resources/config/routing/routing.yml"
 MastopMenuBundle:
@@ -12,18 +14,18 @@ MastopTesteBundle:
     resource: "@MastopTesteBundle/Resources/config/routing/teste.yml"
    
 _login:
-    resource: "@TuvaisUserBundle/Controller/Frontend/SecurityController.php"
+    resource: "@BannerUserBundle/Controller/Frontend/SecurityController.php"
     type:     annotation
     requirements:
         _scheme:  https
 _logout:
-    resource: "@TuvaisUserBundle/Controller/Frontend/SecurityController.php"
+    resource: "@BannerUserBundle/Controller/Frontend/SecurityController.php"
     type:     annotation
 login_check:
     pattern:   /login_check
 
 _home:
     pattern:  /
-    defaults: { _controller: TuvaisCoreBundle:Frontend\Core:index }
+    defaults: { _controller: BannerCoreBundle:Frontend\Core:index }
     requirements:
       _scheme: http

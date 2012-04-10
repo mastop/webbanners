@@ -1,0 +1,12 @@
+status_backend:
+    resource: "@BannerOrderBundle/Controller/Backend/StatusController.php"
+    type: annotation
+    prefix:   /admin/status
+order_frontend:
+    resource: "@BannerOrderBundle/Controller/Frontend/OrderController.php"
+    type: annotation
+order_frontend:
+    resource: "@BannerOrderBundle/Controller/Frontend/OrderController.php"
+    type: annotation
+    prefix:   /pedido
+    

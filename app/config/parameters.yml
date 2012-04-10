@@ -1,7 +1,7 @@
 parameters:
   mongo_server: mongodb://localhost:27017
   mongo_server_prod: mongodb://localhost:27017
-  mongo_database: tuvais
+  mongo_database: banner
 
 #  mailer_transport: gmail
 #  mailer_host: localhost
@@ -17,4 +17,4 @@ parameters:
   secret: MastopInternetDevelopment_OhMyGodThisIsSoSecret
   secretRemember: MastopInternetDevelopment_OhGoshThisIsSOSecret
 
-  themes_dir: %kernel.root_dir%/../src/Tuvais/CoreBundle/Resources/views/themes
+  themes_dir: %kernel.root_dir%/../src/Banner/CoreBundle/Resources/views/themes

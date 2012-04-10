@@ -27,9 +27,9 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
-            new Tuvais\CoreBundle\TuvaisCoreBundle(),
-            new Tuvais\UserBundle\TuvaisUserBundle(),
-            new Tuvais\EventBundle\TuvaisEventBundle(),
+            new Banner\CoreBundle\BannerCoreBundle(),
+            new Banner\UserBundle\BannerUserBundle(),
+            new Banner\OrderBundle\BannerOrderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

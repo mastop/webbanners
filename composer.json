@@ -1,5 +1,5 @@
 {
-    "name": "tuvais",
+    "name": "banner",
     "autoload": {
         "psr-0": { "": "src/" }
     },

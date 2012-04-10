@@ -1,0 +1,10 @@
+user_frontend:
+    resource: "@BannerUserBundle/Controller/Frontend/UserController.php"
+    type: annotation
+user_dashboard_frontend:
+    resource: "@BannerUserBundle/Controller/Frontend/DashboardController.php"
+    type: annotation
+user_backend:
+    resource: "@BannerUserBundle/Controller/Backend/UserController.php"
+    type: annotation
+    prefix:   /admin/usuario

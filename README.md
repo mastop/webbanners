@@ -1,7 +1,7 @@
 README
 ========================
 
-Sistema Tuvais
+Sistema Banner
 
 1 - Baixou
 2 - No terminal: $ curl -s http://getcomposer.org/installer | php && php composer.phar install

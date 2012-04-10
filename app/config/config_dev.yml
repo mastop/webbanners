@@ -50,13 +50,13 @@ doctrine_mongodb:
             metadata_cache_driver: array # array, apc, xcache, memcache
 
 swiftmailer:
-    delivery_address:  suporte@mastop.com.br
+    delivery_address:  leonardo@mastop.com.br
     
 mastop_system:
     themes_dir: %themes_dir%
-    active_theme: "tuvais"
+    active_theme: "banner"
     twitter:
        file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
        consumer_key: G1WitELkS2NakPjyEsuAtw
        consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
-       callback_url: http://tuvais/usuario/twitter/back
+       callback_url: http://banner/usuario/twitter/back

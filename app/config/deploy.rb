@@ -1,14 +1,14 @@
-set :application, "tuvais"
-set :domain,      "tuvais.com.br"
-set :deploy_to,   "/home/nginx/domains/tuvais.com.br"
+set :application, "banner"
+set :domain,      "banner.com.br"
+set :deploy_to,   "/home/nginx/domains/banner.com.br"
 
 # Deploy strategy
 # set :deploy_via,      :rsync_with_remote_cache
-set :user,        "tuvais"
+set :user,        "banner"
 
 set :app_path,    "app"
 
-set :repository,  "git@github.com:mastop/tuvais.git"
+set :repository,  "git@github.com:mastop/banner.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, `subversion` or `none`
 

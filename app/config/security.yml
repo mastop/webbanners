@@ -1,12 +1,12 @@
 services:
     mastop.user:
-        class: Tuvais\UserBundle\Security\DocumentUserProvider
-        arguments: [@mastop.dm, Tuvais\UserBundle\Document\User]
+        class: Banner\UserBundle\Security\DocumentUserProvider
+        arguments: [@mastop.dm, Banner\UserBundle\Document\User]
     mastop.user.success_handler:
-        class: Tuvais\UserBundle\Security\SuccessHandler
+        class: Banner\UserBundle\Security\SuccessHandler
         arguments: [@router]
     mastop.user.security.interactive_login_listener:
-        class: Tuvais\UserBundle\Security\InteractiveLoginListener
+        class: Banner\UserBundle\Security\InteractiveLoginListener
         arguments: [@mastop.user, @service_container]
         tags:
           - {name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin}
@@ -14,11 +14,12 @@ services:
 
 security:
     encoders:
-        Tuvais\UserBundle\Document\User: sha512
+        Banner\UserBundle\Document\User: sha512
         Symfony\Component\Security\Core\User\User: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_DESIGNER:    ROLE_USER
+        ROLE_ADMIN:       ROLE_DESIGNER
         ROLE_SUPERADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
