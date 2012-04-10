@@ -1,0 +1,36 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+Lead Developer: Fernando Santos
+Site: http://fernan.do
+Twitter: @fernanDOTdo
+Contact: o [at] fernan.do
+Location: Sao Paulo - SP - Brasil
+
+
+
+/* THANKS */
+Names: Mom, Dad and you.
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Language: PHP
+  Framework: Symfony2
+  Database: MongoDB
+  WebServer: Nginx
+  Components: Modernizr, jQuery
+  IDE: Netbeans
+  Developed By:
+                                               ,d                              
+                                               88                              
+  88,dPYba,,adPYba,   ,adPPYYba,  ,adPPYba,  MM88MMM  ,adPPYba,   8b,dPPYba,   
+  88P'   "88"    "8a  ""     `Y8  I8[    ""    88    a8"     "8a  88P'    "8a  
+  88      88      88  ,adPPPPP88   `"Y8ba,     88    8b       d8  88       d8  
+  88      88      88  88,    ,88  aa    ]8I    88,   "8a,   ,a8"  88b,   ,a8"  
+  88      88      88  `"8bbdP"Y8  `"YbbdP"'    "Y888  `"YbbdP"'   88`YbbdP"'   
+                                                                  88           
+                                                                  88           
+
+  Mastop Internet Development                          http://www.mastop.com.br

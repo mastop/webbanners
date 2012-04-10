@@ -1,0 +1,14 @@
+{%if banner is defined%}
+<div id="bannerSlides">
+    <img src="{{ asset('themes/'~mastop_theme_name()~'/images/slides/new-ribbon.png') }}" width="112" height="112" alt="Novo!" id="ribbon">
+    <div id="slides">
+            <div class="slides_container">
+                {% for banner in banner %}
+                    <div class="slide"><a href="{{ banner.getUrl() }}" title="{{ banner.getTitle() }}" {%if banner.getNewWindow%}target="_blank"{%endif%}><img src="{{ asset("/uploads/bannercore/banner/" ~ banner.getFilename()) }}" alt="{{ banner.getTitle() }}"/></a></div>
+                {% endfor %}
+            </div>
+            <a href="#" class="prev"><img src="{{ asset('themes/'~mastop_theme_name()~'/images/slides/arrow-prev.png') }}" width="19" height="21" alt="Arrow Prev"></a>
+            <a href="#" class="next"><img src="{{ asset('themes/'~mastop_theme_name()~'/images/slides/arrow-next.png') }}" width="19" height="21" alt="Arrow Next"></a>
+    </div>
+</div>
+{%endif%}

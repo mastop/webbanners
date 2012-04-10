@@ -1,0 +1,58 @@
+{% extends '::frontend.html.twig' %}
+{% block javascriptsHead %}
+{% endblock %}
+{% block title %}{{ "Login"|trans }}{% endblock %}
+{% block content %}
+<div class="row">
+<div class="span6">
+    <div>
+        <h2>{{ titulo }}</h2>
+        <form action="{{ path('user_user_save') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+            <div class="actions">
+                <button class='btn large primary' type="submit">{{ "Cadastrar"|trans }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="span6">
+    <div id="login_register_box">
+        <h2>{{ "Já sou cadastrado"|trans }}</h2>
+        <form action="{{ path("login_check") }}" method="post">
+            <div class="clearfix">
+                <label for="umail">{{ "Email"|trans }}</label>
+                <div class="input">
+                    <input type="text" id="umail" name="_umail" value="{{ last_username }}" />
+                </div>
+            </div>
+            <div class="clearfix">
+                <label for="password">{{ "Senha"|trans }}</label>
+                <div class="input">
+                <input type="password" id="password" name="_password" />
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="input inputs-list"><label><input type="checkbox" id="remember_me" name="_remember_me" />{{ "Me manter conectado"|trans }}</label></div>
+            </div>
+            <div class="actions">
+                <button class='btn large primary' type='submit'>{{ "Login"|trans }}</button>
+            </div>
+                <a href="{{ path('user_user_recovery', {'username':last_username} ) }}" title="{{ "Troque sua senha"|trans }}" class="strong">{{ "Esqueci minha senha"|trans }}</a>
+        </form>
+    </div>
+    <div class="mT10">
+        <a href="{{url('user_user_twitterconect')}}" class="twLoginBtn" title="{{"Tem uma conta no Twitter? Use-a para fazer o seu login no %sitename%"|trans ({"%sitename%":mastop_param('system.site.name')}) }}">Logar com Twitter</a>
+        <a href="#" id='facebook-login' class="fbLoginBtn" title="{{"Tem uma conta no Facebook? Use-a para fazer o seu login no %sitename%"|trans ({"%sitename%":mastop_param('system.site.name')}) }}">Logar com Facebook</a>
+    </div>
+    
+</div>
+</div>
+{% endblock content %}  
+{% block javascripts %}
+        <script type="text/javascript" src="{{ path('user_user_script') }}"></script>
+        {% javascripts output='static/system/js/newuser.js' 
+                '@BannerUserBundle/Resources/public/js/Frontend/newUser.js' 
+                '@BannerCoreBundle/Resources/public/js/cpfMask.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '::backend.html.twig' %}
+
+{% set vars = cat.getId() ? {'slug': cat.getSlug()} : {} %}
+{% block content %}
+<div class="content box grid_12 round_all">
+    <form action="{{ path('admin_core_category_save', vars) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+        <button class="button_colour" type='submit'><span>{{ "Enviar"|trans }}</span></button>
+    </form>
+</div>
+{% endblock %}

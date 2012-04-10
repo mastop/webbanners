@@ -1,0 +1,62 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
+    profiler:
+        only_exceptions: false
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+#    position: top
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+        firephp:
+            type: firephp
+            level: info
+
+assetic:
+    use_controller: true
+    
+doctrine_mongodb:
+    connections:
+        default:
+            server: %mongo_server%
+            options:
+                connect: true
+        crawler:
+            server: %mongo_server%
+            options:
+                connect: true
+    default_database: %mongo_database%_%kernel.environment%
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                StofDoctrineExtensionsBundle: false
+            metadata_cache_driver: array # array, apc, xcache, memcache
+        crawler:
+            connection: crawler
+            database: %mongo_database%_prod
+            auto_mapping: true
+            mappings:
+                StofDoctrineExtensionsBundle: false
+            metadata_cache_driver: array # array, apc, xcache, memcache
+
+swiftmailer:
+    delivery_address:  leonardo@mastop.com.br
+    
+mastop_system:
+    themes_dir: %themes_dir%
+    active_theme: "banner"
+    twitter:
+       file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
+       consumer_key: G1WitELkS2NakPjyEsuAtw
+       consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
+       callback_url: http://banner/usuario/twitter/back
