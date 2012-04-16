@@ -27,6 +27,9 @@ class OrderRepository extends DocumentRepository
                 ->getQuery()
                 ->execute();
     }
+    public function findOneByName($name){
+        return $this->findOneBy(array('name'=>$name));
+    }
     public function findByNameUser($name, User $user){
         return $this->createQueryBuilder()
                 ->field('name')->equals($name)

@@ -52,3 +52,13 @@ function upload(){
         i++;
     }
 };
+
+function fechar(upload) { document.getElementById(upload).style.visibility = "hidden"; }
+
+function abrir(upload) {
+    document.getElementById(upload).style.visibility="visible";
+}
+
+function SaveFile(fname){
+    img.document.execCommand('saveas', null ,fname)
+}

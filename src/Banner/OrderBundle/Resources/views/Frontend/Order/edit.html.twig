@@ -9,83 +9,165 @@
 {% endblock%}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid span7">
     <div class="row-fluid">
         <div class="row">
-            <div class="span7">
+            <div class="span12">
                 <table class="table">
                     <tr>
-                        <th class="span2">{{order.getId()}}</th>
+                        <th class="span1">{{order.getId()}}</th>
                         <th class="span3">{{order.name}}</th>
                         <th class="span1">Criado: {{order.formatCreated()}}</th>
                         <th class="span1">Expira: {{order.formatExpires()}}</th>
                     </tr>
                     <tr>
-                        <td rowspan="2"  class="span2">
-                        {% for upload in order.upload %}
-                            <img src='{{upload.getWebPath()}}{{upload.getPath}}' class="thumbnail" width="100%" /><br>
-                        {% endfor %}
+                        <td rowspan="2"  class="span4">
+                            <div id="myCarousel" class="carousel slide">
+                                    <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    {%set i = 0 %}
+                                    {% for upload in order.upload %}
+                                    <div class="item {% if (i==0)%}active{%endif%}">
+                                        <img src="{{ upload.getAddress() | apply_filter('order') }}" onclick="abrir('{{upload.getId()}}');" width="100%" />
+                                        <div class="carousel-caption">
+                                            <a class=" left" href="#myCarousel" data-slide="prev"><</a>_________________________
+                                            <a class=" right" href="#myCarousel" data-slide="next">></a>
+                                        </div>
+                                            {%set i = 1 %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>                            
+                            {% for upload in order.upload %}
+                            <div id="{{upload.getId()}}" class="janela">
+                                <div id="barra">
+                                    <h2>Pedido</h2>
+                                    <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
+                                </div>
+                                    <img src='{{upload.getWebPath()}}{{upload.getPath}}' width="100%"/>
+                            </div>
+                            {% endfor%}
                         </td>
-                        <td colspan="3">{{order.notes}}</td>
+                        <td colspan="3">
+                            {{order.notes}}
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3">
-                        {% for banner in order.banner %}
-                        {{banner.width}}x{{banner.height}}
-                        {% if banner.psd %}
+                            {% for banner in order.banner %}
+                                {{banner.width}}x{{banner.height}}
+                            {% if banner.psd %}
                                 com PSD
-                        {% endif %}
-                                <br />
-                        {% endfor %}
+                            {% endif %}
+                            <br />
+                            {% endfor %}
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="span3">
-            </div>
-        </div>
-        <div class="row">
-            <div class="span7">
+            <div class="span12">
                 <table class="table">
                     <tr>
                         <th colspan="2"><h4>Conversa</h4></th>
                     </tr>
-
-            {% for talk in order.talk %}
+                {%set t = 0 %}
+                {% for talk in order.talk %}
                     <tr> 
+                        <th class="span3">{{talk.formatCreated()}}</th>
                         <th>{{talk.user.username}}</th>
-                        <th>{{talk.formatCreated()}}</th>
-                    </tr>
-                    <tr> 
-                        <td colspan="2">{{talk.message}}</td>
                     </tr>
                     <tr>
-                        <th colspan="2" class="span1">
-                        {% for upload in talk.upload %}
-                            <img src='{{upload.getWebPath()}}{{upload.getPath}}' width="10%"  class="thumbnail" />
-                        {% endfor%}
-                        </th>
-                   </tr>
+                        <td class="span3">
+                            <div id="talk{{t}}" class="carousel slide">
+                                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    {%set i = 0 %}
+                                    {% for upload in talk.upload %}
+                                    <div class="item {% if (i==0)%}active{%endif%}">
+                                        <img id="imageprin" src="{{upload.getAddress() | apply_filter('talk') }}" onclick="abrir('{{upload.getId()}}');" width="100%">
+                                        <div class="carousel-caption">
+                                            <a class=" left" href="#talk{{t}}" data-slide="prev"><</a>_____________
+                                            <a class=" right" href="#talk{{t}}" data-slide="next">></a>
+                                        </div>
+                                    </div>
+                                    {%set i = 1 %}
+                                    {% endfor%}
+                                </div>
+                            </div>
+                            {% for upload in talk.upload %}
+                            <div id="{{upload.getId()}}" class="janela">
+                                <div id="barra">
+                                    <h2>Conversa</h2>
+                                    <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
+                                </div>
+                                        <a id="img" href="FILE://webbanners{{upload.getAddress()}}">
+                                    <img src='{{upload.getWebPath()}}{{upload.getPath}}' />
+                                        </a>
+                            </div>
+                            {% endfor%}
+                        </td>
+                        <td colspan="2">{{talk.message}}</td>
+                    </tr>
+            {%set t = t+1 %}
             {% else %}
                     <tr> 
-                <td colspan="3">Não existe conversa para esse pedido</td>
+                        <td colspan="3">Não existe conversa para esse pedido</td>
                     </tr>
             {% endfor %}
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span7">
-                <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name}) }}" method="post" {{ form_enctype(formUpload)}} >
-                    <input type="hidden" value="{{order.name}}" name="order">
-                    <div id="upload">
-                        <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
-                    </div>
-                    {{ form_widget(formTalk) }}
-                    <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
-                </form>
+                <div class="span12">
+                    <table class="table">
+                        <tr>
+                            <th colspan="2"><h4>Responder</h4></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name}) }}" method="post" {{ form_enctype(formUpload)}} >
+                                    <input type="hidden" value="{{order.name}}" name="order">
+                                    <div id="upload">
+                                        <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
+                                    </div>
+                                        {{ form_widget(formTalk) }}
+                                    <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+        <div class="container-fluid span3">
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table">
+                        <tr>
+                            <th colspan="2"><h4>Preview</h4></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form class="block" action="{{ path('_order_order_preview') }}" method="post" {{ form_enctype(formUpload)}} >
+                                    <input type="hidden" value="{{order.name}}" name="order">
+                                    {{ form_widget(formUpload) }}
+                                    <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                                </form>                
+                                {%set t = 0 %}
+                                {% for preview in order.preview |reverse %}
+                                <div id="{{preview.getId()}}" class="janela">
+                                    <div id="barra">
+                                        <h2>Preview</h2>
+                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{preview.getId()}}');">x</a>
+                                    </div>
+                                    <img src="{{preview.getWebPath()}}{{preview.getPath}}" width='100%'>
+                                </div>
+                                <img id="imageprin" src="{{ preview.getAddress() | apply_filter('order') }}" onclick="abrir('{{preview.getId()}}');" {% if (t==0)%}class="thumbnail"{%endif%}>
+                                {%set t = 1 %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 {% endblock %}

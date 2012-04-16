@@ -43,6 +43,11 @@ Mastop Internet Development                          http://www.mastop.com.br
   {% stylesheets '@BannerCoreBundle/Resources/public/css/*.css' filter='?yui_css' output='themes/banner/css/banner.css' %}
    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
   {% endstylesheets %}
+   
+  <!-- CSS Tema -->
+  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
   
   <!-- Bootstrap LESS -->
   {% stylesheets filter='less,?yui_css' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/bootstrap.less' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/responsive.less' output='themes/banner/twitter-bootstrap/css/bootstrap.css' %}

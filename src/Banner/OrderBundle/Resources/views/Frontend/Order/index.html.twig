@@ -37,7 +37,9 @@
             {{ form_row(formOrder.notes) }}
             {{ form_row(formOrder.quantity) }}
 
-            <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
+            <div id="upload">
+                <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]" required="required"><br />
+            </div>
             <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
         </div>
     </form>

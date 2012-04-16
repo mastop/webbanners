@@ -134,3 +134,6 @@ div.orderStatusLogItem.aprovado, div.orderStatusLogItem.finalizado{
     background: #587906;
     color: #FFF;
 }
+img{
+    height: 50px;
+}

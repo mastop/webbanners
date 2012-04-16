@@ -176,11 +176,13 @@ class OrderController extends BaseController
                 $dm->persist($talk);
                 $dm->flush();
                 foreach ($formUpload1 as $upload1){
-                    $upload = new Upload();
-                    $upload->setUniqpath('order/'.$talker->getUsername().'/talker/');
-                    $upload->setFile($upload1);
-                    $dm->persist($upload);
-                    $talk->addUpload($upload);
+                    if($upload1){
+                        $upload = new Upload();
+                        $upload->setUniqpath('order/'.$talker->getUsername().'/talker/');
+                        $upload->setFile($upload1);
+                        $dm->persist($upload);
+                        $talk->addUpload($upload);
+                    }
                 }
                 
                 $order->addTalk($talk);
@@ -197,6 +199,35 @@ class OrderController extends BaseController
                         'order'  => $order,
                         'user'  => $user
                     );
+    }
+     
+    /**
+     * @Route("/preview", name="_order_order_preview")
+     * @Template()
+     */
+    public function previewAction()
+    { 
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $upload = new Upload();
+        $formUpload  = $this->createForm(new UploadType(), $upload);
+        $request = $this->get('request');
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);  
+        //exit(var_dump($order));
+        
+        if ('POST' == $request->getMethod()) {
+            $formUpload->bindRequest($request);
+            if ($formUpload->isValid()) {
+                $upload->setUniqpath('order/'.($order->getUser()->getUsername()).'/preview');
+                $dm->persist($upload);
+                $order->addPreview($upload);
+                $dm->persist($order);
+                $dm->flush();
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Salvo");
+            }
+            
+        }
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
      }
     
      /**
@@ -215,12 +246,12 @@ class OrderController extends BaseController
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
         $formUpload->bindRequest($request); 
+        $formUpload1  = $request->files->get("upload");
         
         if(($formUser["email"] && !$formUser) || !$formOrder || !$formUpload){
             $msg = "Problemas no cadastro, favor conferir.";
             return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
         }
-        //exit(var_dump($formUpload));
         
         if($this->get('security.context')->isGranted("ROLE_USER") ){
             $user = $this->get('security.context')->getToken()->getUser();
@@ -255,7 +286,6 @@ class OrderController extends BaseController
             $mail->notify('Senha de acesso', 'A Senha do usuário '.$user->getEmail().' foi enviada com sucesso.');
             
         }
-        $upload->setUniqpath('order/'.$user->getUsername().'/');
         
         $status = $this->mongo('BannerOrderBundle:Status')->findOneById(1);
         $statusLog = new StatusLog();
@@ -277,7 +307,15 @@ class OrderController extends BaseController
         //exit(var_dump($order));
                 
         $order->setUser($user);
-        $order->addUpload($upload);
+        foreach ($formUpload1 as $upload1){
+            if($upload1){
+                $upload = new Upload();
+                $upload->setUniqpath('order/'.$user->getUsername().'/talker/');
+                $upload->setFile($upload1);
+                $dm->persist($upload);
+                $order->addUpload($upload);
+            }
+        }
         $order->setStatus($status);
         $order->addStatusLog($statusLog);
         $order->setName($formOrder['name']);
