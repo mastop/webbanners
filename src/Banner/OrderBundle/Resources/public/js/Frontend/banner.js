@@ -58,7 +58,3 @@ function fechar(upload) { document.getElementById(upload).style.visibility = "hi
 function abrir(upload) {
     document.getElementById(upload).style.visibility="visible";
 }
-
-function SaveFile(fname){
-    img.document.execCommand('saveas', null ,fname)
-}

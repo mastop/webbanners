@@ -126,7 +126,8 @@ services:
     tags:
       -  { name: twig.extension }
       
-avalanche_imagine:
+avalanche_imagine:    
+    cache_prefix: uploads/thumbnails
     filters:
         order:
             type:    thumbnail

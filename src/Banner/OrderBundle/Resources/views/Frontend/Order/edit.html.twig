@@ -100,9 +100,9 @@
                                     <h2>Conversa</h2>
                                     <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
                                 </div>
-                                        <a id="img" href="FILE://webbanners{{upload.getAddress()}}">
+                                <a onclick="SaveFile('http://webbanner{{upload.getAddress()}}');">
                                     <img src='{{upload.getWebPath()}}{{upload.getPath}}' />
-                                        </a>
+                                </a>
                             </div>
                             {% endfor%}
                         </td>
