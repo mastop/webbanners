@@ -229,6 +229,22 @@ class OrderController extends BaseController
         }
                 return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
      }
+     
+    /**
+     * @Route("/aprovar", name="_order_order_aprove")
+     * @Template()
+     */
+    public function aproveAction()
+    { 
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);
+        $order->setAprove(true);
+        $dm->persist($order);
+        $dm->flush();
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Pedido aprovado e finalizado");
+     }
     
      /**
      * @Route("/save", name="_order_order_save")

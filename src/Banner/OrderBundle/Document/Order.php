@@ -144,6 +144,7 @@ class Order
      * @ODM\Int
      */
     protected $cunread;
+
     /**
      * mensagens não lidas designer
      *
@@ -151,6 +152,14 @@ class Order
      * @ODM\Int
      */
     protected $dunread;
+    
+    /**
+     * pedido aprovado
+     *
+     * @var boolean
+     * @ODM\Boolean
+     */
+    protected $aprove;
     
     /**
      * Conversa
@@ -625,5 +634,25 @@ class Order
     public function getUpload()
     {
         return $this->upload;
+    }
+
+    /**
+     * Set aprove
+     *
+     * @param boolean $aprove
+     */
+    public function setAprove($aprove)
+    {
+        $this->aprove = $aprove;
+    }
+
+    /**
+     * Get aprove
+     *
+     * @return boolean $aprove
+     */
+    public function getAprove()
+    {
+        return $this->aprove;
     }
 }

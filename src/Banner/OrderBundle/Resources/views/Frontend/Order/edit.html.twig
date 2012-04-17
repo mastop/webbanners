@@ -115,6 +115,7 @@
                     </tr>
             {% endfor %}
                 </table>
+                                {% if (order.aprove != true) %}
                 <div class="span12">
                     <table class="table">
                         <tr>
@@ -134,6 +135,7 @@
                         </tr>
                     </table>
                 </div>
+                                {% endif %} 
             </div>
         </div>
     </div>
@@ -143,15 +145,27 @@
                 <div class="span12">
                     <table class="table">
                         <tr>
+                        <form class="block" action="{{path('_order_order_aprove')}}" method="post" >
+                            <input type="hidden" value="{{order.name}}" name="order">
+                            {% if (order.aprove != true) and (order.user == app.user)%}
+                            <input type="submit" value="Aprovar" width='100%'>
+                            {% else %}
+                            <input type="submit" value="Aprovado" width='100%' disabled="disabled">
+                            {% endif %}
+                        </form>
+                        </tr>
+                        <tr>
                             <th colspan="2"><h4>Preview</h4></th>
                         </tr>
                         <tr>
                             <td>
+                                {% if (order.aprove != true) %}
                                 <form class="block" action="{{ path('_order_order_preview') }}" method="post" {{ form_enctype(formUpload)}} >
                                     <input type="hidden" value="{{order.name}}" name="order">
                                     {{ form_widget(formUpload) }}
                                     <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
                                 </form>                
+                                {% endif %}
                                 {%set t = 0 %}
                                 {% for preview in order.preview |reverse %}
                                 <div id="{{preview.getId()}}" class="janela">
