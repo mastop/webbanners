@@ -59,6 +59,14 @@ class Order
     protected $notes;
     
     /**
+     * Anotações do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $link;
+    
+    /**
      * Array com as informações sobre o pagamento
      * 
      * @var array
@@ -123,6 +131,14 @@ class Order
     protected $upload = array();
     
     /**
+     * Linguagem Visual
+     *
+     * @var object
+     * @ODM\EmbedMany(targetDocument="Banner\OrderBundle\Document\Upload")
+     */
+    protected $vLanguage = array();
+    
+    /**
      * Figuras para desenvolver o Banner
      * 
      * @var object
@@ -152,14 +168,6 @@ class Order
      * @ODM\Int
      */
     protected $dunread;
-    
-    /**
-     * pedido aprovado
-     *
-     * @var boolean
-     * @ODM\Boolean
-     */
-    protected $aprove;
     
     /**
      * Conversa
@@ -637,22 +645,42 @@ class Order
     }
 
     /**
-     * Set aprove
+     * Set link
      *
-     * @param boolean $aprove
+     * @param string $link
      */
-    public function setAprove($aprove)
+    public function setLink($link)
     {
-        $this->aprove = $aprove;
+        $this->link = $link;
     }
 
     /**
-     * Get aprove
+     * Get link
      *
-     * @return boolean $aprove
+     * @return string $link
      */
-    public function getAprove()
+    public function getLink()
     {
-        return $this->aprove;
+        return $this->link;
+    }
+
+    /**
+     * Add vLanguage
+     *
+     * @param Banner\OrderBundle\Document\Upload $vLanguage
+     */
+    public function addVLanguage(\Banner\OrderBundle\Document\Upload $vLanguage)
+    {
+        $this->vLanguage[] = $vLanguage;
+    }
+
+    /**
+     * Get vLanguage
+     *
+     * @return Doctrine\Common\Collections\Collection $vLanguage
+     */
+    public function getVLanguage()
+    {
+        return $this->vLanguage;
     }
 }

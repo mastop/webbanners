@@ -39,6 +39,16 @@ class Upload {
      */
     protected $path;
     
+    /**
+     * @ODM\String
+     */
+    protected $justify;
+    
+    /**
+     * @ODM\String
+     */
+    protected $aproved;
+    
     protected $file;
     
     /**
@@ -233,5 +243,45 @@ class Upload {
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set justify
+     *
+     * @param string $justify
+     */
+    public function setJustify($justify)
+    {
+        $this->justify = $justify;
+    }
+
+    /**
+     * Get justify
+     *
+     * @return string $justify
+     */
+    public function getJustify()
+    {
+        return $this->justify;
+    }
+
+    /**
+     * Set aproved
+     *
+     * @param string $aproved
+     */
+    public function setAproved($aproved)
+    {
+        $this->aproved = $aproved;
+    }
+
+    /**
+     * Get aproved
+     *
+     * @return string $aproved
+     */
+    public function getAproved()
+    {
+        return $this->aproved;
     }
 }

@@ -131,7 +131,7 @@ avalanche_imagine:
     filters:
         order:
             type:    thumbnail
-            options: { size: [240, 200], mode: outbound }
+            options: { size: [280, 210], mode: inset }
         talk:
             type:    thumbnail
-            options: { size: [150, 110], mode: outbound }
+            options: { size: [180, 130], mode: inset }

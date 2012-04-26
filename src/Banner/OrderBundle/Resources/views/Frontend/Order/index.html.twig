@@ -11,18 +11,34 @@
 {% block content %}
 <div class="container-fluid">
 <div class="row-fluid">
-    <form class="block" action="{{ path('_order_order_save') }}" method="post" {{ form_enctype(formUpload)}} >
+    <form class="block" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
     <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
         <div class="span6">
             <div id="newBanner">
-                <div id="banner0">
+                {% set i = 0 %}
+                {% for banner in order.banner %}
+                <div id="banner{{i}}">
                     <input type="hidden" value="0" />
-                    <input class="width" id="width0" name=" banner[0][width] " maxlength="3" value="728" type="number" required="required" />
+                    <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="{{banner.width}}" type="number" required="required" readonly="readonly" />
                     <span class="x">x</span>
-                    <input class="height" id="height0" name=" banner[0][height] " maxlength="3" value="90" type="number" required="required" />
-                    <input class="psd" id="psd0" name=" banner[0][psd] " type="checkbox"/> PSD +
-                    <BR /><BR />
+                    <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="{{banner.height}}" type="number" required="required" readonly="readonly" />
+                    <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} /> PSD +
+                    <br />
+                    <br />
                 </div>
+                {% set i = i + 1 %}
+                {% endfor %}
+                    {% if (i==0) %}
+                <div id="banner{{i}}">
+                    <input type="hidden" value="0" />
+                    <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="728" type="number" required="required" />
+                    <span class="x">x</span>
+                    <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="60" type="number" required="required"/>
+                    <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" /> PSD +
+                    <br />
+                    <br />
+                </div>
+                    {% endif %}
             </div>
             <div id="btnnew">
                 <a id="novo" href="#" class="btn">+</a>
@@ -36,10 +52,11 @@
             {{ form_row(formOrder.name) }}
             {{ form_row(formOrder.notes) }}
             {{ form_row(formOrder.quantity) }}
-
+            {% if order.name == null %}
             <div id="upload">
                 <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]" required="required"><br />
-            </div>
+            </div>  
+            {% endif %} 
             <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
         </div>
     </form>
