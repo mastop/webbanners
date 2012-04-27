@@ -52,3 +52,62 @@ function upload(){
         i++;
     }
 };
+
+function just(id){
+    if(document.getElementById("just('"+id+"')") == undefined){
+        var justific = "Justificativa: <textarea id=just('"+id+"') name='just["+id+"]' required='required'></textarea> <br />" ;
+        $('#just'+id).append(justific);
+    }
+};
+
+function rmjust(id){
+    if(document.getElementById("just"+id) != undefined){
+        $('#just'+id).html("");
+    }
+};
+
+function banner(){
+    var max = parseInt(document.getElementById("maxPreview").value);
+    for (i = 0 ; i < max ; i++) {
+        if (document.getElementById("banner"+i) == undefined){
+            break;
+        }
+    }
+    var i = 0;
+    while(i<max){
+        if (document.getElementById("banner["+i+"]") == undefined){
+            if (document.getElementById("banner["+(i-1)+"]").value != ""){
+                var image = '<input id="banner['+i+']" type="file" onchange="banner()" name="banner['+i+']"><br />';
+                $('#banner').append(image);
+            }
+            break;
+        }
+        i++;
+    }
+};
+
+function ling(){
+    var max = parseInt(document.getElementById("maxLing").value);
+    for (i = 0 ; i < max ; i++) {
+        if (document.getElementById("ling["+i+"]") == undefined){
+            break;
+        }
+    }
+    var i = 0;
+    while(i<max){
+        if (document.getElementById("ling["+i+"]") == undefined){
+            if (document.getElementById("ling["+(i-1)+"]").value != ""){
+                var image = '<input id="ling['+i+']" type="file" onchange="ling()" name="ling['+i+']"><br />';
+                $('#ling').append(image);
+            }
+            break;
+        }
+        i++;
+    }
+};
+
+function fechar(upload) {document.getElementById(upload).style.visibility = "hidden";}
+
+function abrir(upload) {
+    document.getElementById(upload).style.visibility="visible";
+}

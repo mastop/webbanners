@@ -20,12 +20,32 @@ class OrderRepository extends DocumentRepository
                 ->getQuery()
                 ->execute();
     }
-    public function findByDesignerUser(User $designer, User $user){
+    public function findByOpenUser(User $user){
         return $this->createQueryBuilder()
-                ->field('designer')->references($designer)
+                ->field('user')->references($user)
+                ->field('aproved')->notEqual("true")
                 ->sort('expires', 'ASC')
                 ->getQuery()
                 ->execute();
+    }
+    public function findByDoneUser(User $user){
+        return $this->createQueryBuilder()
+                ->field('user')->references($user)
+                ->field('aproved')->equals("true")
+                ->sort('expires', 'ASC')
+                ->getQuery()
+                ->execute();
+    }
+    public function findByDesignerUser(User $designer, User $user){
+        return $this->createQueryBuilder()
+                ->field('designer')->references($designer)
+                ->field('user')->references($user)
+                ->sort('expires', 'ASC')
+                ->getQuery()
+                ->execute();
+    }
+    public function findOneByName($name){
+        return $this->findOneBy(array('name'=>$name));
     }
     public function findByNameUser($name, User $user){
         return $this->createQueryBuilder()
@@ -38,7 +58,6 @@ class OrderRepository extends DocumentRepository
     public function findUserByDesigner(User $designer){
         return $this->createQueryBuilder()
                 ->field('designer')->references($designer)
-                ->sort('expires', 'ASC')
                 ->getQuery()
                 ->execute();
     }

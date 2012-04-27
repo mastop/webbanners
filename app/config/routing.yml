@@ -29,3 +29,7 @@ _home:
     defaults: { _controller: BannerCoreBundle:Frontend\Core:index }
     requirements:
       _scheme: http
+      
+_imagine:
+    resource: .
+    type:     imagine

@@ -21,6 +21,7 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "doctrine/mongodb-odm-bundle": "dev-master",
         "kertz/twitteroauth": "dev-master",
+        "avalanche123/imagine-bundle": "dev-master",
         "mastop/MastopBundles": "*"
     },
     "repositories": [

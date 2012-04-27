@@ -59,6 +59,22 @@ class Order
     protected $notes;
     
     /**
+     * Anotações do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $link;
+    
+    /**
+     * Pedido aprovado
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $aproved;
+    
+    /**
      * Array com as informações sobre o pagamento
      * 
      * @var array
@@ -123,6 +139,14 @@ class Order
     protected $upload = array();
     
     /**
+     * Linguagem Visual
+     *
+     * @var object
+     * @ODM\EmbedMany(targetDocument="Banner\OrderBundle\Document\Upload")
+     */
+    protected $vLanguage = array();
+    
+    /**
      * Figuras para desenvolver o Banner
      * 
      * @var object
@@ -144,6 +168,7 @@ class Order
      * @ODM\Int
      */
     protected $cunread;
+
     /**
      * mensagens não lidas designer
      *
@@ -625,5 +650,65 @@ class Order
     public function getUpload()
     {
         return $this->upload;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string $link
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Add vLanguage
+     *
+     * @param Banner\OrderBundle\Document\Upload $vLanguage
+     */
+    public function addVLanguage(\Banner\OrderBundle\Document\Upload $vLanguage)
+    {
+        $this->vLanguage[] = $vLanguage;
+    }
+
+    /**
+     * Get vLanguage
+     *
+     * @return Doctrine\Common\Collections\Collection $vLanguage
+     */
+    public function getVLanguage()
+    {
+        return $this->vLanguage;
+    }
+
+    /**
+     * Set aproved
+     *
+     * @param string $aproved
+     */
+    public function setAproved($aproved)
+    {
+        $this->aproved = $aproved;
+    }
+
+    /**
+     * Get aproved
+     *
+     * @return string $aproved
+     */
+    public function getAproved()
+    {
+        return $this->aproved;
     }
 }

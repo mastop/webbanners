@@ -125,3 +125,13 @@ services:
     class: Twig_Extensions_Extension_Text
     tags:
       -  { name: twig.extension }
+      
+avalanche_imagine:    
+    cache_prefix: uploads/thumbnails
+    filters:
+        order:
+            type:    thumbnail
+            options: { size: [280, 210], mode: inset }
+        talk:
+            type:    thumbnail
+            options: { size: [180, 130], mode: inset }
