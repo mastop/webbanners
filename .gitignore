@@ -1,7 +1,7 @@
 web/bundles/
 web/themes/
 web/static/
-web/uploads/
+web/uploads/*
 app/bootstrap*
 app/cache/*
 app/logs/*
@@ -10,3 +10,4 @@ vendor/
 composer.phar
 composer.lock
 /nbproject/private/
+*~

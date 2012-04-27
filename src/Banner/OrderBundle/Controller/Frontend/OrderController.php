@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
+use Banner\OrderBundle\Form\Frontend\Order1Type;
 use Banner\OrderBundle\Form\Frontend\OrderType;
 use Banner\OrderBundle\Form\Frontend\UploadType;
 use Banner\OrderBundle\Form\Frontend\TalkType;
@@ -21,17 +22,24 @@ use Banner\OrderBundle\Document\Banner;
 class OrderController extends BaseController
 { 
     /**
-     * @Route("/novo", name="_order_order_index")
+     * @Route("/novo", name="_order_order_index", defaults={"name"=""})
+     * @Route("/alterar/{name}", name="_order_order_alter")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($name="")
     {                      
-        $order = new Order();
+        if ($name) {
+            $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
+            $order->setQuantity($order->getQuantity());
+            $formOrder = $this->createForm(new Order1Type(), $order);
+        }else{
+            $order = new Order();
+            $order->setQuantity(1);
+            $formOrder = $this->createForm(new OrderType(), $order);
+        }
         $upload = new Upload();
         $user = new User();
-        $order->setQuantity(1);
         
-        $formOrder = $this->createForm(new OrderType(), $order);
         $formUpload = $this->createForm(new UploadType(), $upload);
         $formUser = $this->createForm(new UserForm(), $user);
         
@@ -39,7 +47,45 @@ class OrderController extends BaseController
                         'formOrder'  => $formOrder->createView(), 
                         'formUpload' => $formUpload->createView(), 
                         'formUser'   => $formUser->createView(), 
+                        'order'      => $order,
                     );
+     }
+
+     /**
+     * @Route("/modificar/{name}", name="_order_order_modify")
+     * @Template()
+     */
+    public function modifyAction($name="")
+    {          
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');             
+        $request = $this->get('request');
+        $formOrder = $request->request->get('order');
+        $formBanner = $request->request->get('banner');
+        if ($name) {
+            $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
+            $quantity = $order->getQuantity();
+            $order->setQuantity($formOrder['quantity']);
+            $i = 0;
+            foreach($formBanner as $fBanner){
+                $i++;
+                if($i>$quantity){
+                    $banner = new Banner();
+                    $banner->setHeight($fBanner['height']);
+
+                    $banner->setWidth($fBanner['width']);
+                    if(sizeof($fBanner)==3){
+                        $banner->setPsd($fBanner['psd']);
+                    }
+                    $order->addBanner($banner);
+                }
+            }
+            $dm->persist($order);
+            $dm->flush();
+            
+        }
+        
+        
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Alteração no pedido feita");
      }
      
     /**
@@ -70,7 +116,6 @@ class OrderController extends BaseController
                     $clients[array_search($order->getUser(), $clients)] += 1;
                 }
             }
-            //exit(var_dump($clients));
         }
         return array(
                         'clients' => $clients,
@@ -113,6 +158,7 @@ class OrderController extends BaseController
      */
     public function clientAction($username)
     {       
+        $orders = array();
         if($username){
             $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
             $designer = $this->get('security.context')->getToken()->getUser();
@@ -122,11 +168,15 @@ class OrderController extends BaseController
             }
         }else{
             $user = $this->get('security.context')->getToken()->getUser();
-            $orders = $this->mongo('BannerOrderBundle:Order')->findByUser($user);
+            if($user && $user != "anon."){
+                $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenUser($user);
+                $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneUser($user);
+            }
         }
         
         return array(
-                        'orders'  => $orders
+                        'orders'  => $orders,
+                        'finals'  => $finals
                     );
      }
      
@@ -151,6 +201,23 @@ class OrderController extends BaseController
         }
         $dm->persist($order);
         $dm->flush();
+        
+        $pendings = array();
+        $aproves = array();
+        $lvisus = array();
+        foreach ($order->getPreview() as $pending){
+            if ($pending->getAproved() == "true") {
+               $aproves[] = $pending; 
+            }else{
+                $pendings[] = $pending;
+            }
+        } 
+        foreach ($order->getVLanguage() as $lvisu){
+            if ($lvisu->getAproved() == "true") {
+               $lvisus[] = $lvisu; 
+            }
+        } 
+        
             
         $talk = new Talk();
         $upload = new Upload();
@@ -176,11 +243,13 @@ class OrderController extends BaseController
                 $dm->persist($talk);
                 $dm->flush();
                 foreach ($formUpload1 as $upload1){
-                    $upload = new Upload();
-                    $upload->setUniqpath('order/'.$talker->getUsername().'/talker/');
-                    $upload->setFile($upload1);
-                    $dm->persist($upload);
-                    $talk->addUpload($upload);
+                    if($upload1){
+                        $upload = new Upload();
+                        $upload->setUniqpath('order/'.$talker->getUsername().'/talker/');
+                        $upload->setFile($upload1);
+                        $dm->persist($upload);
+                        $talk->addUpload($upload);
+                    }
                 }
                 
                 $order->addTalk($talk);
@@ -195,8 +264,122 @@ class OrderController extends BaseController
                         'formTalk'  => $formTalk->createView(), 
                         'formUpload'  => $formUpload->createView(), 
                         'order'  => $order,
-                        'user'  => $user
+                        'user'  => $user,
+                        'aproves'  => $aproves,
+                        'pendings'  => $pendings,
+                        'lvisus'  => $lvisus
                     );
+    }
+     
+    /**
+     * @Route("/linguagem", name="_order_order_vlanguage")
+     * @Template()
+     */
+    public function vlanguageAction()
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $lvisual  = $request->request->get("lvisual");
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);
+        foreach ($order->getVLanguage() as $vlanguage){  
+            if($vlanguage->getId() == $lvisual){
+                $vlanguage->setAproved("true");
+            }else{
+                $vlanguage->setAproved("false");
+            }
+        }
+        $dm->persist($order);
+        $dm->flush();
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Linguagem Visual aceita");
+    }
+    
+    /**
+     * @Route("/banner", name="_order_order_banner")
+     * @Template()
+     */
+    public function bannerAction()
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);
+        $justifics = array();
+        foreach ($order->getPreview() as $upload){  
+            if($upload->getAproved() != "true" && $upload->getAproved() !=  "false"){
+                $banner  = $request->request->get($upload->getId());
+                if($banner == "false" ){
+                    $justifics  = $request->request->get("just");
+                    $upload->setJustify($justifics[$upload->getId()]);
+                }
+                $upload->setAproved($banner);
+            }
+        }
+        $dm->persist($order);
+        $dm->flush();
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Banners avaliados");
+    }
+    
+    /**
+     * @Route("/preview", name="_order_order_preview")
+     * @Template()
+     */
+    public function previewAction()
+    { 
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $formUpload  = $request->files->get("banner");
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);  
+        //exit(var_dump($order));
+        
+        if ('POST' == $request->getMethod()) {
+            foreach ($formUpload as $upload){
+                if($upload){
+                    $upload1 = new Upload();
+                    $upload1->setFile($upload);
+                    $upload1->setUniqpath('order/'.($order->getUser()->getUsername()).'/preview');
+                    $dm->persist($upload1);
+                    $order->addPreview($upload1);
+                }
+            }
+            $dm->persist($order);
+            $dm->flush();
+            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Salvo");
+            
+        }
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
+     }
+     
+    /**
+     * @Route("/lvisual", name="_order_order_lvisual")
+     * @Template()
+     */
+    public function lvisualAction()
+    { 
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $formUpload  = $request->files->get("ling");
+        $name  = $request->request->get("order");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);  
+        //exit(var_dump($order));
+        
+        if ('POST' == $request->getMethod()) {
+            foreach ($formUpload as $upload){
+                if($upload){
+                    $upload1 = new Upload();
+                    $upload1->setFile($upload);
+                    $upload1->setUniqpath('order/'.($order->getUser()->getUsername()).'/lvisual');
+                    $dm->persist($upload1);
+                    $order->addVLanguage($upload1);
+                }
+            }
+            $dm->persist($order);
+            $dm->flush();
+            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Salvo");
+            
+        }
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
      }
     
      /**
@@ -215,12 +398,12 @@ class OrderController extends BaseController
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
         $formUpload->bindRequest($request); 
+        $formUpload1  = $request->files->get("upload");
         
         if(($formUser["email"] && !$formUser) || !$formOrder || !$formUpload){
             $msg = "Problemas no cadastro, favor conferir.";
             return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
         }
-        //exit(var_dump($formUpload));
         
         if($this->get('security.context')->isGranted("ROLE_USER") ){
             $user = $this->get('security.context')->getToken()->getUser();
@@ -255,7 +438,6 @@ class OrderController extends BaseController
             $mail->notify('Senha de acesso', 'A Senha do usuário '.$user->getEmail().' foi enviada com sucesso.');
             
         }
-        $upload->setUniqpath('order/'.$user->getUsername().'/');
         
         $status = $this->mongo('BannerOrderBundle:Status')->findOneById(1);
         $statusLog = new StatusLog();
@@ -277,7 +459,15 @@ class OrderController extends BaseController
         //exit(var_dump($order));
                 
         $order->setUser($user);
-        $order->addUpload($upload);
+        foreach ($formUpload1 as $upload1){
+            if($upload1){
+                $upload = new Upload();
+                $upload->setUniqpath('order/'.$user->getUsername().'/talker/');
+                $upload->setFile($upload1);
+                $dm->persist($upload);
+                $order->addUpload($upload);
+            }
+        }
         $order->setStatus($status);
         $order->addStatusLog($statusLog);
         $order->setName($formOrder['name']);
@@ -297,8 +487,8 @@ class OrderController extends BaseController
         $mail->notify('Pedido solicitado', 'Um pedido foi enviado por '.$user->getEmail(),'leonardo@mastop.com.br');
 
         //autologin
-        $token = new UsernamePasswordToken(     $user,    null,     'main',     array('ROLE_USER'));
-        $this->container->get('security.context')->setToken($token);  
+        //$token = new UsernamePasswordToken(     $user,    null,     'main',     array('ROLE_USER'));
+        //$this->container->get('security.context')->setToken($token);  
         
         $msg = "Pedido efetuado com sucesso!";
         return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);

@@ -20,6 +20,14 @@ class Upload {
     protected $id;
     
     /**
+     * Usuário que fez o upload
+     * 
+     * @var object
+     * @ODM\ReferenceOne(targetDocument="Banner\UserBundle\Document\User")
+     */
+    protected $user;
+    
+    /**
      * Local onde o arquivo será salvo
      * 
      * @ODM\String
@@ -31,7 +39,25 @@ class Upload {
      */
     protected $path;
     
+    /**
+     * @ODM\String
+     */
+    protected $justify;
+    
+    /**
+     * @ODM\String
+     */
+    protected $aproved;
+    
     protected $file;
+    
+    /**
+     * Data de Criação
+     *
+     * @var object
+     * @ODM\Date
+     */
+    protected $created;
     
     public function getAbsolutePath()
     {
@@ -66,6 +92,13 @@ class Upload {
             $this->setPath(uniqid().'.'.$this->getfile()->guessExtension());
         }
     } 
+    /*
+     * @ODM\prePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreated(new \DateTime());
+    }
      
     /**
     * @ODM\PostPersist()
@@ -161,5 +194,94 @@ class Upload {
     public function getFile()
     {
         return $this->file;
+    }
+    
+    /**
+     * Get address
+     *
+     */
+    public function getAddress()
+    {
+        return $this->getWebPath().$this->getPath();
+    }
+
+    /**
+     * Set user
+     *
+     * @param Banner\UserBundle\Document\User $user
+     */
+    public function setUser(\Banner\UserBundle\Document\User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Banner\UserBundle\Document\User $user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set created
+     *
+     * @param date $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * Get created
+     *
+     * @return date $created
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set justify
+     *
+     * @param string $justify
+     */
+    public function setJustify($justify)
+    {
+        $this->justify = $justify;
+    }
+
+    /**
+     * Get justify
+     *
+     * @return string $justify
+     */
+    public function getJustify()
+    {
+        return $this->justify;
+    }
+
+    /**
+     * Set aproved
+     *
+     * @param string $aproved
+     */
+    public function setAproved($aproved)
+    {
+        $this->aproved = $aproved;
+    }
+
+    /**
+     * Get aproved
+     *
+     * @return string $aproved
+     */
+    public function getAproved()
+    {
+        return $this->aproved;
     }
 }

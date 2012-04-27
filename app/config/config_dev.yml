@@ -59,4 +59,4 @@ mastop_system:
        file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
        consumer_key: G1WitELkS2NakPjyEsuAtw
        consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
-       callback_url: http://banner/usuario/twitter/back
+       callback_url: http://banner/usuario/twitter/back   

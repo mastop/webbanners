@@ -1,0 +1,43 @@
+.janela {
+position:absolute;
+left: 30%;
+width: 40%;
+border-top: 1px solid #000000;
+border-right: 2px solid #666666;
+border-bottom: 2px solid #000000;
+border-left: 1px solid #999999;
+z-index: 1000;
+visibility:hidden;
+background: 0 -90px no-repeat; 
+}
+
+#barra {
+width: 100%;
+height: 25px;
+border-top: 1px solid #999999;
+border-right: 1px solid #666666;
+border-bottom: 1px solid black;
+border-left: 1px solid #999999;
+background-color: white;
+}
+
+#barra h2 {
+font: 12px Verdana, Arial, Sans-serif;
+padding: 3px 20px;
+margin: 0px;
+float: left;
+}
+
+#barra a {
+font: 12px Verdana, Arial, Sans-serif;
+color: #000000;
+padding: 0px 0px;
+margin: 5px;
+float: right;
+}
+
+img.disab {
+opacity: 0.5;
+-moz-opacity: 0.5;
+filter: alpha(opacity=50);
+}
