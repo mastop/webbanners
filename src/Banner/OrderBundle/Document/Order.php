@@ -67,6 +67,14 @@ class Order
     protected $link;
     
     /**
+     * Pedido aprovado
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $aproved;
+    
+    /**
      * Array com as informações sobre o pagamento
      * 
      * @var array
@@ -682,5 +690,25 @@ class Order
     public function getVLanguage()
     {
         return $this->vLanguage;
+    }
+
+    /**
+     * Set aproved
+     *
+     * @param string $aproved
+     */
+    public function setAproved($aproved)
+    {
+        $this->aproved = $aproved;
+    }
+
+    /**
+     * Get aproved
+     *
+     * @return string $aproved
+     */
+    public function getAproved()
+    {
+        return $this->aproved;
     }
 }

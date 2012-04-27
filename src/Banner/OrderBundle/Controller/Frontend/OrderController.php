@@ -116,7 +116,6 @@ class OrderController extends BaseController
                     $clients[array_search($order->getUser(), $clients)] += 1;
                 }
             }
-            //exit(var_dump($clients));
         }
         return array(
                         'clients' => $clients,
@@ -170,12 +169,14 @@ class OrderController extends BaseController
         }else{
             $user = $this->get('security.context')->getToken()->getUser();
             if($user && $user != "anon."){
-                $orders = $this->mongo('BannerOrderBundle:Order')->findByUser($user);
+                $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenUser($user);
+                $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneUser($user);
             }
         }
         
         return array(
-                        'orders'  => $orders
+                        'orders'  => $orders,
+                        'finals'  => $finals
                     );
      }
      
