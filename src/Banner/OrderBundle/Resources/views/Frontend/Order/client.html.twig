@@ -1,5 +1,12 @@
 {% extends '::frontend.html.twig' %}
 
+{% block stylesheets %}
+  <!-- CSS Tema -->
+  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
@@ -58,6 +65,7 @@
                             <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
+                            <td>{{order.cUnread}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>

@@ -97,6 +97,71 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         
         $manager->persist($param);
         $manager->flush();
+        
+        $param = new Parameters();
+        $param->setName('all');
+        $param->setTitle('Pedido');
+        $param->setDesc('Configurações para pedido no site');
+        $param->setBundle('order');
+        $param->setRole('ROLE_ADMIN');
+        $param->setOrder(2);
+
+        $child = new Children();
+        $child->setName('defaultstatus');
+        $child->setTitle('Status padrão');
+        $child->setDesc('Qual Status que o pedido virá ao ser criado.');
+        $child->setValue("1");
+        $child->setFieldtype('text');
+        $child->setOrder(0);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('BannersOrder');
+        $child->setTitle('Máximo de Banners');
+        $child->setDesc('Máximo de Banners que podem ser solicitados por pedido.');
+        $child->setValue(10);
+        $child->setFieldtype('number');
+        $child->setOrder(1);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('UploadOrder');
+        $child->setTitle('Máximo de Uploads');
+        $child->setDesc('Máximo de uploads por pedido.');
+        $child->setValue(10);
+        $child->setFieldtype('number');
+        $child->setOrder(2);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('FirstBanner');
+        $child->setTitle('Valor para o 1º banner');
+        $child->setDesc('Valor para o 1º banner.');
+        $child->setValue(30.00);
+        $child->setFieldtype('number');
+        $child->setOrder(3);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('OthersBanner');
+        $child->setTitle('Valor os outros banners');
+        $child->setDesc('Valor para os outros banners.');
+        $child->setValue(20.00);
+        $child->setFieldtype('number');
+        $child->setOrder(3);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('PSDBanner');
+        $child->setTitle('Valor para o PSD do Banner');
+        $child->setDesc('Valor para o PSD do Banner.');
+        $child->setValue(5.00);
+        $child->setFieldtype('number');
+        $child->setOrder(3);
+        $param->addChildren($child);
+        
+        $manager->persist($param);
+        $manager->flush();
     }
 
 }

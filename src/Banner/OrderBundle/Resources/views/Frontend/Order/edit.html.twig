@@ -1,5 +1,12 @@
 {% extends '::frontend.html.twig' %}
 
+{% block stylesheets %}
+  <!-- CSS Tema -->
+  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
@@ -12,14 +19,14 @@
 
 <div class="tabbable">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#1" data-toggle="tab">Pedido</a></li>
-        <li><a href="#2" data-toggle="tab">Histórico</a></li>
-        <li><a href="#3" data-toggle="tab">Para aprovação</a></li>
-        <li><a href="#4" data-toggle="tab">Aprovados</a></li>
+        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a href="#1" data-toggle="tab">Pedido</a></li>
+        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a href="#2" data-toggle="tab">Histórico</a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a href="#3" data-toggle="tab">Para aprovação</a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a href="#4" data-toggle="tab">Aprovados</a></li>
     </ul>
     <div class="tab-content">
         <!-- Pedido -->
-        <div class="tab-pane active" id="1">
+        <div class="tab-pane{% if( pgatual == "pedido") %} active{% endif %}" id="1">
             <div class="container-fluid span11">
                 <div class="row">
                     <div class="span11">
@@ -29,47 +36,49 @@
                                 <th class="span3">{{order.name}}</th>
                                 <th class="span2">Criado: {{order.formatCreated()}}</th>
                                 <th class="span2">Expira: {{order.formatExpires()}}</th>
+                                {% if (order.user == app.user)%}
                                 <th class="span2"><a href="{{path('_order_order_alter',{'name':order.name})}}" class="btn" >Editar</a></th>
+                                {% endif %}
                             </tr>
                             <tr>
                                 <td rowspan="2" class="span4">
                                 {% for upload in order.upload %}
-                                        <div id="{{upload.getId()}}" class="janela">
-                                            <div id="barra">
-                                                <h2>Pedido</h2>
-                                                <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
-                                            </div>
-                                            <img src='{{upload.getWebPath()}}{{upload.getPath}}'/>
-                                        </div>
+                                    <div id="{{upload.getId()}}" class="janela">
+                                        <h1>Pedido</h1>
+                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
+                                        <img src='{{upload.getWebPath()}}{{upload.getPath}}' width="100%"/>
+                                    </div>
                                 {% endfor%}
                                     <div id="myCarousel" class="carousel slide">
-                                            <a class="btn" href="#myCarousel" data-slide="prev"><</a>
-                                            <a class="btn" href="#myCarousel" data-slide="next">></a>
                                         <!-- Carousel items -->
                                         <div class="carousel-inner " height="250">
                                         {%set i = 0 %}
                                         {% for upload in order.upload %}
                                                 <div class="item {% if (i==0)%}active{%endif%}">
                                                     <img src="{{ upload.getAddress() | apply_filter('order') }}" onclick="abrir('{{upload.getId()}}');" />
-                                                {%set i = 1 %}
+                                                {%set i = i + 1 %}
                                                 </div>
                                         {% endfor %}
-                                            </div>
-                                        </div>                            
-                                    </td>
-                                    <td colspan="4">
+                                        </div>
+                                        {% if (i>1) %}
+                                    </div>                            
+                                        <a class="btn" href="#myCarousel" data-slide="prev"><</a>
+                                        <a class="btn" href="#myCarousel" data-slide="next">></a>
+                                        {% endif %}
+                                </td>
+                                <td colspan="4">
                                 {{order.notes}}
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan="4">
-                                {% for banner in order.banner %}
-                                    {{banner.width}}x{{banner.height}}
-                                {% if banner.psd %}
-                                                com PSD
-                                {% endif %}
-                                    <br />
-                                {% endfor %}
+                                    {% for banner in order.banner %}
+                                        {{banner.width}}x{{banner.height}}
+                                    {% if banner.psd %}
+                                                    com PSD
+                                    {% endif %}
+                                        <br />
+                                    {% endfor %}
                                 </td>
                             </tr>
                         </table>
@@ -78,7 +87,7 @@
             </div>
         </div>
         <!-- Histórico -->
-        <div class="tab-pane" id="2">
+        <div class="tab-pane{% if( pgatual == "historico") %} active{% endif %}" id="2">
             <div class="container-fluid span11">
                 <div class="row">
                     <div class="span11">
@@ -91,8 +100,6 @@
                             </tr>
                             <tr>
                                 <td class="span3">
-                                <a class="btn left" href="#talk{{t}}" data-slide="prev"><</a>
-                                <a class="btn right" href="#talk{{t}}" data-slide="next">></a>
                                 {% for upload in talk.upload %}
                                     <div id="{{upload.getId()}}" class="janela">
                                         <div id="barra">
@@ -111,11 +118,14 @@
                                             {% for upload in talk.upload %}
                                             <div class="item {% if (i==0)%}active{%endif%}">
                                                 <img id="imageprin" src="{{upload.getAddress() | apply_filter('talk') }}" onclick="abrir('{{upload.getId()}}');">
-
                                             </div>
-                                            {%set i = 1 %}
+                                            {%set i = i + 1 %}
                                             {% endfor%}
                                         </div>
+                                        {% if (i>1) %}
+                                        <a class="btn left" href="#talk{{t}}" data-slide="prev"><</a>
+                                        <a class="btn right" href="#talk{{t}}" data-slide="next">></a>
+                                        {% endif %}
                                     </div>
                                 </td>
                                 <td colspan="2">{{talk.message}}</td>
@@ -137,13 +147,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name}) }}" method="post" {{ form_enctype(formUpload)}} >
+                                    <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name, 'pgatual':2}) }}" method="post" {{ form_enctype(formUpload)}} >
                                         <input type="hidden" value="{{order.name}}" name="order">
                                         <input type="hidden" value="10" id="maxUpload">
+                                        {{ form_widget(formTalk) }}
                                         <div id="upload">
                                             <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
                                         </div>
-                                        {{ form_widget(formTalk) }}
                                         <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
                                     </form>
                                 </td>
@@ -154,7 +164,7 @@
             </div>
         </div>
         <!-- Para aprovação -->
-        <div class="tab-pane" id="3">
+        <div class="tab-pane{% if( pgatual == "aprovacao") %} active{% endif %}" id="3">
             <div class="container-fluid span12">
                 <div class="row-fluid">
                     <div class="span11">
@@ -285,7 +295,7 @@
             </div>
         </div>
         <!-- Aprovados -->
-        <div class="tab-pane" id="4">
+        <div class="tab-pane{% if( pgatual == "aprovados") %} active{% endif %}" id="4">
             <div class="container-fluid span12">
                 <div class="row-fluid">
                     <div class="span11">
@@ -295,7 +305,7 @@
                                     Linguagem visual
                                 </th>
                             </tr>
-                                    {% for lvisual in lvisus |reverse %}
+                            {% for lvisual in lvisus |reverse %}
                             <tr>
                                 <td>
                                     <div id="a{{lvisual.getId()}}" class="janela">
@@ -308,7 +318,13 @@
                                     <img src="{{ lvisual.getAddress() | apply_filter('order') }}" onclick="abrir('a{{lvisual.getId()}}');">
                                  </td>
                             </tr>
-                                    {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>
+                                    Não há Linguagem visual aprovada para esse pedido.
+                                </td>
+                            </tr>
+                            {% endfor %}
                             <tr>
                                 <th>
                                     Banners
@@ -329,7 +345,13 @@
                                     {%set t = 1 %}
                                 </td>
                             </tr>
-                                    {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>
+                                    Não há banners aprovados para esse pedido.
+                                </td>
+                            </tr>
+                            {% endfor %}
                         </table>
                     </div>
                 </div>

@@ -18,8 +18,9 @@ security:
         Symfony\Component\Security\Core\User\User: sha512
 
     role_hierarchy:
-        ROLE_DESIGNER:    ROLE_USER
-        ROLE_ADMIN:       ROLE_DESIGNER
+        ROLE_CLIENT:     [ROLE_USER]
+        ROLE_DESIGNER:   [ROLE_USER]
+        ROLE_ADMIN:      [ROLE_USER]
         ROLE_SUPERADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -54,6 +55,6 @@ security:
             #    realm: "Secured Demo Area"
 
     access_control:
-        - { path: /admin, roles: ROLE_ADMIN, requires_channel: https}
+        - { path: /admin, roles: ROLE_ADMIN}
         #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

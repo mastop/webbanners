@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  *   repositoryClass="Banner\OrderBundle\Document\OrderRepository"
  * )
  * @ODM\Indexes({
- *   @ODM\Index(keys={"user.$id"="desc", "created"="desc", "name"="desc"})
+ * @ODM\Index(keys={"id"="asc", "name"="asc"})
  * })
  */
 class Order

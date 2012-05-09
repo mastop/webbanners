@@ -9,11 +9,14 @@ border-left: 1px solid #999999;
 z-index: 1000;
 visibility:hidden;
 background: 0 -90px no-repeat; 
+background-color: white;
 }
 
 #barra {
 width: 100%;
 height: 25px;
+left: 30%;
+width: 40%;
 border-top: 1px solid #999999;
 border-right: 1px solid #666666;
 border-bottom: 1px solid black;
@@ -21,9 +24,9 @@ border-left: 1px solid #999999;
 background-color: white;
 }
 
-#barra h2 {
+#barra h1 {
 font: 12px Verdana, Arial, Sans-serif;
-padding: 3px 20px;
+padding: 3px 10px;
 margin: 0px;
 float: left;
 }

@@ -3,6 +3,8 @@ $(function(){
         var banner = '';
         var max = parseInt(document.getElementById("maxBanner").value);
         var total = 0;
+        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
+        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
         for (i = 0 ; i < max ; i++) {
             if (document.getElementById("width"+i) == undefined){
                 break;
@@ -13,7 +15,9 @@ $(function(){
         banner = banner + '<input class="width" id="width'+i+'" maxlength="3" name=" banner['+i+'][width] " value="728" type="number" required="required" />';
         banner = banner + '<span id="x'+i+'" class="x">x</span>';
         banner = banner + '<input class="height" id="height'+i+'" maxlength="3" name=" banner['+i+'][height] " value="90" type="number" required="required" />';
-        banner = banner + '<input class="psd" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD + ';
+        banner = banner + 'R$ '+others.toFixed(2);
+        banner = banner + ' <input class="psd" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox" onclick="total()"/> PSD ';
+        banner = banner + '+ R$ '+psd.toFixed(2);
         banner = banner + '<a href="#" onclick="remove('+i+')" class="btn btn-danger rm" >-</a><BR><BR>';
         banner = banner + '</div>';
         $('#newBanner').append(banner);
@@ -22,20 +26,67 @@ $(function(){
         if(total>(max-1)){
             $('#btnnew').hide();
         }
-         
+        total = 0;
+        i = 0
+        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+        for (i = 0 ; i < max ; i++) {
+            if(i==0){   
+                if(document.getElementById("width"+i)){
+                    total = total + first;
+                }
+            }
+            else 
+            {
+                if(document.getElementById("width"+i)){
+                    total = total + others;
+                }
+            }
+            if (document.getElementById("psd"+i) != undefined){
+                if (document.getElementById('psd'+i).checked == true){
+                    total = total + psd;
+                }
+            }
+        }
+        document.getElementById("order_total").value = total.toFixed(2);
     });
 });
 
 function remove(id){
     var banner = document.getElementById("banner"+id);
     var total = 0;
-    var max = parseInt(document.getElementById("maxBanner").nodeValue);
+    var max = parseInt(document.getElementById("maxBanner").value);    
     banner.parentNode.removeChild(banner);          
     total = document.getElementById("order_quantity").value-1;
     if(total<max){
         $('#btnnew').show();
     }
     document.getElementById("order_quantity").value = total;
+
+    total = 0;
+    var i = 0;
+    var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
+    var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
+    var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+
+    for (i = 0 ; i < max ; i++) {
+        if(i==0){   
+            if(document.getElementById("width"+i)){
+                total = total + first;
+            }
+        }
+        else 
+        {
+            if(document.getElementById("width"+i)){
+                total = total + others;
+            }
+        }
+        if (document.getElementById("psd"+i) != undefined){
+            if (document.getElementById('psd'+i).checked == true){
+                total = total + psd;
+            }
+        }
+    }
+    document.getElementById("order_total").value = total.toFixed(2);
 };    
 
 function upload(){
@@ -98,7 +149,7 @@ function ling(){
         if (document.getElementById("ling["+i+"]") == undefined){
             if (document.getElementById("ling["+(i-1)+"]").value != ""){
                 var image = '<input id="ling['+i+']" type="file" onchange="ling()" name="ling['+i+']"><br />';
-                $('#ling').append(image);
+                $('#ling').append(image);'{{i}}'
             }
             break;
         }
@@ -110,4 +161,32 @@ function fechar(upload) {document.getElementById(upload).style.visibility = "hid
 
 function abrir(upload) {
     document.getElementById(upload).style.visibility="visible";
+}
+
+function total(){
+    var max = parseInt(document.getElementById("maxBanner").value);
+    var total = 0;
+    var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
+    var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
+    var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+
+    for (i = 0 ; i < max ; i++) {
+        if(i==0){   
+            if(document.getElementById("width"+i)){
+                total = total + first;
+            }
+        }
+        else 
+        {
+            if(document.getElementById("width"+i)){
+                total = total + others;
+            }
+        }
+        if (document.getElementById("psd"+i) != undefined){
+            if (document.getElementById('psd'+i).checked == true){
+                total = total + psd;
+            }
+        }
+    }
+    document.getElementById("order_total").value = total.toFixed(2);
 }

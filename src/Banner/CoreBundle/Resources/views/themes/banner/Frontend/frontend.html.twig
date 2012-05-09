@@ -5,15 +5,15 @@
 {% set redirURL = app.session.get('_security.target_path') %}
 <!doctype html>
 <!--
-,d
-88
-88,dPYba,,adPYba, ,adPPYYba, ,adPPYba, MM88MMM ,adPPYba, 8b,dPPYba,
-88P' "88" "8a "" `Y8 I8[ "" 88 a8" "8a 88P' "8a
-88 88 88 ,adPPPPP88 `"Y8ba, 88 8b d8 88 d8
-88 88 88 88, ,88 aa ]8I 88, "8a, ,a8" 88b, ,a8"
-88 88 88 `"8bbdP"Y8 `"YbbdP"' "Y888 `"YbbdP"' 88`YbbdP"'
-88
-88
+.                                        ,d
+.                                        88
+88,dPYba,,adPYba, ,adPPYYba, ,adPPYba, MM88MMM  ,adPPYba,  8b,dPPYba,
+88P'   "88"   "8a ""     `Y8 I8[   ""    88    a8"     "8a 88P'    "8a
+88      88     88 ,adPPPPP88   `"Y8ba,   88    8b       d8 88       d8
+88      88     88 88,    ,88 aa    ]8I   88,   "8a,   ,a8" 88b,   ,a8"
+88      88     88 `"8bbdP"Y8 `"YbbdP"'   "Y888  `"YbbdP"'  88`YbbdP"'
+.                                                          88
+.                                                          88 
 
 Mastop Internet Development http://www.mastop.com.br
 
@@ -41,11 +41,6 @@ Mastop Internet Development http://www.mastop.com.br
    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
   {% endstylesheets %}
    
-  <!-- CSS Tema -->
-  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
-   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-  {% endstylesheets %}
-  
   <!-- Bootstrap LESS -->
   {% stylesheets filter='less,?yui_css' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/bootstrap.less' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/responsive.less' output='themes/banner/twitter-bootstrap/css/bootstrap.css' %}
     <link href="{{ asset_url }}" rel="stylesheet" media="screen" />

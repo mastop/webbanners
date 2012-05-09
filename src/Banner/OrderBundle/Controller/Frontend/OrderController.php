@@ -31,7 +31,7 @@ class OrderController extends BaseController
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
             $order->setQuantity($order->getQuantity());
-            $formOrder = $this->createForm(new Order1Type(), $order);
+            $formOrder = $this->createForm(new OrderType(), $order);
         }else{
             $order = new Order();
             $order->setQuantity(1);
@@ -117,9 +117,11 @@ class OrderController extends BaseController
                 }
             }
         }
+        $finals = array();
         return array(
                         'clients' => $clients,
-                        'orders'  => $orders
+                        'orders'  => $orders,
+                        'finals'  => $finals
                     );
      }
      
@@ -133,6 +135,7 @@ class OrderController extends BaseController
         $request = $this->get('request');
         if ($this->get('security.context')->isGranted('ROLE_SUPERADMIN')) {
             $orders = $this->mongo("BannerOrderBundle:Order")->findUnsets();
+            $finals = $this->mongo("BannerOrderBundle:Order")->findUnsets();
             $designers = $this->mongo("BannerUserBundle:User")->findBy(array('roles'=>'ROLE_DESIGNER'));
             if ('POST' == $request->getMethod()) {
                 foreach($orders as $order){
@@ -140,15 +143,24 @@ class OrderController extends BaseController
                     $order->setDesigner($designer);
                     $dm->persist($order);
                     $dm->flush();
+                    
+                    $mail = $this->get('mastop.mailer');
+                    $mail->to($designer->getEmail())
+                        ->subject('Novo projeto no seu nome - WebBanners')
+                        ->template('pedido_designer', array('user' => $designer,'order'=>$order))
+                        ->send();
+                    $mail->notify('O pedido '.$order->getId().' foi escolhido para '.$designer->getName(), 'O pedido '.$order->getId().' foi escolhido para '.$designer->getName().' pelo admnistrador do sistema.');
+                    
                 }
             }
         }
         else{
             return $this->redirectFlash($this->generateUrl('_home'), "Você não está autorizado para acessar essa página.");
         }
+        $finals = array();
         return array(
                         'orders'  => $orders,
-                        'designers'  => $designers
+                        'finals'  => $finals,
                     );
      }
      
@@ -162,9 +174,11 @@ class OrderController extends BaseController
         if($username){
             $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
             $designer = $this->get('security.context')->getToken()->getUser();
-            $orders = $this->mongo('BannerOrderBundle:Order')->findByDesignerUser($designer,$user);
+            $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenDesigner($designer);
+            $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneDesigner($designer);
             if(!$orders && ($this->get('security.context')->isGranted('ROLE_SUPERADMIN'))){
-                $orders = $this->mongo('BannerOrderBundle:Order')->findByUser($user);
+                $orders = $this->mongo('BannerOrderBundle:Order')->findByOpen();
+                $finals = $this->mongo('BannerOrderBundle:Order')->findByDone();
             }
         }else{
             $user = $this->get('security.context')->getToken()->getUser();
@@ -181,10 +195,10 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/detalhes/{username}-{name}", name="_order_order_edit",  defaults={"username" = null,"name" = null})
+     * @Route("/detalhes/{username}-{name}/{pgatual}", name="_order_order_edit",  defaults={"pgatual" = "pedido"})
      * @Template()
      */
-    public function editAction($username= null,$name=null)
+    public function editAction($username,$name,$pgatual = "pedido")
     {           
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $request = $this->get('request');
@@ -195,8 +209,7 @@ class OrderController extends BaseController
             $order->setDunread(0);
         }elseif ($this->get('security.context')->getToken()->getUser() == $order->getUser()) {
             $order->setCunread(0);
-        }
-        else{
+        }elseif (!$this->get('security.context')->isGranted("ROLE_ADMIN")){
             return $this->redirectFlash($this->generateUrl('_home'), "Você não está autorizado para acessar essa página.");
         }
         $dm->persist($order);
@@ -255,19 +268,20 @@ class OrderController extends BaseController
                 $order->addTalk($talk);
                 $dm->persist($order);
                 $dm->flush();
-                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Comentário Salvo");
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual" => $pgatual)), "Comentário Salvo");
             }
             
         }
         
         return array(
                         'formTalk'  => $formTalk->createView(), 
-                        'formUpload'  => $formUpload->createView(), 
-                        'order'  => $order,
-                        'user'  => $user,
-                        'aproves'  => $aproves,
+                        'formUpload'=> $formUpload->createView(), 
+                        'order'     => $order,
+                        'user'      => $user,
+                        'aproves'   => $aproves,
                         'pendings'  => $pendings,
-                        'lvisus'  => $lvisus
+                        'lvisus'    => $lvisus,
+                        'pgatual'   => $pgatual
                     );
     }
      
@@ -388,6 +402,7 @@ class OrderController extends BaseController
      */
     public function saveAction(Request $request){
         
+        $msg = "";
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
             
         $formUser = $request->request->get('Userform');
@@ -407,6 +422,13 @@ class OrderController extends BaseController
         
         if($this->get('security.context')->isGranted("ROLE_USER") ){
             $user = $this->get('security.context')->getToken()->getUser();
+            
+            $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($formOrder['name'],$user);
+
+            if($order){
+                $msg = "Já existe um projeto com esse nome. Crie um novo nome.";
+                return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
+            }
         }
         else
         {
@@ -428,6 +450,7 @@ class OrderController extends BaseController
             $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
             $password = $this->random(8);
             $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
+            
             $dm->persist($user);
             $dm->flush();
             $mail = $this->get('mastop.mailer');
@@ -435,11 +458,11 @@ class OrderController extends BaseController
                 ->subject('Senha gerada - WebBanners')
                 ->template('usuario_senhagerada', array('user' => $user,'password'=>$password, 'title' => 'Senha de acesso.'))
                 ->send();
-            $mail->notify('Senha de acesso', 'A Senha do usuário '.$user->getEmail().' foi enviada com sucesso.');
+            $mail->notify('Senha de acesso', 'A Senha do usuário '.$user->getName().' foi enviada com sucesso para o email '.$user->getEmail().'.');
             
+            $msg = "Um email foi enviado com sua senha.";
         }
-        
-        $status = $this->mongo('BannerOrderBundle:Status')->findOneById(1);
+        $status = $this->mongo('BannerOrderBundle:Status')->findOneById((int)$this->get('mastop')->param('order.all.defaultstatus'));
         $statusLog = new StatusLog();
         $statusLog->setStatus($status);
         $statusLog->setUser($user);
@@ -480,17 +503,17 @@ class OrderController extends BaseController
         
         $mail = $this->get('mastop.mailer');
         
-        $mail->to("hideaki.kume@uol.com.br")
-            ->subject('Pedido enviado com Sucesso')
-            ->template('usuario_novasenha', array('user' => $user, 'title' => 'Pedido enviado com sucesso.'))
+        $mail->to($user->getEmail())
+            ->subject('Pedido solicitado com Sucesso')
+            ->template('pedido_novo', array('user' => $user, 'order' => $order, 'title' => 'Pedido solicitado com sucesso.'))
             ->send();
-        $mail->notify('Pedido solicitado', 'Um pedido foi enviado por '.$user->getEmail(),'leonardo@mastop.com.br');
+        $mail->notify('Pedido solicitado', 'O pedido '.$order->getId().' foi criado e enviado para o e-mail '.$user->getEmail());
 
         //autologin
         //$token = new UsernamePasswordToken(     $user,    null,     'main',     array('ROLE_USER'));
         //$this->container->get('security.context')->setToken($token);  
         
-        $msg = "Pedido efetuado com sucesso!";
+        $msg = $msg." Pedido efetuado com sucesso! Foi enviado um e-mail.";
         return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
         
      }

@@ -1,5 +1,12 @@
 {% extends '::frontend.html.twig' %}
 
+{% block stylesheets %}
+  <!-- CSS Tema -->
+  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
@@ -17,8 +24,9 @@
                 <th>Projeto</th>
                 <th>Designer</th>
             </tr>
+            {% set i = 0 %}
             <form action="{{path('_order_order_admin')}}" method="post">
-{% for order in orders %}
+                {% for order in orders %}
                 <tr>
                     <td>{{order.user.name}}</td>
                     <td>{{order.name}}</td>
@@ -32,13 +40,16 @@
                         </select>
                     </td>
                 </tr>
-{% else %}
+                {% set i = 1 %}
+                {% else %}
                 <tr><td colspan="3">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-{% endfor %} 
+                {% endfor %} 
+                {% if (i==1) %}
                 <tr>
                     <td colspan="2"></td>
                     <td><input type="submit" value="Ok" /></td>
                 </tr>
+                {% endif %}
             </form>
         </table>
     </div>
