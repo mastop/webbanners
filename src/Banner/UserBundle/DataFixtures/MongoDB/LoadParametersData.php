@@ -55,12 +55,22 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $param->addChildren($child);
 
         $child = new Children();
+        $child->setName('typeclient');
+        $child->setTitle('Tipo Cliente');
+        $child->setDesc('Tipo cliente que irá ser criado');
+        $child->setValue('ROLE_CLIENT');
+        $child->setFieldtype('choice');
+        $child->setOpts(array('choices' => array('ROLE_CLIENT' => 'Somente Cliente', 'ROLE_DESIGNER' =>'Somente Designer', 'ROLE_USER' => 'Somente Usuário', 'ROLE_ADMIN' => 'Administrador', 'ROLE_SUPERADMIN' => 'Super-Administrador')));
+        $child->setOrder(3);
+        $param->addChildren($child);
+
+        $child = new Children();
         $child->setName('selfdelete');
         $child->setTitle('Deletar Conta');
         $child->setDesc('Permitir que os usuários deletem o próprio cadastro.');
         $child->setValue('0');
         $child->setFieldtype('checkbox');
-        $child->setOrder(3);
+        $child->setOrder(4);
         $param->addChildren($child);
         
         $child = new Children();
@@ -68,7 +78,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('ID do Aplicativo Facebook');
         $child->setDesc('Código do aplicativo criado no facebook developers');
         $child->setValue('108342115933418');
-        $child->setOrder(4);
+        $child->setOrder(5);
         $param->addChildren($child);
         
         $child = new Children();
@@ -76,7 +86,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('Código Secret do App criado no Facebook');
         $child->setDesc('Código gerado no site de developers do Facebook.');
         $child->setValue('f3872f946c36c127f4effbb4e6a918b3');
-        $child->setOrder(5);
+        $child->setOrder(6);
         $param->addChildren($child);
         
         $child = new Children();
@@ -84,7 +94,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('ID Consumer key do Twitter');
         $child->setDesc('Código do aplicativo criado no twitter developers');
         $child->setValue('G1WitELkS2NakPjyEsuAtw');
-        $child->setOrder(6);
+        $child->setOrder(7);
         $param->addChildren($child);
         
         $child = new Children();
@@ -92,7 +102,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('Código Consumer secret no Twitter');
         $child->setDesc('Código gerado no site de developers do Twitter.');
         $child->setValue('mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM');
-        $child->setOrder(7);
+        $child->setOrder(8);
         $param->addChildren($child);
         
         $manager->persist($param);

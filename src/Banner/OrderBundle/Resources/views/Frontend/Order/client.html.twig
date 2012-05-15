@@ -30,6 +30,7 @@
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>
+                            <th></th>
                             <th>Descrição</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
@@ -37,6 +38,13 @@
             {% for order in orders %}
                         <tr>
                             <td>{{order.id}}</td>
+                            <td>
+                                {%if (order.cunread > 0) %}
+                                <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
+                                    <span class="badge badge-important">{{order.cunread}}</span>
+                                </a>
+                                {% endif %}
+                            </td>       
                             <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>

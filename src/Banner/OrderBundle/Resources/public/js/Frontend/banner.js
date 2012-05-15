@@ -1,4 +1,77 @@
 $(function(){
+    $("a.rm").live("click", function(e){
+        $(this).parent().remove();
+        var i = 0;
+        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
+        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
+        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+        var total = 0;
+        var max = parseInt(document.getElementById("maxBanner").value);  
+
+        for (i = 0 ; i < max ; i++) {
+            if(i==0){   
+                if(document.getElementById("width"+i)){
+                    total = total + first;
+                }
+            }
+            else 
+            {
+                if(document.getElementById("width"+i)){
+                    total = total + others;
+                }
+            }
+            if (document.getElementById("psd"+i) != undefined){
+                if (document.getElementById('psd'+i).checked == true){
+                    total = total + psd;
+                }
+            }
+        }
+        document.getElementById("order_total").value = total.toFixed(2);
+        e.preventDefault();
+
+    });
+    $("a.rmupload").live("click", function(e){ 
+        $(this).parent().parent().remove();
+        e.preventDefault();
+    }); 
+    $("a.guide").live("click", function(e){
+        window.location.href = ($(this).firstChild.noveValue);
+        var quebra = window.location.href.split("/");
+        if(quebra.length == 7){
+            window.location.href = $(this).firstChild.noveValue;
+        }else{
+            window.location.href = window.location.href+"/"+$(this).firstChild.noveValue;
+        }
+        e.preventDefault();
+    });
+    $("input.upload").live("change", function(e){
+        var i = 0;
+        var j = 0;
+        while(true){
+            if(document.getElementById("upload_file["+i+"]").value != ""){
+                if(document.getElementById("upload_file["+i+"]").style.visibility == "" || document.getElementById("upload_file["+i+"]").style.visibility == "visible"){
+                    document.getElementById("upload_file["+i+"]").style.visibility = "hidden";
+                    var html = document.getElementById("upload_file["+i+"]").value;
+                    if(html != ""){
+                            html = html + "  <a href='#' class='rmupload badge badge-important'>x</a>";
+                            $("#upload"+i).append(html);
+                    }
+                }
+            }
+            if (document.getElementById("upload_file["+(i+1)+"]") == undefined){
+                if (document.getElementById("upload_file["+i+"]").value != "" && j==0){
+                    var image = '<div id="upload_file'+(i+1)+'"><spam id="upload'+(i+1)+'"></spam><input id="upload_file['+(i+1)+']" class="upload" type="file" onchange="upload()" name="upload['+(i+1)+']"><br /></div>';
+                    $('#upload').append(image);
+                    j=1;
+                }
+                if(document.getElementById("upload_file["+(i+2)+"]") == undefined){
+                    break;
+                }
+            }
+            i++;
+        }
+        e.preventDefault();
+    });
     $("#novo").click(function(){
         var banner = '';
         var max = parseInt(document.getElementById("maxBanner").value);
@@ -18,7 +91,7 @@ $(function(){
         banner = banner + 'R$ '+others.toFixed(2);
         banner = banner + ' <input class="psd" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox" onclick="total()"/> PSD ';
         banner = banner + '+ R$ '+psd.toFixed(2);
-        banner = banner + '<a href="#" onclick="remove('+i+')" class="btn btn-danger rm" >-</a><BR><BR>';
+        banner = banner + '  <a href="#" class="rm badge badge-important">-</a><BR><BR>';
         banner = banner + '</div>';
         $('#newBanner').append(banner);
         total = parseInt(document.getElementById("order_quantity").value) + 1;
@@ -51,58 +124,6 @@ $(function(){
     });
 });
 
-function remove(id){
-    var banner = document.getElementById("banner"+id);
-    var total = 0;
-    var max = parseInt(document.getElementById("maxBanner").value);    
-    banner.parentNode.removeChild(banner);          
-    total = document.getElementById("order_quantity").value-1;
-    if(total<max){
-        $('#btnnew').show();
-    }
-    document.getElementById("order_quantity").value = total;
-
-    total = 0;
-    var i = 0;
-    var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
-    var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
-    var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
-
-    for (i = 0 ; i < max ; i++) {
-        if(i==0){   
-            if(document.getElementById("width"+i)){
-                total = total + first;
-            }
-        }
-        else 
-        {
-            if(document.getElementById("width"+i)){
-                total = total + others;
-            }
-        }
-        if (document.getElementById("psd"+i) != undefined){
-            if (document.getElementById('psd'+i).checked == true){
-                total = total + psd;
-            }
-        }
-    }
-    document.getElementById("order_total").value = total.toFixed(2);
-};    
-
-function upload(){
-    var caminho = document.getElementById("upload_file");
-    var i = 0;
-    while(true){
-        if (document.getElementById("upload_file["+i+"]") == undefined){
-            if (document.getElementById("upload_file["+(i-1)+"]").value != ""){
-                var image = '<input id="upload_file['+i+']" type="file" onchange="upload()" name="upload['+i+']"><br />';
-                $('#upload').append(image);
-            }
-            break;
-        }
-        i++;
-    }
-};
 
 function just(id){
     if(document.getElementById("just('"+id+"')") == undefined){

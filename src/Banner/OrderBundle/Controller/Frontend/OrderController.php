@@ -126,20 +126,22 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/admin", name="_order_order_admin")
+     * @Route("/admin", name="_order_order_admin", defaults= {"pgatual"="design"}
+     * )
      * @Template()
      */
-    public function adminAction()
+    public function adminAction($pgatual="design")
     {   
         $dm = $this->get('doctrine.odm.mongodb.document_manager');  
         $request = $this->get('request');
         if ($this->get('security.context')->isGranted('ROLE_SUPERADMIN')) {
-            $orders = $this->mongo("BannerOrderBundle:Order")->findUnsets();
-            $finals = $this->mongo("BannerOrderBundle:Order")->findUnsets();
+            $unsets = $this->mongo("BannerOrderBundle:Order")->findUnsets();
+            $orders = $this->mongo("BannerOrderBundle:Order")->findByOpen();
+            $finals = $this->mongo("BannerOrderBundle:Order")->findByDone();
             $designers = $this->mongo("BannerUserBundle:User")->findBy(array('roles'=>'ROLE_DESIGNER'));
             if ('POST' == $request->getMethod()) {
                 foreach($orders as $order){
-                    $designer = $this->mongo("BannerUserBundle:User")->findOneById($request->get($order->getId()));
+                    $designer = $this->mongo("BannerUserBundle:User")->findByCode($request->get($order->getId()));
                     $order->setDesigner($designer);
                     $dm->persist($order);
                     $dm->flush();
@@ -157,10 +159,12 @@ class OrderController extends BaseController
         else{
             return $this->redirectFlash($this->generateUrl('_home'), "Você não está autorizado para acessar essa página.");
         }
-        $finals = array();
         return array(
-                        'orders'  => $orders,
-                        'finals'  => $finals,
+                        'unsets'    => $unsets,
+                        'orders'    => $orders,
+                        'finals'    => $finals,
+                        'designers' => $designers,
+                        'pgatual'   => $pgatual,
                     );
      }
      
@@ -245,13 +249,34 @@ class OrderController extends BaseController
             if ($formTalk->isValid()) {
                 $talker = $this->get('security.context')->getToken()->getUser();
                 $talk->setUser($talker);
+                $mail = $this->get('mastop.mailer');
                 if ($talker == $order->getUser()) {
                     $order->setDunread($order->getDunread()+1);
+                    if($order->getDesigner()){
+                        $mail->to($order->getDesigner()->getEmail())
+                            ->subject('Comentário - WebBanners')
+                            ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $order->getUser()))
+                            ->send();
+                    }else{
+                        $mail->notify("O pedido ".$order->getId()." está sem designer e o cliente enviou um comentário.");
+                    }
                 }elseif ($talker ==  $order->getDesigner()) {
                     $order->setCunread($order->getCunread()+1);
+                    $mail->to($talker->getEmail())
+                        ->subject('Comentário - WebBanners')
+                        ->template('comment_new', array('from' => $order->getDesigner(), 'to' => $order->getUser()))
+                        ->send();
                 }else{
                     $order->setDunread($order->getDunread()+1);
                     $order->setCunread($order->getCunread()+1);
+                    $mail->to($talker->getEmail())
+                        ->subject('Comentário - WebBanners')
+                        ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $talker))
+                        ->send();
+                    $mail->to($talker->getEmail())
+                        ->subject('Comentário - WebBanners')
+                        ->template('comment_new', array('to' => $order->getUser(), 'from' => $talker))
+                        ->send();
                 }
                 $dm->persist($talk);
                 $dm->flush();
@@ -268,7 +293,7 @@ class OrderController extends BaseController
                 $order->addTalk($talk);
                 $dm->persist($order);
                 $dm->flush();
-                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual" => $pgatual)), "Comentário Salvo");
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual" => "historico")), "Comentário Salvo");
             }
             
         }
@@ -305,7 +330,7 @@ class OrderController extends BaseController
         }
         $dm->persist($order);
         $dm->flush();
-        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Linguagem Visual aceita");
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Linguagem Visual aceita");
     }
     
     /**
@@ -331,7 +356,7 @@ class OrderController extends BaseController
         }
         $dm->persist($order);
         $dm->flush();
-        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Banners avaliados");
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Banners avaliados");
     }
     
     /**
@@ -359,10 +384,10 @@ class OrderController extends BaseController
             }
             $dm->persist($order);
             $dm->flush();
-            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Salvo");
+            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Preview Salvo");
             
         }
-                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Preview Não Salvo");
      }
      
     /**
@@ -390,10 +415,10 @@ class OrderController extends BaseController
             }
             $dm->persist($order);
             $dm->flush();
-            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Salvo");
+            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Preview Salvo");
             
         }
-                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Preview Não Salvo");
+                return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Preview Não Salvo");
      }
     
      /**
@@ -440,7 +465,7 @@ class OrderController extends BaseController
             }
 
             $user = new User();
-            $user->setRoles("ROLE_USER");
+            $user->setRoles("ROLE_CLIENT");
             $user->setEmail($formUser["email"]);
             $user->setUsername(str_replace(".", "", str_replace("@", "", $formUser["email"])));
             $user->setName(str_replace(".", "", str_replace("@", "", $formUser["email"])));
@@ -450,6 +475,11 @@ class OrderController extends BaseController
             $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);
             $password = $this->random(8);
             $user->setPassword($encoder->encodePassword($password, $user->getSalt()));
+            $code = $this->mastop()->generateCode();
+            while($this->mongo('BannerUserBundle:User')->has('code', $code)){
+                $code = $this->mastop()->generateCode();
+            }
+            $user->setCode($code);
             
             $dm->persist($user);
             $dm->flush();

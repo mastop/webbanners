@@ -19,10 +19,10 @@
 
 <div class="tabbable">
     <ul class="nav nav-tabs">
-        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a href="#1" data-toggle="tab">Pedido</a></li>
-        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a href="#2" data-toggle="tab">Histórico</a></li>
-        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a href="#3" data-toggle="tab">Para aprovação</a></li>
-        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a href="#4" data-toggle="tab">Aprovados</a></li>
+        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a class="guide" href="#1" data-toggle="tab">Pedido</a></li>
+        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a class="guide" href="#2" data-toggle="tab">Histórico</a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" href="#3" data-toggle="tab">Para aprovação</a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" href="#4" data-toggle="tab">Aprovados</a></li>
     </ul>
     <div class="tab-content">
         <!-- Pedido -->
@@ -152,9 +152,12 @@
                                         <input type="hidden" value="10" id="maxUpload">
                                         {{ form_widget(formTalk) }}
                                         <div id="upload">
-                                            <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]"><br />
+                                            <div id="upload_file0">
+                                                <spam id="upload0"></spam>
+                                                <input id="upload_file[0]" class="upload" type="file" onchange="upload()" name="upload[0]">
+                                            </div>
                                         </div>
-                                        <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                                        <div><br><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
                                     </form>
                                 </td>
                             </tr>
@@ -238,10 +241,10 @@
                                                 <td class="span3">
                                                 <div id="p{{pending.getId()}}" class="janela">
                                                     <div id="barra">
-                                                        <h2>Preview</h2>
-                                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('p{{pending.getId()}}');">x</a>
+                                                        <h2>Preview
+                                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('p{{pending.getId()}}');">x</a></h2>
                                                     </div>
-                                                    <img src="{{pending.getWebPath()}}{{pending.getPath}}">
+                                                    <img src="{{pending.getWebPath()}}{{pending.getPath}}" width="100%">
                                                 </div>
                                                 <img id="imageprin" src="{{ pending.getAddress() | apply_filter('order') }}" onclick="abrir('p{{pending.getId()}}');"><br />
                                                 </td>

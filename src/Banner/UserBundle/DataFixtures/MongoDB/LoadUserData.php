@@ -29,6 +29,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setMailOk(true);
         $user->setUsername('suportemastopcombr');
         $user->setPassword("QRcrz4q1+CMeIOSJe9qybVEL5agAMeWRc1ZpPj/wDlH8lbgaJetnRvz79I0WuPwjIcuVsU/cuF733/Ts1KHd1A==");
+        $user->setCode("SSUUPP");
         $manager->persist($user);
         $manager->flush();
 
@@ -43,6 +44,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setMailOk(true);
         $user->setUsername('mastopmastopcombr');
         $user->setPassword("5wqjnkXHoGQ2ni1eOT8f83+uGjykKiVr35hfM90oSMX779xWoRxJQL6EYd8Mx4lV/bedVbWbQVhMBtMXoQC2JA==");
+        $user->setCode("MMSTPP");
         $manager->persist($user);
         $manager->flush();
 
@@ -56,7 +58,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setRoles('ROLE_DESIGNER');
         $user->setMailOk(true);
         $user->setUsername('leonardomastopcombr');
-        $user->setPassword("2hvirKcZwr09YTgp20qB6XWVKweWsqYNJ8mJGablkllTE63+lIvPqukx9SENhoGTRh0PFJ386d4uhpMT\/3PUOw==");
+        $user->setPassword("2hvirKcZwr09YTgp20qB6XWVKweWsqYNJ8mJGablkllTE63+lIvPqukx9SENhoGTRh0PFJ386d4uhpMT/3PUOw==");
+        $user->setCode("LLEEOO");
         $manager->persist($user);
         $manager->flush();
 
@@ -67,10 +70,11 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setCreated(new \DateTime());
         $user->setTheme('');
         $user->setStatus(1);
-        $user->setRoles('ROLE_USER');
+        $user->setRoles('ROLE_CLIENT');
         $user->setMailOk(true);
         $user->setUsername('leomastopcombr');
-        $user->setPassword("vNz7h1eO9IXxEynVJMLP4\/vFtzDwMlNUBFqL7HxazZZdNdfMjxNOeQqPJKsskoTa+taMKHnRMIh7uDH1qvOadQ==");
+        $user->setPassword("vNz7h1eO9IXxEynVJMLP4/vFtzDwMlNUBFqL7HxazZZdNdfMjxNOeQqPJKsskoTa+taMKHnRMIh7uDH1qvOadQ==");
+        $user->setCode("LLCCLL");
         $manager->persist($user);
         $manager->flush();
     }

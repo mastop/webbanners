@@ -123,7 +123,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setRoute(true);
         $menu->addChildren($child);
         $child = new MenuItem();
-        $child->setCode('cliente');
+        $child->setCode('pedidos');
         $child->setName('Meus Pedidos');
         $child->setTitle('Meus Pedidos');
         $child->setRole('ROLE_CLIENT');
@@ -132,7 +132,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setRoute(true);
         $menu->addChildren($child);
         $child = new MenuItem();
-        $child->setCode('designer');
+        $child->setCode('projetos');
         $child->setName('Meus Projetos');
         $child->setTitle('Meus Projetos');
         $child->setRole('ROLE_DESIGNER');

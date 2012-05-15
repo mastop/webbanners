@@ -78,7 +78,10 @@
                 {% endif %}
                 {% if order.name == null %}
                 <div id="upload">
-                    <input id="upload_file[0]" type="file" onchange="upload()" name="upload[0]" required="required"><br />
+                    <div id="upload_file0">
+                        <spam id="upload0"></spam>
+                        <input id="upload_file[0]" class="upload" type="file" name="upload[0]" required="required">
+                    </div>
                 </div>  
                 {% endif %} 
                 <div>

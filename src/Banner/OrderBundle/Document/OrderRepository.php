@@ -95,6 +95,7 @@ class OrderRepository extends DocumentRepository
         return $this->createQueryBuilder()
                 ->field('designer')->equals(null)
                 ->sort('expires', 'ASC')
+                ->field('aproved')->notEqual("true")
                 ->getQuery()
                 ->execute();
     }

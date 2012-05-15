@@ -471,7 +471,7 @@ class UserController extends BaseController {
                 $user->setLang('pt_BR');
                 $user->setTheme('');
                 $user->setCreated(new \DateTime());
-                $user->setRoles('ROLE_USER');
+                $user->setRoles($this->get('mastop')->param('user.all.typeclient'));
                 $user->setCpf($dadosPost['cpf']);
                 $user->setEmail($dadosPost['email']);
                 $encoder = $this->container->get('security.encoder_factory')->getEncoder($user);

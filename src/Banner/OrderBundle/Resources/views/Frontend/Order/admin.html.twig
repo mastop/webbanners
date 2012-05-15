@@ -16,42 +16,167 @@
 {% endblock%}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row-fluid">
-        <table class="table table-striped">
-            <tr>
-                <th>Cliente</th>
-                <th>Projeto</th>
-                <th>Designer</th>
-            </tr>
-            {% set i = 0 %}
-            <form action="{{path('_order_order_admin')}}" method="post">
-                {% for order in orders %}
-                <tr>
-                    <td>{{order.user.name}}</td>
-                    <td>{{order.name}}</td>
-                    <td>
-                        <select name="{{order.id}}">
-                        {% for designer in designers %}
-                            <option value="{{designer.id}}">
-                                {{designer.name}}
-                            </option>
-                        {% endfor %}
-                        </select>
-                    </td>
-                </tr>
-                {% set i = 1 %}
-                {% else %}
-                <tr><td colspan="3">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-                {% endfor %} 
-                {% if (i==1) %}
-                <tr>
-                    <td colspan="2"></td>
-                    <td><input type="submit" value="Ok" /></td>
-                </tr>
-                {% endif %}
-            </form>
-        </table>
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li{% if( pgatual == "design") %} class="active"{% endif %}><a href="#1" data-toggle="tab">Designer</a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a href="#2" data-toggle="tab">Para aprovação</a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a href="#3" data-toggle="tab">Aprovados</a></li>
+        <li{% if( pgatual == "pagamento") %} class="active"{% endif %}><a href="#4" data-toggle="tab">Pendente pagamento</a></li>
+    </ul>
+    <div class="tab-content">
+        <!-- Designers -->
+        <div class="tab-pane{% if( pgatual == "design") %} active{% endif %}" id="1">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <h2> Selecione o Designer para o Projeto </h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Projeto</th>
+                            <th>Designer</th>
+                        </tr>
+                        {% set i = 0 %}
+                        <form action="{{path('_order_order_admin')}}" method="post">
+                            {% for order in unsets %}
+                            <tr>
+                                <td>{{order.user.name}}</td>
+                                <td>{{order.name}}</td>
+                                <td>
+                                    <select name="{{order.id}}">
+                                    {% for designer in designers %}
+                                        <option value="{{designer.code}}">
+                                            {{designer.name}}
+                                        </option>
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            {% set i = 1 %}
+                            {% else %}
+                            <tr><td colspan="3">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+                            {% endfor %} 
+                            {% if (i==1) %}
+                            <tr>
+                                <td colspan="2"></td>
+                                <td><input type="submit" value="Ok" /></td>
+                            </tr>
+                            {% endif %}
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Para aprovação -->
+        <div class="tab-pane{% if( pgatual == "aprovacao") %} active{% endif %}" id="2">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>
+                                {%if (order.dunread > 0) %}
+                                <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
+                                    <span class="badge badge-important">{{order.dunread}}</span>
+                                </a>
+                                {% endif %}
+                            </td>       
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Aprovados -->
+        <div class="tab-pane{% if( pgatual == "aprovados") %} active{% endif %}" id="3">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in finals %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                            <td>{{order.cUnread}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Pendente Pagamento -->
+        <div class="tab-pane{% if( pgatual == "pagamento") %} active{% endif %}" id="3">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in finals %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                            <td>{{order.cUnread}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Alterar Design -->
+        <div class="tab-pane{% if( pgatual == "pagamento") %} active{% endif %}" id="3">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in finals %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                            <td>{{order.cUnread}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
