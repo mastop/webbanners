@@ -17,16 +17,17 @@
 
 {% block content %}
 
+<div id="maxUpload" hidden="hidden">{{mastop_param('order.all.UploadOrder')}}</div>
 <div class="tabbable">
     <ul class="nav nav-tabs">
-        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a class="guide" href="#1" data-toggle="tab">Pedido</a></li>
-        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a class="guide" href="#2" data-toggle="tab">Histórico</a></li>
-        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" href="#3" data-toggle="tab">Para aprovação</a></li>
-        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" href="#4" data-toggle="tab">Aprovados</a></li>
+        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a class="guide" href="#pedido" data-toggle="tab">Pedido</a></li>
+        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a class="guide" href="#historico" data-toggle="tab">Histórico</a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" href="#aprovacao" data-toggle="tab">Para aprovação</a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" href="#aprovados" data-toggle="tab">Aprovados</a></li>
     </ul>
     <div class="tab-content">
         <!-- Pedido -->
-        <div class="tab-pane{% if( pgatual == "pedido") %} active{% endif %}" id="1">
+        <div class="tab-pane{% if( pgatual == "pedido") %} active{% endif %}" id="pedido">
             <div class="container-fluid span11">
                 <div class="row">
                     <div class="span11">
@@ -42,20 +43,15 @@
                             </tr>
                             <tr>
                                 <td rowspan="2" class="span4">
-                                {% for upload in order.upload %}
-                                    <div id="{{upload.getId()}}" class="janela">
-                                        <h1>Pedido</h1>
-                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
-                                        <img src='{{upload.getWebPath()}}{{upload.getPath}}' width="100%"/>
-                                    </div>
-                                {% endfor%}
                                     <div id="myCarousel" class="carousel slide">
                                         <!-- Carousel items -->
                                         <div class="carousel-inner " height="250">
                                         {%set i = 0 %}
                                         {% for upload in order.upload %}
                                                 <div class="item {% if (i==0)%}active{%endif%}">
-                                                    <img src="{{ upload.getAddress() | apply_filter('order') }}" onclick="abrir('{{upload.getId()}}');" />
+                                                    <a href="{{upload.getWebPath()}}{{upload.getPath}}" rel="facebox" >
+                                                        <img src="{{ upload.getAddress() | apply_filter('order') }}"/>
+                                                    </a>
                                                 {%set i = i + 1 %}
                                                 </div>
                                         {% endfor %}
@@ -87,7 +83,7 @@
             </div>
         </div>
         <!-- Histórico -->
-        <div class="tab-pane{% if( pgatual == "historico") %} active{% endif %}" id="2">
+        <div class="tab-pane{% if( pgatual == "historico") %} active{% endif %}" id="historico">
             <div class="container-fluid span11">
                 <div class="row">
                     <div class="span11">
@@ -100,24 +96,15 @@
                             </tr>
                             <tr>
                                 <td class="span3">
-                                {% for upload in talk.upload %}
-                                    <div id="{{upload.getId()}}" class="janela">
-                                        <div id="barra">
-                                            <h2>Comentários</h2>
-                                            <a id="fechar" href="#" title="Fechar" onmouseup="fechar('{{upload.getId()}}');">x</a>
-                                        </div>
-                                        <a onclick="SaveFile('http://webbanner{{upload.getAddress()}}');">
-                                            <img src='{{upload.getWebPath()}}{{upload.getPath}}' />
-                                        </a>
-                                    </div>
-                                {% endfor%}
                                     <div id="talk{{t}}" class="carousel slide">
                                         <!-- Carousel items -->
                                         <div class="carousel-inner">
                                             {%set i = 0 %}
                                             {% for upload in talk.upload %}
                                             <div class="item {% if (i==0)%}active{%endif%}">
-                                                <img id="imageprin" src="{{upload.getAddress() | apply_filter('talk') }}" onclick="abrir('{{upload.getId()}}');">
+                                                <a href="{{upload.getWebPath()}}{{upload.getPath}}" rel="facebox" >
+                                                    <img id="{{upload.id}}" src="{{upload.getAddress() | apply_filter('talk') }}">
+                                                </a>
                                             </div>
                                             {%set i = i + 1 %}
                                             {% endfor%}
@@ -147,14 +134,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name, 'pgatual':2}) }}" method="post" {{ form_enctype(formUpload)}} >
+                                    <form class="block" action="{{ path('_order_order_edit',{'username':user.username, 'name':order.name, 'pgatual':"historico"}) }}" method="post" {{ form_enctype(formUpload)}} >
                                         <input type="hidden" value="{{order.name}}" name="order">
                                         <input type="hidden" value="10" id="maxUpload">
                                         {{ form_widget(formTalk) }}
                                         <div id="upload">
                                             <div id="upload_file0">
                                                 <spam id="upload0"></spam>
-                                                <input id="upload_file[0]" class="upload" type="file" onchange="upload()" name="upload[0]">
+                                                <input id="upload_file[0]" class="upload" type="file" name="upload[0]">
                                             </div>
                                         </div>
                                         <div><br><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
@@ -167,7 +154,7 @@
             </div>
         </div>
         <!-- Para aprovação -->
-        <div class="tab-pane{% if( pgatual == "aprovacao") %} active{% endif %}" id="3">
+        <div class="tab-pane{% if( pgatual == "aprovacao") %} active{% endif %}" id="aprovacao">
             <div class="container-fluid span12">
                 <div class="row-fluid">
                     <div class="span11">
@@ -184,20 +171,15 @@
                                             {% for pending in order.vLanguage |reverse %}
                                             <tr>
                                                 <td>    
-                                                    <div id="p{{pending.getId()}}" class="janela">
-                                                        <div id="barra">
-                                                            <h2>Preview</h2>
-                                                            <a id="fechar" href="#" title="Fechar" onmouseup="fechar('p{{pending.getId()}}');">x</a>
-                                                        </div>
-                                                        <img src="{{pending.getWebPath()}}{{pending.getPath}}">
-                                                    </div>
                                                     {% if (pending.aproved != "false" and pending.aproved != "true" and order.user == app.user) %}
                                                     <input type="radio" name="lvisual" value="{{pending.getId()}}" />
                                                     {%set aproved = true %}
                                                     {% endif %}
                                                     </td>
                                                     <td>
-                                                    <img id="imageprin" src="{{ pending.getAddress() | apply_filter('order') }}" onclick="abrir('p{{pending.getId()}}');" {% if(pending.aproved == "false") %}class="disab"{% endif %}><br />
+                                                    <a href="{{pending.getWebPath()}}{{pending.getPath}}" rel="facebox" >
+                                                        <img id="imageprin" src="{{ pending.getAddress() | apply_filter('order') }}" {% if(pending.aproved == "false") %}class="disab"{% endif %}><br />
+                                                    </a>
                                                 </td>
                                             </tr>
                                             {%set t = 1 %}
@@ -239,14 +221,9 @@
                                             {% for pending in pendings |reverse %}
                                                 <tr>
                                                 <td class="span3">
-                                                <div id="p{{pending.getId()}}" class="janela">
-                                                    <div id="barra">
-                                                        <h2>Preview
-                                                        <a id="fechar" href="#" title="Fechar" onmouseup="fechar('p{{pending.getId()}}');">x</a></h2>
-                                                    </div>
-                                                    <img src="{{pending.getWebPath()}}{{pending.getPath}}" width="100%">
-                                                </div>
-                                                <img id="imageprin" src="{{ pending.getAddress() | apply_filter('order') }}" onclick="abrir('p{{pending.getId()}}');"><br />
+                                                <a href="{{pending.getWebPath()}}{{pending.getPath}}" rel="facebox" >
+                                                    <img id="imageprin" src="{{ pending.getAddress() | apply_filter('order') }}"><br />
+                                                </a>
                                                 </td>
                                                 <td>
                                                 {% if(pending.aproved == "false")%}
@@ -260,8 +237,8 @@
                                                 <tr>
                                                     <td>
                                                         {%set t=1 %}
-                                                        <input type="radio" name="{{pending.getId()}}" value="true" onclick="rmjust('{{pending.getId()}}')"/> Aceitar<br />
-                                                        <input type="radio" name="{{pending.getId()}}" value="false" onclick="just('{{pending.getId()}}')"/> Recusar<br />
+                                                        <input type="radio" name="{{pending.getId()}}" value="true" id="{{pending.getId()}}" class="rmjust"/> Aceitar<br />
+                                                        <input type="radio" name="{{pending.getId()}}" value="false" id="{{pending.getId()}}" class="just" /> Recusar<br />
                                                         <div id="just{{pending.getId()}}" >
                                                         </div>
                                                     </td>
@@ -298,11 +275,41 @@
             </div>
         </div>
         <!-- Aprovados -->
-        <div class="tab-pane{% if( pgatual == "aprovados") %} active{% endif %}" id="4">
+        <div class="tab-pane{% if( pgatual == "aprovados") %} active{% endif %}" id="aprovados">
             <div class="container-fluid span12">
                 <div class="row-fluid">
                     <div class="span11">
                         <table class="table">
+                            {% if(order.aproved == "true") %}
+                            <tr>
+                                <th>
+                                    Arquivo final
+                                </th>
+                            </tr>
+                            {% if(order.final) %}
+                            <tr>
+                                <td>
+                                    <a href="{{order.final.getWebPath()}}{{order.final.getPath}}">
+                                        <i class="icon-download-alt"></i> Download
+                                    </a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td>
+                                    {% if (order.designer == app.user or is_granted('ROLE_SUPERADMIN')) %}
+                                    <form action="{{ path('_order_order_final') }}" method="post" {{ form_enctype(formUpload)}}>
+                                        <input id='order' type='hidden' name='order' value='{{order.name}}' ><br />
+                                        <input id='final' type='file' name='final' ><br />
+                                        <input id='enviar' class="btn" type='submit' value='Enviar' ><br />
+                                    </form>
+                                    {% else %}
+                                        Ainda não foi enviado o arquivo final.
+                                    {% endif %}    
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endif %}
                             <tr>
                                 <th>
                                     Linguagem visual
@@ -311,14 +318,9 @@
                             {% for lvisual in lvisus |reverse %}
                             <tr>
                                 <td>
-                                    <div id="a{{lvisual.getId()}}" class="janela">
-                                        <div id="barra">
-                                            <h2>Linguagem Visual</h2>
-                                            <a id="fechar" href="#" title="Fechar" onmouseup="fechar('a{{lvisual.getId()}}');">x</a>
-                                        </div>
-                                        <img src="{{lvisual.getWebPath()}}{{lvisual.getPath()}}">
-                                    </div>
-                                    <img src="{{ lvisual.getAddress() | apply_filter('order') }}" onclick="abrir('a{{lvisual.getId()}}');">
+                                    <a href="{{lvisual.getWebPath()}}{{lvisual.getPath}}" rel="facebox" >
+                                        <img src="{{ lvisual.getAddress() | apply_filter('order') }}">
+                                    </a>
                                  </td>
                             </tr>
                             {% else %}
@@ -337,14 +339,9 @@
                                     {% for aprove in aproves |reverse %}
                             <tr>
                                 <td>
-                                    <div id="a{{aprove.getId()}}" class="janela">
-                                        <div id="barra">
-                                            <h2>Preview</h2>
-                                            <a id="fechar" href="#" title="Fechar" onmouseup="fechar('a{{aprove.getId()}}');">x</a>
-                                        </div>
-                                        <img src="{{aprove.getWebPath()}}{{aprove.getPath}}">
-                                    </div>
-                                    <img id="imageprin" src="{{ aprove.getAddress() | apply_filter('order') }}" onclick="abrir('a{{aprove.getId()}}');" >
+                                    <a href="{{aprove.getWebPath()}}{{aprove.getPath}}" rel="facebox" >
+                                        <img id="imageprin" src="{{ aprove.getAddress() | apply_filter('order') }}" >
+                                    </a>
                                     {%set t = 1 %}
                                 </td>
                             </tr>

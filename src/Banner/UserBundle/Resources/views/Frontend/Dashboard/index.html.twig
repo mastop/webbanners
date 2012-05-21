@@ -2,33 +2,39 @@
 
 {% block stylesheets %}
     {% stylesheets '@BannerCoreBundle/Resources/views/themes/banner/Frontend/css/bundles/user/*' filter='?yui_css' output='static/system/css/user.all.css' %}
-        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
     {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
-    <div class="clear"></div>
-    <div class="grid_12">
+<div class="clear"></div>
+<div class="span12">
+    <div class="tabbable">
         <!-- the tabs -->
-        <ul class="tabs">
+        <ul class="nav nav-tabs">
+            {% set i = 0%}
             {% for k, tabs in tabs %}
-                <li>
-                    <a href="#{{k}}">{{tabs}}</a>
-                </li>
+            <li{% if (i == 0) %} class="active"{% endif%}>
+                <a href="#{{k}}">{{tabs}}</a>
+            </li>
+            {% set i = 1%}
             {% endfor %}
         </ul>
 
         <!-- tab "panes" -->
-        <div class="panes">
-            {% for pane in panes %}
-                <div>
-                    {% render pane %}
-                    <div class='clear'></div>
-                </div>
+        <div class="tab-content">
+            {% set i = 0%}
+            {% for k, pane in panes %}
+            <div class="tab-pane{% if (i == 0) %} active{% endif%}" id="{{k}}">
+                {% render pane %}
+            </div>
+            {% set i = 1%}
             {% endfor %}
+            <div class='clear'>
+            </div>
         </div>
     </div>
-
+</div>
 {% endblock %}
 {% block javascriptsHead %}
     {% javascripts output='static/system/js/core.abas.js'

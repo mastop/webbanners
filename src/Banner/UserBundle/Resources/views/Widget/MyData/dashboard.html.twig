@@ -1,4 +1,4 @@
-<div class="dp50">
+<div class="span5">
     <h2>Cadastro</h2>
     {{ "<b>Nome: </b>"}} {{ usuario.getName }}
     <br />
@@ -17,7 +17,7 @@
     <a class="button" href="{{ path('user_user_edit') }}">{{"Editar"|trans}}</a>
     <a class="button" href="{{ path('user_user_recovery', {'username': usuario.getUsername()}) }}">{{"Trocar a Senha"|trans}}</a>
 </div>
-<div class="dp50">
+<div class="span5">
     <h2>Informações Bancárias</h2>
     <div class="info">Dados necessários para solicitar um pagamento, caso queira <strong>vender</strong> uma oferta, ou reembolso caso queira cancelar uma <strong>compra</strong>.</div>
     {% set bankData = usuario.getBankData %}
@@ -37,5 +37,5 @@
     <div class="mB10">{{ bankData.getObs|nl2br }}</div>
     <a class="button" href="{{ path('user_user_bank') }}">{{"Editar Informações Bancárias"|trans}}</a>
     {%endif%}
-   
+
 </div>

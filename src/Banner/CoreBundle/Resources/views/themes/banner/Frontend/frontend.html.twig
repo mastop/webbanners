@@ -45,6 +45,11 @@ Mastop Internet Development http://www.mastop.com.br
   {% stylesheets filter='less,?yui_css' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/bootstrap.less' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/responsive.less' output='themes/banner/twitter-bootstrap/css/bootstrap.css' %}
     <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
   {% endstylesheets %}
+
+  <!-- Facebox CSS -->
+  {% stylesheets '@BannerCoreBundle/Resources/public/js/facebox/facebox.css' filter='?yui_css' output='themes/banner/facebox/css/facebox.css' %}
+    <link href="{{ asset_url }}" rel="stylesheet" media="screen"/>
+  {% endstylesheets %}
   <!-- CSS System -->
   {% block stylesheets null%}
 
@@ -221,6 +226,10 @@ mathiasbynens.be/notes/async-analytics-snippet -->
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
   
+    {% javascripts '@BannerCoreBundle/Resources/public/js/facebox/facebox.js' filter='yui_js' output='static/system/js/facebox.js' %}
+        <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+        
   <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
 chromium.org/developers/how-tos/chrome-frame-getting-started -->
   <!--[if lt IE 7 ]>

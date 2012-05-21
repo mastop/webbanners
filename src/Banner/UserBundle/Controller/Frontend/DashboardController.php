@@ -28,7 +28,7 @@ class DashboardController extends BaseController
             //'mybalance' => 'Meu Financeiro',
         );
         $panes = array(
-            'BannerUserBundle:Widget\\MyData:dashboard',
+            'mydata' => 'BannerUserBundle:Widget\\MyData:dashboard',
             //'BannerOrderBundle:Widget\\MyOrders:dashboard',
             //'BannerOrderBundle:Widget\\MySales:dashboard',
             //'BannerOrderBundle:Widget\\MyBalance:dashboard',

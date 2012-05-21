@@ -62,7 +62,6 @@ class OrderRepository extends DocumentRepository
         return $this->createQueryBuilder()
                 ->field('designer')->references($designer)
                 ->field('aproved')->equals("true")
-                ->sort('user.name', 'ASC')
                 ->getQuery()
                 ->execute();
     }
@@ -94,6 +93,14 @@ class OrderRepository extends DocumentRepository
     public function findUnsets(){
         return $this->createQueryBuilder()
                 ->field('designer')->equals(null)
+                ->sort('expires', 'ASC')
+                ->field('aproved')->notEqual("true")
+                ->getQuery()
+                ->execute();
+    }
+    public function findSets(){
+        return $this->createQueryBuilder()
+                ->field('designer')->notEqual(null)
                 ->sort('expires', 'ASC')
                 ->field('aproved')->notEqual("true")
                 ->getQuery()

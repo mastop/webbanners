@@ -64,6 +64,9 @@ class OrderController extends BaseController
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
             $quantity = $order->getQuantity();
+            if($quantity != $order->setQuantity){
+                $order->setAproved("false");
+            }
             $order->setQuantity($formOrder['quantity']);
             $i = 0;
             foreach($formBanner as $fBanner){
@@ -95,31 +98,17 @@ class OrderController extends BaseController
      */
     public function designAction($username)
     {   
-        $i=0;
         $orders = array();
-        $clients = array();
         if($username){
             $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
         }else{
             $user = $this->get('security.context')->getToken()->getUser();
         }
         if($user == $this->get('security.context')->getToken()->getUser() || ($this->get('security.context')->isGranted('ROLE_SUPERADMIN'))){
-            $orders = $this->mongo('BannerOrderBundle:Order')->findUserByDesigner($user);
-            foreach($orders as $order){
-                if (!in_array($order->getUser(), $clients)) { 
-                    $i++;
-                    $clients[$i][0] = $order->getUser()->getUsername(); 
-                    $clients[$i][1] = $order->getDunread(); 
-                }
-                else
-                {
-                    $clients[array_search($order->getUser(), $clients)] += 1;
-                }
-            }
+            $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenDesigner($user);
+            $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneDesigner($user);
         }
-        $finals = array();
         return array(
-                        'clients' => $clients,
                         'orders'  => $orders,
                         'finals'  => $finals
                     );
@@ -136,23 +125,25 @@ class OrderController extends BaseController
         $request = $this->get('request');
         if ($this->get('security.context')->isGranted('ROLE_SUPERADMIN')) {
             $unsets = $this->mongo("BannerOrderBundle:Order")->findUnsets();
+            $sets = $this->mongo("BannerOrderBundle:Order")->findSets();
             $orders = $this->mongo("BannerOrderBundle:Order")->findByOpen();
             $finals = $this->mongo("BannerOrderBundle:Order")->findByDone();
             $designers = $this->mongo("BannerUserBundle:User")->findBy(array('roles'=>'ROLE_DESIGNER'));
             if ('POST' == $request->getMethod()) {
                 foreach($orders as $order){
                     $designer = $this->mongo("BannerUserBundle:User")->findByCode($request->get($order->getId()));
-                    $order->setDesigner($designer);
-                    $dm->persist($order);
-                    $dm->flush();
-                    
-                    $mail = $this->get('mastop.mailer');
-                    $mail->to($designer->getEmail())
-                        ->subject('Novo projeto no seu nome - WebBanners')
-                        ->template('pedido_designer', array('user' => $designer,'order'=>$order))
-                        ->send();
-                    $mail->notify('O pedido '.$order->getId().' foi escolhido para '.$designer->getName(), 'O pedido '.$order->getId().' foi escolhido para '.$designer->getName().' pelo admnistrador do sistema.');
-                    
+                    if($designer){
+                        $order->setDesigner($designer);
+                        $dm->persist($order);
+                        $dm->flush();
+
+                        $mail = $this->get('mastop.mailer');
+                        $mail->to($designer->getEmail())
+                            ->subject('Novo projeto no seu nome - WebBanners')
+                            ->template('pedido_designer', array('user' => $designer,'order'=>$order))
+                            ->send();
+                        $mail->notify('O pedido '.$order->getId().' foi escolhido para '.$designer->getName(), 'O pedido '.$order->getId().' foi escolhido para '.$designer->getName().' pelo admnistrador do sistema.');
+                    }
                 }
             }
         }
@@ -160,6 +151,7 @@ class OrderController extends BaseController
             return $this->redirectFlash($this->generateUrl('_home'), "Você não está autorizado para acessar essa página.");
         }
         return array(
+                        'sets'      => $sets,
                         'unsets'    => $unsets,
                         'orders'    => $orders,
                         'finals'    => $finals,
@@ -175,6 +167,7 @@ class OrderController extends BaseController
     public function clientAction($username)
     {       
         $orders = array();
+        $finals = array();
         if($username){
             $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
             $designer = $this->get('security.context')->getToken()->getUser();
@@ -199,10 +192,10 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/detalhes/{username}-{name}/{pgatual}", name="_order_order_edit",  defaults={"pgatual" = "pedido"})
+     * @Route("/detalhes/{username}-{name}/{pgatual}", name="_order_order_edit")
      * @Template()
      */
-    public function editAction($username,$name,$pgatual = "pedido")
+    public function editAction($username,$name,$pgatual)
     {           
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $request = $this->get('request');
@@ -309,6 +302,28 @@ class OrderController extends BaseController
                         'pgatual'   => $pgatual
                     );
     }
+        /**
+     * @Route("/final", name="_order_order_final")
+     * @Template()
+     */
+    public function finalAction()
+    {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $request = $this->get('request');
+        $name  = $request->request->get("order");
+        $final  = $request->files->get("final");
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);
+        if($final->guessExtension() == "zip"){
+            $upload = new Upload();
+            $upload->setFile($final);
+            $order->setFinal($upload);
+            $dm->persist($order);
+            $dm->flush();
+        }else{
+            return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovados")), "Favor enviar um arquivo zipado");
+        }
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovados")), "Arquivo final aceito");
+    }
      
     /**
      * @Route("/linguagem", name="_order_order_vlanguage")
@@ -324,6 +339,10 @@ class OrderController extends BaseController
         foreach ($order->getVLanguage() as $vlanguage){  
             if($vlanguage->getId() == $lvisual){
                 $vlanguage->setAproved("true");
+                $mail->to($talker->getEmail())
+                    ->subject('Linguagem visual aceita - WebBanners')
+                    ->template('ling_accept', array('to' => $order->getUser(), 'from' => $talker, 'vlanguage' => $vlanguage))
+                    ->send();
             }else{
                 $vlanguage->setAproved("false");
             }
@@ -344,6 +363,8 @@ class OrderController extends BaseController
         $name  = $request->request->get("order");
         $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);
         $justifics = array();
+        $count = 0;
+        $banners = count($order->getBanner());
         foreach ($order->getPreview() as $upload){  
             if($upload->getAproved() != "true" && $upload->getAproved() !=  "false"){
                 $banner  = $request->request->get($upload->getId());
@@ -353,6 +374,12 @@ class OrderController extends BaseController
                 }
                 $upload->setAproved($banner);
             }
+            if($upload->getAproved()=="true"){
+                $count = $count + 1;
+            }
+        }
+        if($count == $banners){
+            $order->setAproved("true");
         }
         $dm->persist($order);
         $dm->flush();

@@ -30,6 +30,7 @@
                         <tr>
                             <th>#</th>
                             <th></th>
+                            <th>Cliente</th>
                             <th>Nome</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
@@ -38,7 +39,8 @@
                         <tr>
                             <td>{{order.id}}</td>
                             <td>{%if (order.dunread > 0) %}<span class="badge badge-important">{{order.dunread}}</span>{% endif %}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.user.username}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
@@ -56,17 +58,18 @@
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>
-                            <th>Descrição</th>
+                            <th>Cliente</th>
+                            <th>Nome</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
                         </tr>
             {% for order in finals %}
                         <tr>
                             <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.user.username}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
-                            <td>{{order.cUnread}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>

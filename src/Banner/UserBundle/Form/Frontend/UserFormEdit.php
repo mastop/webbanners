@@ -22,7 +22,7 @@ class UserFormEdit extends AbstractType {
         ;
     }
 
-    public function getDefaultOptions(array $options) {
+    public function getDefaultOptions() {
         return array(
             'data_class' => 'Banner\UserBundle\Document\User',
             'csrf_protection' => true,

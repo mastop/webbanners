@@ -1,4 +1,5 @@
 $(function(){
+    $('a[rel*=facebox]').facebox() 
     $("a.rm").live("click", function(e){
         $(this).parent().remove();
         var i = 0;
@@ -35,44 +36,38 @@ $(function(){
         e.preventDefault();
     }); 
     $("a.guide").live("click", function(e){
-        window.location.href = ($(this).firstChild.noveValue);
-        var quebra = window.location.href.split("/");
-        if(quebra.length == 7){
-            window.location.href = $(this).firstChild.noveValue;
-        }else{
-            window.location.href = window.location.href+"/"+$(this).firstChild.noveValue;
-        }
+        var stateObj = { foo: "bar" };
+        var url = (e.target.href).split("#")[1];
+        history.pushState(stateObj, "/", url);
         e.preventDefault();
     });
     $("input.upload").live("change", function(e){
+        var max = parseFloat(document.getElementById("maxUpload").firstChild.nodeValue);
         var i = 0;
         var j = 0;
-        while(true){
-            if(document.getElementById("upload_file["+i+"]").value != ""){
-                if(document.getElementById("upload_file["+i+"]").style.visibility == "" || document.getElementById("upload_file["+i+"]").style.visibility == "visible"){
+        for (i = 0 ; i < max ; i++) {
+            if (document.getElementById("upload_file["+i+"]") != undefined){
+                if(document.getElementById("upload_file["+i+"]").value != ""){
                     document.getElementById("upload_file["+i+"]").style.visibility = "hidden";
                     var html = document.getElementById("upload_file["+i+"]").value;
                     if(html != ""){
                             html = html + "  <a href='#' class='rmupload badge badge-important'>x</a>";
-                            $("#upload"+i).append(html);
+                            $("#upload"+i).html(html);
                     }
+                }else{
+                    j=0;
                 }
-            }
-            if (document.getElementById("upload_file["+(i+1)+"]") == undefined){
-                if (document.getElementById("upload_file["+i+"]").value != "" && j==0){
-                    var image = '<div id="upload_file'+(i+1)+'"><spam id="upload'+(i+1)+'"></spam><input id="upload_file['+(i+1)+']" class="upload" type="file" onchange="upload()" name="upload['+(i+1)+']"><br /></div>';
+            }else{
+                if(j!=1){
+                    var image = '<div id="upload_file'+i+'"><spam id="upload'+i+'"></spam><input id="upload_file['+i+']" class="upload" type="file" name="upload['+i+']"><br /></div>';
                     $('#upload').append(image);
                     j=1;
                 }
-                if(document.getElementById("upload_file["+(i+2)+"]") == undefined){
-                    break;
-                }
             }
-            i++;
         }
         e.preventDefault();
     });
-    $("#novo").click(function(){
+    $("#novo").click(function(e){
         var banner = '';
         var max = parseInt(document.getElementById("maxBanner").value);
         var total = 0;
@@ -121,22 +116,23 @@ $(function(){
             }
         }
         document.getElementById("order_total").value = total.toFixed(2);
+        e.preventDefault();
     });
+     $("input.just").live("change", function(e){
+        var id = e.target.id;
+        if(document.getElementById("just('"+id+"')") == undefined){
+            var justific = "Justificativa: <textarea id=just('"+id+"') name='just["+id+"]' required='required'></textarea> <br />" ;
+            $('#just'+id).append(justific);
+        }
+    });
+     $("input.rmjust").live("change", function(e){
+        var id = e.target.id;
+        if(document.getElementById("just"+id) != undefined){
+            $('#just'+id).html("");
+        }  
+     });
+    
 });
-
-
-function just(id){
-    if(document.getElementById("just('"+id+"')") == undefined){
-        var justific = "Justificativa: <textarea id=just('"+id+"') name='just["+id+"]' required='required'></textarea> <br />" ;
-        $('#just'+id).append(justific);
-    }
-};
-
-function rmjust(id){
-    if(document.getElementById("just"+id) != undefined){
-        $('#just'+id).html("");
-    }
-};
 
 function banner(){
     var max = parseInt(document.getElementById("maxPreview").value);
@@ -177,12 +173,6 @@ function ling(){
         i++;
     }
 };
-
-function fechar(upload) {document.getElementById(upload).style.visibility = "hidden";}
-
-function abrir(upload) {
-    document.getElementById(upload).style.visibility="visible";
-}
 
 function total(){
     var max = parseInt(document.getElementById("maxBanner").value);

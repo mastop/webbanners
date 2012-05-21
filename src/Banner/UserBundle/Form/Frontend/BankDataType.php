@@ -37,7 +37,7 @@ class BankDataType extends AbstractType {
         $builder->add('obs', 'textarea', array('label' => 'Observações', 'required' => false));
     }
 
-    public function getDefaultOptions(array $options) {
+    public function getDefaultOptions() {
         return array(
             'data_class' => 'Banner\UserBundle\Document\BankData',
         );

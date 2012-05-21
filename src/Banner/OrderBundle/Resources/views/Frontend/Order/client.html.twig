@@ -73,7 +73,6 @@
                             <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
-                            <td>{{order.cUnread}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>

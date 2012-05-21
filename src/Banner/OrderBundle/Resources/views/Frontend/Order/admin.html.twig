@@ -22,6 +22,7 @@
         <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a href="#2" data-toggle="tab">Para aprovação</a></li>
         <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a href="#3" data-toggle="tab">Aprovados</a></li>
         <li{% if( pgatual == "pagamento") %} class="active"{% endif %}><a href="#4" data-toggle="tab">Pendente pagamento</a></li>
+        <li{% if( pgatual == "alterar") %} class="active"{% endif %}><a href="#5" data-toggle="tab">Alterar designer</a></li>
     </ul>
     <div class="tab-content">
         <!-- Designers -->
@@ -40,7 +41,7 @@
                             {% for order in unsets %}
                             <tr>
                                 <td>{{order.user.name}}</td>
-                                <td>{{order.name}}</td>
+                                <td>{{order.id}}-{{order.name}}</td>
                                 <td>
                                     <select name="{{order.id}}">
                                     {% for designer in designers %}
@@ -88,7 +89,7 @@
                                 </a>
                                 {% endif %}
                             </td>       
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
@@ -113,7 +114,7 @@
             {% for order in finals %}
                         <tr>
                             <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                             <td>{{order.cUnread}}</td>
@@ -126,7 +127,7 @@
             </div>
         </div>
         <!-- Pendente Pagamento -->
-        <div class="tab-pane{% if( pgatual == "pagamento") %} active{% endif %}" id="3">
+        <div class="tab-pane{% if( pgatual == "pagamento") %} active{% endif %}" id="4">
             <div class="container-fluid">
                 <div class="row-fluid">
                     <table class="table table-striped">
@@ -139,7 +140,7 @@
             {% for order in finals %}
                         <tr>
                             <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                             <td>{{order.cUnread}}</td>
@@ -152,27 +153,50 @@
             </div>
         </div>
         <!-- Alterar Design -->
-        <div class="tab-pane{% if( pgatual == "pagamento") %} active{% endif %}" id="3">
+        <div class="tab-pane{% if( pgatual == "alterar") %} active{% endif %}" id="5">
             <div class="container-fluid">
                 <div class="row-fluid">
+                    <h2> Selecione o Designer para o Projeto </h2>
                     <table class="table table-striped">
                         <tr>
-                            <th>#</th>
-                            <th>Descrição</th>
-                            <th>Dt.Criação</th>
-                            <th>Expira</th>
+                            <th>Cliente</th>
+                            <th>Projeto</th>
+                            <th>Designer</th>
+                            <th>Novo Designer</th>
                         </tr>
-            {% for order in finals %}
-                        <tr>
-                            <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
-                            <td>{{order.formatCreated()}}</td>
-                            <td>{{order.formatExpires()}}</td>
-                            <td>{{order.cUnread}}</td>
-                        </tr>
-            {% else %}
-                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
+                        {% set i = 0 %}
+                        <form action="{{path('_order_order_admin')}}" method="post">
+                            {% for order in sets %}
+                            <tr>
+                                <td>{{order.user.name}}</td>
+                                <td>{{order.id}}-{{order.name}}</td>
+                                <td>{{order.designer.name}}</td>
+                                <td>
+                                    <select name="{{order.id}}">
+                                    <option value="manter">
+                                        Manter designer
+                                    </option>
+                                    {% for designer in designers %}
+                                        {% if designer != order.designer%}
+                                        <option value="{{designer.code}}">
+                                            {{designer.name}}
+                                        </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            {% set i = 1 %}
+                            {% else %}
+                            <tr><td colspan="3">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+                            {% endfor %} 
+                            {% if (i==1) %}
+                            <tr>
+                                <td colspan="3"></td>
+                                <td><input type="submit" value="Ok" /></td>
+                            </tr>
+                            {% endif %}
+                        </form>
                     </table>
                 </div>
             </div>

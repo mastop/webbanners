@@ -194,6 +194,14 @@ class Order
     protected $preview = array();
     
     /**
+     * Upload do arquivo final
+     * 
+     * @var array
+     * @ODM\EmbedOne(targetDocument="Banner\OrderBundle\Document\Upload")
+     */
+    protected $final;
+    
+    /**
      * Dados do usuário, exemplo: Ip. Origem, OS, etc
      * 
      * @var array
@@ -710,5 +718,25 @@ class Order
     public function getAproved()
     {
         return $this->aproved;
+    }
+
+    /**
+     * Set final
+     *
+     * @param Banner\OrderBundle\Document\Upload $final
+     */
+    public function setFinal(\Banner\OrderBundle\Document\Upload $final)
+    {
+        $this->final = $final;
+    }
+
+    /**
+     * Get final
+     *
+     * @return Banner\OrderBundle\Document\Upload $final
+     */
+    public function getFinal()
+    {
+        return $this->final;
     }
 }
