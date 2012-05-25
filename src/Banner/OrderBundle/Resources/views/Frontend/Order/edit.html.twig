@@ -200,7 +200,8 @@
                                         <input type="hidden" value="{{ 3-( order.vlanguage | length ) }}" id="maxLing">
                                         {% if( (3-( order.vlanguage | length )) > 0 )  %}
                                         <div id="ling">
-                                            <input id='ling[0]' type='file' onchange='ling()' name='ling[0]' ><br />
+                                            <spam id="ling0"></spam>
+                                            <input id='ling[0]' type='file' class='ling' name='ling[0]' ><br />
                                         </div>
                                         <div><button class="button green m10"><span>Enviar</span></button></div>
                                         {% endif %}
@@ -261,7 +262,8 @@
                                         <input type="hidden" value="{{ order.banner | length - order.preview | length + cont }}" id="maxPreview">
                                         {% if( (order.banner | length - order.preview | length  + cont) > 0 )  %}
                                         <div id="banner">
-                                            <input id='banner[0]' type='file' onchange='banner()' name='banner[0]' ><br />
+                                            <spam id="banner0"></spam>
+                                            <input id='banner[0]' type='file' class="banner" name='banner[0]' ><br />
                                         </div>
                                         <div><button class="button green m10"><span>Enviar</span></button></div>
                                         {% endif %}

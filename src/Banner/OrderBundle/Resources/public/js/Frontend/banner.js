@@ -36,11 +36,63 @@ $(function(){
         e.preventDefault();
     }); 
     $("a.guide").live("click", function(e){
-        var stateObj = { foo: "bar" };
+        var stateObj = {foo: "bar"};
         var url = (e.target.href).split("#")[1];
         history.pushState(stateObj, "/", url);
         e.preventDefault();
     });
+    
+    $("input.ling").live("change", function(e){
+        var max = parseInt(document.getElementById("maxLing").value);
+        var i = 0;
+        var j = 0;
+        for (i = 0 ; i < max ; i++) {
+            if (document.getElementById("ling["+i+"]") != undefined){
+                if(document.getElementById("ling["+i+"]").value != ""){
+                    document.getElementById("ling["+i+"]").style.visibility = "hidden";
+                    var html = document.getElementById("ling["+i+"]").value;
+                    if(html != ""){
+                            $("#ling"+i).html(html);
+                    }
+                }else{
+                    j=0;
+                }
+            }else{
+                if(j!=1){
+                    var image = '<div id="ling_file'+i+'"><spam id="ling'+i+'"></spam><input id="ling['+i+']" class="ling" type="file" name="ling['+i+']"><br /></div>';
+                    $('#ling').append(image);
+                    j=1;
+                }
+            }
+        }
+        e.preventDefault();
+    });
+
+    $("input.banner").live("change", function(e){
+        var max = parseInt(document.getElementById("maxPreview").value);
+        var i = 0;
+        var j = 0;
+        for (i = 0 ; i < max ; i++) {
+            if (document.getElementById("banner["+i+"]") != undefined){
+                if(document.getElementById("banner["+i+"]").value != ""){
+                    document.getElementById("banner["+i+"]").style.visibility = "hidden";
+                    var html = document.getElementById("banner["+i+"]").value;
+                    if(html != ""){
+                            $("#banner"+i).html(html);
+                    }
+                }else{
+                    j=0;
+                }
+            }else{
+                if(j!=1){
+                    var image = '<div id="banner_file'+i+'"><spam id="banner'+i+'"></spam><input id="banner['+i+']" class="banner" type="file" name="banner['+i+']"><br /></div>';
+                    $('#banner').append(image);
+                    j=1;
+                }
+            }
+        }
+        e.preventDefault();
+        });
     $("input.upload").live("change", function(e){
         var max = parseFloat(document.getElementById("maxUpload").firstChild.nodeValue);
         var i = 0;
@@ -131,48 +183,30 @@ $(function(){
             $('#just'+id).html("");
         }  
      });
+     $("a.link-size").click(function(e){
+        var id = $(this).attr("id");
+        alert(id);
+        var value = $(this).parent().attr("id");
+        var size = value.split('x');
+        document.getElementById("width"+id).value = size[0];
+        document.getElementById("height"+id).value = size[1];
+        e.preventDefault();
+     });
+     $("a.selectButton").click(function(e){
+        var id = $(this).attr("id");
+        var size = $("#size").html();    
+        var pos = size.indexOf('NUM');   
+        while (pos > -1){
+            size = size.replace('NUM',id);
+            pos = size.indexOf('NUM');
+	}
+        if($("#size"+id).html().replace(/^\s+|\s+$/g,"") == ""){ 
+            $("#size"+id).append(size);
+        }
+     });
     
 });
 
-function banner(){
-    var max = parseInt(document.getElementById("maxPreview").value);
-    for (i = 0 ; i < max ; i++) {
-        if (document.getElementById("banner"+i) == undefined){
-            break;
-        }
-    }
-    var i = 0;
-    while(i<max){
-        if (document.getElementById("banner["+i+"]") == undefined){
-            if (document.getElementById("banner["+(i-1)+"]").value != ""){
-                var image = '<input id="banner['+i+']" type="file" onchange="banner()" name="banner['+i+']"><br />';
-                $('#banner').append(image);
-            }
-            break;
-        }
-        i++;
-    }
-};
-
-function ling(){
-    var max = parseInt(document.getElementById("maxLing").value);
-    for (i = 0 ; i < max ; i++) {
-        if (document.getElementById("ling["+i+"]") == undefined){
-            break;
-        }
-    }
-    var i = 0;
-    while(i<max){
-        if (document.getElementById("ling["+i+"]") == undefined){
-            if (document.getElementById("ling["+(i-1)+"]").value != ""){
-                var image = '<input id="ling['+i+']" type="file" onchange="ling()" name="ling['+i+']"><br />';
-                $('#ling').append(image);'{{i}}'
-            }
-            break;
-        }
-        i++;
-    }
-};
 
 function total(){
     var max = parseInt(document.getElementById("maxBanner").value);

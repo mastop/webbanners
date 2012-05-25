@@ -64,7 +64,7 @@ class OrderController extends BaseController
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
             $quantity = $order->getQuantity();
-            if($quantity != $order->setQuantity){
+            if($quantity != $order->getQuantity()){
                 $order->setAproved("false");
             }
             $order->setQuantity($formOrder['quantity']);
@@ -82,13 +82,23 @@ class OrderController extends BaseController
                     $order->addBanner($banner);
                 }
             }
+            $mail = $this->get('mastop.mailer');
+                        $mail->to($order->getUser()->getEmail())
+                            ->subject('Alteração de pedido - WebBanners')
+                            ->template('pedido_alteracao', array('user' => $order->getUser(),'order'=>$order))
+                            ->send();
+                        $mail->to($order->getDesigner()->getEmail())
+                            ->subject('Alteração de pedido - WebBanners')
+                            ->template('pedido_alteracao', array('user' => $order->getDesigner(),'order'=>$order))
+                            ->send();
+                        $mail->notify('Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer '.$order->getDesigner()->getCode().'-'.$order->getDesigner()->getName());
             $dm->persist($order);
             $dm->flush();
             
         }
         
         
-        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName())), "Alteração no pedido feita");
+        return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(),'pgatual'=>'pedido')), "Alteração no pedido feita");
      }
      
     /**
@@ -145,6 +155,7 @@ class OrderController extends BaseController
                         $mail->notify('O pedido '.$order->getId().' foi escolhido para '.$designer->getName(), 'O pedido '.$order->getId().' foi escolhido para '.$designer->getName().' pelo admnistrador do sistema.');
                     }
                 }
+                return $this->redirectFlash($this->generateUrl('_order_order_admin'), "Foi selecionado os designers para os projetos.");
             }
         }
         else{
@@ -317,6 +328,12 @@ class OrderController extends BaseController
             $upload = new Upload();
             $upload->setFile($final);
             $order->setFinal($upload);
+            $mail = $this->get('mastop.mailer');
+            $mail->to($order->getUser()->getEmail())
+                ->subject('Arquivo Final - WebBanners')
+                ->template('pedido_arquivo_final', array('user' => $order->getUser(),'order'=>$order))
+                ->send();
+            $mail->notify('Arquivo Final - WebBanners', 'O pedido '.$order->getId().' foi finalizado e colocado o arquivo final.');
             $dm->persist($order);
             $dm->flush();
         }else{
@@ -339,10 +356,12 @@ class OrderController extends BaseController
         foreach ($order->getVLanguage() as $vlanguage){  
             if($vlanguage->getId() == $lvisual){
                 $vlanguage->setAproved("true");
-                $mail->to($talker->getEmail())
+                $mail = $this->get('mastop.mailer');
+                $mail->to($order->getDesigner()->getEmail())
                     ->subject('Linguagem visual aceita - WebBanners')
-                    ->template('ling_accept', array('to' => $order->getUser(), 'from' => $talker, 'vlanguage' => $vlanguage))
+                    ->template('ling_accept', array('to' => $order->getDesigner(), 'from' => $order->getUser(), 'order' => $order))
                     ->send();
+                $mail->notify('Linguagem visual do pedido '.$order->getId().' aceita ', 'O pedido '.$order->getId().' teve a linguagem visual aceita.');
             }else{
                 $vlanguage->setAproved("false");
             }
@@ -381,6 +400,12 @@ class OrderController extends BaseController
         if($count == $banners){
             $order->setAproved("true");
         }
+        $mail = $this->get('mastop.mailer');
+        $mail->to($order->getUser()->getEmail())
+            ->subject('Arquivo Final - WebBanners')
+            ->template('pedido_arquivo_final', array('user' => $order->getUser(),'order'=>$order))
+            ->send();
+        $mail->notify('Arquivo Final - WebBanners', 'O pedido '.$order->getId().' foi finalizado e colocado o arquivo final.');
         $dm->persist($order);
         $dm->flush();
         return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Banners avaliados");
@@ -409,6 +434,12 @@ class OrderController extends BaseController
                     $order->addPreview($upload1);
                 }
             }
+            $mail = $this->get('mastop.mailer');
+            $mail->to($order->getUser()->getEmail())
+                ->subject('Banner - WebBanners')
+                ->template('pedido_banners', array('user' => $order->getUser(),'order'=>$order))
+                ->send();
+            $mail->notify('Banner - WebBanners', 'Foi incluido um banner no pedido '.$order->getId().'.');
             $dm->persist($order);
             $dm->flush();
             return $this->redirectFlash($this->generateUrl('_order_order_edit',array("username"=>($order->getUser()->getUsername()), "name"=>$order->getName(), "pgatual"=>"aprovacao")), "Preview Salvo");

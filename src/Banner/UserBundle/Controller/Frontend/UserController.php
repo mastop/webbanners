@@ -341,7 +341,7 @@ class UserController extends BaseController {
 
     /**
      * @Route("/usuario/detalhes/{username}", name="user_user_details")
-     * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function detailsAction($username) {
@@ -696,7 +696,7 @@ class UserController extends BaseController {
                 $user->setStatus(1);
                 $user->setLang('pt_BR');
                 $user->setCreated(new \DateTime());
-                $user->setRoles('ROLE_USER');
+                $user->setRoles('ROLE_CLIENT');
                 while($this->mongo('BannerUserBundle:User')->has('code', $code)){
                     $code = $this->mastop()->generateCode();
                 }
@@ -872,7 +872,7 @@ class UserController extends BaseController {
                         $user->setLang('pt_BR');
                         $user->setTheme('');
                         $user->setCreated(new \DateTime());
-                        $user->setRoles('ROLE_USER');
+                        $user->setRoles('ROLE_CLIENT');
                         $code = $this->mastop()->generateCode();
                         while($this->mongo('BannerUserBundle:User')->has('code', $code)){
                             $code = $this->mastop()->generateCode();
@@ -951,7 +951,7 @@ class UserController extends BaseController {
     
     /**
      * @Route("/usuario/banco", name="user_user_bank")
-     * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function bankAction() {
@@ -965,7 +965,7 @@ class UserController extends BaseController {
     
     /**
      * @Route("/usuario/banco/salvar", name="user_user_banksave")
-     * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function bankSaveAction() {

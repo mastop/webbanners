@@ -41,12 +41,15 @@
                             {% for order in unsets %}
                             <tr>
                                 <td>{{order.user.name}}</td>
-                                <td>{{order.id}}-{{order.name}}</td>
+                                <td>{{order.code}}-{{order.name}}</td>
                                 <td>
                                     <select name="{{order.id}}">
+                                        <option value="manter">
+                                            Selecione um designer
+                                        </option>
                                     {% for designer in designers %}
                                         <option value="{{designer.code}}">
-                                            {{designer.name}}
+                                            {{designer.code}}-{{designer.name}}
                                         </option>
                                     {% endfor %}
                                     </select>
@@ -73,15 +76,14 @@
                 <div class="row-fluid">
                     <table class="table table-striped">
                         <tr>
-                            <th>#</th>
                             <th></th>
+                            <th>Cliente</th>
                             <th>Nome</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
                         </tr>
             {% for order in orders %}
                         <tr>
-                            <td>{{order.id}}</td>
                             <td>
                                 {%if (order.dunread > 0) %}
                                 <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
@@ -89,7 +91,8 @@
                                 </a>
                                 {% endif %}
                             </td>       
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
+                            <td>{{order.user.code}}-{{order.user.name}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.id}}-{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
@@ -106,18 +109,17 @@
                 <div class="row-fluid">
                     <table class="table table-striped">
                         <tr>
-                            <th>#</th>
-                            <th>Descrição</th>
+                            <th>Cliente</th>
+                            <th>Projeto</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
                         </tr>
             {% for order in finals %}
                         <tr>
-                            <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
+                            <td>{{order.user.code}}-{{order.user.name}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.id}}-{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
-                            <td>{{order.cUnread}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
@@ -132,18 +134,17 @@
                 <div class="row-fluid">
                     <table class="table table-striped">
                         <tr>
-                            <th>#</th>
-                            <th>Descrição</th>
+                            <th>Cliente</th>
+                            <th>Projeto</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
                         </tr>
             {% for order in finals %}
                         <tr>
-                            <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
+                            <td>{{order.user.code}}-{{order.user.name}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.id}}-{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
-                            <td>{{order.cUnread}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
@@ -168,9 +169,9 @@
                         <form action="{{path('_order_order_admin')}}" method="post">
                             {% for order in sets %}
                             <tr>
-                                <td>{{order.user.name}}</td>
+                                <td>{{order.user.code}}-{{order.user.name}}</td>
                                 <td>{{order.id}}-{{order.name}}</td>
-                                <td>{{order.designer.name}}</td>
+                                <td>{{order.designer.code}}-{{order.designer.name}}</td>
                                 <td>
                                     <select name="{{order.id}}">
                                     <option value="manter">
@@ -179,7 +180,7 @@
                                     {% for designer in designers %}
                                         {% if designer != order.designer%}
                                         <option value="{{designer.code}}">
-                                            {{designer.name}}
+                                            {{designer.code}}-{{designer.name}}
                                         </option>
                                         {% endif %}
                                     {% endfor %}

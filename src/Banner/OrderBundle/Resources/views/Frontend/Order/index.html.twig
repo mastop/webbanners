@@ -1,9 +1,9 @@
 {% extends '::frontend.html.twig' %}
 
 {% block stylesheets %}
-  <!-- CSS Tema -->
+<!-- CSS Tema -->
   {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
-   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
   {% endstylesheets %}
 {% endblock %}
 
@@ -20,80 +20,116 @@
 <div id="othersBanner" hidden="hidden">{{mastop_param('order.all.OthersBanner')}}</div>
 <div id="PSDBanner" hidden="hidden">{{mastop_param('order.all.PSDBanner')}}</div>
 <div id="maxUpload" hidden="hidden">{{mastop_param('order.all.UploadOrder')}}</div>
-    
+
 <div class="container-fluid">
-<div class="row-fluid">
-    <form class="block" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
-        <div class="span12">
-            <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
-            <div class="span6">
-                <div id="newBanner">
+    <div class="row-fluid">
+        <form class="block" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
+            <div class="span12">
+                <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
+                <div class="span6">
+                    <div id="newBanner">
                     {% set i = 0 %}
                     {% for banner in order.banner %}
-                    <div id="banner{{i}}">
-                        <input type="hidden" value="0" />
-                        <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="{{banner.width}}" type="number" required="required" readonly="readonly" />
-                        <span class="x">x</span>
-                        <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="{{banner.height}}" type="number" required="required" readonly="readonly" />
-                        R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
-                        <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} /> PSD
-                        + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
-                        <br />
-                        <br />
-                    </div>
+                        <div id="{{i}}" class="span5">
+                            <input type="hidden" value="0" />
+                            <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="{{banner.width}}" type="number" required="required" readonly="readonly" />
+                            <span class="x">x</span>
+                            <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="{{banner.height}}" type="number" required="required" readonly="readonly" />
+                            R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
+                            <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} /> PSD
+                            + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
+                            <br />
+                            <br />
+                        </div>
                     {% set i = i + 1 %}
                     {% endfor %}
                         {% if (i==0) %}
-                    <div id="banner{{i}}">
-                        <input type="hidden" value="0" />
-                        <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="728" type="number" required="required" />
-                        <span class="x">x</span>
-                        <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="60" type="number" required="required"/>
-                        R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
-                        <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" onclick="total()"/> PSD
-                        + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
-                        <br />
-                        <br />
+                        <div id="banner{{i}}" class="span6">
+                            <input type="hidden" value="0" />
+                            <input class="width" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="728" type="number" required="required" />
+                            <span class="x">x</span>
+                            <input class="height" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="60" type="number" required="required"/>
+                            <!-- dropdown -->
+                            <ul class="nav nav-pills banner">
+                                <li class="dropdown" id="menu1">
+                                    <a href="#" class="selectButton" id="{{i}}" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>
+                                    <ul id="size{{i}}" class="size dropdown-menu">
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- /dropdown -->
+                            R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
+                            <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" onclick="total()"/> PSD
+                            + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
+                            <br />
+                            <br />
+                        </div>
+                    {% endif %}
                     </div>
-                        {% endif %}
+                    <br />
+                    <br />
+                    <div id="btnnew" class="span5">
+                        <a id="novo" href="#" class="btn">+</a>
+                    </div>
                 </div>
-                <div id="btnnew">
-                    <a id="novo" href="#" class="btn">+</a>
-                </div>
-            </div>
-            <div class="span5">
-                {% if not is_granted('ROLE_USER') %}
+                <div class="span5">
+                    {% if not is_granted('ROLE_USER') %}
                     {{ form_row(formUser.email) }}
-                {% endif %}    
+                    {% endif %}    
 
-                {% if (i==0) %}
+                    {% if (i==0) %}
                     {{ form_row(formOrder.name) }}
                     {{ form_row(formOrder.notes) }}
                     {{ form_row(formOrder.quantity) }}
-                {% else %}
+                    {% else %}
                     {{ form_row(formOrder.quantity) }}
-                    <label class="required" for="order_name"><h5>Nome do Projeto</h5></label>
+                    <label class="required" for="order_name">
+                        <h5>Nome do Projeto</h5>
+                    </label>
                     {{order.name}}<br /><br />
-                    <label class="required" for="order_notes"><h5>Anotações</h5></label>
+                    <label class="required" for="order_notes">
+                        <h5>Anotações</h5>
+                    </label>
                     {{order.notes}}<br /><br />
-                {% endif %}
-                {% if order.name == null %}
-                <div id="upload">
-                    <div id="upload_file0">
-                        <spam id="upload0"></spam>
-                        <input id="upload_file[0]" class="upload" type="file" name="upload[0]" required="required">
+                    {% endif %}
+                    {% if order.name == null %}
+                    <div id="upload">
+                        <div id="upload_file0">
+                            <spam id="upload0"></spam>
+                            <input id="upload_file[0]" class="upload" type="file" name="upload[0]" required="required">
+                        </div>
+                    </div>  
+                    {% endif %} 
+                    <div>
+                        <label class=" required" for="order_total">Total</label>
+                        <input id="order_total" type="text" required="required" readonly="readonly" name="order[total]" value="{{mastop_param('order.all.FirstBanner')|number_format(2,'.',',')}}">
                     </div>
-                </div>  
-                {% endif %} 
-                <div>
-                    <label class=" required" for="order_total">Total</label>
-                    <input id="order_total" type="text" required="required" readonly="readonly" name="order[total]" value="{{mastop_param('order.all.FirstBanner')|number_format(2,'.',',')}}">
-                </div>
 
+                </div>
             </div>
-        </div>
-        <div class="offset1"><button class="btn btn-primary"><span>Enviar</span></button> <a class="btn" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
-    </form>
+            <div class="offset1"><button class="btn btn-primary">
+                <span>Enviar</span></button> 
+                <a class="btn" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a>
+            </div>
+        </form>
+    </div>
 </div>
+
+<div id="size">
+    <li id="88x31"><a class="link-size" id="NUM" href="#">
+        <span> 88</span>
+        <em>x</em>
+        <span> 31</span>
+    </a></li>
+    <li id="100x100"><a class="link-size" id="NUM" href="#">
+        <span>100</span>
+        <em>x</em>
+        <span>100</span>
+    </a></li>
+    <li id="200x504"><a class="link-size" id="NUM" href="#">
+        <span>200</span>
+        <em>x</em>
+        <span>504</span>
+    </a></li>
 </div>
 {% endblock %}
