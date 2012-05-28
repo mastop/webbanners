@@ -16,70 +16,72 @@
 {% endblock%}
 
 {% block content %}
-
-<div class="tabbable">
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#1" data-toggle="tab">Em aberto</a></li>
-        <li><a href="#2" data-toggle="tab">Finalizados</a></li>
-    </ul>
-    <div class="tab-content">
-        <!-- Em aberto -->
-        <div class="tab-pane active" id="1">
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th></th>
-                            <th>Descrição</th>
-                            <th>Dt.Criação</th>
-                            <th>Expira</th>
-                        </tr>
-            {% for order in orders %}
-                        <tr>
-                            <td>{{order.id}}</td>
-                            <td>
-                                {%if (order.cunread > 0) %}
-                                <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
-                                    <span class="badge badge-important">{{order.cunread}}</span>
-                                </a>
-                                {% endif %}
-                            </td>       
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
-                            <td>{{order.formatCreated()}}</td>
-                            <td>{{order.formatExpires()}}</td>
-                        </tr>
-            {% else %}
-                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
-                    </table>
+<div class="span12">
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#1" data-toggle="tab">Em aberto</a></li>
+            <li><a href="#2" data-toggle="tab">Finalizados</a></li>
+        </ul>
+        <div class="tab-content">
+            <!-- Em aberto -->
+            <div class="tab-pane active" id="1">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Descrição</th>
+                                <th>Dt.Criação</th>
+                                <th>Expira</th>
+                            </tr>
+                {% for order in orders %}
+                            <tr>
+                                <td>{{order.id}}</td>
+                                <td>
+                                    {%if (order.cunread > 0) %}
+                                    <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
+                                        <span class="badge badge-important">{{order.cunread}}</span>
+                                    </a>
+                                    {% endif %}
+                                </td>       
+                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
+                                <td>{{order.formatCreated()}}</td>
+                                <td>{{order.formatExpires()}}</td>
+                            </tr>
+                {% else %}
+                                <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+                {% endfor %} 
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Finalizados -->
+            <div class="tab-pane" id="2">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>Descrição</th>
+                                <th>Dt.Criação</th>
+                                <th>Expira</th>
+                            </tr>
+                {% for order in finals %}
+                            <tr>
+                                <td>{{order.id}}</td>
+                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
+                                <td>{{order.formatCreated()}}</td>
+                                <td>{{order.formatExpires()}}</td>
+                            </tr>
+                {% else %}
+                                <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+                {% endfor %} 
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Finalizados -->
-        <div class="tab-pane" id="2">
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Descrição</th>
-                            <th>Dt.Criação</th>
-                            <th>Expira</th>
-                        </tr>
-            {% for order in finals %}
-                        <tr>
-                            <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
-                            <td>{{order.formatCreated()}}</td>
-                            <td>{{order.formatExpires()}}</td>
-                        </tr>
-            {% else %}
-                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
-                    </table>
-                </div>
-            </div>
-        </div>
+    </div>
 </div>
 {% endblock %}

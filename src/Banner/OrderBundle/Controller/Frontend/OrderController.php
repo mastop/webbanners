@@ -125,14 +125,15 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/admin", name="_order_order_admin", defaults= {"pgatual"="design"}
+     * @Route("/admin/{pgatual}", name="_order_order_admin", defaults= {"pgatual"="design"}
      * )
      * @Template()
      */
-    public function adminAction($pgatual="design")
+    public function adminAction($pgatual)
     {   
         $dm = $this->get('doctrine.odm.mongodb.document_manager');  
         $request = $this->get('request');
+        //exit(var_dump(($request->attributes)));
         if ($this->get('security.context')->isGranted('ROLE_SUPERADMIN')) {
             $unsets = $this->mongo("BannerOrderBundle:Order")->findUnsets();
             $sets = $this->mongo("BannerOrderBundle:Order")->findSets();

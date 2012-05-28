@@ -36,8 +36,15 @@ $(function(){
         e.preventDefault();
     }); 
     $("a.guide").live("click", function(e){
+        var nodes = document.ATTRIBUTE_NODE;
         var stateObj = {foo: "bar"};
-        var url = (e.target.href).split("#")[1];
+        var first = url[qtde].split("#")[0];
+        var url = (e.target.href).split("/");
+        var qtde = e.target.id;
+        alert(parseInt(qtde) == url.length);
+        if(parseInt(qtde) == url.length){
+            url = (url[0]).split("/")[0]+"/"+url[1];
+        }
         history.pushState(stateObj, "/", url);
         e.preventDefault();
     });
@@ -130,16 +137,25 @@ $(function(){
                 break;
             }
         }
-        banner = banner + '<div id="banner'+i+'">';
-        banner = banner + '<input type="hidden" value="'+i+'" />';
-        banner = banner + '<input class="width" id="width'+i+'" maxlength="3" name=" banner['+i+'][width] " value="728" type="number" required="required" />';
-        banner = banner + '<span id="x'+i+'" class="x">x</span>';
-        banner = banner + '<input class="height" id="height'+i+'" maxlength="3" name=" banner['+i+'][height] " value="90" type="number" required="required" />';
+        
+        banner = banner + '<div id="banner{{i}}" class="span6">'
+        banner = banner + '    <input type="hidden" value="0" />'
+        banner = banner + '    <input class="width" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" value="728" type="number" required="required" />'
+        banner = banner + '    <span class="x">x</span>'
+        banner = banner + '    <input class="height" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" value="60" type="number" required="required"/>'
+        banner = banner + '    <ul class="nav nav-pills banner">'
+        banner = banner + '        <li class="dropdown" id="menu1">'
+        banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
+        banner = banner + '            <ul id="size'+i+'" class="size dropdown-menu">'
+        banner = banner + '            </ul>'
+        banner = banner + '        </li>'
+        banner = banner + '    </ul>'
         banner = banner + 'R$ '+others.toFixed(2);
-        banner = banner + ' <input class="psd" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox" onclick="total()"/> PSD ';
-        banner = banner + '+ R$ '+psd.toFixed(2);
-        banner = banner + '  <a href="#" class="rm badge badge-important">-</a><BR><BR>';
-        banner = banner + '</div>';
+        banner = banner + '    <input class="psd" id="psd{{i}}" name=" banner['+i+'][psd] " type="checkbox" onclick="total()"/> PSD'
+        banner = banner + ' + R$ '+psd.toFixed(2);
+        banner = banner + '    <br />'
+        banner = banner + '    <br />'
+        banner = banner + '</div>'
         $('#newBanner').append(banner);
         total = parseInt(document.getElementById("order_quantity").value) + 1;
         document.getElementById("order_quantity").value = total;
@@ -183,16 +199,15 @@ $(function(){
             $('#just'+id).html("");
         }  
      });
-     $("a.link-size").click(function(e){
+     $("a.link-size").live("click", function(e){
         var id = $(this).attr("id");
-        alert(id);
         var value = $(this).parent().attr("id");
         var size = value.split('x');
         document.getElementById("width"+id).value = size[0];
         document.getElementById("height"+id).value = size[1];
         e.preventDefault();
      });
-     $("a.selectButton").click(function(e){
+     $("a.selectButton").live("mouseover", function(e){
         var id = $(this).attr("id");
         var size = $("#size").html();    
         var pos = size.indexOf('NUM');   
@@ -203,6 +218,7 @@ $(function(){
         if($("#size"+id).html().replace(/^\s+|\s+$/g,"") == ""){ 
             $("#size"+id).append(size);
         }
+        e.preventDefault();
      });
     
 });
