@@ -102,25 +102,22 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/designer/{username}", name="_order_order_design", defaults={"username" = ""}
+     * @Route("/designer/{pgatual}", name="_order_order_design", defaults={"pgatual" = "aberto"}
      * )
      * @Template()
      */
-    public function designAction($username)
+    public function designAction($pgatual="aberto")
     {   
         $orders = array();
-        if($username){
-            $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
-        }else{
-            $user = $this->get('security.context')->getToken()->getUser();
-        }
+        $user = $this->get('security.context')->getToken()->getUser();
         if($user == $this->get('security.context')->getToken()->getUser() || ($this->get('security.context')->isGranted('ROLE_SUPERADMIN'))){
             $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenDesigner($user);
             $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneDesigner($user);
         }
         return array(
                         'orders'  => $orders,
-                        'finals'  => $finals
+                        'finals'  => $finals,
+                        'pgatual' => $pgatual
                     );
      }
      
@@ -129,7 +126,7 @@ class OrderController extends BaseController
      * )
      * @Template()
      */
-    public function adminAction($pgatual)
+    public function adminAction($pgatual="design")
     {   
         $dm = $this->get('doctrine.odm.mongodb.document_manager');  
         $request = $this->get('request');
@@ -156,7 +153,7 @@ class OrderController extends BaseController
                         $mail->notify('O pedido '.$order->getId().' foi escolhido para '.$designer->getName(), 'O pedido '.$order->getId().' foi escolhido para '.$designer->getName().' pelo admnistrador do sistema.');
                     }
                 }
-                return $this->redirectFlash($this->generateUrl('_order_order_admin'), "Foi selecionado os designers para os projetos.");
+                return $this->redirectFlash($this->generateUrl('_order_order_admin',array("pgatual"=>"alterar")), "Foi selecionado os designers para os projetos.");
             }
         }
         else{
@@ -173,33 +170,24 @@ class OrderController extends BaseController
      }
      
     /**
-     * @Route("/cliente/{username}", name="_order_order_client",  defaults={"username" = ""})
+     * @Route("/cliente/{pgatual}", name="_order_order_client",  defaults={"pgatual" = "aberto"})
      * @Template()
      */
-    public function clientAction($username)
+    public function clientAction($pgatual="aberto")
     {       
         $orders = array();
         $finals = array();
-        if($username){
-            $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
-            $designer = $this->get('security.context')->getToken()->getUser();
-            $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenDesigner($designer);
-            $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneDesigner($designer);
-            if(!$orders && ($this->get('security.context')->isGranted('ROLE_SUPERADMIN'))){
-                $orders = $this->mongo('BannerOrderBundle:Order')->findByOpen();
-                $finals = $this->mongo('BannerOrderBundle:Order')->findByDone();
-            }
-        }else{
-            $user = $this->get('security.context')->getToken()->getUser();
-            if($user && $user != "anon."){
-                $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenUser($user);
-                $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneUser($user);
-            }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        if($user && $user != "anon."){
+            $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenUser($user);
+            $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneUser($user);
         }
         
         return array(
                         'orders'  => $orders,
-                        'finals'  => $finals
+                        'finals'  => $finals,
+                        'pgatual' => $pgatual
                     );
      }
      

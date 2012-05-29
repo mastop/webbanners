@@ -36,16 +36,14 @@ $(function(){
         e.preventDefault();
     }); 
     $("a.guide").live("click", function(e){
-        var nodes = document.ATTRIBUTE_NODE;
         var stateObj = {foo: "bar"};
-        var first = url[qtde].split("#")[0];
-        var url = (e.target.href).split("/");
         var qtde = e.target.id;
-        alert(parseInt(qtde) == url.length);
-        if(parseInt(qtde) == url.length){
-            url = (url[0]).split("/")[0]+"/"+url[1];
+        var first = (e.target.href).split("#")[1];
+        var url = (e.target.href).split("/");
+        if(parseInt(qtde) == parseInt(url.length)){
+            first = url[(qtde-1)].split("#")[0]+"/"+first;
         }
-        history.pushState(stateObj, "/", url);
+        history.pushState(stateObj, "/", first);
         e.preventDefault();
     });
     
