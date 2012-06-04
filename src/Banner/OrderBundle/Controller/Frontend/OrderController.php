@@ -18,6 +18,8 @@ use Banner\OrderBundle\Document\Status;
 use Banner\OrderBundle\Document\StatusLog;
 use Banner\OrderBundle\Document\Upload;
 use Banner\OrderBundle\Document\Banner;
+use Banner\OrderBundle\Payment\PagSeguro;
+
 
 class OrderController extends BaseController
 { 
@@ -27,7 +29,8 @@ class OrderController extends BaseController
      * @Template()
      */
     public function indexAction($name="")
-    {                      
+    {        
+        $sizes = $this->mongo("BannerOrderBundle:Size")->findAllByOrder();
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
             $order->setQuantity($order->getQuantity());
@@ -48,6 +51,7 @@ class OrderController extends BaseController
                         'formUpload' => $formUpload->createView(), 
                         'formUser'   => $formUser->createView(), 
                         'order'      => $order,
+                        'sizes'      => $sizes,
                     );
      }
 
@@ -551,12 +555,12 @@ class OrderController extends BaseController
             $banner->setHeight($fBanner['height']);
             
             $banner->setWidth($fBanner['width']);
-            if(sizeof($fBanner)==3){
+            if(sizeof($fBanner)==4){
                 $banner->setPsd($fBanner['psd']);
             }
+            $banner->setValue($fBanner['value']);
             $order->addBanner($banner);
         }
-        //exit(var_dump($order));
                 
         $order->setUser($user);
         foreach ($formUpload1 as $upload1){
@@ -568,6 +572,7 @@ class OrderController extends BaseController
                 $order->addUpload($upload);
             }
         }
+        
         $order->setStatus($status);
         $order->addStatusLog($statusLog);
         $order->setName($formOrder['name']);
@@ -585,13 +590,28 @@ class OrderController extends BaseController
             ->template('pedido_novo', array('user' => $user, 'order' => $order, 'title' => 'Pedido solicitado com sucesso.'))
             ->send();
         $mail->notify('Pedido solicitado', 'O pedido '.$order->getId().' foi criado e enviado para o e-mail '.$user->getEmail());
+        
+        $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($formOrder['name'],$user);
+        $gateway = 'Banner\OrderBundle\Payment\\'.$this->mastop()->param('order.all.gateway');
+        $payment = new $gateway($order, $this->container);
+        $ret = $payment->checkStatus();
+        if($ret){
+            $pay = $order->getPayment();
+            $pay['data'] = $payment->getData();
+            $order->setPayment($pay);
+        }
+        
+        
+        $ret['title'] = 'Compra '.$order->getId();
+        $ret['content'] = $payment->process();
+        $ret['order'] = $order;
 
         //autologin
         //$token = new UsernamePasswordToken(     $user,    null,     'main',     array('ROLE_USER'));
         //$this->container->get('security.context')->setToken($token);  
         
         $msg = $msg." Pedido efetuado com sucesso! Foi enviado um e-mail.";
-        return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
+        return $this->render('BannerOrderBundle:Frontend:Order\finish.html.twig', $ret);
         
      }
      

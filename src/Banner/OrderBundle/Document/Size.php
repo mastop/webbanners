@@ -5,13 +5,23 @@ namespace Banner\OrderBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * Representa um Pedido
+ * Representa os tamanhos padrões para banners
  * 
- * @ODM\EmbeddedDocument
+ * @ODM\Document(
+ *   collection="size",
+ *   repositoryClass="Banner\OrderBundle\Document\SizeRepository"
+ * )
  */
  
-class Banner
+class Size
 {
+    /**
+     * ID do Tamanho
+     *
+     * @var string
+     * @ODM\Id(strategy="increment")
+     */
+    protected $id;
     
     /**
      * Largura
@@ -30,22 +40,12 @@ class Banner
     protected $height;
 
     /**
-     * PSD
+     * Ordem
      *
-     * @var boolean
-     * @ODM\Boolean
+     * @var int
+     * @ODM\Int
      */
-    protected $psd;
-    
-    /**
-     * Valor
-     *
-     * @var float
-     * @ODM\Float
-     */
-    protected $value;
-    
-   
+    protected $order;
 
     /**
      * Set width
@@ -87,44 +87,35 @@ class Banner
         return $this->height;
     }
 
+
+
     /**
-     * Set psd
+     * Get id
      *
-     * @param boolean $psd
+     * @return custom_id $id
      */
-    public function setPsd($psd)
+    public function getId()
     {
-        $this->psd = $psd;
+        return $this->id;
     }
 
     /**
-     * Get psd
+     * Set order
      *
-     * @return boolean $psd
+     * @param int $order
      */
-    public function getPsd()
+    public function setOrder($order)
     {
-        return $this->psd;
-    }
-
-
-    /**
-     * Set value
-     *
-     * @param float $value
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
+        $this->order = $order;
     }
 
     /**
-     * Get value
+     * Get order
      *
-     * @return float $value
+     * @return int $order
      */
-    public function getValue()
+    public function getOrder()
     {
-        return $this->value;
+        return $this->order;
     }
 }

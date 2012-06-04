@@ -1,7 +1,7 @@
 {% extends '::backend.html.twig' %}
 
 {% block title %}{{title|trans}}{% endblock %}
-{% set vars = banner.getId() ? {'id': banner.getId()} : {} %}
+{% set vars = status.getId() ? {'id': status.getId()} : {} %}
 
 {% block stylesheets %}
     {% stylesheets '@BannerCoreBundle/Resources/public/js/autocomplete/jquery.autocomplete.css' filter='?yui_css' output='static/admin/banner/autocomplete.css' %}
@@ -11,14 +11,14 @@
 
 {% block content %}
 <div class="content box grid_12 round_all">
-    <form class="block" action="{{ path('admin_core_banner_save', vars) }}" method="post" {{ form_enctype(form) }}>
+    <form class="block" action="{{ path('admin_core_status_save', vars) }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form) }}
-            <div class="block"><button class="button green m10" id="bannerEnviar"><span>Salvar</span></button> <a href="#" onclick="javascript:history.go(-1); return false;" class="button red">Cancelar</a></div>
+            <div class="block"><button class="button green m10" id="statusEnviar"><span>Salvar</span></button> <a href="#" onclick="javascript:history.go(-1); return false;" class="button red">Cancelar</a></div>
     </form>
 </div>
 {% endblock %}
 {% block javascripts %}
-    <script type="text/javascript" src="{{ url('admin_core_banner_script') }}"></script>
+    <script type="text/javascript" src="{{ url('admin_core_status_script') }}"></script>
     {% javascripts output='static/admin/js/banner.js'
                    '@BannerCoreBundle/Resources/public/js/autocomplete/jquery.autocomplete.pack.js'
                    '@BannerCoreBundle/Resources/public/js/banner.js'

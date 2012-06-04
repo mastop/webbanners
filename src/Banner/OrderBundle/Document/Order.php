@@ -152,7 +152,7 @@ class Order
      * @var object
      * @ODM\EmbedMany(targetDocument="Banner\OrderBundle\Document\Banner")
      */
-    protected $banner;
+    protected $banner = array();
     
     /**
      * Quantidade vendida

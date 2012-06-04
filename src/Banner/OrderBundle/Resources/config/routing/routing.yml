@@ -2,6 +2,10 @@ status_backend:
     resource: "@BannerOrderBundle/Controller/Backend/StatusController.php"
     type: annotation
     prefix:   /admin/status
+size_backend:
+    resource: "@BannerOrderBundle/Controller/Backend/SizeController.php"
+    type: annotation
+    prefix:   /admin/tamanho
 order_frontend:
     resource: "@BannerOrderBundle/Controller/Frontend/OrderController.php"
     type: annotation

@@ -38,6 +38,7 @@
                             R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
                             <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} /> PSD
                             + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
+                            <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{banner.value}}" />
                             <br />
                             <br />
                         </div>
@@ -58,9 +59,10 @@
                                 </li>
                             </ul>
                             <!-- /dropdown -->
-                            R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}
-                            <input class="psd" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" onclick="total()"/> PSD
-                            + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}
+                            <span>R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}</span>
+                            <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox"/> <span>PSD
+                            + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}</span>
+                            <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{mastop_param('order.all.FirstBanner')}}" />
                             <br />
                             <br />
                         </div>
@@ -69,7 +71,7 @@
                     <br />
                     <br />
                     <div id="btnnew" class="span5">
-                        <a id="novo" href="#" class="btn">+</a>
+                        <a id="novo" href="#" class="btn soma">+</a>
                     </div>
                 </div>
                 <div class="span5">
@@ -116,20 +118,12 @@
 </div>
 
 <div id="size">
-    <li id="88x31"><a class="link-size" id="NUM" href="#">
-        <span> 88</span>
+    {% for size in sizes %}
+    <li id="{{size.width}}x{{size.height}}"><a class="link-size" id="NUM" href="#">
+        <span class="tamanho">{{size.width}}</span>
         <em>x</em>
-        <span> 31</span>
+        <span class="tamanho">{{size.height}}</span>
     </a></li>
-    <li id="100x100"><a class="link-size" id="NUM" href="#">
-        <span>100</span>
-        <em>x</em>
-        <span>100</span>
-    </a></li>
-    <li id="200x504"><a class="link-size" id="NUM" href="#">
-        <span class="tamanho">200</span>
-        <em>x</em>
-        <span class="tamanho">504</span>
-    </a></li>
+    {% endfor %}
 </div>
 {% endblock %}

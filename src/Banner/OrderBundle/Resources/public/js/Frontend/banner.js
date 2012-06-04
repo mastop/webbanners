@@ -149,8 +149,10 @@ $(function(){
         banner = banner + '        </li>'
         banner = banner + '    </ul>'
         banner = banner + 'R$ '+others.toFixed(2);
-        banner = banner + '    <input class="psd" id="psd{{i}}" name=" banner['+i+'][psd] " type="checkbox" onclick="total()"/> PSD'
+        banner = banner + '    <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD'
         banner = banner + ' + R$ '+psd.toFixed(2);
+        banner = banner + ' <a href="#" class="badge badge-warning rm">-</a>'
+        banner = banner + ' <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
         banner = banner + '    <br />'
         banner = banner + '    <br />'
         banner = banner + '</div>'
@@ -218,34 +220,35 @@ $(function(){
         }
         e.preventDefault();
      });
+    $("input.soma").live("change", function(e){
+        var max = parseInt(document.getElementById("maxBanner").value);
+        var total = 0;
+        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
+        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
+        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+
+        for (i = 0 ; i < max ; i++) {
+            if(i==0){   
+                if(document.getElementById("width"+i)){
+                    total = total + first;
+                }
+            }
+            else 
+            {
+                if(document.getElementById("width"+i)){
+                    total = total + others;
+                }
+            }
+            if (document.getElementById("psd"+i) != undefined){
+                if (document.getElementById('psd'+i).checked == true){
+                    total = total + psd;
+                }
+            }
+        }
+        document.getElementById("order_total").value = total.toFixed(2);
+    });
     
 });
 
 
-function total(){
-    var max = parseInt(document.getElementById("maxBanner").value);
-    var total = 0;
-    var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
-    var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
-    var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
 
-    for (i = 0 ; i < max ; i++) {
-        if(i==0){   
-            if(document.getElementById("width"+i)){
-                total = total + first;
-            }
-        }
-        else 
-        {
-            if(document.getElementById("width"+i)){
-                total = total + others;
-            }
-        }
-        if (document.getElementById("psd"+i) != undefined){
-            if (document.getElementById('psd'+i).checked == true){
-                total = total + psd;
-            }
-        }
-    }
-    document.getElementById("order_total").value = total.toFixed(2);
-}
