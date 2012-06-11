@@ -62,7 +62,7 @@
                             <span>R$ {{mastop_param('order.all.FirstBanner') |number_format(2,'.',',')}}</span>
                             <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox"/> <span>PSD
                             + R$ {{mastop_param('order.all.PSDBanner') |number_format(2,'.',',')}}</span>
-                            <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{mastop_param('order.all.FirstBanner')}}" />
+                            <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{mastop_param('order.all.FirstBanner')|number_format(2,'.',',')}}" />
                             <br />
                             <br />
                         </div>

@@ -65,12 +65,12 @@ class PagSeguro implements PaymentInterface {
             $this->setParam('reference', $order->getId());
             $this->setParam('receiverEmail', $this->email);
             $this->setParam('currency', "BRL");
-            $i = 0;
+            $i = 1;
             foreach ($order->getBanner() as $banner) { 
-                $this->setParam('itemId'+$i, $i);
-                $this->setParam('itemDescription'+$i, "Banner tamanho ".$banner->getWidth() ."x". $banner->getHeight(). (($banner->getPSD()=="true")? "com o PSD" :""));
-                $this->setParam('itemAmount'+$i, $banner->getValue());
-                $this->setParam('itemQuantity'+$i, 1);
+                $this->setParam('itemId'.$i, $i);
+                $this->setParam('itemDescription'.$i, "Banner tamanho ".$banner->getWidth() ."x". $banner->getHeight(). (($banner->getPSD()==true)? " com o PSD" :""));
+                $this->setParam('itemAmount'.$i, number_format($banner->getValue(),2));
+                $this->setParam('itemQuantity'.$i, 1);
                 $i++;
             }
             $user = $order->getUser();
@@ -162,8 +162,11 @@ class PagSeguro implements PaymentInterface {
         $ret = '<form action="' . $this->url . '" method="post"><input type="submit" value="' . $text . '" class="button">';
 
         foreach ($this->getParams() as $name => $value) {
-            if($name == 'nome' || $name == 'descricao'){
+            $item = explode("itemDescription", $name);
+            if($name == 'senderName' || $name == 'itemDescription'){
                 $ret .= '<input type="hidden" name="' . $name . '" value="' . iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value) . '" />'; // Tira os acentos
+            }else if(count($item) > 1){
+                $ret .= '<input type="hidden" name="' . $name . '" value="' . number_format($value,2) . '" />';
             }else{
                 $ret .= '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
             }
@@ -187,7 +190,7 @@ class PagSeguro implements PaymentInterface {
          <input type="submit" class="button big" value="Ir para tela de pagamento">';
 
         foreach ($this->getParams() as $name => $value) {
-            if($name == 'nome' || $name == 'descricao'){
+            if($name == 'senderName' || $name == 'itemDescription'){
                 $ret .= '<input type="hidden" name="' . $name . '" value="' . iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value) . '" />'; // Tira os acentos
             }else{
                 $ret .= '<input type="hidden" name="' . $name . '" value="' . $value . '" />';

@@ -29,7 +29,7 @@ class OrderController extends BaseController
      * @Template()
      */
     public function indexAction($name="")
-    {        
+    {     
         $sizes = $this->mongo("BannerOrderBundle:Size")->findAllByOrder();
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
@@ -53,6 +53,7 @@ class OrderController extends BaseController
                         'order'      => $order,
                         'sizes'      => $sizes,
                     );
+        
      }
 
      /**
@@ -614,6 +615,87 @@ class OrderController extends BaseController
         return $this->render('BannerOrderBundle:Frontend:Order\finish.html.twig', $ret);
         
      }
+     /**
+     * Action para redirecionamento pós pagamento
+     * 
+     * @Route("/retorno/{gateway}/", name="order_order_return")
+     */
+    public function returnAction($gateway) {
+         
+        if(count($_POST) > 0){
+            $mail = $this->get('mastop.mailer');
+            $mail->notify(var_dump($_POST));
+            $mail->send();
+        }
+        
+        $gateway = 'Banner\OrderBundle\Payment\\' . $gateway;
+        if (class_exists($gateway)) {
+            $orderId = $gateway::getOrderId($this->getRequest());
+            $order = $this->mongo('BannerOrderBundle:Order')->findOneById((int) $orderId);
+            $order->setLink(var_dump($request));
+            $dm = $this->dm();
+            $dm->persist($order);
+            $dm->flush();
+            return array();
+            
+            if ($order && $this->getUser()->getId() == $order->getUser()->getId()) { // Pedido encontrado e pertence ao user atual
+                $payment = new $gateway($order, $this->container);
+                $ret = $payment->checkStatus();
+                if ($ret) {
+                    $pay = $order->getPayment();
+                    $pay['data'] = $payment->getData();
+                    $order->setPayment($pay);
+                    $dm = $this->dm();
+                    $dm->persist($order);
+                    $dm->flush();
+                    if ($ret['type'] == 'ok') {
+                        // Se $ret['type'] for "ok" quer dizer que o pagamento está aprovado
+                        $status = $this->mongo('BannerOrderBundle:Status')->findByName('Finalizado');
+                        $statusLog = new StatusLog();
+                        $statusLog->setStatus($status);
+                        $statusLog->setUser($order->getUser());
+
+                        $order->setStatus($status);
+                        $order->addStatusLog($statusLog);
+
+                        $dm->persist($order);
+                        $dm->flush();
+                        $orderLinkBuyer = $this->generateUrl('order_order_client');
+                        $orderLinkSeller = $this->generateUrl('order_order_designer');
+                        
+                        // Envia e-mail para comprador
+                        $mail = $this->get('mastop.mailer');
+                        $mail->to($order->getUser())
+                                ->subject('Status da Compra ' . $order->getId() . ': ' . $status->getName())
+                                ->template('pedido_status_comprador', array(
+                                    'title' => 'Status: ' . $status->getName(),
+                                    'user' => $order->getUser(),
+                                    'order' => $order,
+                                    'orderLink' => $orderLinkBuyer,
+                                    'obs' => false,
+                                ));
+                        $mail->send();
+                        // Envia e-mail para vendedor
+                        $mail = $this->get('mastop.mailer');
+                        $mail->to($order->getSeller())
+                                ->subject('Status da Venda ' . $order->getId() . ': ' . $status->getName())
+                                ->template('pedido_status_vendedor', array(
+                                    'title' => 'Status: ' . $status->getName(),
+                                    'user' => $order->getSeller(),
+                                    'order' => $order,
+                                    'orderLink' => $orderLinkSeller,
+                                    'obs' => false,
+                                ));
+                        $mail->send();
+                    }
+                    return $this->redirectFlash($this->generateUrl('user_dashboard_index') . '#myorders', $ret['msg'], $ret['type']);
+                }
+            } else {
+                return $this->redirectFlash($this->generateUrl('user_dashboard_index') . '#myorders', $ret['msg'], $ret['type']);
+            }
+        }
+        throw $this->createNotFoundException('Compra não encontrada');
+    }
      
      public function random($quantidade){ 
         $caracteresAceitos = 'abcdefghijklmnopqrstuvxwyz';

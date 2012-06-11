@@ -136,7 +136,7 @@ $(function(){
             }
         }
         
-        banner = banner + '<div id="banner{{i}}" class="span6">'
+        banner = banner + '<div id="banner'+i+'" class="span6">'
         banner = banner + '    <input type="hidden" value="0" />'
         banner = banner + '    <input class="width" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" value="728" type="number" required="required" />'
         banner = banner + '    <span class="x">x</span>'
@@ -184,7 +184,6 @@ $(function(){
             }
         }
         document.getElementById("order_total").value = total.toFixed(2);
-        e.preventDefault();
     });
      $("input.just").live("change", function(e){
         var id = e.target.id;
@@ -226,23 +225,30 @@ $(function(){
         var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
         var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
         var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+        var value = 0;
 
         for (i = 0 ; i < max ; i++) {
             if(i==0){   
                 if(document.getElementById("width"+i)){
                     total = total + first;
+                    value = first;
                 }
             }
             else 
             {
                 if(document.getElementById("width"+i)){
                     total = total + others;
+                    value = others;
                 }
             }
             if (document.getElementById("psd"+i) != undefined){
-                if (document.getElementById('psd'+i).checked == true){
+                if (document.getElementById("psd"+i).checked == true){
                     total = total + psd;
+                    value = value + psd;
                 }
+            }
+            if (document.getElementById("value"+i) != undefined){
+                document.getElementById("value"+i).value = value.toFixed(2);
             }
         }
         document.getElementById("order_total").value = total.toFixed(2);
