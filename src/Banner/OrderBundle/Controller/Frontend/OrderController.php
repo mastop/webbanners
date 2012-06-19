@@ -1,4 +1,5 @@
 <?php
+
 namespace Banner\OrderBundle\Controller\Frontend;
 
 use Mastop\SystemBundle\Controller\BaseController;
@@ -253,27 +254,27 @@ class OrderController extends BaseController
                     if($order->getDesigner()){
                         $mail->to($order->getDesigner()->getEmail())
                             ->subject('Comentário - WebBanners')
-                            ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $order->getUser()))
+                            ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $talker))
                             ->send();
                     }else{
                         $mail->notify("O pedido ".$order->getId()." está sem designer e o cliente enviou um comentário.");
                     }
                 }elseif ($talker ==  $order->getDesigner()) {
                     $order->setCunread($order->getCunread()+1);
-                    $mail->to($talker->getEmail())
+                    $mail->to($order->getUser()->getEmail())
                         ->subject('Comentário - WebBanners')
-                        ->template('comment_new', array('from' => $order->getDesigner(), 'to' => $order->getUser()))
+                        ->template('comment_new', array('from' => $talker, 'to' => $order->getUser()))
                         ->send();
                 }else{
                     $order->setDunread($order->getDunread()+1);
                     $order->setCunread($order->getCunread()+1);
-                    $mail->to($talker->getEmail())
-                        ->subject('Comentário - WebBanners')
-                        ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $talker))
-                        ->send();
-                    $mail->to($talker->getEmail())
+                    $mail->to($order->getUser()->getEmail())
                         ->subject('Comentário - WebBanners')
                         ->template('comment_new', array('to' => $order->getUser(), 'from' => $talker))
+                        ->send();
+                    $mail->to($order->getDesigner()->getEmail())
+                        ->subject('Comentário - WebBanners')
+                        ->template('comment_new', array('to' => $order->getDesigner(), 'from' => $talker))
                         ->send();
                 }
                 $dm->persist($talk);
@@ -544,7 +545,7 @@ class OrderController extends BaseController
             
             $msg = "Um email foi enviado com sua senha.";
         }
-        $status = $this->mongo('BannerOrderBundle:Status')->findOneById((int)$this->get('mastop')->param('order.all.defaultstatus'));
+        $status = $this->mongo('BannerOrderBundle:Status')->findOneById((int)$this->get('mastop')->param('order.order.defaultstatus'));
         $statusLog = new StatusLog();
         $statusLog->setStatus($status);
         $statusLog->setUser($user);
@@ -583,7 +584,7 @@ class OrderController extends BaseController
         $order->setDunread(0);
         $dm->persist($order);
         $dm->flush();
-        
+      
         $mail = $this->get('mastop.mailer');
         
         $mail->to($user->getEmail())
@@ -591,9 +592,9 @@ class OrderController extends BaseController
             ->template('pedido_novo', array('user' => $user, 'order' => $order, 'title' => 'Pedido solicitado com sucesso.'))
             ->send();
         $mail->notify('Pedido solicitado', 'O pedido '.$order->getId().' foi criado e enviado para o e-mail '.$user->getEmail());
-        
+      
         $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($formOrder['name'],$user);
-        $gateway = 'Banner\OrderBundle\Payment\\'.$this->mastop()->param('order.all.gateway');
+        $gateway = 'Banner\OrderBundle\Payment\\'.$this->mastop()->param('order.sell.gateway');
         $payment = new $gateway($order, $this->container);
         $ret = $payment->checkStatus();
         if($ret){
@@ -616,85 +617,112 @@ class OrderController extends BaseController
         
      }
      /**
-     * Action para redirecionamento pós pagamento
-     * 
-     * @Route("/retorno/{gateway}/", name="order_order_return")
+     * @Route("/retorno/{gateway}", name="order_order_return")
+     * @Template()
      */
     public function returnAction($gateway) {
-         
-        if(count($_POST) > 0){
-            $mail = $this->get('mastop.mailer');
-            $mail->notify(var_dump($_POST));
-            $mail->send();
-        }
         
         $gateway = 'Banner\OrderBundle\Payment\\' . $gateway;
-        if (class_exists($gateway)) {
-            $orderId = $gateway::getOrderId($this->getRequest());
+        
+        /*
+        $postdata = $_POST;
+        $postdata['Comando'] = 'validar';
+        $postdata['Token'] = '1518C7D1BEC84FD192862BA7070D2936';
+        */
+        $postdata = 'Comando=validar&Token=1518C7D1BEC84FD192862BA7070D2936';
+        foreach ($_POST as $key => $value){
+            $valued='';
+            if(!get_magic_quotes_gpc()){
+                $valued = addslashes($value);                
+            }
+            $postdata .= '&$key=$valued';
+        }
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "https://pagseguro.uol.com.br/pagseguro-ws/checkout/NPI.jhtml");
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 20);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = trim(curl_exec($curl));
+        curl_close($curl);
+        
+        $mail = $this->get('mastop.mailer');
+
+        $mail->notify('pagseguro',$result);
+        
+        if ( $result == "VERIFICADO" ){
+            
+            $orderId = $_POST['Referencia'];
             $order = $this->mongo('BannerOrderBundle:Order')->findOneById((int) $orderId);
-            $order->setLink(var_dump($request));
+            $order->setLink($this->generateUrl("order_order_return",array("gateway"=>$this->mastop()->param('order.sell.gateway'))));
+            $status = $this->mongo('BannerOrderBundle:Status')->findOneByName($_POST['StatusTransacao']);
+            if(!$status){
+                $status = $this->mongo('BannerOrderBundle:Status')->findById((int)$this->mastop()->param('order.order.othersstatus'));
+            }
+            
+            $mail = $this->get('mastop.mailer');
+
+            $mail->to($order->getUser()->getEmail())
+                ->subject('Pedido solicitado com Sucesso')
+                ->template(trim($status->getName()), array('user' => $order->getUser(), 'order' => $order, 'title' => 'Pedido solicitado com sucesso.'))
+                ->send();
+            $mail->notify('Pedido solicitado', 'O pedido '.$order->getId().' foi criado e enviado para o e-mail '.$order->getUser()->getEmail());
+            
+            $order->setStatus($status);
+            $statusLog = new StatusLog();
+            $statusLog->setStatus($status);
+            $order->addStatusLog($statusLog);
+            $order->setPayment($_POST);
             $dm = $this->dm();
             $dm->persist($order);
             $dm->flush();
-            return array();
-            
-            if ($order && $this->getUser()->getId() == $order->getUser()->getId()) { // Pedido encontrado e pertence ao user atual
-                $payment = new $gateway($order, $this->container);
-                $ret = $payment->checkStatus();
-                if ($ret) {
-                    $pay = $order->getPayment();
-                    $pay['data'] = $payment->getData();
-                    $order->setPayment($pay);
-                    $dm = $this->dm();
-                    $dm->persist($order);
-                    $dm->flush();
-                    if ($ret['type'] == 'ok') {
-                        // Se $ret['type'] for "ok" quer dizer que o pagamento está aprovado
-                        $status = $this->mongo('BannerOrderBundle:Status')->findByName('Finalizado');
-                        $statusLog = new StatusLog();
-                        $statusLog->setStatus($status);
-                        $statusLog->setUser($order->getUser());
+            return $this->redirectFlash($this->generateUrl('_home'), "PagSeguro.");
+          
+        } else if ($result =="FALSO"){  
+            $mail = $this->get('mastop.mailer');
 
-                        $order->setStatus($status);
-                        $order->addStatusLog($statusLog);
-
-                        $dm->persist($order);
-                        $dm->flush();
-                        $orderLinkBuyer = $this->generateUrl('order_order_client');
-                        $orderLinkSeller = $this->generateUrl('order_order_designer');
-                        
-                        // Envia e-mail para comprador
-                        $mail = $this->get('mastop.mailer');
-                        $mail->to($order->getUser())
-                                ->subject('Status da Compra ' . $order->getId() . ': ' . $status->getName())
-                                ->template('pedido_status_comprador', array(
-                                    'title' => 'Status: ' . $status->getName(),
-                                    'user' => $order->getUser(),
-                                    'order' => $order,
-                                    'orderLink' => $orderLinkBuyer,
-                                    'obs' => false,
-                                ));
-                        $mail->send();
-                        // Envia e-mail para vendedor
-                        $mail = $this->get('mastop.mailer');
-                        $mail->to($order->getSeller())
-                                ->subject('Status da Venda ' . $order->getId() . ': ' . $status->getName())
-                                ->template('pedido_status_vendedor', array(
-                                    'title' => 'Status: ' . $status->getName(),
-                                    'user' => $order->getSeller(),
-                                    'order' => $order,
-                                    'orderLink' => $orderLinkSeller,
-                                    'obs' => false,
-                                ));
-                        $mail->send();
-                    }
-                    return $this->redirectFlash($this->generateUrl('user_dashboard_index') . '#myorders', $ret['msg'], $ret['type']);
-                }
-            } else {
-                return $this->redirectFlash($this->generateUrl('user_dashboard_index') . '#myorders', $ret['msg'], $ret['type']);
-            }
+            $mail->notify('Pedido solicitado com retorno errado', 'Retorno com erro para o pedido ');
         }
-        throw $this->createNotFoundException('Compra não encontrada');
+        return $this->redirectFlash($this->generateUrl('_home'), "Pedido efetuado, estamos aguardando a resposta do PagSeguro.");
+    }
+     /**
+     * @Route("/form", name="order_order_form")
+     * @Template()
+     */
+    public function formAction() {
+             
+        $array = array();
+        $array[] = array("nome"=>"VendedorEmail","valor"=>"leonardo@mastop.com.br");   
+        $array[] = array("nome"=>"TransacaoID","valor"=>"823C2F36AED24836B0518C8399857D4F");   
+        $array[] = array("nome"=>"Referencia","valor"=>"1");   
+        $array[] = array("nome"=>"Extras","valor"=>"0,00");   
+        $array[] = array("nome"=>"TipoFrete","valor"=>"FR");   
+        $array[] = array("nome"=>"ValorFrete","valor"=>"0,00");   
+        $array[] = array("nome"=>"DataTransacao","valor"=>"12/06/2012 15:00:18");   
+        $array[] = array("nome"=>"TipoPagamento","valor"=>"Boleto");   
+        $array[] = array("nome"=>"StatusTransacao","valor"=>"Paga");   
+        $array[] = array("nome"=>"CliNome","valor"=>"Leonardo Mastop");   
+        $array[] = array("nome"=>"CliNome","valor"=>"Leonardo Mastop");   
+        $array[] = array("nome"=>"CliEmail","valor"=>"leo@mastop.com.br");   
+        $array[] = array("nome"=>"CliEndereco","valor"=>"RUA AIAMOPO LOBO");   
+        $array[] = array("nome"=>"CliNumero","valor"=>"326");   
+        $array[] = array("nome"=>"CliBairro","valor"=>"Parque Casa de Pedra");   
+        $array[] = array("nome"=>"CliCidade","valor"=>"SAO PAULO");   
+        $array[] = array("nome"=>"CliEstado","valor"=>"SP");   
+        $array[] = array("nome"=>"CliCEP","valor"=>"02320140");   
+        $array[] = array("nome"=>"CliTelefone","valor"=>"11 22035195");   
+        $array[] = array("nome"=>"NumItens","valor"=>"1");   
+        $array[] = array("nome"=>"Parcelas","valor"=>"1");   
+        $array[] = array("nome"=>"ProdID_1","valor"=>"1");   
+        $array[] = array("nome"=>"ProdDescricao_1","valor"=>"Banner tamanho 728x60");   
+        $array[] = array("nome"=>"ProdValor_1","valor"=>"30,00");   
+        $array[] = array("nome"=>"ProdQuantidade_1","valor"=>"1");   
+        $array[] = array("nome"=>"ProdFrete_1","valor"=>"0,00");   
+        $array[] = array("nome"=>"ProdExtras_1","valor"=>"0,00");   
+        return array("parameters"=>$array);
     }
      
      public function random($quantidade){ 

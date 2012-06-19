@@ -44,7 +44,7 @@ class PagSeguro implements PaymentInterface {
     protected $order;
     protected $container;
     protected $email= "leonardo@mastop.com.br";
-    protected $token = "7A78546703FB45A0AD48BF9FF59EDA5F";
+    protected $token = "1518C7D1BEC84FD192862BA7070D2936";
     protected $params = array(); // Parâmetros do Moip
     protected $data = array(); // Dados específicos do Pagamento
     protected $url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html';

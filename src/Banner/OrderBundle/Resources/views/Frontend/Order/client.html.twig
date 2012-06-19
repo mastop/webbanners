@@ -45,7 +45,7 @@
                                     </a>
                                     {% endif %}
                                 </td>       
-                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
+                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                                 <td>{{order.formatCreated()}}</td>
                                 <td>{{order.formatExpires()}}</td>
                             </tr>

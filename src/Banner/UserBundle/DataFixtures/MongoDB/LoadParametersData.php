@@ -109,7 +109,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $manager->flush();
         
         $param = new Parameters();
-        $param->setName('all');
+        $param->setName('order');
         $param->setTitle('Pedido');
         $param->setDesc('Configurações para pedido no site');
         $param->setBundle('order');
@@ -126,12 +126,21 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $param->addChildren($child);
 
         $child = new Children();
+        $child->setName('othersstatus');
+        $child->setTitle('Status Outros');
+        $child->setDesc('Qual Status que o pedido virá ao ser criado.');
+        $child->setValue("8");
+        $child->setFieldtype('text');
+        $child->setOrder(1);
+        $param->addChildren($child);
+
+        $child = new Children();
         $child->setName('BannersOrder');
         $child->setTitle('Máximo de Banners');
         $child->setDesc('Máximo de Banners que podem ser solicitados por pedido.');
         $child->setValue(10);
         $child->setFieldtype('number');
-        $child->setOrder(1);
+        $child->setOrder(2);
         $param->addChildren($child);
 
         $child = new Children();
@@ -140,7 +149,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setDesc('Máximo de uploads por pedido.');
         $child->setValue(10);
         $child->setFieldtype('number');
-        $child->setOrder(2);
+        $child->setOrder(3);
         $param->addChildren($child);
 
         $child = new Children();
@@ -149,7 +158,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setDesc('Valor para o 1º banner.');
         $child->setValue(30.00);
         $child->setFieldtype('number');
-        $child->setOrder(3);
+        $child->setOrder(4);
         $param->addChildren($child);
 
         $child = new Children();
@@ -158,7 +167,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setDesc('Valor para os outros banners.');
         $child->setValue(20.00);
         $child->setFieldtype('number');
-        $child->setOrder(3);
+        $child->setOrder(5);
         $param->addChildren($child);
 
         $child = new Children();
@@ -167,7 +176,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setDesc('Valor para o PSD do Banner.');
         $child->setValue(5.00);
         $child->setFieldtype('number');
-        $child->setOrder(3);
+        $child->setOrder(6);
         $param->addChildren($child);
         
         $manager->persist($param);

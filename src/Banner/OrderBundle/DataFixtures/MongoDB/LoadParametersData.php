@@ -42,7 +42,7 @@ class LoadParametersData extends AbstractFixture implements OrderedFixtureInterf
 
     public function load(ObjectManager $manager) {
         $param = new Parameters();
-        $param->setName('all');
+        $param->setName('sell');
         $param->setTitle('Vendas');
         $param->setDesc('Configurações para o módulo de vendas');
         $param->setBundle('order');
@@ -65,30 +65,6 @@ class LoadParametersData extends AbstractFixture implements OrderedFixtureInterf
         $child->setFieldtype('choice');
         $child->setOpts(array('choices' => array('PagSeguro' => 'PagSeguro', 'Braspag' => 'Braspag', 'Moip' => 'Moip')));
         $child->setOrder(1);
-        $param->addChildren($child);
-        
-        $child = new Children();
-        $child->setName('voucherstatus');
-        $child->setTitle('Id do status para liberar voucher');
-        $child->setDesc('Digite os ids dos status que a venda precisa ter para o sistema liberar o Voucher para o comprador (Separados por virgula)');
-        $child->setValue(4);
-        $child->setOrder(2);
-        $param->addChildren($child);
-        
-        $child = new Children();
-        $child->setName('releasestatus');
-        $child->setTitle('Id do status para liberar pagamento');
-        $child->setDesc('Digite os ids dos status que a venda precisa ter para o sistema liberar o pagamento ao vendedor (Separados por virgula)');
-        $child->setValue(7);
-        $child->setOrder(3);
-        $param->addChildren($child);
-        
-        $child = new Children();
-        $child->setName('refundstatus');
-        $child->setTitle('Id do status para permitir reembolso');
-        $child->setDesc('Digite os ids dos status que a venda precisa ter permitir que o comprador solicite reembolso (Separados por virgula)');
-        $child->setValue(4);
-        $child->setOrder(4);
         $param->addChildren($child);
         
         $manager->persist($param);
