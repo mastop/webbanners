@@ -1,0 +1,19 @@
+{% extends '::backend.html.twig' %}
+
+{% block content %}
+
+{% set vars = status.getId() ? {'id': status.getId()} : {} %}
+
+<div class="spam6">
+    <div class="grid_7 prefix_1 alpha">
+        <form class="block" action="{{ path('admin_order_discount_form',vars) }}" method="post" {{ form_enctype(form) }}>
+        
+        {{ form_widget(form) }}
+        
+        {{ form_rest(form) }}
+        
+                <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

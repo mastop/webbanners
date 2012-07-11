@@ -6,12 +6,12 @@
 <title>{% block title title|default(mastop_param('system.site.name')) %}</title>
 <style>
 a {
-  color: #2072A5;
+  color: #f78119;
   text-decoration: none;
   font-weight: 700;
 }
 a:hover {
-  color: #D87D08;
+  color: #f78119;
 }
 b {color: #666;}
 body {
@@ -28,12 +28,12 @@ body {
         <td width="300">
                 <a href="{{url('_home')}}" name="header_logo" title="{{mastop_param('system.site.name')}} - {{mastop_param('system.site.slogan')}}"><img src="{{asset(url~'/images/logo.png')}}" alt="{{mastop_param('system.site.name')}}" style="border:0px;"/></a></td>
         <td width="360">
-                <h1 style="color:#7a9e24;font-size:18pt;padding-top:40px; margin: 0 0 30px 10px; font-family: Arial, Verdana">
+                <h1 style="color:#666;font-size:18pt;padding-top:40px; margin: 0 0 30px 10px; font-family: Arial, Verdana">
                         {{title|default(mastop_param('system.site.slogan'))}}</h1>
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="background-color:#7A9D24">
+        <td colspan="2" style="background-color:#e6e6e6">
             <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
                             <tr>
@@ -41,7 +41,7 @@ body {
                             </tr>
                             <tr>
                                 <td style="width:10px; font-size:2pt;">&nbsp;</td>
-                                <td style="background-color:White; padding: 15px; color: #666">
+                                <td style="background-color:White; padding: 15px; color: #000">
                                         {#Conteúdo#}
                                         {% block content null %}
                                         {#/Conteúdo#}
@@ -57,7 +57,7 @@ body {
     </tr>
     {%if dealSpecial is defined %}
     <tr>
-        <td colspan="2" style="background-color:#d87d08">
+        <td colspan="2" style="background-color:#efefef ">
             <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
                             <tr>
@@ -83,7 +83,7 @@ body {
     </tr>
     {% endif %}
     <tr>
-        <td colspan="2" style="background-color:#15567e">
+        <td colspan="2" style="background-color:#efefef">
             <table width="100%" cellspacing="0" cellpadding="0">
                     <tbody>
                             <tr>

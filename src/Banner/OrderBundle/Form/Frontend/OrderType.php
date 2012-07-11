@@ -9,9 +9,10 @@ class OrderType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('name', 'text', array('label' => 'Nome do Projeto', 'attr'  => array('style' => 'width: 3')))
-                ->add('link', 'textarea', array('label' => 'Link', 'attr'  => array('style' => 'width: 3')))
-                ->add('notes', 'textarea', array('label' => 'Anotações', 'attr'  => array('style' => 'width: 3')))
+                ->add('name', 'text', array('label' => 'Nome do Projeto'))
+                ->add('link', 'text', array('label' => 'Para qual pagina o seu banner irá direcionar?'))
+                ->add('text', 'textarea', array('label' => 'Qual texto você gostaria que aparecesse no Banner?'))
+                ->add('notes', 'textarea', array('label' => 'Digite as instruções que gostaria que os designers seguisse.'))
                 ->add('quantity', 'hidden')
                 ->add('total','money',array('label'=>'Total', 'currency'=>'R$', 'read_only'=>'read_only'))
             ;

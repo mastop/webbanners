@@ -4,7 +4,7 @@ img.disab {
     filter: alpha(opacity=50);   
 }
 ul.size{
-    left: -100px;
+    left: -150px;
     width:10px;
     padding:0;
     list-style:none;
@@ -28,16 +28,16 @@ a.link-size:hover {
     text-align:center;
     font-style:normal;
     padding:3px 3px 3px;
-    background-color: lightgrey !important;
+    background-color: #CCCCCC !important;
     
-}
-li{
-    padding:6px 7px 7px;
 }
 span.tamanho {
 	float:left;
 	width:35px;
 	text-align:center;
+}
+span.price {
+    margin-left: 10px;
 }
 em {
 	float:left;
@@ -49,17 +49,82 @@ em {
     float:left !important;
 }
 a.selectButton {            
-    background: none repeat scroll 0 0 #DDDDDD;
+    background: none repeat scroll 0 0 #CCCCCC;
     position: relative;
     right: 0;
-    left:-10px;    
-    height: 17px;
+    height: 12px;
     top: 0;
     width: 15px;    
+    border-radius: 0px 8px 8px 0px !important; 
     outline: medium none;
     text-decoration: underline;
-    margin: -5px 0 0 0 !important;
+    margin: 0 !important;
+    border: 1px;
+}
+a.selectButton:hover {            
+    background: #DDDDDD !important;
 }
 #size {
-    visibility: hidden;
+    width: 0px;
+    height: 0px;
+    display:none;
+}
+.required{
+    font-weight: 600;
+    font-size: 13px;    
+}
+input, textArea{
+    width: 500px; 
+    border-radius: 8px !important;
+    box-shadow: 1px 1px 3px #BBBBBB inset !important;
+}
+.background{
+    background-color: #EEEEEE;
+    width: 936px;
+    float: right;
+    border-radius: 8px;
+}
+.order li.active a{
+    background-color: #EEEEEE !important;
+    border: 0px
+}
+.order li.active a:hover{
+    border: 0px;
+}
+.order li a{
+    width: 120px;
+}
+.order li a:hover{
+    border: 0px;
+}
+.order li{
+    margin-right: -30px;
+    border: 0px
+}
+.order{
+    border-right: none !important;
+}
+.pack{
+    height: 50px;
+    width: 550px;
+}
+#pack1{
+    background-color: yellow;
+    color: blue;
+}
+#pack2{
+    background-color: orange;
+    color:purple;
+}
+#pack3{
+    background-color: red;
+    color: white;
+}
+#pack4{
+    background-color: purple;
+    color: orange;
+}
+#pack5{
+    background-color: blue;
+    color: yellow;
 }

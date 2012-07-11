@@ -16,69 +16,67 @@
 {% endblock%}
 
 {% block content %}
-<div class="span12">
-    <div class="tabbable">
-        <ul class="nav nav-tabs">
-            <li{% if(pgatual=="aberto")%} class="active"{% endif %}><a href="#aberto" id="5" class="guide" data-toggle="tab">Em aberto</a></li>
-            <li{% if(pgatual=="finalizados")%} class="active"{% endif %}><a href="#finalizados" id="5" class="guide" data-toggle="tab">Finalizados</a></li>
-        </ul>
-        <div class="tab-content">
-            <!-- Em aberto -->
-            <div class="tab-pane active" id="aberto">
-                <div class="container-fluid">
-                    <div class="row-fluid">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>#</th>
-                                <th></th>
-                                <th>Descrição</th>
-                                <th>Dt.Criação</th>
-                                <th>Expira</th>
-                            </tr>
-                {% for order in orders %}
-                            <tr>
-                                <td>{{order.id}}</td>
-                                <td>
-                                    {%if (order.cunread > 0) %}
-                                    <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
-                                        <span class="badge badge-important">{{order.cunread}}</span>
-                                    </a>
-                                    {% endif %}
-                                </td>       
-                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
-                                <td>{{order.formatCreated()}}</td>
-                                <td>{{order.formatExpires()}}</td>
-                            </tr>
-                {% else %}
-                                <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-                {% endfor %} 
-                        </table>
-                    </div>
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li{% if(pgatual=="aberto")%} class="active"{% endif %}><a href="#aberto" id="5" class="guide" data-toggle="tab">Em aberto</a></li>
+        <li{% if(pgatual=="finalizados")%} class="active"{% endif %}><a href="#finalizados" id="5" class="guide" data-toggle="tab">Finalizados</a></li>
+    </ul>
+    <div class="tab-content">
+        <!-- Em aberto -->
+        <div class="tab-pane active" id="aberto">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>Descrição</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>
+                                {%if (order.cunread > 0) %}
+                                <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
+                                    <span class="badge badge-important">{{order.cunread}}</span>
+                                </a>
+                                {% endif %}
+                            </td>       
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
                 </div>
             </div>
-            <!-- Finalizados -->
-            <div class="tab-pane" id="finalizados">
-                <div class="container-fluid">
-                    <div class="row-fluid">
-                        <table class="table table-striped">
-                            <tr>
-                                <th>#</th>
-                                <th>Descrição</th>
-                                <th>Dt.Criação</th>
-                                <th>Expira</th>
-                            </tr>
-                {% for order in finals %}
-                            <tr>
-                                <td>{{order.id}}</td>
-                                <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
-                                <td>{{order.formatCreated()}}</td>
-                                <td>{{order.formatExpires()}}</td>
-                            </tr>
-                {% else %}
-                                <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-                {% endfor %} 
-                        </table>
-                    </div>
+        </div>
+        <!-- Finalizados -->
+        <div class="tab-pane" id="finalizados">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Descrição</th>
+                            <th>Dt.Criação</th>
+                            <th>Expira</th>
+                        </tr>
+            {% for order in finals %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
+                            <td>{{order.formatCreated()}}</td>
+                            <td>{{order.formatExpires()}}</td>
+                        </tr>
+            {% else %}
+                            <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
+            {% endfor %} 
+                    </table>
                 </div>
             </div>
         </div>

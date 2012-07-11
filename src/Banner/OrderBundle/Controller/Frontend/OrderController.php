@@ -30,7 +30,7 @@ class OrderController extends BaseController
      * @Template()
      */
     public function indexAction($name="")
-    {     
+    {   
         $sizes = $this->mongo("BannerOrderBundle:Size")->findAllByOrder();
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
@@ -53,6 +53,7 @@ class OrderController extends BaseController
                         'formUser'   => $formUser->createView(), 
                         'order'      => $order,
                         'sizes'      => $sizes,
+                        'color'      => 'vermelho'
                     );
         
      }
@@ -82,9 +83,10 @@ class OrderController extends BaseController
                     $banner->setHeight($fBanner['height']);
 
                     $banner->setWidth($fBanner['width']);
-                    if(sizeof($fBanner)==3){
+                    if(sizeof($fBanner)==4){
                         $banner->setPsd($fBanner['psd']);
                     }
+                    $banner->setValue($fBanner['value']);
                     $order->addBanner($banner);
                 }
             }
@@ -93,11 +95,15 @@ class OrderController extends BaseController
                             ->subject('Alteração de pedido - WebBanners')
                             ->template('pedido_alteracao', array('user' => $order->getUser(),'order'=>$order))
                             ->send();
+                        if($order->getDesigner()){
                         $mail->to($order->getDesigner()->getEmail())
                             ->subject('Alteração de pedido - WebBanners')
                             ->template('pedido_alteracao', array('user' => $order->getDesigner(),'order'=>$order))
                             ->send();
-                        $mail->notify('Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer '.$order->getDesigner()->getCode().'-'.$order->getDesigner()->getName());
+                            $mail->notify('Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer '.$order->getDesigner()->getCode().'-'.$order->getDesigner()->getName());
+                        }else{
+                            $mail->notify('Alteração de pedido'.'Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer não foi escolhido');
+                        }
             $dm->persist($order);
             $dm->flush();
             
@@ -480,6 +486,7 @@ class OrderController extends BaseController
      */
     public function saveAction(Request $request){
         
+        
         $msg = "";
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
             
@@ -487,6 +494,8 @@ class OrderController extends BaseController
         $formOrder = $request->request->get('order');
         $formBanner = $request->request->get('banner');
         $formUpload = $request->request->get('upload');
+
+        
         
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
@@ -563,6 +572,51 @@ class OrderController extends BaseController
             $banner->setValue($fBanner['value']);
             $order->addBanner($banner);
         }
+        if(isset($formOrder['pacote'])==true){
+            if($formOrder['pacote'] == 1 || $formOrder['pacote'] == 2  || $formOrder['pacote'] == 3 ||
+                $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                $banner = new Banner();
+                $banner->setHeight(100);
+                $banner->setWidth(500);
+                $banner->setPsd(true);
+                $banner->setValue(30);
+                $order->addBanner($banner);
+                if($formOrder['pacote'] == 2  || $formOrder['pacote'] == 3 ||
+                    $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                    $banner = new Banner();
+                    $banner->setHeight(200);
+                    $banner->setWidth(500);
+                    $banner->setPsd(true);
+                    $banner->setValue(30);
+                    $order->addBanner($banner);
+                    if( $formOrder['pacote'] == 3 ||
+                        $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                        $banner = new Banner();
+                        $banner->setHeight(300);
+                        $banner->setWidth(500);
+                        $banner->setPsd(true);
+                        $banner->setValue(30);
+                        $order->addBanner($banner);
+                        if( $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                            $banner = new Banner();
+                            $banner->setHeight(300);
+                            $banner->setWidth(500);
+                            $banner->setPsd(true);
+                            $banner->setValue(30);
+                            $order->addBanner($banner);
+                            if( $formOrder['pacote'] == 5 ){
+                                $banner = new Banner();
+                                $banner->setHeight(300);
+                                $banner->setWidth(500);
+                                $banner->setPsd(true);
+                                $banner->setValue(30);
+                                $order->addBanner($banner);
+                            }
+                        }
+                    }
+                }
+            }
+        }
                 
         $order->setUser($user);
         foreach ($formUpload1 as $upload1){
@@ -578,8 +632,12 @@ class OrderController extends BaseController
         $order->setStatus($status);
         $order->addStatusLog($statusLog);
         $order->setName($formOrder['name']);
-        $order->setNotes($formOrder['notes']);
         $order->setQuantity($formOrder['quantity']);
+        $order->setText($formOrder['text']);
+        $order->setLink($formOrder['link']);
+        $order->setNotes($formOrder['notes']);
+        $order->setRush(isset($formOrder['rush']) ? "rush": "normal");
+        $order->setVrush($this->get('mastop')->param('order.order.Rush'));
         $order->setCunread(0);
         $order->setDunread(0);
         $dm->persist($order);
@@ -635,7 +693,7 @@ class OrderController extends BaseController
             if(!get_magic_quotes_gpc()){
                 $valued = addslashes($value);                
             }
-            $postdata .= '&$key=$valued';
+            $postdata .= "&$key=$valued";
         }
 
         $curl = curl_init();
@@ -667,7 +725,7 @@ class OrderController extends BaseController
 
             $mail->to($order->getUser()->getEmail())
                 ->subject('Pedido solicitado com Sucesso')
-                ->template(trim($status->getName()), array('user' => $order->getUser(), 'order' => $order, 'title' => 'Pedido solicitado com sucesso.'))
+                ->template(trim($status->getName()), array('user' => $order->getUser(), 'order' => $order, 'title' => 'Pedido solicitado com sucesso, está com status.'.$_POST['StatusTransacao']))
                 ->send();
             $mail->notify('Pedido solicitado', 'O pedido '.$order->getId().' foi criado e enviado para o e-mail '.$order->getUser()->getEmail());
             
@@ -676,23 +734,19 @@ class OrderController extends BaseController
             $statusLog->setStatus($status);
             $order->addStatusLog($statusLog);
             $order->setPayment($_POST);
+            
             $dm = $this->dm();
             $dm->persist($order);
             $dm->flush();
             return $this->redirectFlash($this->generateUrl('_home'), "PagSeguro.");
-          
-        } else if ($result =="FALSO"){  
-            $mail = $this->get('mastop.mailer');
-
-            $mail->notify('Pedido solicitado com retorno errado', 'Retorno com erro para o pedido ');
         }
         return $this->redirectFlash($this->generateUrl('_home'), "Pedido efetuado, estamos aguardando a resposta do PagSeguro.");
     }
      /**
-     * @Route("/form", name="order_order_form")
+     * @Route("/form/{color}", name="order_order_form",  defaults={"color" = "cinza"})
      * @Template()
      */
-    public function formAction() {
+    public function formAction($color="cinza") {
              
         $array = array();
         $array[] = array("nome"=>"VendedorEmail","valor"=>"leonardo@mastop.com.br");   
@@ -722,7 +776,28 @@ class OrderController extends BaseController
         $array[] = array("nome"=>"ProdQuantidade_1","valor"=>"1");   
         $array[] = array("nome"=>"ProdFrete_1","valor"=>"0,00");   
         $array[] = array("nome"=>"ProdExtras_1","valor"=>"0,00");   
-        return array("parameters"=>$array);
+        return array("parameters"=>$array, "color"=>$color);
+    }
+    
+     /**
+     * @Route("/pay/{id}", name="order_order_pay")
+     * @Template()
+     */
+    public function payAction($id){
+        $order = $this->mongo('BannerOrderBundle:Order')->findById($id);
+        $gateway = 'Banner\OrderBundle\Payment\\'.$this->mastop()->param('order.sell.gateway');
+        $payment = new $gateway($order, $this->container);
+        $ret = $payment->checkStatus();
+        if($ret){
+            $pay = $order->getPayment();
+            $pay['data'] = $payment->getData();
+            $order->setPayment($pay);
+        }
+        
+        
+        $ret['title'] = 'Compra '.$order->getId();
+        $ret['content'] = $payment->process();
+        $ret['order'] = $order;
     }
      
      public function random($quantidade){ 
@@ -736,4 +811,5 @@ class OrderController extends BaseController
         }
         return $random;
      }
+     
 }

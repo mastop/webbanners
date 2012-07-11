@@ -1,5 +1,36 @@
 $(function(){
-    $('a[rel*=facebox]').facebox() 
+    
+    $('#pedidobanner').submit(function(){
+        var checked = false;
+        var elems = document.getElementsByName("pacote");
+        if(elems.length > 0){
+            // vamos percorrer os elementos encontrados
+            for(var i = 0; i < elems.length; i++){
+                // vamos verificar se este radio button está selecionado
+                if(elems[i].checked){
+                    checked = true;
+                }
+            }
+        }
+        alert(checked);
+        if(checked != true){
+            if($('#width0').val() == ''){
+                document.getElementById('width0').style.backgroundColor = '#FF0000';
+            }
+            if($('#height0').val() == ''){
+                document.getElementById('height0').style.backgroundColor = '#FF0000';
+            }
+            var top = $('#pack1').position().top;
+            $(window).scrollTop( top );
+            $('#0').popover({ title:"Tamanho dos banners", content: "Digite um tamanho de banner ou selecione algum dos pacotes.", type:"warning"})
+            $('#0').popover('show');
+            if($('#height0').val() == '' && $('#width0').val() == ''){
+                return false;
+            }
+        }
+        return true;
+    });
+    $('a[rel*=facebox]').facebox();
     $("a.rm").live("click", function(e){
         $(this).parent().remove();
         var i = 0;
@@ -130,6 +161,7 @@ $(function(){
         var total = 0;
         var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
         var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
+        var rush = parseFloat(document.getElementById("rush").firstChild.nodeValue);
         for (i = 0 ; i < max ; i++) {
             if (document.getElementById("width"+i) == undefined){
                 break;
@@ -138,9 +170,9 @@ $(function(){
         
         banner = banner + '<div id="banner'+i+'" class="span6">'
         banner = banner + '    <input type="hidden" value="0" />'
-        banner = banner + '    <input class="width" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" value="728" type="number" required="required" />'
+        banner = banner + '    <input class="width" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" value="728" type="text" required="required" />'
         banner = banner + '    <span class="x">x</span>'
-        banner = banner + '    <input class="height" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" value="60" type="number" required="required"/>'
+        banner = banner + '    <input class="height" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" value="60" type="text" required="required"/>'
         banner = banner + '    <ul class="nav nav-pills banner">'
         banner = banner + '        <li class="dropdown" id="menu1">'
         banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
@@ -148,9 +180,9 @@ $(function(){
         banner = banner + '            </ul>'
         banner = banner + '        </li>'
         banner = banner + '    </ul>'
-        banner = banner + 'R$ '+others.toFixed(2);
+        banner = banner + '<span class="price">  R$ '+others.toFixed(2)+'</span>';
         banner = banner + '    <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD'
-        banner = banner + ' + R$ '+psd.toFixed(2);
+        banner = banner + ' <span class="price"> + R$ '+psd.toFixed(2)+'</span>';
         banner = banner + ' <a href="#" class="badge badge-warning rm">-</a>'
         banner = banner + ' <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
         banner = banner + '    <br />'
@@ -166,24 +198,28 @@ $(function(){
         i = 0
         var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
         for (i = 0 ; i < max ; i++) {
-            if(i==0){   
-                if(document.getElementById("width"+i)){
-                    total = total + first;
-                }
-            }
-            else 
-            {
-                if(document.getElementById("width"+i)){
-                    total = total + others;
-                }
-            }
-            if (document.getElementById("psd"+i) != undefined){
-                if (document.getElementById('psd'+i).checked == true){
-                    total = total + psd;
+            if(document.getElementById("width"+i)){
+                if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
+                    if(i==0){   
+                        total = total + first;
+                    }
+                    else 
+                    {
+                        total = total + others;
+                    }
+                    if (document.getElementById("psd"+i) != undefined){
+                        if (document.getElementById('psd'+i).checked == true){
+                            total = total + psd;
+                        }
+                    }
                 }
             }
         }
+        if (document.getElementById("order_rush").checked == true){   
+            total = total + rush;
+        }
         document.getElementById("order_total").value = total.toFixed(2);
+        e.preventDefault();
     });
      $("input.just").live("change", function(e){
         var id = e.target.id;
@@ -191,12 +227,14 @@ $(function(){
             var justific = "Justificativa: <textarea id=just('"+id+"') name='just["+id+"]' required='required'></textarea> <br />" ;
             $('#just'+id).append(justific);
         }
+        e.preventDefault();
     });
      $("input.rmjust").live("change", function(e){
         var id = e.target.id;
         if(document.getElementById("just"+id) != undefined){
             $('#just'+id).html("");
         }  
+        e.preventDefault();
      });
      $("a.link-size").live("click", function(e){
         var id = $(this).attr("id");
@@ -204,6 +242,8 @@ $(function(){
         var size = value.split('x');
         document.getElementById("width"+id).value = size[0];
         document.getElementById("height"+id).value = size[1];
+        document.getElementById("width"+id).style.backgroundColor = "#FFF";
+        document.getElementById("height"+id).style.backgroundColor = "#FFF";
         e.preventDefault();
      });
      $("a.selectButton").live("mouseover", function(e){
@@ -225,33 +265,37 @@ $(function(){
         var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
         var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
         var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
+        var rush = parseFloat(document.getElementById("rush").firstChild.nodeValue);
         var value = 0;
 
         for (i = 0 ; i < max ; i++) {
-            if(i==0){   
-                if(document.getElementById("width"+i)){
-                    total = total + first;
-                    value = first;
-                }
-            }
-            else 
-            {
-                if(document.getElementById("width"+i)){
-                    total = total + others;
-                    value = others;
-                }
-            }
-            if (document.getElementById("psd"+i) != undefined){
-                if (document.getElementById("psd"+i).checked == true){
-                    total = total + psd;
-                    value = value + psd;
+            if(document.getElementById("width"+i)){
+                if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
+                    if(i==0){   
+                        total = total + first;
+                        value = first;
+                    }
+                    else 
+                    {
+                        total = total + others;
+                        value = others;
+                    }
+                    if (document.getElementById("psd"+i) != undefined){
+                        if (document.getElementById("psd"+i).checked == true){
+                                total = total + psd;
+                                value = value + psd;
+                        }
+                    }
                 }
             }
             if (document.getElementById("value"+i) != undefined){
                 document.getElementById("value"+i).value = value.toFixed(2);
             }
         }
-        document.getElementById("order_total").value = total.toFixed(2);
+        if (document.getElementById("order_rush").checked == true){   
+            total = total + rush;
+       }
+       document.getElementById("order_total").value = total.toFixed(2);
     });
     
 });

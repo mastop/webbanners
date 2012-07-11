@@ -36,6 +36,14 @@ class Banner
      * @ODM\Boolean
      */
     protected $psd;
+
+    /**
+     * Foi pago?
+     *
+     * @var boolean
+     * @ODM\Boolean
+     */
+    protected $paid;
     
     /**
      * Valor
@@ -126,5 +134,25 @@ class Banner
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean $paid
+     */
+    public function getPaid()
+    {
+        return $this->paid;
     }
 }

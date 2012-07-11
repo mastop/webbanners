@@ -108,9 +108,16 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $menu->setBundle('system');
         $menu->setRole('ROLE_ADMIN');
         $child = new MenuItem();
+        $child->setCode('homr');
+        $child->setName('Home');
+        $child->setOrder(0);
+        $child->setUrl('_home');
+        $child->setRoute(true);
+        $menu->addChildren($child);
+        $child = new MenuItem();
         $child->setCode('trabalho');
         $child->setName('Nosso Trabalho');
-        $child->setOrder(0);
+        $child->setOrder(1);
         $child->setUrl('_home');
         $child->setRoute(true);
         $menu->addChildren($child);
@@ -118,7 +125,8 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setCode('pedido');
         $child->setName('Novo Pedido');
         $child->setTitle('Novo Pedido');
-        $child->setOrder(1);
+        $child->setRole('IS_AUTHENTICATED_ANONYMOUSLY');
+        $child->setOrder(2);
         $child->setUrl('_order_order_index');
         $child->setRoute(true);
         $menu->addChildren($child);
@@ -127,7 +135,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setName('Meus Pedidos');
         $child->setTitle('Meus Pedidos');
         $child->setRole('ROLE_CLIENT');
-        $child->setOrder(2);
+        $child->setOrder(3);
         $child->setUrl('_order_order_client');
         $child->setRoute(true);
         $menu->addChildren($child);
@@ -136,7 +144,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setName('Meus Projetos');
         $child->setTitle('Meus Projetos');
         $child->setRole('ROLE_DESIGNER');
-        $child->setOrder(3);
+        $child->setOrder(4);
         $child->setUrl('_order_order_design');
         $child->setRoute(true);
         $menu->addChildren($child);
@@ -145,7 +153,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setName('Administração');
         $child->setTitle('Administração');
         $child->setRole('ROLE_ADMIN');
-        $child->setOrder(4);
+        $child->setOrder(5);
         $child->setUrl('_order_order_admin');
         $child->setRoute(true);
         $menu->addChildren($child);
@@ -153,7 +161,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setCode('faq');
         $child->setName('FAQ');
         $child->setTitle('FAQ');
-        $child->setOrder(5);
+        $child->setOrder(6);
         $child->setUrl('/pg/faq');
         $menu->addChildren($child);
         $child = new MenuItem();

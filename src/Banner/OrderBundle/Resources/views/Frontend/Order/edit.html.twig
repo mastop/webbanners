@@ -28,17 +28,18 @@
     <div class="tab-content">
         <!-- Pedido -->
         <div class="tab-pane{% if( pgatual == "pedido") %} active{% endif %}" id="pedido">
-            <div class="container-fluid span11">
+            <div class="container-fluid span10">
                 <div class="row">
-                    <div class="span11">
+                    <div class="span10">
                         <table class="table">
                             <tr>
-                                <th class="span2">#{{order.getId()}}</th>
+                                <th class="span2">
+                                    #{{order.getId()}}
+                                </th>
                                 <th class="span3">{{order.name}}</th>
                                 <th class="span2">Criado: {{order.formatCreated()}}</th>
                                 <th class="span2">Expira: {{order.formatExpires()}}</th>
                                 {% if (order.user == app.user)%}
-                                <th class="span2"><a href="{{path('_order_order_alter',{'name':order.name})}}" class="btn" >Editar</a></th>
                                 {% endif %}
                             </tr>
                             <tr>
@@ -77,6 +78,23 @@
                                     {% endfor %}
                                 </td>
                             </tr>
+                            {% if (order.status.id != mastop_param('order.order.PayedStatus'))%}
+                            <tr>
+                                <td colspan="4">
+                                    <div class="floatR">
+                                        <a href='{{path('order_order_pay',{'id':order.id})}}' class='btn btn-large btn-success'>Pagar</a>
+                                    </div>
+                                    <div class="floatR">
+                                        <label class="floatR ">
+                                        Ainda não consta em nosso sistema o pagamento desse pedido. </label>
+                                            <br />
+                                        <label class="floatR ">
+                                        Caso o pagamento ainda não tenha sido efetuado, favor efetuar o pagamento no botão ao lado.
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            {%endif%}
                         </table>
                     </div>
                 </div>
@@ -84,9 +102,9 @@
         </div>
         <!-- Histórico -->
         <div class="tab-pane{% if( pgatual == "historico") %} active{% endif %}" id="historico">
-            <div class="container-fluid span11">
+            <div class="container-fluid span10">
                 <div class="row">
-                    <div class="span11">
+                    <div class="span10">
                         <table class="table">
                             {%set t = 0 %}
                             {% for talk in order.talk %}
@@ -127,7 +145,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="span11">
+                    <div class="span10">
                         <table class="table">
                             <tr>
                                 <th colspan="2"><h4>Comentar</h4></th>
@@ -155,9 +173,9 @@
         </div>
         <!-- Para aprovação -->
         <div class="tab-pane{% if( pgatual == "aprovacao") %} active{% endif %}" id="aprovacao">
-            <div class="container-fluid span12">
+            <div class="container-fluid span10">
                 <div class="row-fluid">
-                    <div class="span11">
+                    <div class="span12">
                         <table class="table">
                             <tr>
                                 <th>Linguagem Visual</th>
@@ -278,9 +296,9 @@
         </div>
         <!-- Aprovados -->
         <div class="tab-pane{% if( pgatual == "aprovados") %} active{% endif %}" id="aprovados">
-            <div class="container-fluid span12">
+            <div class="container-fluid span10">
                 <div class="row-fluid">
-                    <div class="span11">
+                    <div class="span12">
                         <table class="table">
                             {% if(order.aproved == "true") %}
                             <tr>

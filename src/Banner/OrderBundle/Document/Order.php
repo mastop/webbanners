@@ -51,6 +51,14 @@ class Order
     protected $name;
     
     /**
+     * Textos do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $text;
+    
+    /**
      * Anotações do pedido
      * 
      * @var string
@@ -59,7 +67,15 @@ class Order
     protected $notes;
     
     /**
-     * Anotações do pedido
+     * Desgin do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $design;
+    
+    /**
+     * Link do Banner
      * 
      * @var string
      * @ODM\String
@@ -73,6 +89,22 @@ class Order
      * @ODM\String
      */
     protected $aproved;
+    
+    /**
+     * Pedido com Rush
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $rush;
+    
+    /**
+     * Pedido com Rush
+     * 
+     * @var float
+     * @ODM\Float
+     */
+    protected $vrush;
     
     /**
      * Array com as informações sobre o pagamento
@@ -738,5 +770,85 @@ class Order
     public function getFinal()
     {
         return $this->final;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string $text
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set design
+     *
+     * @param string $design
+     */
+    public function setDesign($design)
+    {
+        $this->design = $design;
+    }
+
+    /**
+     * Get design
+     *
+     * @return string $design
+     */
+    public function getDesign()
+    {
+        return $this->design;
+    }
+
+    /**
+     * Set rush
+     *
+     * @param string $rush
+     */
+    public function setRush($rush)
+    {
+        $this->rush = $rush;
+    }
+
+    /**
+     * Get rush
+     *
+     * @return string $rush
+     */
+    public function getRush()
+    {
+        return $this->rush;
+    }
+
+    /**
+     * Set vrush
+     *
+     * @param float $vrush
+     */
+    public function setVrush($vrush)
+    {
+        $this->vrush = $vrush;
+    }
+
+    /**
+     * Get vrush
+     *
+     * @return float $vrush
+     */
+    public function getVrush()
+    {
+        return $this->vrush;
     }
 }

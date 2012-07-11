@@ -67,76 +67,95 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
   {% block javascriptsHead null %}
   {{ mastop_param('system.script.head') }}
 </head>
-<body data-offset="50" data-target=".subnav" data-spy="scroll" data-twttr-rendered="true">
+<body class="wbbody wbbody_{%if color is defined%}{{color}}{%else%}cinza{%endif%}{%if is_granted('ROLE_USER') %} logged{%endif%}">
 {# Header #}
 {% block header %}
-<header id="hd" class="container">
-    <BR />
-    <BR />
-    <BR />
-    <BR />
-    <BR />
-    <BR />
-    <div class="row mB10">
-    <div class="span10">
-    {%if is_granted('ROLE_USER') %}
-        <div class="alert alert-message">
-            <span>Olá, <strong>{{ app.user.name|default(app.user.username) }}</strong>! <small>(não é você? <a href="{{path('_logout')}}">clique aqui</a>)</small></span> <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>
-        </div>
-    {%endif%}
-
-    </div>
-    </div>
-    
-  <!-- Menu -->
-  <div class="navbar navbar-fixed-top"">
-    <div class="navbar-inner">
-  
-      <div class="container">
-        <a class="brand" href="#">
-            <div class="span3">
-                <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+{%if is_granted('ROLE_USER') %}      
+<header id="hdC">
+    <div class="container"> 
+        <div id="Table_header">
+            <div id="header-02_">
+                <a class="brand" href="#">
+                    <div class="span3">
+                        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+                    </div>
+                </a>
             </div>
-        </a>
-        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <div id="search" class="span6">
-            {% set isSearch = (app.request.query.get('q') is not null) ? app.request.query.get('q') : false %}
-            <form class="form-search floatR mB10" action="{# path('deal_deal_search') #}" method="get" id="searchForm">
-                <div class="input-prepend">
-                    <span class="add-on">Buscar por</span>
-                    <input type="text" size="16" class="span3" name="q" id="q" value="{%if isSearch%}{{ isSearch }}{%endif%}" placeholder="Digite o nome da empresa ou evento">
+            <div id="header-03_">
+                <div class="navbar floatR">
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            {{mastop_menu('system-head', null, null, 0, 'list', {'class':'nav head'})}}
+                        </ul>
+                    </div>
                 </div>
-                <button class="btn" type="submit"><i class="icon-search"></i></button>
-            </form>
+                {%if is_granted('ROLE_USER') %}
+                <div class="alert alert-message login floatR">
+                    <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>
+                </div>
+                {%endif%}
+            </div>
+            <div id="header-06_">
+                <div class="navbar">
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            {{mastop_menu('system-main', null, null, 0, 'list', {'class':'nav menu'})}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="nav-collapse">
-          <ul class="nav">
-            {{mastop_menu('system-main', null, null, 0, 'list', {'class':'nav'})}}
-          </ul>
-          <ul class="nav pull-right">
-            {{mastop_menu('system-head', null, null, 0, 'list', {'class':'nav'})}}
-          </ul>
-                
-        </div><!-- /.nav-collapse -->
-        
-        
-        
-      </div>
-    </div><!-- /navbar-inner -->
-  </div>
-  <!-- /Menu -->
-        
+    </div>
+</div>
 </header>
+{% else %}
+<header id="hd">
+    <div class="container"> 
+        <div id="Table_header">
+            <div id="header-02_">
+                <a class="brand" href="#">
+                    <div class="span3">
+                        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+                    </div>
+                </a>
+            </div>
+            <div id="header-03_">
+                <div class="navbar floatR">
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            {{mastop_menu('system-head', null, null, 0, 'list', {'class':'nav head'})}}
+                        </ul>
+                    </div>
+                </div>
+                {%if is_granted('ROLE_USER') %}
+                <div class="alert alert-message login floatR">
+                    <span>Olá, <strong>{{ app.user.name|default(app.user.username) }}</strong>! <small>(não é você? <a href="{{path('_logout')}}">clique aqui</a>)</small></span> <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>
+                </div>
+                {%endif%}
+            </div>
+            <div id="header-04_">
+            </div>
+            <div id="header-05_">
+            </div>
+            <div id="header-06_">
+                <div class="navbar">
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            {{mastop_menu('system-main', null, null, 0, 'list', {'class':'nav menu'})}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</header>
+{%endif%}
 {%endblock%}
 {# /Header #}
 {# Body #}
 {% block body %}
-  <div role="foot" class="container">
+<div id="body" role="foot" class="container">
     {# Mensagens do Sistema #}
     {% if app.session.hasFlash('error') %}
     <div class="alert alert-error">
@@ -164,31 +183,47 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
     {% endif %}
     {# /Mensagens do Sistema #}
     {# Conteúdo #}
-    {% block content null %}
+    <div class="container content">
+        <div class="span11">
+        {% block content null %}
+        </div>
+    </div>
     {# /Conteúdo #}
-  </div>
+</div>
 {%endblock%}
 {# /Body #}
 {# Facebook div #}
 <div id="fb-root" class="hidden"></div>
 {#/Facebook div #}
-<footer id="ft" class="container">
-<div class="row">
-<div class="span2">
-    <div id="ftLogo"><a href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a></div>
-</div>
-<div class="span10">
-{{mastop_menu('system-foot', null, null, 0, 'BannerCoreBundle:Menu:footer.html.twig', {'id':'navFoot'})}}
-</div>
-</div>
-<div class="row">
-   <div id="copyright" class="span8">
-            {% block footer %} {{ mastop_param('system.site.footer') }} {% endblock%}
-   </div>
-   <div id="poweredBy" class="span4">
-        <a href="http://www.mastop.com.br" title="Produzido por Mastop Internet Development">Mastop Devenvolvimento e Consultoria Web</a>
-   </div>
-</div>
+<footer id="ft">
+    <div class="container">
+        <div id="Table_footer">
+            <div id="footer-01_">
+            </div>
+            <div id="footer-02_">
+                <div id="ftLogo">
+                    <a href="{{ path('_home') }}" title="Homepage">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+                </div>
+            </div>
+            <div id="footer-03_">
+                {{mastop_menu('system-foot', null, null, 0, 'BannerCoreBundle:Menu:footer.html.twig', {'id':'navFoot'})}}
+            </div>
+            <div id="footer-04_">
+            </div>
+            <div id="footer-05_">
+            </div>
+            <div id="footer-06_">
+                <div id="copyright">
+                    {% block footer %} {{ mastop_param('system.site.footer') }} {% endblock%}
+                </div>
+            </div>
+            <div id="footer-07_">
+                <div id="poweredBy">
+                        <a href="http://www.mastop.com.br" title="Produzido por Mastop Internet Development">Mastop Devenvolvimento e Consultoria Web</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
 

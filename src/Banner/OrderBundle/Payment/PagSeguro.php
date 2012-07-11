@@ -73,6 +73,12 @@ class PagSeguro implements PaymentInterface {
                 $this->setParam('itemQuantity'.$i, 1);
                 $i++;
             }
+            if($order->getRush()=="rush"){
+                $this->setParam('itemId'.$i, $i);
+                $this->setParam('itemDescription'.$i, "Solicitação de pedido rápido. 24 horas ");
+                $this->setParam('itemAmount'.$i, number_format($this->order->getVrush(),2));
+                $this->setParam('itemQuantity'.$i, 1);
+            }
             $user = $order->getUser();
             $this->setParam('senderName', $user->getName());
             $this->setParam('senderEmail', $user->getEmail());
