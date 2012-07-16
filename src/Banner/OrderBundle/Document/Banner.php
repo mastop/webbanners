@@ -53,8 +53,6 @@ class Banner
      */
     protected $value;
     
-   
-
     /**
      * Set width
      *

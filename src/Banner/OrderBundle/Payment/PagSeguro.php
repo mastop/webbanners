@@ -79,6 +79,7 @@ class PagSeguro implements PaymentInterface {
                 $this->setParam('itemAmount'.$i, number_format($this->order->getVrush(),2));
                 $this->setParam('itemQuantity'.$i, 1);
             }
+            $this->setParam('extraAmount', number_format(-20,2));
             $user = $order->getUser();
             $this->setParam('senderName', $user->getName());
             $this->setParam('senderEmail', $user->getEmail());

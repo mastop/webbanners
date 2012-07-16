@@ -240,6 +240,13 @@ class Order
      * @ODM\Hash
      */
     protected $userData;
+    /**
+     * Upload do arquivo final
+     * 
+     * @var array
+     * @ODM\EmbedOne(targetDocument="Banner\OrderBundle\Document\Discount")
+     */
+    protected $cupom;
     
 
     /** 

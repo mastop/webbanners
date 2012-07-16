@@ -12,7 +12,6 @@ $(function(){
                 }
             }
         }
-        alert(checked);
         if(checked != true){
             if($('#width0').val() == ''){
                 document.getElementById('width0').style.backgroundColor = '#FF0000';
@@ -22,7 +21,7 @@ $(function(){
             }
             var top = $('#pack1').position().top;
             $(window).scrollTop( top );
-            $('#0').popover({ title:"Tamanho dos banners", content: "Digite um tamanho de banner ou selecione algum dos pacotes.", type:"warning"})
+            $('#0').popover({title:"Tamanho dos banners", content: "Digite um tamanho de banner ou selecione algum dos pacotes.", type:"warning"})
             $('#0').popover('show');
             if($('#height0').val() == '' && $('#width0').val() == ''){
                 return false;
@@ -170,9 +169,9 @@ $(function(){
         
         banner = banner + '<div id="banner'+i+'" class="span6">'
         banner = banner + '    <input type="hidden" value="0" />'
-        banner = banner + '    <input class="width" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" value="728" type="text" required="required" />'
+        banner = banner + '    <input class="width soma" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" type="text" required="required" />'
         banner = banner + '    <span class="x">x</span>'
-        banner = banner + '    <input class="height" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" value="60" type="text" required="required"/>'
+        banner = banner + '    <input class="height soma" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" type="text" required="required"/>'
         banner = banner + '    <ul class="nav nav-pills banner">'
         banner = banner + '        <li class="dropdown" id="menu1">'
         banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
@@ -194,31 +193,6 @@ $(function(){
         if(total>(max-1)){
             $('#btnnew').hide();
         }
-        total = 0;
-        i = 0
-        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
-        for (i = 0 ; i < max ; i++) {
-            if(document.getElementById("width"+i)){
-                if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
-                    if(i==0){   
-                        total = total + first;
-                    }
-                    else 
-                    {
-                        total = total + others;
-                    }
-                    if (document.getElementById("psd"+i) != undefined){
-                        if (document.getElementById('psd'+i).checked == true){
-                            total = total + psd;
-                        }
-                    }
-                }
-            }
-        }
-        if (document.getElementById("order_rush").checked == true){   
-            total = total + rush;
-        }
-        document.getElementById("order_total").value = total.toFixed(2);
         e.preventDefault();
     });
      $("input.just").live("change", function(e){
@@ -259,7 +233,20 @@ $(function(){
         }
         e.preventDefault();
      });
-    $("input.soma").live("change", function(e){
+    $(".pacote").live("click", function(e){
+        var elems = document.getElementsByName("pacote");
+        for(var i = 0; i < elems.length; i++){
+            // vamos verificar se este radio button está selecionado
+            if(elems[i].checked){
+                document.getElementById("packpsd["+(i+1)+"]").removeAttribute("readonly");
+            }
+            else 
+            {
+                document.getElementById("packpsd["+(i+1)+"]").setAttribute('readonly','readonly');
+            }
+        }
+    });
+    $(".soma").live("click change", function(e){
         var max = parseInt(document.getElementById("maxBanner").value);
         var total = 0;
         var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
@@ -267,33 +254,92 @@ $(function(){
         var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
         var rush = parseFloat(document.getElementById("rush").firstChild.nodeValue);
         var value = 0;
+        var qtd = 0;
 
         for (i = 0 ; i < max ; i++) {
             if(document.getElementById("width"+i)){
-                if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
-                    if(i==0){   
-                        total = total + first;
-                        value = first;
-                    }
-                    else 
-                    {
-                        total = total + others;
-                        value = others;
-                    }
-                    if (document.getElementById("psd"+i) != undefined){
-                        if (document.getElementById("psd"+i).checked == true){
-                                total = total + psd;
-                                value = value + psd;
+                if(document.getElementById("width"+i).value != "" && document.getElementById("height"+i).value != ""){
+                    if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
+                        if(i==0){  
+                                total = total + first;
+                                value = first;
+                        }
+                        else 
+                        {
+                            total = total + others;
+                            value = others;
+                        }
+                        if (document.getElementById("psd"+i) != undefined){
+                            if (document.getElementById("psd"+i).checked == true){
+                                    total = total + psd;
+                                    value = value + psd;
+                            }
                         }
                     }
+                    qtd += 1;
                 }
             }
             if (document.getElementById("value"+i) != undefined){
                 document.getElementById("value"+i).value = value.toFixed(2);
             }
         }
+        
+        var value = 0;
+        var elems = document.getElementsByName("pacote");
+        if(elems.length > 0){
+            // vamos percorrer os elementos encontrados
+            for(var i = 0; i < elems.length; i++){
+                // vamos verificar se este radio button está selecionado
+                if(elems[i].checked){
+                    value = i+1;
+                }
+            }
+            if(value == 1){
+                total = total + 174;
+                qtd += 3;
+                if(document.getElementById("packpsd[1]").checked == true){
+                    total = total + (3*psd);
+                }
+            }
+            if(value == 2){
+                total = total + 240;
+                qtd += 5;
+                if(document.getElementById("packpsd[2]").checked == true){
+                    total = total + (5*psd);
+                }
+            }
+            if(value == 3){
+                total = total + 320;
+                qtd += 7;
+                if(document.getElementById("packpsd[3]").checked == true){
+                    total = total + (7*psd);
+                }
+            }
+            if(value == 4){
+                total = total + 400;
+                qtd += 9;
+                if(document.getElementById("packpsd[4]").checked == true){
+                    total = total + (9*psd);
+                }
+            }
+            if(value == 5){
+                total = total + 480;
+                qtd += 11;
+                if(document.getElementById("packpsd[5]").checked == true){
+                    total = total + (11*psd);
+                }
+            }
+            if(value == 6){
+                total = total + 560;
+                qtd += 13;
+                if(document.getElementById("packpsd[6]").checked == true){
+                    total = total + (13*psd);
+                }
+            }
+        }
+        
         if (document.getElementById("order_rush").checked == true){   
-            total = total + rush;
+            total = total + (qtd*rush);
        }
        document.getElementById("order_total").value = total.toFixed(2);
     });

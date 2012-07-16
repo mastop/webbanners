@@ -202,4 +202,14 @@ class Discount
     {
         return $this->limit;
     }
+    
+    public function isValid()
+    {
+        return "Sim";
+    }
+    
+    public function getValue($total)
+    {
+        return $this->limit;
+    }
 }

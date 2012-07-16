@@ -4,7 +4,7 @@ namespace Banner\OrderBundle\Document;
 
 use Mastop\SystemBundle\Document\BaseRepository;
 
-class SizeRepository extends BaseRepository
+class DiscountRepository extends BaseRepository
 {
 
     /**
@@ -12,8 +12,8 @@ class SizeRepository extends BaseRepository
      *
      * @return Size ou null
      **/
-    public function findAllByOrder()
+    public function findAllById()
     {
-        return $this->findBy(array(), array('order'=>'asc'));
+        return $this->findBy(array(), array('id'=>'asc'));
     }
 }

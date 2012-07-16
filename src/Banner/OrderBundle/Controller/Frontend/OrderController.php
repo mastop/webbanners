@@ -495,8 +495,6 @@ class OrderController extends BaseController
         $formBanner = $request->request->get('banner');
         $formUpload = $request->request->get('upload');
 
-        
-        
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
         $formUpload->bindRequest($request); 
@@ -562,55 +560,112 @@ class OrderController extends BaseController
                
         $order = new Order();
         foreach($formBanner as $fBanner){
-            $banner = new Banner();
-            $banner->setHeight($fBanner['height']);
-            
-            $banner->setWidth($fBanner['width']);
-            if(sizeof($fBanner)==4){
-                $banner->setPsd($fBanner['psd']);
-            }
-            $banner->setValue($fBanner['value']);
-            $order->addBanner($banner);
-        }
-        if(isset($formOrder['pacote'])==true){
-            if($formOrder['pacote'] == 1 || $formOrder['pacote'] == 2  || $formOrder['pacote'] == 3 ||
-                $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+            $fBanner['height'] = (int)$fBanner['height'];
+            $fBanner['width'] = (int)$fBanner['width'];
+            if($fBanner['height'] >= 0 && $fBanner['width'] > 0){
                 $banner = new Banner();
-                $banner->setHeight(100);
-                $banner->setWidth(500);
-                $banner->setPsd(true);
-                $banner->setValue(30);
+                $banner->setHeight($fBanner['height']);
+
+                $banner->setWidth($fBanner['width']);
+                if(sizeof($fBanner)==4){
+                    $banner->setPsd($fBanner['psd']);
+                }
+                $banner->setValue($fBanner['value']);
                 $order->addBanner($banner);
-                if($formOrder['pacote'] == 2  || $formOrder['pacote'] == 3 ||
-                    $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+            }
+        }
+        $pacote = $request->request->get('pacote');
+        $packpsd = $request->request->get('packpsd');
+        if(isset($pacote)==true){
+            if($pacote == '1' || $pacote == '2'  || $pacote == '3' ||
+                $pacote == '4' ||  $pacote == '5' || $pacote == '6'){
+                $banner = new Banner();
+                $banner->setHeight(300);
+                $banner->setWidth(250);
+                $banner->setPsd($packpsd[1]);
+                $banner->setValue((int)$this->get('mastop')->param('order.order.FirstBanner'));
+                $order->addBanner($banner);
+                $banner = new Banner();
+                $banner->setHeight(728);
+                $banner->setWidth(90);
+                $banner->setPsd($packpsd[1]);
+                $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                $order->addBanner($banner);
+                $banner = new Banner();
+                $banner->setHeight(160);
+                $banner->setWidth(600);
+                $banner->setPsd($packpsd[1]);
+                $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                $order->addBanner($banner);
+                
+                if($pacote == '2'  || $pacote == '3' ||
+                    $pacote == '4' ||  $pacote == '5' || $pacote == '6' ){
                     $banner = new Banner();
-                    $banner->setHeight(200);
-                    $banner->setWidth(500);
-                    $banner->setPsd(true);
-                    $banner->setValue(30);
+                    $banner->setHeight(120);
+                    $banner->setWidth(600);
+                    $banner->setPsd($packpsd[2]);
+                    $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                     $order->addBanner($banner);
-                    if( $formOrder['pacote'] == 3 ||
-                        $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                    $banner = new Banner();
+                    $banner->setHeight(468);
+                    $banner->setWidth(60);
+                    $banner->setPsd($packpsd[2]);
+                    $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                    $order->addBanner($banner);
+                    if( $pacote == '3' ||
+                        $pacote == '4' ||  $pacote == '5' || $pacote == '6' ){
                         $banner = new Banner();
-                        $banner->setHeight(300);
-                        $banner->setWidth(500);
-                        $banner->setPsd(true);
-                        $banner->setValue(30);
+                        $banner->setHeight(250);
+                        $banner->setWidth(25);
+                        $banner->setPsd($packpsd[3]);
+                        $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                         $order->addBanner($banner);
-                        if( $formOrder['pacote'] == 4 ||  $formOrder['pacote'] == 5 ){
+                        $banner = new Banner();
+                        $banner->setHeight(720);
+                        $banner->setWidth(300);
+                        $banner->setPsd($packpsd[3]);
+                        $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                        $order->addBanner($banner);
+                        if( $pacote == '4' ||  $pacote == '5' || $pacote == '6' ){
                             $banner = new Banner();
-                            $banner->setHeight(300);
-                            $banner->setWidth(500);
-                            $banner->setPsd(true);
-                            $banner->setValue(30);
+                            $banner->setHeight(336);
+                            $banner->setWidth(280);
+                            $banner->setPsd($packpsd[4]);
+                            $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                             $order->addBanner($banner);
-                            if( $formOrder['pacote'] == 5 ){
+                            $banner = new Banner();
+                            $banner->setHeight(234);
+                            $banner->setWidth(60);
+                            $banner->setPsd($packpsd[4]);
+                            $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                            $order->addBanner($banner);
+                            if( $pacote == '5'  || $pacote == '6'){
                                 $banner = new Banner();
                                 $banner->setHeight(300);
-                                $banner->setWidth(500);
-                                $banner->setPsd(true);
-                                $banner->setValue(30);
+                                $banner->setWidth(100);
+                                $banner->setPsd($packpsd[5]);
+                                $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                                 $order->addBanner($banner);
+                                $banner = new Banner();
+                                $banner->setHeight(300);
+                                $banner->setWidth(600);
+                                $banner->setPsd($packpsd[5]);
+                                $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                                $order->addBanner($banner);
+                                if( $pacote == '6'){
+                                    $banner = new Banner();
+                                    $banner->setHeight(180);
+                                    $banner->setWidth(150);
+                                    $banner->setPsd($packpsd[6]);
+                                    $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                                    $order->addBanner($banner);
+                                    $banner = new Banner();
+                                    $banner->setHeight(88);
+                                    $banner->setWidth(31);
+                                    $banner->setPsd($packpsd[6]);
+                                    $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
+                                    $order->addBanner($banner);
+                                }
                             }
                         }
                     }
@@ -706,11 +761,7 @@ class OrderController extends BaseController
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $result = trim(curl_exec($curl));
         curl_close($curl);
-        
-        $mail = $this->get('mastop.mailer');
-
-        $mail->notify('pagseguro',$result);
-        
+                
         if ( $result == "VERIFICADO" ){
             
             $orderId = $_POST['Referencia'];
@@ -784,7 +835,7 @@ class OrderController extends BaseController
      * @Template()
      */
     public function payAction($id){
-        $order = $this->mongo('BannerOrderBundle:Order')->findById($id);
+        $order = $this->mongo('BannerOrderBundle:Order')->findOneById((int)$id);
         $gateway = 'Banner\OrderBundle\Payment\\'.$this->mastop()->param('order.sell.gateway');
         $payment = new $gateway($order, $this->container);
         $ret = $payment->checkStatus();
@@ -793,11 +844,10 @@ class OrderController extends BaseController
             $pay['data'] = $payment->getData();
             $order->setPayment($pay);
         }
-        
-        
         $ret['title'] = 'Compra '.$order->getId();
         $ret['content'] = $payment->process();
         $ret['order'] = $order;
+        return $this->render('BannerOrderBundle:Frontend:Order\finish.html.twig', $ret);
     }
      
      public function random($quantidade){ 

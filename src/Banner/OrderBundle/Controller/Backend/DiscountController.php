@@ -5,61 +5,61 @@ namespace Banner\OrderBundle\Controller\Backend;
 use Mastop\SystemBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Banner\OrderBundle\Document\Status;
-use Banner\OrderBundle\Form\Backend\StatusType;
+use Banner\OrderBundle\Document\Discount;
+use Banner\OrderBundle\Form\Backend\DiscountType;
 
-class StatusController extends BaseController
+class DiscountController extends BaseController
 { 
     /**
-     * @Route("/", name="admin_order_status")
+     * @Route("/", name="admin_order_discount")
      * @Template()
      */
-    public function statusAction()
+    public function discountAction()
     {
         
-        $allstatus = $this->mongo('BannerOrderBundle:Status')->findAllByOrder();
+        $alldiscount = $this->mongo('BannerOrderBundle:Discount')->findAll();
                 
         return array(
-                        'allstatus'   => $allstatus, 
+                        'alldiscount'   => $alldiscount, 
                     );
      }   
       
     /**
-     * @Route("/form/{id}", name="admin_order_status_form", defaults={"id" = null})
+     * @Route("/form/{id}", name="admin_order_discount_form", defaults={"id" = null})
      * @Template()
     */
-    public function formAction(Status $status = null)
+    public function formAction(Discount $discount = null)
     {
         $dm = $this->dm();
-        $title = ($status) ? "Editar Status" : "Novo Status";
-        $msg = ($status) ? "Status Alterado" : "Status Criado";
-        if(!$status){
-            $status = new Status();
+        $title = ($discount) ? "Editar Discount" : "Novo Discount";
+        $msg = ($discount) ? "Discount Alterado" : "Discount Criado";
+        if(!$discount){
+            $discount = new Discount();
         }
-        $form = $this->createForm(new StatusType(), $status);
+        $form = $this->createForm(new DiscountType(), $discount);
         $request = $this->get('request');
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
-                $dm->persist($status);
+                $dm->persist($discount);
                 $dm->flush();
-                return $this->redirectFlash($this->generateUrl('admin_order_status'), $msg);
+                return $this->redirectFlash($this->generateUrl('admin_order_discount'), $msg);
             }
         }
-        return array('form' => $form->createView(), 'status' => $status, 'title'=>$title, 'current' => 'admin_order_status');
+        return array('form' => $form->createView(), 'discount' => $discount, 'title'=>$title, 'current' => 'admin_order_discount');
     }
    
      /**
-     * @Route("/delete-{id}", name="admin_order_status_delete")
+     * @Route("/delete-{id}", name="admin_order_discount_delete")
      * @Template()
      */
-    public function deleteAction(Status $status)
+    public function deleteAction(Discount $discount)
     {
         if($this->get('request')->getMethod() == 'POST'){
-            $this->dm()->remove($status);
+            $this->dm()->remove($discount);
             $this->dm()->flush();
-            return $this->redirectFlash($this->generateUrl('admin_order_status_index'), 'Status Deletada!');
+            return $this->redirectFlash($this->generateUrl('admin_order_discount_index'), 'Discount Deletada!');
         }
-        return $this->confirm('Tem certeza de que deseja remover o Status "' . $status->getName() . '"?', array('id' => $status->getId()));
+        return $this->confirm('Tem certeza de que deseja remover o Discount "' . $discount->getDescription() . '"?', array('id' => $discount->getId()));
     }
 }

@@ -6,6 +6,10 @@ size_backend:
     resource: "@BannerOrderBundle/Controller/Backend/SizeController.php"
     type: annotation
     prefix:   /admin/tamanho
+discount_backend:
+    resource: "@BannerOrderBundle/Controller/Backend/DiscountController.php"
+    type: annotation
+    prefix:   /admin/desconto
 order_frontend:
     resource: "@BannerOrderBundle/Controller/Frontend/OrderController.php"
     type: annotation
