@@ -1,9 +1,9 @@
 $('#Userform_email').blur(function(e) {
     var email = $(this).val();
     if(email!=""){
-        $.post(ajaxPath,{email:email}, function(data) {
+        $.post("http://webbanners/usuario/check",{email:email}, function(data) {
             if(data==0){
-                alert(emailExiste);
+                alert("Esse e-mail já existe. Digite um e-mail válido ou faça o Login");
                 $('#Userform_email').val('');
             }
     
@@ -35,7 +35,4 @@ $('#Userformedit_email').blur(function(e) {
     
         })
     }
-});
-jQuery(function($){
-    $('.cpfMask').mask("999.999.999-99", {placeholder: " "});
 });

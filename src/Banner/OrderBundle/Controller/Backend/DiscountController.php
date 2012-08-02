@@ -22,7 +22,9 @@ class DiscountController extends BaseController
         return array(
                         'alldiscount'   => $alldiscount, 
                     );
-     }   
+     }  
+     
+  
       
     /**
      * @Route("/form/{id}", name="admin_order_discount_form", defaults={"id" = null})
@@ -41,6 +43,11 @@ class DiscountController extends BaseController
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
+                $code = $this->mastop()->generateCode();
+                while($this->mongo('BannerOrderBundle:Discount')->has('code', $code)){
+                    $code = $this->mastop()->generateCode();
+                }
+                $discount->setCode($code);
                 $dm->persist($discount);
                 $dm->flush();
                 return $this->redirectFlash($this->generateUrl('admin_order_discount'), $msg);

@@ -19,11 +19,11 @@
 
 <div id="maxUpload" hidden="hidden">{{mastop_param('order.order.UploadOrder')}}</div>
 <div class="tabbable">
-    <ul class="nav nav-tabs">
-        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a class="guide" href="#pedido" data-toggle="tab">Pedido</a></li>
-        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a class="guide" href="#historico" data-toggle="tab">Histórico</a></li>
-        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" href="#aprovacao" data-toggle="tab">Para aprovação</a></li>
-        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" href="#aprovados" data-toggle="tab">Aprovados</a></li>
+    <ul class="nav nav-tabs">  
+        <li{% if( pgatual == "pedido") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Dados do pedido" href="#pedido" data-toggle="tab">Pedido <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "historico") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Conversação do cliente e o designer" href="#historico" data-toggle="tab">Histórico {% if badges > 0 %}<span class="badge badge-important">{{badges}}</span>{% endif%} <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Arquivos enviados e para aprovação" href="#aprovacao" data-toggle="tab">Para aprovação <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Arquivos aprovados e finalizados"  href="#aprovados" data-toggle="tab">Aprovados <i class="icon-question-sign"></i></a></li>
     </ul>
     <div class="tab-content">
         <!-- Pedido -->
@@ -38,6 +38,7 @@
                                 </th>
                                 <th class="span3">{{order.name}}</th>
                                 <th class="span2">Criado: {{order.formatCreated()}}</th>
+                                <th class="span2">Finalizar em: {{order.formatFinal()}}</th>
                                 <th class="span2">Expira: {{order.formatExpires()}}</th>
                                 {% if (order.user == app.user)%}
                                 {% endif %}
@@ -63,12 +64,12 @@
                                         <a class="btn" href="#myCarousel" data-slide="next">></a>
                                         {% endif %}
                                 </td>
-                                <td colspan="4">
+                                <td colspan="5">
                                 {{order.notes}}
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="5">
                                     {% for banner in order.banner %}
                                         {{banner.width}}x{{banner.height}}
                                     {% if banner.psd %}
@@ -78,23 +79,6 @@
                                     {% endfor %}
                                 </td>
                             </tr>
-                            {% if (order.status.id != mastop_param('order.order.PayedStatus'))%}
-                            <tr>
-                                <td colspan="4">
-                                    <div class="floatR">
-                                        <a href='{{path('order_order_pay',{'id':order.id})}}' class='btn btn-large btn-success'>Pagar</a>
-                                    </div>
-                                    <div class="floatR">
-                                        <label class="floatR ">
-                                        Ainda não consta em nosso sistema o pagamento desse pedido. </label>
-                                            <br />
-                                        <label class="floatR ">
-                                        Caso o pagamento ainda não tenha sido efetuado, favor efetuar o pagamento no botão ao lado.
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            {%endif%}
                         </table>
                     </div>
                 </div>
@@ -377,6 +361,27 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <table>
+        {% if (order.status.id != mastop_param('order.order.PayedStatus'))%}
+        <tr>
+            <td colspan="5">
+                <div class="floatR">
+                    <a href='{{path('order_order_pay',{'id':order.id})}}' class='btn'>Pagar</a>
+                </div>
+                <div class="floatR">
+                    <label class="floatR ">
+                    Ainda não consta em nosso sistema o pagamento desse pedido. </label>
+                        <br />
+                    <label class="floatR ">
+                    Caso o pagamento ainda não tenha sido efetuado, favor efetuar o pagamento no botão ao lado.
+                    </label>
+                </div>
+            </td>
+        </tr>
+        {%endif%}
+        </table>
     </div>
 </div>
 

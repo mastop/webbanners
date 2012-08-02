@@ -23,13 +23,26 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         // Pega menu Pai System-Admin
         $menu = $repo->findByBundleCode('system', 'admin');
         if ($menu) {
-            $menuItem2 = $repo->getChildrenByCode($menu, 'email');
-            if(!$menuItem2){
+            $menuItem1 = $repo->getChildrenByCode($menu, 'email');
+            if(!$menuItem1){
                 $child = new MenuItem();
                 $child->setCode('email');
                 $child->setName('E-mails');
                 $child->setRole('ROLE_ADMIN');
                 $child->setUrl('admin_core_mailing_index');
+                $child->setRoute(true);
+                $child->setOrder(3);
+                $menu->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush(); 
+            }
+            $menuItem2= $repo->getChildrenByCode($menu, 'discount');
+            if(!$menuItem2){
+                $child = new MenuItem();
+                $child->setCode('ofertas');
+                $child->setName('Discount');
+                $child->setRole('ROLE_ADMIN');
+                $child->setUrl('admin_order_discount');
                 $child->setRoute(true);
                 $child->setOrder(4);
                 $menu->addChildren($child);
@@ -39,7 +52,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
             $menuItem3 = $repo->getChildrenByCode($menu, 'status');
             if(!$menuItem3){
                 $child = new MenuItem();
-                $child->setCode('status');
+                $child->setCode('category');
                 $child->setName('Status');
                 $child->setRole('ROLE_ADMIN');
                 $child->setUrl('admin_order_status');
@@ -52,7 +65,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
             $menuItem4 = $repo->getChildrenByCode($menu, 'size');
             if(!$menuItem4){
                 $child = new MenuItem();
-                $child->setCode('size');
+                $child->setCode('cupons');
                 $child->setName('Tamanhos');
                 $child->setRole('ROLE_ADMIN');
                 $child->setUrl('admin_order_size');
@@ -153,14 +166,6 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
-                    $child2 = new MenuItem();
-                    $child2->setCode('saiba-mais.como-vender');
-                    $child2->setName('Como Vender');
-                    $child2->setUrl('/pg/como-vender');
-                    $child2->setOrder(2);
-                $child->addChildren($child2);
-                $manager->persist($menu);
-                $manager->flush(); 
             }
         }
     }

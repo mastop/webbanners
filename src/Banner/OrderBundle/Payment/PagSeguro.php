@@ -56,6 +56,7 @@ class PagSeguro implements PaymentInterface {
      * @param ContainerInterface $container 
      */
     public function __construct(Order $order, ContainerInterface $container) {
+        
         $this->order = $order;
         $this->container = $container;
         $payment = $order->getPayment();
@@ -79,7 +80,7 @@ class PagSeguro implements PaymentInterface {
                 $this->setParam('itemAmount'.$i, number_format($this->order->getVrush(),2));
                 $this->setParam('itemQuantity'.$i, 1);
             }
-            $this->setParam('extraAmount', number_format(-20,2));
+            $this->setParam('extraAmount', number_format(0-$this->order->getDesconto(),2));
             $user = $order->getUser();
             $this->setParam('senderName', $user->getName());
             $this->setParam('senderEmail', $user->getEmail());

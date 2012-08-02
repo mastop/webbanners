@@ -56,5 +56,6 @@ security:
 
     access_control:
         - { path: /admin, roles: ROLE_ADMIN}
-        #- { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: /pedido/novo, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: /desconto/check, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

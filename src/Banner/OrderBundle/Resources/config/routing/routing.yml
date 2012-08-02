@@ -10,6 +10,10 @@ discount_backend:
     resource: "@BannerOrderBundle/Controller/Backend/DiscountController.php"
     type: annotation
     prefix:   /admin/desconto
+discount_frontend:
+    resource: "@BannerOrderBundle/Controller/Frontend/DiscountController.php"
+    type: annotation
+    prefix:   /desconto
 order_frontend:
     resource: "@BannerOrderBundle/Controller/Frontend/OrderController.php"
     type: annotation

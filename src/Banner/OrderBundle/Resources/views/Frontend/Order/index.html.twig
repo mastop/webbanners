@@ -10,17 +10,20 @@
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+                   '@BannerOrderBundle/Resources/public/js/Frontend/validadeOrder.js'
+                   '@BannerUserBundle/Resources/public/js/Frontend/newUser.js'
                    %}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock%}
 
 {% block content %}
-<div id="firstBanner" hidden="hidden">{{mastop_param('order.order.FirstBanner')}}</div>
-<div id="othersBanner" hidden="hidden">{{mastop_param('order.order.OthersBanner')}}</div>
-<div id="PSDBanner" hidden="hidden">{{mastop_param('order.order.PSDBanner')}}</div>
-<div id="maxUpload" hidden="hidden">{{mastop_param('order.order.UploadOrder')}}</div>
-<div id="rush" hidden="hidden">{{mastop_param('order.order.Rush')}}</div>
+<script>
+    var psd = {{mastop_param('order.order.PSDBanner')}};
+    var first = {{mastop_param('order.order.FirstBanner')}};
+    var others = {{mastop_param('order.order.OthersBanner')}};
+    var rush = {{mastop_param('order.order.Rush')}};
+</script>
 
 <div class="tabbable tabs-left">
     <ul class="nav nav-tabs order">
@@ -30,43 +33,63 @@
         <div class="tab-pane active" id="tab1">
             <form class="block" id="pedidobanner" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
                 <div class="span9">
+                    <input id="maxUpload" type="hidden" value="{{mastop_param('order.order.UploadOrder')}}" name="maxUpload"/>
                     <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
                     <div class="span6">
                         <br /> <br />
                         {% if not is_granted('ROLE_USER') %}
-                        {{ form_row(formUser.email) }}
+                        <h4>E-mail <a rel="tooltip" title="Digite e-mail não cadastrado ou efetue o login"><i class="icon-question-sign"></i></a></h4>
+                        <input id="Userform_email" type="email" required="required" name="Userform[email]">
                         {% endif %}
                         <h4>
                             Pacotes de Banners
-                            <a rel="tooltip" title="Faça seu Banner "><i class="icon-question-sign"></i></a>
+                            <a rel="tooltip" title="Selecione o pacote que é mais adequado às sua necessidades."><i class="icon-question-sign"></i></a>
                         </h4>
                         <div id="pack1" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="1" /> Pacote 1
-                            <input type="checkbox" class="soma" name="packpsd[1]" id="packpsd[1]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="1" /> 
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600" rel="popover" href="#" data-original-title="Pague 2, leve 3">
+                                Pacote 1
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[1]" id="packpsd[1]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <div id="pack2" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="2" /> Pacote 2
-                            <input type="checkbox" class="soma" name="packpsd[2]" id="packpsd[2]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="2" /> 
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60" rel="popover" href="#" data-original-title="Pague 3, leve 5">
+                                Pacote 2
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[2]" id="packpsd[2]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <div id="pack3" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="3" /> Pacote 3
-                            <input type="checkbox" class="soma" name="packpsd[3]" id="packpsd[3]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="3" /> 
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300" rel="popover" href="#" data-original-title="Pague 4, leve 7">
+                                Pacote 3
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[3]" id="packpsd[3]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <div id="pack4" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="4" /> Pacote 4
-                            <input type="checkbox" class="soma" name="packpsd[4]" id="packpsd[4]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="4" /> 
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60" rel="popover" href="#" data-original-title="Pague 5, leve 9">
+                                Pacote 4
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[4]" id="packpsd[4]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <div id="pack5" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="5" /> Pacote 5
-                            <input type="checkbox" class="soma" name="packpsd[5]" id="packpsd[5]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="5" /> 
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600" rel="popover" href="#" data-original-title="Pague 6, leve 11">
+                                Pacote 5
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[5]" id="packpsd[5]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <div id="pack6" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="6" /> Pacote 6
-                            <input type="checkbox" class="soma" name="packpsd[6]" id="packpsd[6]" readonly="readonly" /> Com Psd
+                            <input type="radio" class="pacote soma" name="pacote" value="6" />
+                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600 / 180x150 / 88x31" rel="popover" href="#" data-original-title="Pague 7, leve 13">
+                                Pacote 6
+                            </a>
+                            <input type="checkbox" class="soma" name="packpsd[6]" id="packpsd[6]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
                         </div>
                         <h4>
                             Banners individuais 
-                            <a rel="tooltip" title="Faça seu Banner "><i class="icon-question-sign"></i></a>
+                            <a rel="tooltip" title="Digite ou selecione os tamanhos que deseja para banners individuais"><i class="icon-question-sign"></i></a>
                         </h4>
                         <div id="newBanner">
                             {% set i = 0 %}
@@ -121,17 +144,17 @@
                         </label>
                         <input id="order_name" type="text" required="required" name="order[name]"> 
                         <label class="required" for="order_text">
-                            Qual texto você gostaria que aparecesse no Banner?
-                            <a rel="tooltip" title="Digite o texto que quer que apareça no Banner"><i class="icon-question-sign"></i></a>
+                            Texto para Banner
+                            <a rel="tooltip" title="Digite o texto que deseja para Banner"><i class="icon-question-sign"></i></a>
                         </label>
                         <textarea id="order_text" required="required" name="order[text]"></textarea>
                         <label class="required" for="order_link">
-                            Para qual pagina o seu banner irá direcionar?
+                            Página de redirecionamento
                             <a rel="tooltip" title="Digite o endereço da página que o Banner irá direcionar"><i class="icon-question-sign"></i></a>
                         </label>
                         <input id="order_link" type="text" required="required" name="order[link]">
                         <label class="required" for="order_notes">
-                            Digite as instruções que gostaria que os designers seguisse.
+                            Instruções
                             <a rel="tooltip" title="Faça alguma anotação que é necessário para o designer faça seu banner"><i class="icon-question-sign"></i></a>
                         </label>
                         <textarea id="order_notes" required="required" name="order[notes]"></textarea>
@@ -165,12 +188,17 @@
                         {% endif %}
                         <br /><br />
                         <input id="order_rush" type="checkbox" class="soma" name="order[rush]">
-                        <strong> Apresse meu pedido - 24hs express. R$ {{mastop_param('order.order.Rush') |number_format(2,'.',',')}}</strong>
+                        <strong> Apresse meu pedido - 24hs express. R$ {{mastop_param('order.order.Rush') |number_format(2,'.',',')}} / banner</strong>
                         <a rel="tooltip" title="Marque essa opção se necessita do pedido mais rápido. Faremos o Banner em 24h."><i class="icon-question-sign"></i></a>
                         <br /><br />
                         <div>
+                            <label class=" required" for="order_cupom">Cupom de desconto</label>
+                            <input id="order_cupom" class="soma" type="text" style="width: 150px" name="order[cupom]">
+                        </div>
+                        <div id="desconto"></div>
+                        <div>
                             <label class=" required" for="order_total">Total</label>
-                            <input id="order_total" type="text" required="required" readonly="readonly" name="order[total]" value="0">
+                            <input id="order_total" type="text" required="required" readonly="readonly" name="order[total]" value="0.00">
                         </div>
                     </div>
                 </div>

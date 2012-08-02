@@ -14,6 +14,7 @@ class OrderType extends AbstractType {
                 ->add('text', 'textarea', array('label' => 'Qual texto você gostaria que aparecesse no Banner?'))
                 ->add('notes', 'textarea', array('label' => 'Digite as instruções que gostaria que os designers seguisse.'))
                 ->add('quantity', 'hidden')
+                ->add('cupom', 'text', array('label'=>'Cupom de desconto','required' =>'', 'attr'  => array('style' => 'width: 150px')))
                 ->add('total','money',array('label'=>'Total', 'currency'=>'R$', 'read_only'=>'read_only'))
             ;
     }

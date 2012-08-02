@@ -114,16 +114,7 @@ Mastop Internet Development                          http://www.mastop.com.br
 	
 	<a href="{{ url('admin_system_home_index') }}" class="logo grid_4"><span>{{ mastop_param('system.site.name') }}</span></a>
 	<div id="search_bar" class="grid_5">
-	<form>
-		<input class="indent round_all" type="text" name="busca" value="" />
-		<div class="place_search">
-			<button class="button_colour round_all">
-                                <span></span>
-				<img src="{{ asset('themes/banner/admin/images/icons/small/white/magnifying_glass.png') }}" width="24" height="24" alt="Magnifying Glass">
-				<span>Busca</span>
-			</button>
-		</div>
-	</form>
+
         </div>
 	<div class="user_box round_all grid_3">
 		<img src="{{ gravatar(app.user.email|default(null), 55) }}" width="55" alt="Gravatar" />

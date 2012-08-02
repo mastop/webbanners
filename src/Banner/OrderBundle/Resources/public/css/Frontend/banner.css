@@ -132,3 +132,7 @@ input, textArea{
     background-color: blue;
     color: yellow;
 }
+a.nostyle{
+    text-decoration: none;
+    cursor: default;
+}

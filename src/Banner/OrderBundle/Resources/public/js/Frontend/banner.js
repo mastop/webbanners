@@ -33,9 +33,6 @@ $(function(){
     $("a.rm").live("click", function(e){
         $(this).parent().remove();
         var i = 0;
-        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
-        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
-        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
         var total = 0;
         var max = parseInt(document.getElementById("maxBanner").value);  
 
@@ -129,7 +126,7 @@ $(function(){
         e.preventDefault();
         });
     $("input.upload").live("change", function(e){
-        var max = parseFloat(document.getElementById("maxUpload").firstChild.nodeValue);
+        var max = parseFloat(document.getElementById("maxUpload").value);
         var i = 0;
         var j = 0;
         for (i = 0 ; i < max ; i++) {
@@ -155,43 +152,44 @@ $(function(){
         e.preventDefault();
     });
     $("#novo").click(function(e){
-        var banner = '';
-        var max = parseInt(document.getElementById("maxBanner").value);
-        var total = 0;
-        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
-        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
-        var rush = parseFloat(document.getElementById("rush").firstChild.nodeValue);
-        for (i = 0 ; i < max ; i++) {
-            if (document.getElementById("width"+i) == undefined){
-                break;
+        if( document.getElementById("width0").value  != '' && document.getElementById("height0").value != ''){
+            var banner = '';
+            var max = parseInt(document.getElementById("maxBanner").value);
+            var total = 0;
+            for (i = 0 ; i < max ; i++) {
+                if (document.getElementById("width"+i) == undefined){
+                    break;
+                }
             }
-        }
-        
-        banner = banner + '<div id="banner'+i+'" class="span6">'
-        banner = banner + '    <input type="hidden" value="0" />'
-        banner = banner + '    <input class="width soma" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" type="text" required="required" />'
-        banner = banner + '    <span class="x">x</span>'
-        banner = banner + '    <input class="height soma" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" type="text" required="required"/>'
-        banner = banner + '    <ul class="nav nav-pills banner">'
-        banner = banner + '        <li class="dropdown" id="menu1">'
-        banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
-        banner = banner + '            <ul id="size'+i+'" class="size dropdown-menu">'
-        banner = banner + '            </ul>'
-        banner = banner + '        </li>'
-        banner = banner + '    </ul>'
-        banner = banner + '<span class="price">  R$ '+others.toFixed(2)+'</span>';
-        banner = banner + '    <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD'
-        banner = banner + ' <span class="price"> + R$ '+psd.toFixed(2)+'</span>';
-        banner = banner + ' <a href="#" class="badge badge-warning rm">-</a>'
-        banner = banner + ' <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
-        banner = banner + '    <br />'
-        banner = banner + '    <br />'
-        banner = banner + '</div>'
-        $('#newBanner').append(banner);
-        total = parseInt(document.getElementById("order_quantity").value) + 1;
-        document.getElementById("order_quantity").value = total;
-        if(total>(max-1)){
-            $('#btnnew').hide();
+
+            banner = banner + '<div id="banner'+i+'" class="span6">'
+            banner = banner + '    <input type="hidden" value="0" />'
+            banner = banner + '    <input class="width soma" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" type="text" required="required" />'
+            banner = banner + '    <span class="x">x</span>'
+            banner = banner + '    <input class="height soma" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" type="text" required="required"/>'
+            banner = banner + '    <ul class="nav nav-pills banner">'
+            banner = banner + '        <li class="dropdown" id="menu1">'
+            banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
+            banner = banner + '            <ul id="size'+i+'" class="size dropdown-menu">'
+            banner = banner + '            </ul>'
+            banner = banner + '        </li>'
+            banner = banner + '    </ul>'
+            banner = banner + '<span class="price">  R$ '+others.toFixed(2)+'</span>';
+            banner = banner + '    <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD'
+            banner = banner + ' <span class="price"> + R$ '+psd.toFixed(2)+'</span>';
+            banner = banner + ' <a href="#" class="badge badge-warning rm">-</a>'
+            banner = banner + ' <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
+            banner = banner + '    <br />'
+            banner = banner + '    <br />'
+            banner = banner + '</div>'
+            $('#newBanner').append(banner);
+            total = parseInt(document.getElementById("order_quantity").value) + 1;
+            document.getElementById("order_quantity").value = total;
+            if(total>(max-1)){
+                $('#btnnew').hide();
+            }
+        }else{
+            alert("Adicione um valor para o primeiro banner.");
         }
         e.preventDefault();
     });
@@ -246,13 +244,12 @@ $(function(){
             }
         }
     });
+    $(".nostyle").live("click", function(e){
+        e.preventDefault();
+    });
     $(".soma").live("click change", function(e){
         var max = parseInt(document.getElementById("maxBanner").value);
         var total = 0;
-        var psd = parseFloat(document.getElementById("PSDBanner").firstChild.nodeValue);
-        var others = parseFloat(document.getElementById("othersBanner").firstChild.nodeValue);
-        var first = parseFloat(document.getElementById("firstBanner").firstChild.nodeValue);
-        var rush = parseFloat(document.getElementById("rush").firstChild.nodeValue);
         var value = 0;
         var qtd = 0;
 
@@ -337,11 +334,26 @@ $(function(){
                 }
             }
         }
-        
         if (document.getElementById("order_rush").checked == true){   
             total = total + (qtd*rush);
        }
-       document.getElementById("order_total").value = total.toFixed(2);
+        var cupom = document.getElementById("order_cupom").value;
+        if(cupom!=""){
+            $.post("https://webbanners/desconto/check",{cupom:cupom}, function(data) {
+                total = total - parseFloat(data);
+               if(total > 0){
+                    $("#order_total").val(total.toFixed(2));
+                }else{
+                    $("#order_total").val((0).toFixed(2));
+                }  
+            })
+        }else{
+            if(total > 0){
+                $("#order_total").val(total.toFixed(2));
+            }else{
+                $("#order_total").val((0).toFixed(2));
+            }
+        }
     });
     
 });

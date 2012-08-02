@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Banner\OrderBundle\Form\Frontend\Order1Type;
 use Banner\OrderBundle\Form\Frontend\OrderType;
 use Banner\OrderBundle\Form\Frontend\UploadType;
@@ -31,6 +32,7 @@ class OrderController extends BaseController
      */
     public function indexAction($name="")
     {   
+        //exit(var_dump($this->generateUrl('order_discount_check', array(), true) ));
         $sizes = $this->mongo("BannerOrderBundle:Size")->findAllByOrder();
         if ($name) {
             $order = $this->mongo("BannerOrderBundle:Order")->findOneByName($name);
@@ -53,7 +55,7 @@ class OrderController extends BaseController
                         'formUser'   => $formUser->createView(), 
                         'order'      => $order,
                         'sizes'      => $sizes,
-                        'color'      => 'vermelho'
+                        'color'      => 'vermelho',
                     );
         
      }
@@ -142,7 +144,6 @@ class OrderController extends BaseController
     {   
         $dm = $this->get('doctrine.odm.mongodb.document_manager');  
         $request = $this->get('request');
-        //exit(var_dump(($request->attributes)));
         if ($this->get('security.context')->isGranted('ROLE_SUPERADMIN')) {
             $unsets = $this->mongo("BannerOrderBundle:Order")->findUnsets();
             $sets = $this->mongo("BannerOrderBundle:Order")->findSets();
@@ -214,9 +215,12 @@ class OrderController extends BaseController
         
         $user = $this->mongo('BannerUserBundle:User')->findByUsername($username);
         $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($name,$user);
+        $badges = 0;
         if ($this->get('security.context')->getToken()->getUser() == $order->getDesigner()) {
+            $badges = $order->getDunread();
             $order->setDunread(0);
         }elseif ($this->get('security.context')->getToken()->getUser() == $order->getUser()) {
+            $badges = $order->getCunread();
             $order->setCunread(0);
         }elseif (!$this->get('security.context')->isGranted("ROLE_ADMIN")){
             return $this->redirectFlash($this->generateUrl('_home'), "Você não está autorizado para acessar essa página.");
@@ -311,7 +315,8 @@ class OrderController extends BaseController
                         'aproves'   => $aproves,
                         'pendings'  => $pendings,
                         'lvisus'    => $lvisus,
-                        'pgatual'   => $pgatual
+                        'pgatual'   => $pgatual,
+                        'badges'    =>  $badges
                     );
     }
         /**
@@ -423,7 +428,6 @@ class OrderController extends BaseController
         $formUpload  = $request->files->get("banner");
         $name  = $request->request->get("order");
         $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);  
-        //exit(var_dump($order));
         
         if ('POST' == $request->getMethod()) {
             foreach ($formUpload as $upload){
@@ -460,7 +464,6 @@ class OrderController extends BaseController
         $formUpload  = $request->files->get("ling");
         $name  = $request->request->get("order");
         $order = $this->mongo('BannerOrderBundle:Order')->findOneByName($name);  
-        //exit(var_dump($order));
         
         if ('POST' == $request->getMethod()) {
             foreach ($formUpload as $upload){
@@ -489,23 +492,24 @@ class OrderController extends BaseController
         
         $msg = "";
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            
+        //pegando os dados do formulario    
         $formUser = $request->request->get('Userform');
         $formOrder = $request->request->get('order');
         $formBanner = $request->request->get('banner');
         $formUpload = $request->request->get('upload');
-
+        //pegando os arquivos para upload
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
         $formUpload->bindRequest($request); 
         $formUpload1  = $request->files->get("upload");
-        
+        //validação de dados importantes
         if(($formUser["email"] && !$formUser) || !$formOrder || !$formUpload){
             $msg = "Problemas no cadastro, favor conferir.";
             return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
         }
-        
-        if($this->get('security.context')->isGranted("ROLE_USER") ){
+        //verificação se o usuário é cliente, e se não existe nenhum projeto para esse cliente. Senão verfica se o usuário
+        //já está cadastrado com ese email
+        if($this->get('security.context')->isGranted("ROLE_CLIENT") ){
             $user = $this->get('security.context')->getToken()->getUser();
             
             $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($formOrder['name'],$user);
@@ -518,12 +522,12 @@ class OrderController extends BaseController
         else
         {
             $user = $this->mongo('BannerUserBundle:User')->findByEmail($formUser["email"]);
-
+            //se já cadastrado, não permite cadastrar novamente com o mesmo email
             if($user){
                 $msg = "E-mail já cadastrado. Efetue o login para solicitar um novo pedido.";
                 return $this->redirectFlash($this->generateUrl('_order_order_index'), $msg);
             }
-
+            //cria o usuário e manda e-mail de criação com a senha.
             $user = new User();
             $user->setRoles("ROLE_CLIENT");
             $user->setEmail($formUser["email"]);
@@ -552,13 +556,16 @@ class OrderController extends BaseController
             
             $msg = "Um email foi enviado com sua senha.";
         }
+        //cria status padrão e cria um Log de status.
         $status = $this->mongo('BannerOrderBundle:Status')->findOneById((int)$this->get('mastop')->param('order.order.defaultstatus'));
         $statusLog = new StatusLog();
         $statusLog->setStatus($status);
         $statusLog->setUser($user);
         $dm->persist($statusLog);
-               
+        
+        //cria pedido e seta informações do formulario
         $order = new Order();
+        //seta informações de banners solicitados
         foreach($formBanner as $fBanner){
             $fBanner['height'] = (int)$fBanner['height'];
             $fBanner['width'] = (int)$fBanner['width'];
@@ -574,27 +581,33 @@ class OrderController extends BaseController
                 $order->addBanner($banner);
             }
         }
+        //seta informações de pacotes solicitados
         $pacote = $request->request->get('pacote');
         $packpsd = $request->request->get('packpsd');
         if(isset($pacote)==true){
             if($pacote == '1' || $pacote == '2'  || $pacote == '3' ||
                 $pacote == '4' ||  $pacote == '5' || $pacote == '6'){
+                $order->setPacote($this->mongo("BannerOrderBundle:Discount")->findOneByName("Pacote".$pacote));
+                
+                if($order->getPacote()){
+                    $order->setDesconto($order->getPacote()->getDiscount());
+                }
                 $banner = new Banner();
                 $banner->setHeight(300);
                 $banner->setWidth(250);
-                $banner->setPsd($packpsd[1]);
-                $banner->setValue((int)$this->get('mastop')->param('order.order.FirstBanner'));
+                $banner->setPsd($packpsd[$pacote]);
+                $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                 $order->addBanner($banner);
                 $banner = new Banner();
                 $banner->setHeight(728);
                 $banner->setWidth(90);
-                $banner->setPsd($packpsd[1]);
+                $banner->setPsd($packpsd[$pacote]);
                 $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                 $order->addBanner($banner);
                 $banner = new Banner();
                 $banner->setHeight(160);
                 $banner->setWidth(600);
-                $banner->setPsd($packpsd[1]);
+                $banner->setPsd($packpsd[$pacote]);
                 $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                 $order->addBanner($banner);
                 
@@ -603,13 +616,13 @@ class OrderController extends BaseController
                     $banner = new Banner();
                     $banner->setHeight(120);
                     $banner->setWidth(600);
-                    $banner->setPsd($packpsd[2]);
+                    $banner->setPsd($packpsd[$pacote]);
                     $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                     $order->addBanner($banner);
                     $banner = new Banner();
                     $banner->setHeight(468);
                     $banner->setWidth(60);
-                    $banner->setPsd($packpsd[2]);
+                    $banner->setPsd($packpsd[$pacote]);
                     $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                     $order->addBanner($banner);
                     if( $pacote == '3' ||
@@ -617,52 +630,52 @@ class OrderController extends BaseController
                         $banner = new Banner();
                         $banner->setHeight(250);
                         $banner->setWidth(25);
-                        $banner->setPsd($packpsd[3]);
+                        $banner->setPsd($packpsd[$pacote]);
                         $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                         $order->addBanner($banner);
                         $banner = new Banner();
                         $banner->setHeight(720);
                         $banner->setWidth(300);
-                        $banner->setPsd($packpsd[3]);
+                        $banner->setPsd($packpsd[$pacote]);
                         $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                         $order->addBanner($banner);
                         if( $pacote == '4' ||  $pacote == '5' || $pacote == '6' ){
                             $banner = new Banner();
                             $banner->setHeight(336);
                             $banner->setWidth(280);
-                            $banner->setPsd($packpsd[4]);
+                            $banner->setPsd($packpsd[$pacote]);
                             $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                             $order->addBanner($banner);
                             $banner = new Banner();
                             $banner->setHeight(234);
                             $banner->setWidth(60);
-                            $banner->setPsd($packpsd[4]);
+                            $banner->setPsd($packpsd[$pacote]);
                             $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                             $order->addBanner($banner);
                             if( $pacote == '5'  || $pacote == '6'){
                                 $banner = new Banner();
                                 $banner->setHeight(300);
                                 $banner->setWidth(100);
-                                $banner->setPsd($packpsd[5]);
+                                $banner->setPsd($packpsd[$pacote]);
                                 $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                                 $order->addBanner($banner);
                                 $banner = new Banner();
                                 $banner->setHeight(300);
                                 $banner->setWidth(600);
-                                $banner->setPsd($packpsd[5]);
+                                $banner->setPsd($packpsd[$pacote]);
                                 $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                                 $order->addBanner($banner);
                                 if( $pacote == '6'){
                                     $banner = new Banner();
                                     $banner->setHeight(180);
                                     $banner->setWidth(150);
-                                    $banner->setPsd($packpsd[6]);
+                                    $banner->setPsd($packpsd[$pacote]);
                                     $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                                     $order->addBanner($banner);
                                     $banner = new Banner();
                                     $banner->setHeight(88);
                                     $banner->setWidth(31);
-                                    $banner->setPsd($packpsd[6]);
+                                    $banner->setPsd($packpsd[$pacote]);
                                     $banner->setValue((int)$this->get('mastop')->param('order.order.OthersBanner'));
                                     $order->addBanner($banner);
                                 }
@@ -683,7 +696,11 @@ class OrderController extends BaseController
                 $order->addUpload($upload);
             }
         }
-        
+        $cupom = $this->mongo("BannerOrderBundle:Discount")->findOneByCode($formOrder['cupom']);
+        if($cupom){
+        $order->setCupom($cupom);
+        $order->setDesconto($order->getDesconto() + $cupom->getDiscount());
+        }
         $order->setStatus($status);
         $order->addStatusLog($statusLog);
         $order->setName($formOrder['name']);
@@ -692,7 +709,7 @@ class OrderController extends BaseController
         $order->setLink($formOrder['link']);
         $order->setNotes($formOrder['notes']);
         $order->setRush(isset($formOrder['rush']) ? "rush": "normal");
-        $order->setVrush($this->get('mastop')->param('order.order.Rush'));
+        $order->setVrush(count($order->getBanner())*$this->get('mastop')->param('order.order.Rush'));
         $order->setCunread(0);
         $order->setDunread(0);
         $dm->persist($order);

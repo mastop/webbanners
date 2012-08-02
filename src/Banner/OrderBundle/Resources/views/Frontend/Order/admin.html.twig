@@ -18,11 +18,10 @@
 {% block content %}
 <div class="tabbable">
     <ul class="nav nav-tabs">
-        <li{% if( pgatual == "design") %} class="active"{% endif %}><a class="guide" id="5" href="#design" data-toggle="tab">Designer</a></li>
-        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" id="5" href="#aprovacao" data-toggle="tab">Para aprovação</a></li>
-        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" id="5" href="#aprovados" data-toggle="tab">Aprovados</a></li>
-        <li{% if( pgatual == "pagamento") %} class="active"{% endif %}><a class="guide" id="5" href="#pagamento" data-toggle="tab">Pendente pagamento</a></li>
-        <li{% if( pgatual == "alterar") %} class="active"{% endif %}><a class="guide" id="5" href="#alterar" data-toggle="tab">Alterar designer</a></li>
+        <li{% if( pgatual == "design") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Seleção de designers para os pedidos" id="5" href="#design" data-toggle="tab">Designer <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "aprovacao") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Pedidos que estão aguardando aprovação" id="5" href="#aprovacao" data-toggle="tab">Para aprovação <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "aprovados") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Pedidos já finalizados" id="5" href="#aprovados" data-toggle="tab">Aprovados <i class="icon-question-sign"></i></a></li>
+        <li{% if( pgatual == "alterar") %} class="active"{% endif %}><a class="guide" rel="tooltip" title="Alteração de designer" id="5" href="#alterar" data-toggle="tab">Alterar designer <i class="icon-question-sign"></i></a></li>
     </ul>
     <div class="tab-content">
         <!-- Designers -->
@@ -62,7 +61,7 @@
                             {% if (i==1) %}
                             <tr>
                                 <td colspan="2"></td>
-                                <td><input type="submit" value="Ok" /></td>
+                                <td><input class="btn" type="submit" value="Ok" /></td>
                             </tr>
                             {% endif %}
                         </form>
@@ -194,7 +193,7 @@
                             {% if (i==1) %}
                             <tr>
                                 <td colspan="3"></td>
-                                <td><input type="submit" value="Ok" /></td>
+                                <td><input class="btn" type="submit" value="Ok" /></td>
                             </tr>
                             {% endif %}
                         </form>

@@ -24,6 +24,13 @@ class Discount
      * @ODM\Id(strategy="increment")
      */
     protected $id;
+    
+    /**
+     * Código do disconto
+     * 
+     * @ODM\String
+     */
+    protected $code;
 
     /**
      * Descrição
@@ -211,5 +218,25 @@ class Discount
     public function getValue($total)
     {
         return $this->limit;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string $code
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

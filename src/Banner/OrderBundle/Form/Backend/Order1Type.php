@@ -13,6 +13,7 @@ class Order1Type extends AbstractType {
                 ->add('link', 'textarea', array('label' => 'Link', 'read_only'=>'true', 'attr'  => array('style' => 'width: 3')))
                 ->add('notes', 'textarea', array('label' => 'Anotações','read_only'=>'true', 'attr'  => array('style' => 'width: 3')))
                 ->add('quantity', 'number', array('label'=>'Quantidade', 'read_only'=>'true'))
+                ->add('cupom', 'text', array('label'=>'Cupom de desconto', 'attr'  => array('style' => 'width: 3')))
             ;
     }
 
