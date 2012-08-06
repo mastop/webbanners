@@ -98,10 +98,10 @@ class OrderController extends BaseController
                             ->template('pedido_alteracao', array('user' => $order->getUser(),'order'=>$order))
                             ->send();
                         if($order->getDesigner()){
-                        $mail->to($order->getDesigner()->getEmail())
-                            ->subject('Alteração de pedido - WebBanners')
-                            ->template('pedido_alteracao', array('user' => $order->getDesigner(),'order'=>$order))
-                            ->send();
+                            $mail->to($order->getDesigner()->getEmail())
+                                ->subject('Alteração de pedido - WebBanners')
+                                ->template('pedido_alteracao', array('user' => $order->getDesigner(),'order'=>$order))
+                                ->send();
                             $mail->notify('Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer '.$order->getDesigner()->getCode().'-'.$order->getDesigner()->getName());
                         }else{
                             $mail->notify('Alteração de pedido'.'Foi alterado o pedido '.$order->getId().' do usuário '.$order->getUser()->getCode().'-'.$order->getUser()->getName().' e designer não foi escolhido');

@@ -47,3 +47,4 @@ span.x{
     outline: medium none;
     vertical-align: middle;
 }
+img.center {   display: block;   margin-left: auto;   margin-right: auto; }
