@@ -4,7 +4,6 @@
 .noBG{background: transparent; border: 0; text-shadow:none;}
 span.arrow{float: left; background: url('../images/sprite.png') no-repeat -5px -3px; width: 30px; height: 19px; margin-top: 5px; margin-right: 10px;}
 .floatL{float: left}
-.floatC{float: inherit;}
 .floatR{float: right}
 .m0{margin: 0;}
 .m5{margin: 5px;}

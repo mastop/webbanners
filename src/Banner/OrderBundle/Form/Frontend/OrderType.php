@@ -3,11 +3,11 @@
 namespace Banner\OrderBundle\Form\Frontend;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class OrderType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('name', 'text', array('label' => 'Nome do Projeto'))
                 ->add('link', 'text', array('label' => 'Para qual pagina o seu banner irá direcionar?'))
@@ -19,7 +19,7 @@ class OrderType extends AbstractType {
             ;
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\OrderBundle\Document\Order'
         );

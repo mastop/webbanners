@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57c1c7b9-53c0-4082-ad2d-6bf0da1e6de3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" />
+    <list default="true" id="0bd66ef5-aee4-429b-9369-7d954da69832" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/public/img/webbanner404.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/work.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GleeFixYou.mpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/GleeFixYou.wmv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/form.html.twig" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/images/anuncios/300X250.jpg" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/images/anuncios/300x250.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/images/anuncios/720X300.jpg" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/images/anuncios/720x300.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/Form/form.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/Form/form.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/autoload.php" afterPath="$PROJECT_DIR$/app/autoload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config_dev.yml" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing_dev.yml" afterPath="$PROJECT_DIR$/app/config/routing_dev.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/console" afterPath="$PROJECT_DIR$/app/console" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/phpunit.xml.dist" afterPath="$PROJECT_DIR$/app/phpunit.xml.dist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/BannerOfferType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/BannerOfferType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/BannerType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/BannerType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CategoryType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CategoryType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CityEditType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CityEditType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CityType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CityType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContactType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContactType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContentType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContentType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CoordinatesType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/CoordinatesType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/DiscountType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/DiscountType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/Order1Type.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/Order1Type.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/SizeType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/SizeType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/StatusType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Backend/StatusType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/OrderType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/OrderType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/TalkType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/TalkType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/UploadType.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/UploadType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/admin.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/admin.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/ChangePass.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/ChangePass.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserForm.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserFormEdit.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserFormEdit.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/ForgetForm.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/ForgetForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/BankDataType.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/BankDataType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ChangePassForm.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ChangePassForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ReenviarForm.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ReenviarForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserForm.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserForm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormEdit.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormEdit.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormTwitter.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormTwitter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app.php" afterPath="$PROJECT_DIR$/web/app.php" />
     </list>
     <ignored path="webbanners.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -21,30 +71,15 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="webbanners" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="banner.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="22" selection-start="223" selection-end="246" vertical-scroll-proportion="-0.016566265">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mastop.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="23" selection-start="433" selection-end="433" vertical-scroll-proportion="-3.6">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -57,10 +92,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/ChangePass.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserForm.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Backend/UserFormEdit.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/BankDataType.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ChangePassForm.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/ReenviarForm.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormEdit.php" />
+        <option value="$PROJECT_DIR$/src/Banner/UserBundle/Form/Frontend/UserFormTwitter.php" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContentType.php" />
+        <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/form.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" />
         <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/zzz.html" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" />
+        <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/work.html.twig" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
       </list>
     </option>
   </component>
@@ -77,6 +124,36 @@
         <expanded-state>
           <State>
             <id />
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript validity issuesJavaScript</id>
+          </State>
+          <State>
+            <id>PHP</id>
+          </State>
+          <State>
+            <id>PHPDocPHP</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsJavaScript</id>
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+          <State>
+            <id>XPath</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -141,7 +218,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -155,33 +232,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
+              <option name="myItemId" value="mastop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="MastopBundles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bannercore" />
+              <option name="myItemId" value="Mastop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -195,19 +258,61 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
+              <option name="myItemId" value="mastop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bannercore" />
+              <option name="myItemId" value="MastopBundles" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="Mastop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MenuBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mastop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MastopBundles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Mastop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MenuBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MongoDB" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -222,46 +327,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -280,18 +345,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -314,18 +367,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -351,19 +392,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="banner" />
+              <option name="myItemId" value="DataFixtures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -389,23 +418,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
+              <option name="myItemId" value="DataFixtures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
+              <option name="myItemId" value="Menu" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -419,43 +436,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="system" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -469,65 +450,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Frontend" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -548,10 +475,14 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="settings.xslt" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="options.searchVisible" value="true" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vendor/mastop/MastopBundles/Mastop/MenuBundle/DataFixtures/MongoDB" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -559,13 +490,6 @@
       <method>
         <option name="PhingTarget" enabled="false" />
       </method>
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method />
     </configuration>
     <list size="0" />
   </component>
@@ -590,33 +514,33 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="57c1c7b9-53c0-4082-ad2d-6bf0da1e6de3" name="Default" comment="" />
-      <created>1343915352636</created>
-      <updated>1343915352636</updated>
+      <changelist id="0bd66ef5-aee4-429b-9369-7d954da69832" name="Default" comment="" />
+      <created>1344535418963</created>
+      <updated>1344535418963</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="26" width="1602" height="846" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23359074" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.6710145" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3289855" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25289574" sideWeight="0.6710145" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -673,63 +597,117 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="webbanners" />
-        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="webbanners" />
-        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-      </PATH_ELEMENT>
-    </PATH>
-  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Form/Frontend/UploadType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="52" selection-start="450" selection-end="450" vertical-scroll-proportion="0.38256657">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.5625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContentType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="52" selection-start="1616" selection-end="1616" vertical-scroll-proportion="-10.958333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="370" column="38" selection-start="22236" selection-end="22236" vertical-scroll-proportion="0.3525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="31" selection-start="3694" selection-end="3694" vertical-scroll-proportion="1.7464114" />
+        <state line="785" column="49" selection-start="37376" selection-end="37376" vertical-scroll-proportion="-478.16666">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.430622" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/calendar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.067771085" />
+    <entry file="file://$PROJECT_DIR$/web/images/643f935_logo_1.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="23" selection-start="433" selection-end="433" vertical-scroll-proportion="-3.6">
+        <state line="6" column="7" selection-start="411" selection-end="417" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/css/Frontend/banner.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/mastop/MastopBundles/Mastop/MenuBundle/Resources/public/js/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/mastop/MastopBundles/Mastop/MenuBundle/Resources/views/Backend/Menu/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="56" selection-start="163" selection-end="163" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="12" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="24" selection-start="4202" selection-end="4219" vertical-scroll-proportion="-3.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/mastop/MastopBundles/Mastop/MenuBundle/DataFixtures/MongoDB/LoadMenuData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/work.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="84" selection-start="1862" selection-end="1862" vertical-scroll-proportion="0.7094431">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="223" selection-end="246" vertical-scroll-proportion="-0.016566265">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.9221968">
           <folding />
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
 

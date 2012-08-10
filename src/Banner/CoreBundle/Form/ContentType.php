@@ -25,11 +25,11 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ContentType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('id', 'hidden');
         $builder->add('title', 'text', array('label'=>'Título da Página'));
         $builder->add('seoTitle', 'text', array('label'=>'Título da Janela', 'required'=>false));
@@ -38,7 +38,7 @@ class ContentType extends AbstractType {
         $builder->add('content', 'textarea', array('label'=>'Conteúdo', 'attr'=>array('class'=>'large')));
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\CoreBundle\Document\Content',
             'intention' => 'content_creation',

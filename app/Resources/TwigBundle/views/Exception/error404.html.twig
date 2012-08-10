@@ -1,0 +1,12 @@
+{% extends '::frontend.html.twig' %}
+{% block title %}
+{{ "Erro 404"|trans }}
+{% endblock title %}
+{% block content %}
+<div class="grid_6">
+    <h1>{{ "Erro 404"|trans }}</h1>
+</div>
+<div class="grid_6">
+    <div class='info_box info'><b>{{ "Importante"|trans }}</b><br />{{"Verifique se o email não foi bloqueado pelo sistema anti-SPAM de seu provedor de email."|trans }}</div>
+</div>
+{% endblock content %}

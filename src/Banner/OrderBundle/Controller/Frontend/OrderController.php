@@ -747,7 +747,7 @@ class OrderController extends BaseController
         
      }
      /**
-     * @Route("/retorno/{gateway}", name="order_order_return")
+     * @Route("/retorno/{gateway}", name="_order_order_return")
      * @Template()
      */
     public function returnAction($gateway) {
@@ -783,7 +783,7 @@ class OrderController extends BaseController
             
             $orderId = $_POST['Referencia'];
             $order = $this->mongo('BannerOrderBundle:Order')->findOneById((int) $orderId);
-            $order->setLink($this->generateUrl("order_order_return",array("gateway"=>$this->mastop()->param('order.sell.gateway'))));
+            $order->setLink($this->generateUrl("_order_order_return",array("gateway"=>$this->mastop()->param('order.sell.gateway'))));
             $status = $this->mongo('BannerOrderBundle:Status')->findOneByName($_POST['StatusTransacao']);
             if(!$status){
                 $status = $this->mongo('BannerOrderBundle:Status')->findById((int)$this->mastop()->param('order.order.othersstatus'));
@@ -811,44 +811,16 @@ class OrderController extends BaseController
         return $this->redirectFlash($this->generateUrl('_home'), "Pedido efetuado, estamos aguardando a resposta do PagSeguro.");
     }
      /**
-     * @Route("/form/{color}", name="order_order_form",  defaults={"color" = "cinza"})
+     * @Route("/trabalho/{color}", name="_order_order_work",  defaults={"color" = "cinza"})
      * @Template()
      */
-    public function formAction($color="cinza") {
-             
-        $array = array();
-        $array[] = array("nome"=>"VendedorEmail","valor"=>"leonardo@mastop.com.br");   
-        $array[] = array("nome"=>"TransacaoID","valor"=>"823C2F36AED24836B0518C8399857D4F");   
-        $array[] = array("nome"=>"Referencia","valor"=>"1");   
-        $array[] = array("nome"=>"Extras","valor"=>"0,00");   
-        $array[] = array("nome"=>"TipoFrete","valor"=>"FR");   
-        $array[] = array("nome"=>"ValorFrete","valor"=>"0,00");   
-        $array[] = array("nome"=>"DataTransacao","valor"=>"12/06/2012 15:00:18");   
-        $array[] = array("nome"=>"TipoPagamento","valor"=>"Boleto");   
-        $array[] = array("nome"=>"StatusTransacao","valor"=>"Paga");   
-        $array[] = array("nome"=>"CliNome","valor"=>"Leonardo Mastop");   
-        $array[] = array("nome"=>"CliNome","valor"=>"Leonardo Mastop");   
-        $array[] = array("nome"=>"CliEmail","valor"=>"leo@mastop.com.br");   
-        $array[] = array("nome"=>"CliEndereco","valor"=>"RUA AIAMOPO LOBO");   
-        $array[] = array("nome"=>"CliNumero","valor"=>"326");   
-        $array[] = array("nome"=>"CliBairro","valor"=>"Parque Casa de Pedra");   
-        $array[] = array("nome"=>"CliCidade","valor"=>"SAO PAULO");   
-        $array[] = array("nome"=>"CliEstado","valor"=>"SP");   
-        $array[] = array("nome"=>"CliCEP","valor"=>"02320140");   
-        $array[] = array("nome"=>"CliTelefone","valor"=>"11 22035195");   
-        $array[] = array("nome"=>"NumItens","valor"=>"1");   
-        $array[] = array("nome"=>"Parcelas","valor"=>"1");   
-        $array[] = array("nome"=>"ProdID_1","valor"=>"1");   
-        $array[] = array("nome"=>"ProdDescricao_1","valor"=>"Banner tamanho 728x60");   
-        $array[] = array("nome"=>"ProdValor_1","valor"=>"30,00");   
-        $array[] = array("nome"=>"ProdQuantidade_1","valor"=>"1");   
-        $array[] = array("nome"=>"ProdFrete_1","valor"=>"0,00");   
-        $array[] = array("nome"=>"ProdExtras_1","valor"=>"0,00");   
-        return array("parameters"=>$array, "color"=>$color);
+    public function workAction($color="cinza") {
+
+        return array("color"=>$color);
     }
     
      /**
-     * @Route("/pay/{id}", name="order_order_pay")
+     * @Route("/pay/{id}", name="_order_order_pay")
      * @Template()
      */
     public function payAction($id){

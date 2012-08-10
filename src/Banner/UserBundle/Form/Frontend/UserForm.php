@@ -2,7 +2,7 @@
 
 namespace Banner\UserBundle\Form\Frontend;
 
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\AbstractType;
 
@@ -14,7 +14,7 @@ class UserForm extends AbstractType {
     protected $password2;
     protected $username;
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('id', 'hidden')
                 ->add('name', 'text', array('max_length' => 100, 'label' => 'Nome Completo'))
@@ -29,7 +29,7 @@ class UserForm extends AbstractType {
         ;
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\UserBundle\Document\User',
             'csrf_protection' => true,

@@ -1,5 +1,4 @@
 {% if form is defined %}
-{% form_theme form ':Form:form.html.twig' %}
 {% endif %}
 {% set protocol = mastop_protocol() %}
 {% set redirURL = app.session.get('_security.target_path') %}

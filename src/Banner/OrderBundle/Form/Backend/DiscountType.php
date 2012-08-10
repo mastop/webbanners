@@ -3,10 +3,10 @@
 namespace Banner\OrderBundle\Form\Backend;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class DiscountType extends AbstractType {
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('description', 'text', array('label'=>'Descrição'))
                 ->add('discount', 'integer', array('label'=>'Desconto'))
@@ -16,7 +16,7 @@ class DiscountType extends AbstractType {
             ;
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\OrderBundle\Document\Discount'
         );

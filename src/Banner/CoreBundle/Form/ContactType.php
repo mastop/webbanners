@@ -28,11 +28,11 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ContactType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('name', 'text', array('label' => 'Nome:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('phone', 'text', array('required' => false, 'label' => 'Telefone:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('mail', 'email', array('label' => 'E-mail:', 'attr' => array('style' => 'width: 450px;')));
@@ -49,7 +49,7 @@ class ContactType extends AbstractType {
             )));
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\CoreBundle\Document\Contact',
             'intention' => 'contact_creation',

@@ -25,11 +25,11 @@
 namespace Banner\UserBundle\Form\Frontend;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class BankDataType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('name', 'text', array('label' => 'Banco'));
         $builder->add('agency', 'text', array('label' => 'Agência'));
         $builder->add('account', 'text', array('label' => 'Conta'));
@@ -37,7 +37,7 @@ class BankDataType extends AbstractType {
         $builder->add('obs', 'textarea', array('label' => 'Observações', 'required' => false));
     }
 
-    public function getDefaultOptions() {
+    public function getDefaultOptions(array $options) {
         return array(
             'data_class' => 'Banner\UserBundle\Document\BankData',
         );
