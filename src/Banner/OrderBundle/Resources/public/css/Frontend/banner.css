@@ -80,7 +80,6 @@ input, textArea{
 }
 .background{
     background-color: #EEEEEE;
-    width: 936px;
     float: right;
     border-radius: 8px;
 }
@@ -105,34 +104,43 @@ input, textArea{
     border-right: none !important;
 }
 .pack{
-    height: 50px;
-    width: 550px;
+    height: 65px;
+    width: 600px;
+    padding-top: 10px;
 }
-#pack1{
-    background-color: yellow;
-    color: blue;
+.packName {
+    float: left;
+    margin: 10px 30px;
 }
-#pack2{
-    background-color: orange;
-    color:purple;
+#newBanner .packName {
+    margin: 10px 0px;
 }
-#pack3{
-    background-color: darkorange;
-    color: red;
+.packPrice {
+    float: left;
+    font-weight: bold;
+    margin: 20px 40px;
+    width:80px;
 }
-#pack4{
-    background-color: red;
-    color: darkorange;
+.packPSD{
+    float: left;
+    margin: 20px 10px;
 }
-#pack5{
-    background-color: purple;
-    color: orange;
-}
-#pack6{
-    background-color: blue;
-    color: yellow;
+
+.packline{
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #FFFFFF;
 }
 a.nostyle{
     text-decoration: none;
     cursor: default;
+}
+#pedidobanner{
+    font-size: 14px;
+}
+#tot, #otot {
+    font-weight: bold;
+    font-size: 22px;
+}
+#total {
+    margin: 30px 0;
 }

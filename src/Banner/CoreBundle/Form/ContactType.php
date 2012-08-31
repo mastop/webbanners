@@ -37,12 +37,12 @@ class ContactType extends AbstractType {
         $builder->add('phone', 'text', array('required' => false, 'label' => 'Telefone:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('mail', 'email', array('label' => 'E-mail:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('msg', 'textarea', array('label' => 'Mensagem:', 'attr' => array('style' => 'width: 450px;', 'rows' => '8')));
-        $builder->add('email', 'text', array(
+        $builder->add('email', 'hidden', array(
             'required' => false,
             'attr' => array(
                 'class' => 'hidden'
             )));
-        $builder->add('coment', 'textarea', array(
+        $builder->add('coment', 'hidden', array(
             'required' => false,
             'attr' => array(
                 'class' => 'hidden'

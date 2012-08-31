@@ -1,12 +1,49 @@
 {% extends '::frontend.html.twig' %}
+{% block header %}
+<header id="hd">
+    <div class="container">
+        <div id="Table_header">
+            <div id="header-02_">
+                <a class="brand" href="#">
+                    <div class="span3">
+                        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+                    </div>
+                </a>
+            </div>
+            <div id="header-03_">
+                <div class="navbar floatR">
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            {#mastop_menu('system-head', null, null, 0, 'list', {'class':'nav head'})#}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="header-04_">
+            </div>
+            <div id="header-05_">
+            </div>
+            <div id="header-06_">
+                <div class="navbar">
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li><a href="{{path('_home')}}">Home</a></li>
+                            <li><a href="{{path('_order_order_size')}}">Tamanhos Disponíveis</a></li>
+                            <li><a href="/pg/faq">FAQ</a></li>
+                            <li><a href="/fale-conosco">Fale Conosco</a></li>
+                            {#mastop_menu('system-main', null, null, 0, 'list', {'class':'nav menu'})#}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+{%endblock header%}
 {% block title %}
-{{ "Erro 404"|trans }}
+{{ "Error 404"|trans }}
 {% endblock title %}
 {% block content %}
-<div class="grid_6">
-    <h1>{{ "Erro 404"|trans }}</h1>
-</div>
-<div class="grid_6">
-    <div class='info_box info'><b>{{ "Importante"|trans }}</b><br />{{"Verifique se o email não foi bloqueado pelo sistema anti-SPAM de seu provedor de email."|trans }}</div>
-</div>
+<img class="center" src="/bundles/bannertwig/img/webbanner404.jpg" />
 {% endblock content %}

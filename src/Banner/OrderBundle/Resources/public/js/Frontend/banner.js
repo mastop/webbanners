@@ -1,5 +1,4 @@
 $(function(){
-    
     $('#pedidobanner').submit(function(){
         var checked = false;
         var elems = document.getElementsByName("pacote");
@@ -31,12 +30,11 @@ $(function(){
     });
     $('a[rel*=facebox]').facebox();
     $("a.rm").live("click", function(e){
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
         var i = 0;
         var total = 0;
-        var max = parseInt(document.getElementById("maxBanner").value);  
 
-        for (i = 0 ; i < max ; i++) {
+        for (i = 0 ; i < maxBanner ; i++) {
             if(i==0){   
                 if(document.getElementById("width"+i)){
                     total = total + first;
@@ -79,15 +77,23 @@ $(function(){
         var i = 0;
         var j = 0;
         for (i = 0 ; i < max ; i++) {
+            var file = document.getElementById("ling["+i+"]");
             if (document.getElementById("ling["+i+"]") != undefined){
                 if(document.getElementById("ling["+i+"]").value != ""){
-                    document.getElementById("ling["+i+"]").style.visibility = "hidden";
-                    var html = document.getElementById("ling["+i+"]").value;
-                    if(html != ""){
-                            $("#ling"+i).html(html);
+                    extensao   = file.value.substr(file.value.length - 4,file.value.length);
+                    if(file.files[0].size<=3000000 &&
+                        (extensao=='.jpg' || extensao=='.gif' || extensao=='.psd' || extensao=='.cdr' || extensao=='.png' || extensao=='.pdf')
+                        ){
+                            document.getElementById("ling["+i+"]").style.visibility = "hidden";
+                            var html = document.getElementById("ling["+i+"]").value;
+                            if(html != ""){
+                                    $("#ling"+i).html(html);
+                            }
+                    }else{
+                        alert("Atenção, só é permitido arquivos com no máximo 3Mb nos formatos .jpg, .gif, .psd, .cdr, .png e .pdf. ");
+                        document.getElementById("ling["+i+"]").value = "";
+                        j=1;
                     }
-                }else{
-                    j=0;
                 }
             }else{
                 if(j!=1){
@@ -105,16 +111,24 @@ $(function(){
         var i = 0;
         var j = 0;
         for (i = 0 ; i < max ; i++) {
+            var file = document.getElementById("banner["+i+"]");
             if (document.getElementById("banner["+i+"]") != undefined){
-                if(document.getElementById("banner["+i+"]").value != ""){
-                    document.getElementById("banner["+i+"]").style.visibility = "hidden";
-                    var html = document.getElementById("banner["+i+"]").value;
-                    if(html != ""){
+                extensao   = file.value.substr(file.value.length - 4,file.value.length);
+                if(file.files[0].size<=3000000 &&
+                    (extensao=='.jpg' || extensao=='.gif' || extensao=='.psd' || extensao=='.cdr' || extensao=='.png' || extensao=='.pdf')
+                    ){
+                    if(document.getElementById("banner["+i+"]").value != ""){
+                        document.getElementById("banner["+i+"]").style.visibility = "hidden";
+                        var html = document.getElementById("banner["+i+"]").value;
+                        if(html != ""){
                             $("#banner"+i).html(html);
+                        }
                     }
                 }else{
-                    j=0;
-                }
+                        alert("Atenção, só é permitido arquivos com no máximo 3Mb nos formatos .jpg, .gif, .psd, .cdr, .png e .pdf. ");
+                        document.getElementById("banner["+i+"]").value = "";
+                        j=1;
+                    }
             }else{
                 if(j!=1){
                     var image = '<div id="banner_file'+i+'"><spam id="banner'+i+'"></spam><input id="banner['+i+']" class="banner" type="file" name="banner['+i+']"><br /></div>';
@@ -124,19 +138,28 @@ $(function(){
             }
         }
         e.preventDefault();
-        });
+    });
     $("input.upload").live("change", function(e){
-        var max = parseFloat(document.getElementById("maxUpload").value);
-        var i = 0;
         var j = 0;
-        for (i = 0 ; i < max ; i++) {
-            if (document.getElementById("upload_file["+i+"]") != undefined){
-                if(document.getElementById("upload_file["+i+"]").value != ""){
-                    document.getElementById("upload_file["+i+"]").style.visibility = "hidden";
-                    var html = document.getElementById("upload_file["+i+"]").value;
-                    if(html != ""){
+        var extensao = "";
+        for (i = 0 ; i < maxUpload ; i++) {
+            var file = document.getElementById("upload_file["+i+"]");
+            if (file != undefined){
+                if(file.value != ""){
+                    extensao   = file.value.substr(file.value.length - 4,file.value.length);
+                    if(file.files[0].size<=3000000 &&
+                        (extensao=='.jpg' || extensao=='.gif' || extensao=='.psd' || extensao=='.cdr' || extensao=='.png' || extensao=='.pdf')
+                        ){
+                        document.getElementById("upload_file["+i+"]").style.visibility = "hidden";
+                        var html = document.getElementById("upload_file["+i+"]").value;
+                        if(html != ""){
                             html = html + "  <a href='#' class='rmupload badge badge-important'>x</a>";
                             $("#upload"+i).html(html);
+                        }
+                    }else{
+                        alert("Atenção, só é permitido arquivos com no máximo 3Mb nos formatos .jpg, .gif, .psd, .cdr, .png e .pdf. ");
+                        document.getElementById("upload_file["+i+"]").value = "";
+                        j=1;
                     }
                 }else{
                     j=0;
@@ -154,38 +177,43 @@ $(function(){
     $("#novo").click(function(e){
         if( document.getElementById("width0").value  != '' && document.getElementById("height0").value != ''){
             var banner = '';
-            var max = parseInt(document.getElementById("maxBanner").value);
             var total = 0;
-            for (i = 0 ; i < max ; i++) {
+            for (i = 0 ; i < maxBanner ; i++) {
                 if (document.getElementById("width"+i) == undefined){
                     break;
                 }
             }
 
-            banner = banner + '<div id="banner'+i+'" class="span6">'
-            banner = banner + '    <input type="hidden" value="0" />'
-            banner = banner + '    <input class="width soma" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" type="text" required="required" />'
-            banner = banner + '    <span class="x">x</span>'
-            banner = banner + '    <input class="height soma" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" type="text" required="required"/>'
-            banner = banner + '    <ul class="nav nav-pills banner">'
-            banner = banner + '        <li class="dropdown" id="menu1">'
-            banner = banner + '            <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>'
-            banner = banner + '            <ul id="size'+i+'" class="size dropdown-menu">'
-            banner = banner + '            </ul>'
-            banner = banner + '        </li>'
-            banner = banner + '    </ul>'
-            banner = banner + '<span class="price">  R$ '+others.toFixed(2)+'</span>';
-            banner = banner + '    <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> PSD'
-            banner = banner + ' <span class="price"> + R$ '+psd.toFixed(2)+'</span>';
-            banner = banner + ' <a href="#" class="badge badge-warning rm">-</a>'
-            banner = banner + ' <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
+            banner = banner + '<div id="banner'+i+'" class="span8">';
+            banner = banner + ' <div class="packName">';
+            banner = banner + '     <input type="hidden" value="0" />';
+            banner = banner + '      <input class="width soma" id="width'+i+'" name=" banner['+i+'][width] " maxlength="3" type="text" required="required" />';
+            banner = banner + '      <span class="x">x</span>';
+            banner = banner + '      <input class="height soma" id="height'+i+'" name=" banner['+i+'][height] " maxlength="3" type="text" required="required"/>';
+            banner = banner + '      <ul class="nav nav-pills banner">';
+            banner = banner + '         <li class="dropdown" id="menu1">';
+            banner = banner + '                <a href="#" class="selectButton" id="'+i+'" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>';
+            banner = banner + '                <ul id="size'+i+'" class="size dropdown-menu">';
+            banner = banner + '               </ul>';
+            banner = banner + '           </li>';
+            banner = banner + '      </ul>';
+            banner = banner + ' </div>';
+            banner = banner + ' <div class="packPrice">';
+            banner = banner + '     <span class="price">  R$ '+others.toFixed(2)+'</span>';
+            banner = banner + ' </div>'
+            banner = banner + ' <div class="packPSD">'
+            banner = banner + '     <input class="psd soma" id="psd'+i+'" name=" banner['+i+'][psd] " type="checkbox"/> '
+            banner = banner + '     <span class="price"> PSD + R$ '+psd.toFixed(2)+'</span>';
+            banner = banner + '     <a href="#" class="badge badge-warning rm">-</a>'
+            banner = banner + '     <input class="value" id="value'+i+'" name=" banner['+i+'][value] " type="hidden" value="'+others.toFixed(2)+'" />'
+            banner = banner + ' </div>'
             banner = banner + '    <br />'
             banner = banner + '    <br />'
             banner = banner + '</div>'
             $('#newBanner').append(banner);
             total = parseInt(document.getElementById("order_quantity").value) + 1;
             document.getElementById("order_quantity").value = total;
-            if(total>(max-1)){
+            if(total>(maxBanner-1)){
                 $('#btnnew').hide();
             }
         }else{
@@ -248,12 +276,11 @@ $(function(){
         e.preventDefault();
     });
     $(".soma").live("click change", function(e){
-        var max = parseInt(document.getElementById("maxBanner").value);
         var total = 0;
         var value = 0;
         var qtd = 0;
 
-        for (i = 0 ; i < max ; i++) {
+        for (i = 0 ; i < maxBanner ; i++) {
             if(document.getElementById("width"+i)){
                 if(document.getElementById("width"+i).value != "" && document.getElementById("height"+i).value != ""){
                     if (document.getElementById("width"+i).getAttribute("readonly") != "readonly"){
@@ -292,38 +319,38 @@ $(function(){
                 }
             }
             if(value == 1){
-                total = total + 174;
+                total = total + 160;
                 qtd += 3;
                 if(document.getElementById("packpsd[1]").checked == true){
-                    total = total + (3*psd);
+                    total = total + (5*psd);
                 }
             }
             if(value == 2){
                 total = total + 240;
                 qtd += 5;
                 if(document.getElementById("packpsd[2]").checked == true){
-                    total = total + (5*psd);
+                    total = total + (7*psd);
                 }
             }
             if(value == 3){
                 total = total + 320;
                 qtd += 7;
                 if(document.getElementById("packpsd[3]").checked == true){
-                    total = total + (7*psd);
+                    total = total + (9*psd);
                 }
             }
             if(value == 4){
                 total = total + 400;
                 qtd += 9;
                 if(document.getElementById("packpsd[4]").checked == true){
-                    total = total + (9*psd);
+                    total = total + (11*psd);
                 }
             }
             if(value == 5){
                 total = total + 480;
                 qtd += 11;
                 if(document.getElementById("packpsd[5]").checked == true){
-                    total = total + (11*psd);
+                    total = total + (13*psd);
                 }
             }
             if(value == 6){
@@ -338,8 +365,14 @@ $(function(){
             total = total + (qtd*rush);
        }
         var cupom = document.getElementById("order_cupom").value;
-        if(cupom!=""){
+        if(cupom!="" && cupom.substr(0,4) !="PACK"){
             $.post("https://webbanners/desconto/check",{cupom:cupom}, function(data) {
+                if(data==0){
+                    document.getElementById("ordem_cupom").nodeValue = "";
+                    $('#desconto').html('Esse cupom não existe. Favor conferir.');
+                }else{
+                    $('#desconto').html('Desconto: '+ (parseFloat(data)).toFixed(2));
+                }
                 total = total - parseFloat(data);
                if(total > 0){
                     $("#order_total").val(total.toFixed(2));
@@ -349,14 +382,20 @@ $(function(){
             })
         }else{
             if(total > 0){
+                $('#desconto').html('');
                 $("#order_total").val(total.toFixed(2));
+                $("#tot").html('R$ '+total.toFixed(2));
             }else{
+                $('#desconto').html('');
                 $("#order_total").val((0).toFixed(2));
+                $("#tot").html('R$ '+(0).toFixed(2));
             }
         }
+
     });
     
 });
+
 
 
 

@@ -1,0 +1,40 @@
+{% extends '::frontend.html.twig' %}
+
+{% block content %}
+<div class="span11">
+    <h1>FAQ</h1>
+    <br />
+    <h3>Cadastro</h3>
+    <br />
+    <div id="sercliente">
+        <h4>Como faço para ser um cliente?</h4>
+        <div class="span11">
+            Em nosso menu principal, você encontrará a opção "Cadastre-se". Depois disso, basta preencher as informações que nosso sistema confirmará seu cadastro por e-mail. Depois de efetuar o seu cadastro poderá fazer sua solicitação de banners.<br/>
+            Você também pode fazer seu pedido direto preenchendo apenas seu e-mail, nosso sistema irá enviar a senha para você e seu pedido já será processado após o pagamento.
+            <br /><br />
+        </div>
+    </div>
+    <div id="esquecisenha">
+        <h4>Esqueci minha senha. O que faço agora?</h4>
+        <div class="span11">
+            Na área de login temos a opção "esqueci minha senha" o sistema irá direciona-lo para uma página de recuperação de senha.
+            <br /><br />
+        </div>
+    </div>
+    <div id="alteraremail">
+        <h4>Quero alterar meu e-mail, é possível?</h4>
+        <div class="span11">
+            Sim, em "Meus Dados" é possível alterar seu nome e e-mail.
+            <br /><br />
+        </div>
+    </div>
+    <div id="mudarsenha">
+        <h4>Posso mudar minha senha?</h4>
+        <div class="span11">
+            Não só pode como deve alterar a senha de tempos em tempos. A melhor maneira de garantir a segurança no seu perfil WebBanner e em qualquer cadastro que você tenha na Web é mantendo sua senha sempre atualizada e bem guardada.
+            <br /><br />
+        </div>
+    </div>
+    <btn href="#" class="btn" onclick="javascript:history.go(-1); return false;">Voltar</btn>
+</div>
+{% endblock %}

@@ -3,8 +3,8 @@
 {% endblock %}
 {% block title %}{{ "Login"|trans }}{% endblock %}
 {% block content %}
-<div class="row">
-<div class="span6">
+<div class="span12">
+<div class="span5">
     <div>
         <h2>{{ "Já sou cadastrado"|trans }}</h2>
         <form action="{{ path("login_check") }}" method="post">
@@ -29,13 +29,9 @@
                 <a href="{{ path('user_user_recovery', {'username':last_username} ) }}" title="{{ "Troque sua senha"|trans }}" class="strong">{{ "Esqueci minha senha"|trans }}</a>
         </form>
     </div>
-    <div class="mT10">
-        <a href="{{url('user_user_twitterconect')}}" class="twLoginBtn" title="{{"Tem uma conta no Twitter? Use-a para fazer o seu login no %sitename%"|trans ({"%sitename%":mastop_param('system.site.name')}) }}">Logar com Twitter</a>
-        <a href="#" id='facebook-login' class="fbLoginBtn" title="{{"Tem uma conta no Facebook? Use-a para fazer o seu login no %sitename%"|trans ({"%sitename%":mastop_param('system.site.name')}) }}">Logar com Facebook</a>
-    </div>
     
 </div>
-<div class="span5">
+<div class="span6">
     <div id="login_register_box">
         <h2>{{ titulo }}</h2>
         <form action="{{ path('user_user_save') }}" method="post" {{ form_enctype(form) }}>

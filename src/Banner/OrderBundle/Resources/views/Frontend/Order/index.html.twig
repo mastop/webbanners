@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block javascripts%}
-{% javascripts output='static/system/js/sell.contact.js'
-                   '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+{% javascripts     '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/validadeOrder.js'
                    '@BannerUserBundle/Resources/public/js/Frontend/newUser.js'
+                   output='static/system/js/sell.contact.js'
                    %}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
@@ -23,201 +23,304 @@
     var first = {{mastop_param('order.order.FirstBanner')}};
     var others = {{mastop_param('order.order.OthersBanner')}};
     var rush = {{mastop_param('order.order.Rush')}};
+    var maxUpload = {{mastop_param('order.order.UploadOrder')}};
+    var maxBanner = 10;
 </script>
+<form class="block" id="pedidobanner" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
+    <div class="span11">
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs order">
+                <li class="active"><a class="guide" id="1" href="#tab1" data-toggle="tab">Banner</a></li>
+            </ul>
+            <div class="tab-content background">
+                <div class="tab-pane active" id="tab1">
+                    <div class="span9">
 
-<div class="tabbable tabs-left">
-    <ul class="nav nav-tabs order">
-        <li class="active"><a class="guide" id="1" href="#tab1" data-toggle="tab">Banner</a></li>
-    </ul>
-    <div class="tab-content background"> 
-        <div class="tab-pane active" id="tab1">
-            <form class="block" id="pedidobanner" {% if (order.name == null) %} action="{{ path('_order_order_save') }}" {% else %} action="{{ path('_order_order_modify',{"name":order.name}) }}" {% endif %} method="post" {{ form_enctype(formUpload)}} >
-                <div class="span9">
-                    <input id="maxUpload" type="hidden" value="{{mastop_param('order.order.UploadOrder')}}" name="maxUpload"/>
-                    <input id="maxBanner" type="hidden" value="10" name="maxBanner"/>
-                    <div class="span6">
-                        <br /> <br />
-                        {% if not is_granted('ROLE_USER') %}
-                        <h4>E-mail <a rel="tooltip" title="Digite e-mail não cadastrado ou efetue o login"><i class="icon-question-sign"></i></a></h4>
-                        <input id="Userform_email" type="email" required="required" name="Userform[email]">
-                        {% endif %}
-                        <h4>
-                            Pacotes de Banners
-                            <a rel="tooltip" title="Selecione o pacote que é mais adequado às sua necessidades."><i class="icon-question-sign"></i></a>
-                        </h4>
-                        <div id="pack1" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="1" /> 
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600" rel="popover" href="#" data-original-title="Pague 2, leve 3">
-                                Pacote 1
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[1]" id="packpsd[1]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <div id="pack2" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="2" /> 
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60" rel="popover" href="#" data-original-title="Pague 3, leve 5">
-                                Pacote 2
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[2]" id="packpsd[2]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <div id="pack3" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="3" /> 
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300" rel="popover" href="#" data-original-title="Pague 4, leve 7">
-                                Pacote 3
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[3]" id="packpsd[3]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <div id="pack4" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="4" /> 
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60" rel="popover" href="#" data-original-title="Pague 5, leve 9">
-                                Pacote 4
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[4]" id="packpsd[4]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <div id="pack5" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="5" /> 
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600" rel="popover" href="#" data-original-title="Pague 6, leve 11">
-                                Pacote 5
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[5]" id="packpsd[5]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <div id="pack6" class="pack">
-                            <input type="radio" class="pacote soma" name="pacote" value="6" />
-                            <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600 / 180x150 / 88x31" rel="popover" href="#" data-original-title="Pague 7, leve 13">
-                                Pacote 6
-                            </a>
-                            <input type="checkbox" class="soma" name="packpsd[6]" id="packpsd[6]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} / banner
-                        </div>
-                        <h4>
-                            Banners individuais 
-                            <a rel="tooltip" title="Digite ou selecione os tamanhos que deseja para banners individuais"><i class="icon-question-sign"></i></a>
-                        </h4>
-                        <div id="newBanner">
-                            {% set i = 0 %}
-                            {% for banner in order.banner %}
-                            <div id="{{i}}" class="span5">
-                                <input type="hidden" value="0" />
-                                <input class="width soma" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="{{banner.width}}" type="text" required="required" readonly="readonly"/>
-                                <span class="x">x</span>
-                                <input class="height soma" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="{{banner.height}}" type="text" required="required" readonly="readonly" />
-                                <span class="price"> R$ {{banner.value |number_format(2,'.',',')}}</span>
-                                <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} /> PSD
-                                <span class="price"> + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}}</span>
-                                <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{banner.value}}" />
-                                <br />
-                                <br />
+                        <div>
+                            <br /> <br />
+                            {% if not is_granted('ROLE_USER') %}
+                            <h3>E-mail <a rel="tooltip" title="Digite e-mail não cadastrado ou efetue o login"><i class="icon-question-sign"></i></a></h3>
+                            <input id="Userform_email" type="email" required="required" name="Userform[email]">
+                            {% endif %}
+                            <h3>
+                                Pacotes de Banners
+                                <a rel="tooltip" title="Selecione o pacote que é mais adequado às sua necessidades."><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <div class="packline span8"></div>
+                            <div id="pack1" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="1" {%if(pacote=="pack1")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600" rel="popover" href="#" data-original-title="Ganhe 1 banner">
+                                        <img src="/bundles/bannercore/images/pack/free1.png" alt="Free 1" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 1<br/>
+                                    <a href="{{path('_package',{'pacote':'1'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 160,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[1]" id="packpsd[1]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
                             </div>
-                            {% set i = i + 1 %}
-                            {% endfor %}
-                            <div id="banner{{i}}" class="span6">
-                                <input type="hidden" value="0" />
-                                <input class="width soma" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" type="text" />
-                                <span class="x">x</span>
-                                <input class="height soma" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" type="text" />
-                                <!-- dropdown -->
-                                <ul class="nav nav-pills banner">
-                                    <li class="dropdown" id="menu1">
-                                        <a href="#" class="selectButton" id="{{i}}" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>
-                                        <ul id="size{{i}}" class="size dropdown-menu">
+                            <div class="packline span8"></div>
+                            <div id="pack2" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="2" {%if(pacote=="pack2")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60" rel="popover" href="#" data-original-title="Ganhe 2 banners">
+                                        <img src="/bundles/bannercore/images/pack/free2.png" alt="Free 2" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 2<br/>
+                                    <a href="{{path('_package',{'pacote':'2'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 240,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[2]" id="packpsd[2]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
+                            </div>
+                            <div class="packline span8"></div>
+                            <div id="pack3" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="3" {%if(pacote=="pack3")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300" rel="popover" href="#" data-original-title="Ganhe 3 banners">
+                                        <img src="/bundles/bannercore/images/pack/free3.png" alt="Free 3" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 3<br/>
+                                    <a href="{{path('_package',{'pacote':'3'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 320,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[3]" id="packpsd[3]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
+                            </div>
+                            <div class="packline span8"></div>
+                            <div id="pack4" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="4" {%if(pacote=="pack4")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60" rel="popover" href="#" data-original-title="Ganhe 4 banners">
+                                        <img src="/bundles/bannercore/images/pack/free4.png" alt="Free 4" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 4<br/>
+                                    <a href="{{path('_package',{'pacote':'4'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 400,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[4]" id="packpsd[4]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
+                            </div>
+                            <div class="packline span8"></div>
+                            <div id="pack5" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="5" {%if(pacote=="pack5")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600" rel="popover" href="#" data-original-title="Ganhe 5 banners">
+                                        <img src="/bundles/bannercore/images/pack/free5.png" alt="Free 5" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 5<br/>
+                                    <a href="{{path('_package',{'pacote':'5'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 480,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[5]" id="packpsd[5]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
+                            </div>
+                            <div class="packline span8"></div>
+                            <div id="pack6" class="pack">
+                                <div class="floatL">
+                                    <input type="radio" class="pacote soma" name="pacote" value="6" {%if(pacote=="pack6")%} checked="checked" {%endif%}/>
+                                    <a class="nostyle" data-content="300x250 / 728x90/ 160x600 / 120x600 / 468x60 / 250x250 / 720X300 / 336x280 / 234x60 / 300x100 / 300x600 / 180x150 / 88x31" rel="popover" href="#" data-original-title="Ganhe 6 banners">
+                                        <img src="/bundles/bannercore/images/pack/free6.png" alt="Free 6" />
+                                    </a>
+                                </div>
+                                <div class="packName">
+                                    Free 6<br/>
+                                    <a href="{{path('_package',{'pacote':'5'})}}">Saiba Mais</a>
+                                </div>
+                                <div class="packPrice">
+                                    R$ 560,00
+                                </div>
+                                <div class="packPSD">
+                                    <input type="checkbox" class="soma" name="packpsd[6]" id="packpsd[6]" readonly="readonly" /> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}} por banner
+                                </div>
+                            </div>
+                            <div class="packline span8"></div>
+                            <br />
+                            <h3>
+                                Banners individuais
+                                <a rel="tooltip" title="Digite ou selecione os tamanhos que deseja para banners individuais"><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <div id="newBanner" class="span8">
+                                {% set i = 0 %}
+                                {% for banner in order.banner %}
+                                <div id="{{i}}" class="span8">
+                                    <div class="packName">
+                                        <input type="hidden" value="0" />
+                                        <input class="width soma" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" value="{{banner.width}}" type="text" required="required" readonly="readonly"/>
+                                        <span class="x">x</span>
+                                        <input class="height soma" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" value="{{banner.height}}" type="text" required="required" readonly="readonly" />
+                                    </div>
+                                    <div class="packPrice">
+                                    <span class="price"> R$ {{banner.value |number_format(2,'.',',')}}</span>
+                                    </div>
+                                    <div class="packPSD">
+                                        <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox" disabled="disabled" {% if (banner.psd != null) %}checked="checked"{% endif %} />
+                                        <span class="price"> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}}</span>
+                                        <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{banner.value}}" />
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                                {% set i = i + 1 %}
+                                {% endfor %}
+                                <div id="banner{{i}}" class="span8">
+                                    <div class="packName">
+                                        <input type="hidden" value="0" />
+                                        <input class="width soma" id="width{{i}}" name=" banner[{{i}}][width] " maxlength="3" type="text" />
+                                        <span class="x">x</span>
+                                        <input class="height soma" id="height{{i}}" name=" banner[{{i}}][height] " maxlength="3" type="text" />
+                                        <!-- dropdown -->
+                                        <ul class="nav nav-pills banner">
+                                            <li class="dropdown" id="menu1">
+                                                <a href="#" class="selectButton" id="{{i}}" data-toggle="dropdown" href="#menu1"><b class="caret"></b></a>
+                                                <ul id="size{{i}}" class="size dropdown-menu">
+                                                </ul>
+                                            </li>
                                         </ul>
-                                    </li>
-                                </ul>
-                                <!-- /dropdown -->
-                                <span class="price"> R$ {{mastop_param('order.order.FirstBanner') |number_format(2,'.',',')}}</span>
-                                <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox"/> 
-                                <span class="price"> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}}</span>
-                                <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{mastop_param('order.order.FirstBanner')}}" />
-                                <br />
-                                <br />
+                                        <!-- /dropdown -->
+                                    </div>
+                                    <div class="packPrice">
+                                        <span class="price"> R$ {{mastop_param('order.order.FirstBanner') |number_format(2,'.',',')}}</span>
+                                    </div>
+                                    <div class="packPSD">
+                                        <input class="psd soma" id="psd{{i}}" name=" banner[{{i}}][psd] " type="checkbox"/>
+                                        <span class="price"> PSD + R$ {{mastop_param('order.order.PSDBanner') |number_format(2,'.',',')}}</span>
+                                        <input class="value" id="value{{i}}" name=" banner[{{i}}][value] " type="hidden" value="{{mastop_param('order.order.FirstBanner')}}" />
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div id="btnnew" class="span8">
+                                <a id="novo" href="#" class="btn soma">+</a>
                             </div>
                         </div>
-                        <br />
-                        <br />
-                        <div id="btnnew" class="span5">
-                            <a id="novo" href="#" class="btn soma">+</a>
-                        </div>
-                    </div>
-                    <div class="span5">
-                        {% if (i==0) %}
-                        <label class="required" for="order_name">
-                            Nome do Projeto
-                            <a rel="tooltip" title="Digite um nome para identificar a campanha "><i class="icon-question-sign"></i></a>
-                        </label>
-                        <input id="order_name" type="text" required="required" name="order[name]"> 
-                        <label class="required" for="order_text">
-                            Texto para Banner
-                            <a rel="tooltip" title="Digite o texto que deseja para Banner"><i class="icon-question-sign"></i></a>
-                        </label>
-                        <textarea id="order_text" required="required" name="order[text]"></textarea>
-                        <label class="required" for="order_link">
-                            Página de redirecionamento
-                            <a rel="tooltip" title="Digite o endereço da página que o Banner irá direcionar"><i class="icon-question-sign"></i></a>
-                        </label>
-                        <input id="order_link" type="text" required="required" name="order[link]">
-                        <label class="required" for="order_notes">
-                            Instruções
-                            <a rel="tooltip" title="Faça alguma anotação que é necessário para o designer faça seu banner"><i class="icon-question-sign"></i></a>
-                        </label>
-                        <textarea id="order_notes" required="required" name="order[notes]"></textarea>
-                        {{ form_row(formOrder.quantity) }}
-                        {% if order.name == null %}
-                        <div id="upload">
-                            <label class="required" for="upload_file[0]">
-                                Imagens para o Banner
-                                <a rel="tooltip" title="Faça o upload das imagens que deverão ser utilizadas para o designer fazer o banner"><i class="icon-question-sign"></i></a>
+                        <div class="span8">
+                            {% if (i==0) %}
+                            <h3 for="order_name">
+                                Nome do Projeto
+                                <a rel="tooltip" title="Digite um nome para identificar a campanha "><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <input id="order_name" type="text" required="required" name="order[name]">
+                            <h3 for="order_text">
+                                Texto para Banner
+                                <a rel="tooltip" title="Digite o texto que deseja para Banner"><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <textarea id="order_text" required="required" name="order[text]"></textarea>
+                            <h3 for="order_link">
+                                Página de redirecionamento
+                                <a rel="tooltip" title="Digite o endereço da página que o Banner irá direcionar"><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <input id="order_link" type="text" required="required" name="order[link]">
+                            <h3 for="order_notes">
+                                Instruções
+                                <a rel="tooltip" title="Faça alguma anotação que é necessário para o designer faça seu banner"><i class="icon-question-sign"></i></a>
+                            </h3>
+                            <textarea id="order_notes" required="required" name="order[notes]"></textarea>
+                            {{ form_row(formOrder.quantity) }}
+                            {% if order.name == null %}
+                            <div id="upload">
+                                <h3 for="upload_file[0]">
+                                    Imagens para o Banner
+                                    <a rel="tooltip" title="Faça o upload das imagens que deverão ser utilizadas para o designer fazer o banner"><i class="icon-question-sign"></i></a>
+                                </h3>
+                                <div id="upload_file0">
+                                    <spam id="upload0"></spam>
+                                    <input id="upload_file[0]" class="upload" type="file" name="upload[0]" maxlength="100">
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            {{ form_row(formOrder.quantity) }}
+                            <label class="required" for="order_name">
+                                <h3>Nome do Projeto</h3>
                             </label>
-                            <div id="upload_file0">
-                                <spam id="upload0"></spam>
-                                <input id="upload_file[0]" class="upload" type="file" name="upload[0]" required="required">
+                            {{order.name}}<br /><br />
+                            <label class="required" for="order_text">
+                                <h3>Texto que irá no Banner</h3>
+                            </label>
+                            {{order.notes}}<br /><br />
+                            <label class="required" for="order_notes">
+                                <h3>Anotações</h3>
+                            </label>
+                            {{order.notes}}<br /><br />
+                            {% endif %}
+                            <br /><br />
+                            <input id="order_rush" type="checkbox" class="soma" name="order[rush]">
+                            <strong> Apresse meu pedido - 24hs express. R$ {{mastop_param('order.order.Rush') |number_format(2,'.',',')}} / banner</strong>
+                            <a rel="tooltip" title="Marque essa opção se necessita do pedido mais rápido. Faremos o Banner em 24h."><i class="icon-question-sign"></i></a>
+                            <br /><br />
+                            <div>
+                                <h3 for="order_cupom">
+                                    Cupom de desconto
+                                    <a rel="tooltip" title="Caso tenha um cupom de desconto, digite o número."><i class="icon-question-sign"></i></a>
+                                </h3>
+                                <input id="order_cupom" class="soma" type="text" style="width: 150px" name="order[cupom]">
                             </div>
-                        </div>
-                        {% endif %}
-                        {% else %}
-                        {{ form_row(formOrder.quantity) }}
-                        <label class="required" for="order_name">
-                            <h5>Nome do Projeto</h5>
-                        </label>
-                        {{order.name}}<br /><br />
-                        <label class="required" for="order_text">
-                            <h5>Texto que irá no Banner</h5>
-                        </label>
-                        {{order.notes}}<br /><br />
-                        <label class="required" for="order_notes">
-                            <h5>Anotações</h5>
-                        </label>
-                        {{order.notes}}<br /><br />
-                        {% endif %}
-                        <br /><br />
-                        <input id="order_rush" type="checkbox" class="soma" name="order[rush]">
-                        <strong> Apresse meu pedido - 24hs express. R$ {{mastop_param('order.order.Rush') |number_format(2,'.',',')}} / banner</strong>
-                        <a rel="tooltip" title="Marque essa opção se necessita do pedido mais rápido. Faremos o Banner em 24h."><i class="icon-question-sign"></i></a>
-                        <br /><br />
-                        <div>
-                            <label class=" required" for="order_cupom">Cupom de desconto</label>
-                            <input id="order_cupom" class="soma" type="text" style="width: 150px" name="order[cupom]">
-                        </div>
-                        <div id="desconto"></div>
-                        <div>
-                            <label class=" required" for="order_total">Total</label>
-                            <input id="order_total" type="text" required="required" readonly="readonly" name="order[total]" value="0.00">
+                            <div id="desconto"></div>
+                            <br />
                         </div>
                     </div>
                 </div>
-                <div class="offset1">
-                    <button class="btn btn-primary"><span>Enviar</span></button>
-                    <a class="btn" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+    <div class="offset2 span9">
+        <div id='total'>
+            <span id="otot" for="order_total">Total: </span>
+            <input id="order_total" type="hidden" required="required" readonly="readonly" name="order[total]" value="0.00">
+            <span id="tot">
+                {%set pack = pacote|slice(4,1) %}
+                {% if (pack > 0)%}
+                    R$ {{ (pack+1) * 80 }}.00
+                {% else %}
+                    R$ 0.00
+                {% endif %}
+            </span>
+        </div>
+        <button class="btn btn-primary"><span>Enviar</span></button>
+        <button class="btn" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</button>
+    </div>
+</form>
 
-            <div id="size">
+
+<div id="size">
     {% for size in sizes %}
-                    <li id="{{size.width}}x{{size.height}}"><a class="link-size soma" id="NUM" href="#">
-                            <span class="tamanho">{{size.width}}</span>
-                            <em>x</em>
-                            <span class="tamanho">{{size.height}}</span>
-                        </a></li>
+    <li id="{{size.width}}x{{size.height}}">
+        <a class="link-size soma" id="NUM" href="#">
+            <span class="tamanho">{{size.width}}</span>
+            <em>x</em>
+            <span class="tamanho">{{size.height}}</span>
+        </a>
+    </li>
     {% endfor %}
-                </div>
+</div>
 {% endblock %}

@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
-use JMS\SecurityExtraBundle\Annotation\Secure;
 use Banner\UserBundle\Form\Frontend\UserForm;
 use Banner\UserBundle\Form\Frontend\UserFormTwitter;
 use Banner\UserBundle\Form\Frontend\UserFormEdit;
@@ -341,24 +340,26 @@ class UserController extends BaseController {
 
     /**
      * @Route("/usuario/detalhes/{username}", name="user_user_details")
-     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function detailsAction($username) {
-        $repository = $this->dm()->getRepository('BannerUserBundle:User');
-        $itens = $repository->findByUsername($username);
-        if (count($itens) > 0) {
-            if ($this->verificaStatus($itens)) {
-                return $this->render('BannerUserBundle:Frontend/User:detalhes.html.twig', array(
-                            'usuario' => $itens));
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            $repository = $this->dm()->getRepository('BannerUserBundle:User');
+            $itens = $repository->findByUsername($username);
+            if (count($itens) > 0) {
+                if ($this->verificaStatus($itens)) {
+                    return $this->render('BannerUserBundle:Frontend/User:detalhes.html.twig', array(
+                                'usuario' => $itens));
+                } else {
+                    return $this->redirect($this->generateUrl('_home'));
+                }
             } else {
+                $msg = $this->trans('O usuário <b>%username%</b> não existe', array("%username%" => $username));
+                $this->get('session')->setFlash('error', $msg);
                 return $this->redirect($this->generateUrl('_home'));
             }
-        } else {
-            $msg = $this->trans('O usuário <b>%username%</b> não existe', array("%username%" => $username));
-            $this->get('session')->setFlash('error', $msg);
-            return $this->redirect($this->generateUrl('_home'));
         }
+        return $this->redirect($this->generateUrl('_home'));
     }
 
     /**
@@ -951,39 +952,43 @@ class UserController extends BaseController {
     
     /**
      * @Route("/usuario/banco", name="user_user_bank")
-     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function bankAction() {
-        $userLogado = $this->get('security.context')->getToken()->getUser();
-        $bankData = $userLogado->getBankData();
-        $form = $this->createForm(new BankDataType(), $bankData);
-        $ret['title'] = 'Informações Bancárias';
-        $ret['form'] = $form->createView();
-        return $ret;
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            $userLogado = $this->get('security.context')->getToken()->getUser();
+            $bankData = $userLogado->getBankData();
+            $form = $this->createForm(new BankDataType(), $bankData);
+            $ret['title'] = 'Informações Bancárias';
+            $ret['form'] = $form->createView();
+            return $ret;
+        }
+        return $this->redirectFlash($this->generateUrl('_home'), 'Faça o Login.');
     }
     
     /**
      * @Route("/usuario/banco/salvar", name="user_user_banksave")
-     * @Secure(roles="ROLE_CLIENT")
      * @Template()
      */
     public function bankSaveAction() {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $bankData = $user->getBankData();
-        $form = $this->createForm(new BankDataType(), $bankData);
-        $request = $this->get('request');
-        $dm = $this->dm();
-        if ('POST' == $request->getMethod()) {
-            $form->bindRequest($request);
-            if ($form->isValid()) {
-                $user->setBankData($form->getData());
-                $dm->persist($user);
-                $dm->flush();
-                return $this->redirectFlash($this->generateUrl('user_dashboard_index'), 'Informações bancárias atualizadas');
+        if ($this->get('security.context')->isGranted('ROLE_USER')) {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $bankData = $user->getBankData();
+            $form = $this->createForm(new BankDataType(), $bankData);
+            $request = $this->get('request');
+            $dm = $this->dm();
+            if ('POST' == $request->getMethod()) {
+                $form->bindRequest($request);
+                if ($form->isValid()) {
+                    $user->setBankData($form->getData());
+                    $dm->persist($user);
+                    $dm->flush();
+                    return $this->redirectFlash($this->generateUrl('user_dashboard_index'), 'Informações bancárias atualizadas');
+                }
             }
+            return $this->redirectFlash($this->generateUrl('user_dashboard_index'), 'Ocorreu um erro ao processar suas informações bancárias.', 'error');
         }
-        return $this->redirectFlash($this->generateUrl('user_dashboard_index'), 'Ocorreu um erro ao processar suas informações bancárias.', 'error');
+        return $this->redirectFlash($this->generateUrl('_home'), 'Faça o Login.');
     }
 
 }

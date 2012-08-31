@@ -9,13 +9,17 @@
 
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
-                   '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
+                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
                    %}
 <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock%}
 
 {% block content %}
+<script>
+    var maxUpload = {{mastop_param('order.order.UploadOrder')}};
+    var maxBanner = 10;
+</script>
 
 <div id="maxUpload" hidden="hidden">{{mastop_param('order.order.UploadOrder')}}</div>
 <div class="tabbable">
@@ -146,7 +150,7 @@
                                                 <input id="upload_file[0]" class="upload" type="file" name="upload[0]">
                                             </div>
                                         </div>
-                                        <div><br><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                                        <div><br><button class="button green m10"><span>Enviar</span></button> <a href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
                                     </form>
                                 </td>
                             </tr>
@@ -205,7 +209,7 @@
                                             <spam id="ling0"></spam>
                                             <input id='ling[0]' type='file' class='ling' name='ling[0]' ><br />
                                         </div>
-                                        <div><button class="button green m10"><span>Enviar</span></button></div>
+                                        <div><button class="btn"><span>Enviar</span></button></div>
                                         {% endif %}
                                     </form>     
                                     {% endif %}
@@ -362,7 +366,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="span11">
         <table>
         {% if (order.status.id != mastop_param('order.order.PayedStatus'))%}
         <tr>

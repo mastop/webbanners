@@ -1,12 +1,7 @@
-{% extends 'BannerCoreBundle:themes\\banner\\Frontend:frontend.html.twig' %}
+{% extends '::frontend.html.twig' %}
 {% block title %}
 {{ "Error"|trans }}
 {% endblock title %}
 {% block content %}
-<div class="grid_6">
-    <h1>{{ "Erro"|trans }}</h1>
-</div>
-<div class="grid_6">
-    <div class='info_box info'><b>{{ "Importante"|trans }}</b><br />{{"Error no Tema Banner"|trans }}</div>
-</div>
+<img class="center" src="/bundles/bannertwig/img/webbanner404.jpg" />
 {% endblock content %}

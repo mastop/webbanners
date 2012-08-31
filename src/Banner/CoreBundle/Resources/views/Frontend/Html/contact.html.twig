@@ -1,15 +1,15 @@
 {% extends '::frontend.html.twig' %}
 
 {% block content %}
-<div class="content box grid_12 round_all">
-    <div class="grid_7 prefix_1 alpha">
+<div class="span12">
+    <div class="span7">
         <h1>{{ title }}</h1>
         <form class="block" action="{{ path('core_html_contact') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
-                <div><button class="button green m10"><span>Enviar</span></button> <a class="button red" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</a></div>
+                <div><button class="btn btn-success"><span>Enviar</span></button> <button class="btn" href="#" onclick="javascript:history.go(-1); return false;">Cancelar</button></div>
         </form>
     </div>
-    <div class="grid_4 omega">
+    <div class="span4">
     {% render 'BannerCoreBundle:Widget\\Block:render' %}
     </div>
 </div>

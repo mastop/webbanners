@@ -115,10 +115,9 @@ mastop_system:
        file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
        consumer_key: G1WitELkS2NakPjyEsuAtw
        consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
-       callback_url: http://www.banner.com.br/usuario/twitter/back
+       callback_url: http://www.webbanner.com.br/usuario/twitter/back
 
 banner_core:
-    default_city: "sao-paulo"
     quova:
       apikey: "100.gp863cz2gt3gk6p2nxay"
       secret: "cqTd9Psm"

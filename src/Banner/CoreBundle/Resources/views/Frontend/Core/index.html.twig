@@ -1,20 +1,170 @@
 {% extends 'BannerCoreBundle:themes\\banner\\Frontend:frontend.html.twig' %}
 
 {% block content %}
-    <div class="span3">
-        <h3>O que é Webbanners?</h3>
-        Nós desenvolvemos sua campanha virtual personalizada, com comunicação 100% virtual, seguindo suas exigencias. <br /><a href="{{path('_order_order_index')}}">Peça já o seu!</a>
+<div class="row">
+    <div class="span12">
+        <div class="margem1">
+            <div id='index1' class="index ">
+                <span>Banners Online</span><br /><br />
+                Desenvolvimento de<br />
+                banners estáticos para<br />
+                campanhas de marketing, lojas virtuais,<br />
+                sites , blogs, facebook, etc...<br />
+                Potencializando campanhas na Web.<br />
+            </div>
+            <div id="index2" class="index ">
+                <span>Alterações no banner</span><br /><br />
+                Você pode comprar<br />
+                também o arquivo aberto do<br />
+                Photoshop do seu projeto.<br />
+                Ele virá todo separado e qualquer<br />
+                alteração será bem simples de ser feita.<br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="margem1">
+            <div id='index3' class="index">
+                <span>Agilidade na entrega</span><br /><br />
+                Prazo de entrega de 72 hs<br />
+                da aprovação do conceito.<br />
+                Receba os modelos, escolha o que mais<br />
+                lhe agrada, solicite suas alterações e em<br/>
+                3 dias já tem seu banner.<br />
+            </div>
+            <div id="index4" class="index">
+                <span>Tercerize seu trabalho</span><br /><br />
+                Correndo para entregar<br />
+                diversos projetos?<br />
+                Passe os banners para nossa equipe que<br />
+                iremos ajudá-lo.<br />
+                Condições especiais para designers.<br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="span11">
+            <h3>Pacotes Free</h3>
+                <div class="span10">
+                    Escolha o pacote ideal para sua campanha
+                </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="homePack">
+            <table>
+                <tr>
+                    <td>
+                        <a id='homePack1' href="{{path('_package',{'pacote':'1'})}}">Pacote 1</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 1!</span><br/>
+                            Neste pacote você paga por dois banners e nós fazemos três, você ganha um banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'1'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a id='homePack2' href="{{path('_package',{'pacote':'2'})}}">Pacote 2</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 2!</span><br/>
+                            Neste pacote você paga por três banners e nós fazemos cinco, você ganha dois banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'2'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a id='homePack3' href="{{path('_package',{'pacote':'3'})}}">Pacote 3</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 3!</span><br/>
+                            Neste pacote você paga por quatro banners e nós fazemos sete, você ganha três banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'3'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a id='homePack4' href="{{path('_package',{'pacote':'4'})}}">Pacote 4</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 4!</span><br/>
+                            Neste pacote você paga por cinco banners e nós fazemos nove, você ganha quatro banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'4'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a id='homePack5' href="{{path('_package',{'pacote':'5'})}}">Pacote 5</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 5!</span><br/>
+                            Neste pacote você paga por seis banners e nós fazemos onze, você ganha cinco banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'5'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a id='homePack6' href="{{path('_package',{'pacote':'6'})}}">Pacote 6</a>
+                    </td>
+                    <td>
+                        <div class="texto">
+                            <span>Ganhe 6!</span><br/>
+                            Neste pacote você paga por sete banners e nós fazemos treze, você ganha seis banner.<br/>
+                            <a class="saiba" href="{{path('_package',{'pacote':'6'})}}">saiba mais</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="row">
+    <div class="offset2 span10">
+        <span class="medium">Banner unitário R$ {{mastop_param('order.order.OthersBanner')}} - Optando pelos pacotes você ganha banners free.</span>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="row">
+    <div class="span12">
+        <div class="span11 links">
+            <a id='monicashop' href="http://www.monicashop.com.br/">Monica Shop</a>
+            <a id='ajoalheria' href="http://www.ajoalheria.com.br/">A Joalheria da internet</a>
+            <a id='leadernet' href="http://www.leadernet.com.br/">Leader Net</a>
+            <a id='gentequedanca' href="http://www.gentequedanca.com/">Gente Que Dança</a>
+            <a id='realimoveis' href="http://www.realimoveis.com.br/">Real Imóveis</a>
+            <a id='tiobeto' href="http://www.tiobeto.com/">Tio Beto</a>
+            <a id='turismo' href="http://www.turismonewyork.com/">Turismo New York</a>
+            <a id='clinicaatibaia' href="http://www.clinicaatibaia.com.br/">Clinica Atibaia</a>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="offset3 span9">
+        <span class="clientes">Conheça mais sobre nosso trabalho acessando os links de alguns de nossos clientes</span>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="row">
+    <div class="offset3 span3">
+        <a href="{{path('_order_order_index')}}" id="hcriar">criar banner</a>
     </div>
     <div class="span3">
-        <h3>Agilidade no desenvolvimento</h3>
-        Contamos com profissionais de designer que desenvolverão sua campanha em 72horas e você ainda pode solicitar que agilize seu pedido para 24h por apenas R$ {{mastop_param('order.order.Rush')|number_format(2,'.',',')}}/banner.
+        <a href="{{path('_package')}}" id="hpacotes">ver pacotes</a>
     </div>
-    <div class="span3">
-        <h3>Solicite o arquivo PSD</h3>
-        Ter essa opção é muito útil, pois ao ter o arquivo PSD é possível a exportação para outros formatos e simples alterações que você possa fazer em casa. Somente R$ {{mastop_param('order.order.PSDBanner')|number_format(2,'.',',')}}/banner.
-    </div>
-    <div class="span10">
-        <h3>Qualidade e atendimento</h3>
-        Nosso clientes são muito importantes. Prezamos pela qualidade de nossos trabalhos e o melhor atendimento pra você. <br />Procuramos sempre atualizar nosso atendimento e nossos sistemas para melhor atendê-los.
-    </div>
+</div>
+
 {% endblock %}

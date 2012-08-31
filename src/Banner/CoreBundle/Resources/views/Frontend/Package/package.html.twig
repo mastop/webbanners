@@ -1,0 +1,94 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+<!-- CSS Tema -->
+{% stylesheets '@BannerCoreBundle/Resources/public/css/package.css' filter='?yui_css' output='themes/banner/css/package.css' %}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack1' href="{{path('_package',{'pacote':'1'})}}">Pacote 1</a>
+    </div>
+    <div class="span8">
+        <br/>
+        <b>Free 1- Na compa de dois você ganha um banner!</b><br/>
+        Neste pacote você paga por dois banners e nós fazemos três, você ganha um banner.<br/>
+        Modelos (300x250/728x90/160x600)<br/>
+        <b>R$ 160,00</b> - <a href="{{path('_package',{'pacote':'1'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack1'})}}" style="margin: 0 20px;">Comprar!</a>
+
+     </div>
+</div>
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack2' href="{{path('_package',{'pacote':'2'})}}">Pacote 2</a>
+     </div>
+    <div class="span8">
+        <br/>
+        <b>Free 2- Na compa de três você ganha dois banners!</b><br/>
+        Neste pacote você paga por três banners e nós fazemos cinco, você ganha dois banner.<br/>
+        Modelos (300x250/728x90/160x600120x600/468x60)<br/>
+        <b>R$ 240,00</b> - <a href="{{path('_package',{'pacote':'2'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack2'})}}" style="margin: 0 20px;">Comprar!</a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack3' href="{{path('_package',{'pacote':'3'})}}">Pacote 3</a>
+    </div>
+    <div class="span8">
+        <br/>
+        <b>Free 3- Na compa de quatro você ganha três banners!</b><br/>
+        Neste pacote você paga por quatro banners e nós fazemos sete, você ganha três banner.<br/>
+        Modelos (300x250/728x90/160x600120x600/468x60/250x250/720x300)<br/>
+        <b>R$ 320,00</b> - <a href="{{path('_package',{'pacote':'3'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack3'})}}" style="margin: 0 20px;">Comprar!</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack4' href="{{path('_package',{'pacote':'4'})}}">Pacote 4</a>
+    </div>
+    <div class="span8">
+        <br/>
+        <b>Free 4- Na compa de três você ganha quatro banner!</b><br/>
+        Neste pacote você paga por cinco banners e nós fazemos nove, você ganha quatro banner.<br/>
+        Modelos (300x250/728x90/160x600120x600/468x60/250x250/720x300/336x280/280x60)<br/>
+        <b>R$ 400,00</b> - <a href="{{path('_package',{'pacote':'4'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack4'})}}" style="margin: 0 20px;">Comprar!</a>
+    </div>
+</div>
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack5' href="{{path('_package',{'pacote':'5'})}}">Pacote 5</a>
+    </div>
+    <div class="span8">
+        <br/>
+        <b>Free 5- Na compa de seis você ganha cinco banner!</b><br/>
+        Neste pacote você paga por seis banners e nós fazemos onze, você ganha cinco banner.<br/>
+        Modelos (300x250/728x90/160x600120x600/468x60/250x250/720x300/336x280/280x60/300x100/300x600)<br/>
+        <b>R$ 480,00</b> - <a href="{{path('_package',{'pacote':'5'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack5'})}}" style="margin: 0 20px;">Comprar!</a>
+    </div>
+</div>
+<div class="row">
+    <div class="offset1 span2">
+        <a id='homePack6' href="{{path('_package',{'pacote':'6'})}}">Pacote 6</a>
+    </div>
+    <div class="span8">
+        <br/>
+        <b>Free 6- Na compa de sete você ganha seis banner!</b><br/>
+        Neste pacote você paga por sete banners e nós fazemos treze, você ganha seis banner.<br/>
+        Modelos (300x250/728x90/160x600120x600/468x60/250x250/720x300/336x280/280x60/300x100/300x600/180x150/88x31)<br/>
+        <b>R$ 560,00</b> - <a href="{{path('_package',{'pacote':'6'})}}">saiba mais</a>
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack6'})}}" style="margin: 0 20px;">Comprar!</a>
+
+    </div>
+</div>
+
+{% endblock %}

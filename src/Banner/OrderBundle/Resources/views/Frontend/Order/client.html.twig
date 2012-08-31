@@ -43,14 +43,14 @@
                                     <span class="badge badge-important">{{order.cunread}}</span>
                                 </a>
                                 {% endif %}
-                            </td>       
+                            </td>
                             <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
+            {% endfor %}
                     </table>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
+            {% endfor %}
                     </table>
                 </div>
             </div>

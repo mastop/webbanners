@@ -108,7 +108,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $menu->setBundle('system');
         $menu->setRole('ROLE_ADMIN');
         $child = new MenuItem();
-        $child->setCode('homr');
+        $child->setCode('home');
         $child->setName('Home');
         $child->setOrder(0);
         $child->setUrl('_home');
@@ -116,9 +116,9 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $menu->addChildren($child);
         $child = new MenuItem();
         $child->setCode('trabalho');
-        $child->setName('Nosso Trabalho');
+        $child->setName('Tamanhos Disponíveis');
         $child->setOrder(1);
-        $child->setUrl('_order_order_work');
+        $child->setUrl('_order_order_size');
         $child->setRoute(true);
         $menu->addChildren($child);
         $child = new MenuItem();
@@ -162,7 +162,8 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $child->setName('FAQ');
         $child->setTitle('FAQ');
         $child->setOrder(6);
-        $child->setUrl('/pg/faq');
+        $child->setUrl('_faq');
+        $child->setRoute(true);
         $menu->addChildren($child);
         $child = new MenuItem();
         $child->setCode('contato');
@@ -189,7 +190,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         $menu->addChildren($child);
         $child = new MenuItem();
         $child->setCode('cadastro');
-        $child->setName('Cadastro');
+        $child->setName('Cadastre-se');
         $child->setUrl('/usuario/novo');
         $child->setRole('IS_AUTHENTICATED_ANONYMOUSLY');
         $child->setOrder(1);

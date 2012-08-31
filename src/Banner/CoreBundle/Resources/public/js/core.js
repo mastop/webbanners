@@ -30,6 +30,7 @@ $(".alert-message").alert();
 
 
 $(function(){
+
     // Todos os alertas são exibidos após o carregamento da página
     $('.alert').slideDown('slow');
     $('#topNL').slideDown('slow');

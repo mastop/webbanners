@@ -22,7 +22,8 @@ Mastop Internet Development http://www.mastop.com.br
 <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="pt-BR"> <![endif]-->
 <!--[if IE 8]> <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
 <!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-BR"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="pt-BR" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <title>{% block title title|default(mastop_param('system.site.name'))|trans %} - {%if app.request.attributes.get('_route') == '_home'%}{{mastop_param('system.site.slogan')}}{%else%}{{mastop_param('system.site.name')}}{%endif%}</title>
@@ -41,7 +42,7 @@ Mastop Internet Development http://www.mastop.com.br
   {% endstylesheets %}
    
   <!-- Bootstrap LESS -->
-  {% stylesheets filter='less,?yui_css' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/bootstrap.less' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/responsive.less' output='themes/banner/twitter-bootstrap/css/bootstrap.css' %}
+  {% stylesheets filter='less,?yui_css' '@BannerCoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/bootstrap.less' output='themes/banner/twitter-bootstrap/css/bootstrap.css' %}
     <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
   {% endstylesheets %}
 
@@ -60,6 +61,7 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
   {% javascripts '@BannerCoreBundle/Resources/public/js/libs/modernizr-2.0.6.min.js' filter='yui_js' output='static/system/js/modernizr.js' %}
     <script src="{{ asset_url }}"></script>
   {% endjavascripts %}
+
     <script type='text/javascript'>
         var __wtw_lucky_setup_key = {};
         __wtw_lucky_setup_key.id = '5589';
@@ -77,21 +79,14 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
   {% block javascriptsHead null %}
   {{ mastop_param('system.script.head') }}
 </head>
-<body class="wbbody wbbody_{%if color is defined%}{{color}}{%else%}cinza{%endif%}{%if is_granted('ROLE_USER') %} logged{%endif%}">
+<body class="wbbody wbbody_{%if color is defined%}{{color}}{%else%}padrao{%endif%} {% block bodyClass %}{%if is_granted('ROLE_USER')%}logged{% endif %}{% endblock %}">
 {# Header #}
 {% block header %}
 {%if is_granted('ROLE_USER') %}      
 <header id="hdC">
-    <div class="container"> 
+    <div class="container">
         <div id="Table_header">
-            <div id="header-02_">
-                <a class="brand" href="#">
-                    <div class="span3">
-                        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
-                    </div>
-                </a>
-            </div>
-            <div id="header-03_">
+            <div id="header-01_">
                 <div class="navbar floatR">
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
@@ -105,12 +100,57 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
                 </div>
                 {%endif%}
             </div>
-            <div id="header-06_">
+            <div id="header-03_">
+                <a class="brand" href="#">
+                    <div class="span3">
+                        <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
+                    </div>
+                </a>
+            </div>
+            <div id="header-07_">
                 <div class="navbar">
-                    <div class="nav-collapse">
+                    <div class="nav-collapse" onmouseout="packclose()">
                         <ul class="nav">
                             {{mastop_menu('system-main', null, null, 0, 'list', {'class':'nav menu'})}}
                         </ul>
+                        <ul class="nav floatR" >
+                            <li id="packopen">
+                                <a class="dropdown-toggle" title="pacotes" href="#" onmouseover="packopen()" data-toggle="dropdown">Pacotes</a>
+                                <ul class="dropdown-menu dropPack">
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'1'})}}">
+                                            Pacote Free 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'2'})}}">
+                                            Pacote Free 2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'3'})}}">
+                                            Pacote Free 3
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'4'})}}">
+                                            Pacote Free 4
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'5'})}}">
+                                            Pacote Free 5
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'6'})}}">
+                                            Pacote Free 6
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -120,38 +160,82 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
 </header>
 {% else %}
 <header id="hd">
-    <div class="container"> 
+    <div class="container">
         <div id="Table_header">
-            <div id="header-02_">
-                <a class="brand" href="#">
-                    <div class="span3">
+            <div id="fade">
+                <div id="header-01_">
+                    <div class="navbar floatR">
+                        <div class="nav-collapse">
+                            <ul class="nav pull-right">
+                                {{mastop_menu('system-head', null, null, 0, 'list', {'class':'nav head'})}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="header-02_">
+                </div>
+                <div id="header-03_">
+                    <a class="brand" href="#">
                         <a id="logo" href="{{ path('_home') }}" title="{{ mastop_param('system.site.name') }} - Home">{{ mastop_param('system.site.name') }} - {{ mastop_param('system.site.slogan') }}</a>
-                    </div>
-                </a>
-            </div>
-            <div id="header-03_">
-                <div class="navbar floatR">
-                    <div class="nav-collapse">
-                        <ul class="nav pull-right">
-                            {{mastop_menu('system-head', null, null, 0, 'list', {'class':'nav head'})}}
-                        </ul>
-                    </div>
+                    </a>
                 </div>
-                {%if is_granted('ROLE_USER') %}
-                <div class="alert alert-message login floatR">
-                    <span>Olá, <strong>{{ app.user.name|default(app.user.username) }}</strong>! <small>(não é você? <a href="{{path('_logout')}}">clique aqui</a>)</small></span> <a href="{{path('user_dashboard_index')}}" class="button small blue">Minha conta</a>
+                <div id="header-04_">
                 </div>
-                {%endif%}
+                <div id="header-05_">
+                </div>
+                <div id="header-06_">
+                    <a href="{{path('_order_order_index')}}" id="criar">criar banner</a>
+                    <a href="{{path('_package')}}" id="pacotes">ver pacotes</a>
+                </div>
+                <div id="header-06_1">
+                    <a href="#" id="abanner0">banner0 </a>
+                    <a href="#" id="abanner1">banner1 </a>
+                    <a href="#" id="abanner2">banner2 </a>
+                </div>
             </div>
-            <div id="header-04_">
-            </div>
-            <div id="header-05_">
-            </div>
-            <div id="header-06_">
+
+            <div id="header-07_">
                 <div class="navbar">
                     <div class="nav-collapse">
                         <ul class="nav">
                             {{mastop_menu('system-main', null, null, 0, 'list', {'class':'nav menu'})}}
+                        </ul>
+                        <ul class="nav floatR">
+                            <li class="dropdown" id="packopen">
+                                <a class="dropdown-toggle" title="pacotes" href="#" data-toggle="dropdown">Pacotes</a>
+                                <ul class="dropdown-menu dropPack">
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'1'})}}">
+                                            Pacote Free 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'2'})}}">
+                                            Pacote Free 2
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'3'})}}">
+                                            Pacote Free 3
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'4'})}}">
+                                            Pacote Free 4
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'5'})}}">
+                                            Pacote Free 5
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{path('_package',{'pacote':'6'})}}">
+                                            Pacote Free 6
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -193,10 +277,8 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
     {% endif %}
     {# /Mensagens do Sistema #}
     {# Conteúdo #}
-    <div class="container content">
-        <div class="span11">
+    <div class="container">
         {% block content null %}
-        </div>
     </div>
     {# /Conteúdo #}
 </div>
@@ -217,10 +299,6 @@ for optimal performance, create your own custom Modernizr build: www.modernizr.c
             </div>
             <div id="footer-03_">
                 {{mastop_menu('system-foot', null, null, 0, 'BannerCoreBundle:Menu:footer.html.twig', {'id':'navFoot'})}}
-            </div>
-            <div id="footer-04_">
-            </div>
-            <div id="footer-05_">
             </div>
             <div id="footer-06_">
                 <div id="copyright">
@@ -283,6 +361,9 @@ chromium.org/developers/how-tos/chrome-frame-getting-started -->
 <![endif]-->
 {# Javascripts #}
 {% block javascripts null%}
+{% javascripts '@BannerCoreBundle/Resources/public/js/all.js' output='static/system/js/all.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 {{ mastop_param('system.script.foot') }}
 {#/Javascripts #}
 </body>

@@ -26,11 +26,11 @@ use Banner\OrderBundle\Payment\PagSeguro;
 class OrderController extends BaseController
 { 
     /**
-     * @Route("/novo", name="_order_order_index", defaults={"name"=""})
-     * @Route("/alterar/{name}", name="_order_order_alter")
+     * @Route("/novo/{pacote}", name="_order_order_index", defaults={"name"="","pacote"=""})
+     * @Route("/alterar/{name}", name="_order_order_alter", defaults={"pacote"=""})
      * @Template()
      */
-    public function indexAction($name="")
+    public function indexAction($name="", $pacote="")
     {   
         //exit(var_dump($this->generateUrl('order_discount_check', array(), true) ));
         $sizes = $this->mongo("BannerOrderBundle:Size")->findAllByOrder();
@@ -55,7 +55,7 @@ class OrderController extends BaseController
                         'formUser'   => $formUser->createView(), 
                         'order'      => $order,
                         'sizes'      => $sizes,
-                        'color'      => 'vermelho',
+                        'pacote'     => $pacote,
                     );
         
      }
@@ -190,13 +190,12 @@ class OrderController extends BaseController
     {       
         $orders = array();
         $finals = array();
-        
         $user = $this->get('security.context')->getToken()->getUser();
         if($user && $user != "anon."){
             $orders = $this->mongo('BannerOrderBundle:Order')->findByOpenUser($user);
             $finals = $this->mongo('BannerOrderBundle:Order')->findByDoneUser($user);
         }
-        
+
         return array(
                         'orders'  => $orders,
                         'finals'  => $finals,
@@ -500,7 +499,7 @@ class OrderController extends BaseController
         //pegando os arquivos para upload
         $upload = new Upload();
         $formUpload = $this->createForm(new UploadType(), $upload);
-        $formUpload->bindRequest($request); 
+        $formUpload->bindRequest($request);
         $formUpload1  = $request->files->get("upload");
         //validação de dados importantes
         if(($formUser["email"] && !$formUser) || !$formOrder || !$formUpload){
@@ -511,7 +510,7 @@ class OrderController extends BaseController
         //já está cadastrado com ese email
         if($this->get('security.context')->isGranted("ROLE_CLIENT") ){
             $user = $this->get('security.context')->getToken()->getUser();
-            
+
             $order = $this->mongo('BannerOrderBundle:Order')->findByNameUser($formOrder['name'],$user);
 
             if($order){
@@ -544,7 +543,7 @@ class OrderController extends BaseController
                 $code = $this->mastop()->generateCode();
             }
             $user->setCode($code);
-            
+
             $dm->persist($user);
             $dm->flush();
             $mail = $this->get('mastop.mailer');
@@ -553,7 +552,7 @@ class OrderController extends BaseController
                 ->template('usuario_senhagerada', array('user' => $user,'password'=>$password, 'title' => 'Senha de acesso.'))
                 ->send();
             $mail->notify('Senha de acesso', 'A Senha do usuário '.$user->getName().' foi enviada com sucesso para o email '.$user->getEmail().'.');
-            
+
             $msg = "Um email foi enviado com sua senha.";
         }
         //cria status padrão e cria um Log de status.
@@ -562,7 +561,8 @@ class OrderController extends BaseController
         $statusLog->setStatus($status);
         $statusLog->setUser($user);
         $dm->persist($statusLog);
-        
+
+        //exit(var_dump("oi"));
         //cria pedido e seta informações do formulario
         $order = new Order();
         //seta informações de banners solicitados
@@ -811,10 +811,10 @@ class OrderController extends BaseController
         return $this->redirectFlash($this->generateUrl('_home'), "Pedido efetuado, estamos aguardando a resposta do PagSeguro.");
     }
      /**
-     * @Route("/trabalho/{color}", name="_order_order_work",  defaults={"color" = "cinza"})
+     * @Route("/tamanhos/{color}", name="_order_order_size",  defaults={"color" = "padrao"})
      * @Template()
      */
-    public function workAction($color="cinza") {
+    public function sizeAction($color="padrao") {
 
         return array("color"=>$color);
     }
