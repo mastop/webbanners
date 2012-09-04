@@ -85,6 +85,10 @@ img.center {   display: block;   margin-left: auto;   margin-right: auto; }
     background: url(/bundles/bannercore/images/index/04.png)  no-repeat;
     background-position: 300px 20px;
 }
+.index:hover{
+    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #EEE !important;
+}
 a#homePack1{
     background: url(/bundles/bannercore/images/index/free01.png)  no-repeat;
     background-position: bottom;

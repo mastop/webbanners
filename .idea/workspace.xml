@@ -2,63 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f985699-dcc4-47b1-8bd7-4f84d186daff" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadParametersData.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/package.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faq.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqcadastro.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqcampanha.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqentrega.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqenvio.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqpagamento.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/FAQ/faqsobre.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package1.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/exception_full.html.twig" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/zz\z.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/City/index.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/exception_full2.html.twig" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/work.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/size.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/images/slides/pagination.png" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/images/slides/pagination.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error.html.twig" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/error404.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/exception_full.html.twig" afterPath="$PROJECT_DIR$/app/Resources/TwigBundle/views/Exception/exception_full.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Controller/Frontend/CoreController.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Controller/Frontend/CoreController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadContentData.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadContentData.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadMenuData.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadMenuData.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContactType.php" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Form/ContactType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/core.js" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Content/index.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Content/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Html/contact.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Html/contact.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/error.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/error.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/error404.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Bundles/TwigBundle/Exception/error404.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/popovers.less" afterPath="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/popovers.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/css/Frontend/banner.css" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/css/Frontend/banner.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/js/Frontend/banner.js" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/js/Frontend/banner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/js/Frontend/validadeOrder.js" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/public/js/Frontend/validadeOrder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/client.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/client.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/index.html.twig" afterPath="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Controller/Frontend/DashboardController.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Controller/Frontend/DashboardController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Controller/Frontend/UserController.php" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Controller/Frontend/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/public/js/Frontend/newUser.js" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/public/js/Frontend/newUser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/Security/forget.html.twig" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/Security/forget.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/Security/login.html.twig" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/Security/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/User/confirmation.html.twig" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/User/confirmation.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/User/novo.html.twig" afterPath="$PROJECT_DIR$/src/Banner/UserBundle/Resources/views/Frontend/User/novo.html.twig" />
     </list>
     <ignored path="webbanners.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,20 +37,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="package.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig">
+      <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="130" selection-start="4371" selection-end="4371" vertical-scroll-proportion="0.0">
+            <state line="6" column="31" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frontend.html.twig" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig">
+      <file leaf-file-name="LoadContentData.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadContentData.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="47" selection-start="10008" selection-end="10008" vertical-scroll-proportion="-18.75">
-              <folding />
+            <state line="120" column="30" selection-start="7633" selection-end="7633" vertical-scroll-proportion="0.023923445">
+              <folding>
+                <marker date="1346706549000" expanded="true" signature="1554:2797" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="1613:2760" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="3040:3914" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="3099:3877" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="4211:5796" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="4270:5759" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="4460:5097" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="5236:5722" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="6040:8185" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="6099:8148" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="7084:7637" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="8441:9313" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="8500:9276" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="9569:10253" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="9628:10216" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="10513:11224" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="10572:11187" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="11458:12699" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="11517:12662" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="11795:12625" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="12951:21832" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="13012:21792" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="13357:21786" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="13394:14226" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="14263:14644" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="14802:15440" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="15477:15797" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="16278:16457" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="17521:17912" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="18636:18932" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="18969:19647" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="19684:20904" placeholder="..." />
+                <marker date="1346706549000" expanded="true" signature="20941:21268" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,16 +92,16 @@
       <file leaf-file-name="banner.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="290" column="0" selection-start="6413" selection-end="6413" vertical-scroll-proportion="0.0">
+            <state line="6" column="7" selection-start="128" selection-end="131" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js">
+      <file leaf-file-name="mastop.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="1" selection-start="2657" selection-end="2657" vertical-scroll-proportion="1.1069278">
+            <state line="382" column="1" selection-start="9419" selection-end="9419" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,22 +120,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadMenuData.php" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php" />
-        <option value="$PROJECT_DIR$/vendor/mastop/MastopBundles/Mastop/MenuBundle/DataFixtures/MongoDB/LoadMenuData.php" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/less/popovers.less" />
         <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php" />
         <option value="$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package1.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadMenuData.php" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig" />
         <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css" />
-        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js" />
+        <option value="$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadContentData.php" />
       </list>
     </option>
   </component>
@@ -181,16 +172,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,34 +299,16 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webbanners" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="Frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Banner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="Package" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,12 +338,142 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="Frontend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Banner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoreBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Frontend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Banner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoreBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Banner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoreBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MongoDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webbanners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Banner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoreBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DataFixtures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -432,13 +525,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="26" width="1602" height="846" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289855" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2998713" sideWeight="0.6623188" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31209782" sideWeight="0.6623188" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -508,92 +601,124 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Controller/Frontend/CoreController.php">
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/Menu/LoadMenuData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="41" selection-start="868" selection-end="868" vertical-scroll-proportion="0.703125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="24" selection-start="2135" selection-end="2135" vertical-scroll-proportion="0.2966507" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Resources/views/Frontend/Order/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="27" selection-start="20919" selection-end="20919" vertical-scroll-proportion="0.44976076" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/OrderBundle/Controller/Frontend/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="70" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.19936204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/twitter-bootstrap/js/bootstrap-dropdown.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package1.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="130" selection-start="1094" selection-end="1094" vertical-scroll-proportion="0.50239235" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="118" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.19138756" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="118" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.2631579" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="118" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.2631579" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="118" selection-start="1274" selection-end="1274" vertical-scroll-proportion="0.4784689" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="118" selection-start="1312" selection-end="1312" vertical-scroll-proportion="0.40988836" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/banner.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="130" selection-start="4371" selection-end="4371" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.042087544" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/frontend.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="47" selection-start="10008" selection-end="10008" vertical-scroll-proportion="-18.75">
+        <state line="116" column="48" selection-start="6015" selection-end="6015" vertical-scroll-proportion="0.038071066" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="130" selection-start="4371" selection-end="4371" vertical-scroll-proportion="0.5945946" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="1" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.7911833" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadMenuData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="39" selection-start="6360" selection-end="6360" vertical-scroll-proportion="-0.625" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package6.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="131" selection-start="1325" selection-end="1325" vertical-scroll-proportion="0.8042895" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package5.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="131" selection-start="1287" selection-end="1287" vertical-scroll-proportion="0.39678285" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package4.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="131" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.76407504" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package3.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="131" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.64343166" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package2.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="56" selection-start="1254" selection-end="1254" vertical-scroll-proportion="0.30456853" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Package/package1.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="123" selection-start="1087" selection-end="1095" vertical-scroll-proportion="0.3426396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/package.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/Frontend/Core/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="31" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/DataFixtures/MongoDB/LoadContentData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="30" selection-start="7633" selection-end="7633" vertical-scroll-proportion="0.023923445">
+          <folding>
+            <marker date="1346706549000" expanded="true" signature="1554:2797" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="1613:2760" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="3040:3914" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="3099:3877" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="4211:5796" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="4270:5759" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="4460:5097" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="5236:5722" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="6040:8185" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="6099:8148" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="7084:7637" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="8441:9313" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="8500:9276" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="9569:10253" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="9628:10216" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="10513:11224" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="10572:11187" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="11458:12699" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="11517:12662" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="11795:12625" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="12951:21832" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="13012:21792" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="13357:21786" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="13394:14226" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="14263:14644" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="14802:15440" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="15477:15797" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="16278:16457" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="17521:17912" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="18636:18932" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="18969:19647" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="19684:20904" placeholder="..." />
+            <marker date="1346706549000" expanded="true" signature="20941:21268" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/css/banner.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="290" column="0" selection-start="6413" selection-end="6413" vertical-scroll-proportion="0.0">
+        <state line="6" column="7" selection-start="128" selection-end="131" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/public/js/all.js">
+    <entry file="file://$PROJECT_DIR$/src/Banner/CoreBundle/Resources/views/themes/banner/Frontend/css/system/mastop.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="1" selection-start="2657" selection-end="2657" vertical-scroll-proportion="1.1069278">
-          <folding />
-        </state>
+        <state line="382" column="1" selection-start="9419" selection-end="9419" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
   </component>

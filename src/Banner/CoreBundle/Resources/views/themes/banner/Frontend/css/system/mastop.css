@@ -381,9 +381,6 @@ span.big{
     margin-top: 30px;
     margin-left: 30px;
 }
-#navFoot.row .current{
-    margin-left: 70px;
-}
 
 #copyright {color: #999; font-family: "museo-sans-rounded",sans-serif;}
 #poweredBy{text-align: right;}

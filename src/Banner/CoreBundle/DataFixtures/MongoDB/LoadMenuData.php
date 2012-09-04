@@ -114,7 +114,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                     $child2 = new MenuItem();
                     $child2->setCode('empresa.sobre');
                     $child2->setName('Sobre');
-                    $child2->setUrl('/pg/sobre-o-banner');
+                    $child2->setUrl('/pg/sobre-o-webbanner');
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
@@ -139,6 +139,14 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                     $child2->setName('Termos e Condições');
                     $child2->setUrl('/pg/termos-e-condicoes');
                     $child2->setOrder(3);
+                $child->addChildren($child2);
+                $manager->persist($menu);
+                $manager->flush();
+                    $child2 = new MenuItem();
+                    $child2->setCode('empresa.seguranca');
+                    $child2->setName('Segurança');
+                    $child2->setUrl('/pg/seguranca');
+                    $child2->setOrder(4);
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
