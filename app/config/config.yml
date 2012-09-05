@@ -4,21 +4,22 @@ imports:
 
 framework:
     #esi:             ~
-    secret: %secret%
-    charset: UTF-8
-    router: { resource: "%kernel.root_dir%/config/routing.yml" }
-    form: true
+    #translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
     csrf_protection: true
-    validation: { enable_annotations: true }
-    templating: { engines: ['twig'] } #assets_version: SomeVersionScheme
-    default_locale: %locale%
-    session:
-        auto_start: true
-    translator: { fallback: en }
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
+    trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:         ~
 
 # Twig Configuration
 twig:
-    debug: %kernel.debug%
+    debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
 # Assetic Configuration
@@ -27,6 +28,8 @@ assetic:
     read_from:      %themes_dir%
     write_to: %kernel.root_dir%/../web
     use_controller: false
+    bundles:        [BannerUserBundle, BannerCoreBundle, BannerOrderBundle, MastopMenuBundle, MastopSystemBundle ]
+    #java: /usr/bin/java
 #    assets:
 #        teste: css/text.css
 #        testejs: css/text.css
@@ -90,7 +93,7 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-    spool:     { type: memory }
+    spool: { type: memory }
 
 jms_security_extra:
     secure_all_services: false
@@ -112,10 +115,9 @@ mastop_system:
        file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
        consumer_key: G1WitELkS2NakPjyEsuAtw
        consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
-       callback_url: http://www.banner.com.br/usuario/twitter/back
+       callback_url: http://www.webbanner.com.br/usuario/twitter/back
 
 banner_core:
-    default_city: "sao-paulo"
     quova:
       apikey: "100.gp863cz2gt3gk6p2nxay"
       secret: "cqTd9Psm"

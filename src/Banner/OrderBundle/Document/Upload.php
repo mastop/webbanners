@@ -49,6 +49,12 @@ class Upload {
      */
     protected $aproved;
     
+    /**
+     * Nome do Arquivo
+     *
+     * @var string
+     * @ODM\String
+     */
     protected $file;
     
     /**
@@ -87,9 +93,9 @@ class Upload {
     */
     public function preUpload()
     {
-        if (null !== $this->file) {
+        if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
-            $this->setPath(uniqid().'.'.$this->getfile()->guessExtension());
+            $this->setPath(uniqid().'.'.$this->getFile()->guessExtension());
         }
     } 
     /*
@@ -179,24 +185,6 @@ class Upload {
     }
 
     /**
-     * Set file
-     *
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get file
-     *
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-    
-    /**
      * Get address
      *
      */
@@ -283,5 +271,25 @@ class Upload {
     public function getAproved()
     {
         return $this->aproved;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string $file
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

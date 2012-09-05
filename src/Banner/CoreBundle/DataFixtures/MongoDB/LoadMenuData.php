@@ -23,39 +23,52 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
         // Pega menu Pai System-Admin
         $menu = $repo->findByBundleCode('system', 'admin');
         if ($menu) {
-            $menuItem2 = $repo->getChildrenByCode($menu, 'email');
-            if(!$menuItem2){
+            $menuItem1 = $repo->getChildrenByCode($menu, 'email');
+            if(!$menuItem1){
                 $child = new MenuItem();
                 $child->setCode('email');
                 $child->setName('E-mails');
                 $child->setRole('ROLE_ADMIN');
                 $child->setUrl('admin_core_mailing_index');
                 $child->setRoute(true);
+                $child->setOrder(3);
+                $menu->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush(); 
+            }
+            $menuItem2= $repo->getChildrenByCode($menu, 'discount');
+            if(!$menuItem2){
+                $child = new MenuItem();
+                $child->setCode('ofertas');
+                $child->setName('Discount');
+                $child->setRole('ROLE_ADMIN');
+                $child->setUrl('admin_order_discount');
+                $child->setRoute(true);
                 $child->setOrder(4);
                 $menu->addChildren($child);
                 $manager->persist($menu);
                 $manager->flush(); 
             }
-            $menuItem3 = $repo->getChildrenByCode($menu, 'banner');
+            $menuItem3 = $repo->getChildrenByCode($menu, 'status');
             if(!$menuItem3){
                 $child = new MenuItem();
-                $child->setCode('banner');
-                $child->setName('Banners');
+                $child->setCode('category');
+                $child->setName('Status');
                 $child->setRole('ROLE_ADMIN');
-                $child->setUrl('admin_core_banner_index');
+                $child->setUrl('admin_order_status');
                 $child->setRoute(true);
                 $child->setOrder(5);
                 $menu->addChildren($child);
                 $manager->persist($menu);
                 $manager->flush(); 
             }
-            $menuItem4 = $repo->getChildrenByCode($menu, 'categorias');
+            $menuItem4 = $repo->getChildrenByCode($menu, 'size');
             if(!$menuItem4){
                 $child = new MenuItem();
-                $child->setCode('category');
-                $child->setName('Categorias');
+                $child->setCode('cupons');
+                $child->setName('Tamanhos');
                 $child->setRole('ROLE_ADMIN');
-                $child->setUrl('admin_core_category_index');
+                $child->setUrl('admin_order_size');
                 $child->setRoute(true);
                 $child->setOrder(6);
                 $menu->addChildren($child);
@@ -101,7 +114,7 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                     $child2 = new MenuItem();
                     $child2->setCode('empresa.sobre');
                     $child2->setName('Sobre');
-                    $child2->setUrl('/pg/sobre-o-banner');
+                    $child2->setUrl('/pg/sobre-o-webbanner');
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
@@ -129,6 +142,14 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
+                    $child2 = new MenuItem();
+                    $child2->setCode('empresa.seguranca');
+                    $child2->setName('Segurança');
+                    $child2->setUrl('/pg/seguranca');
+                    $child2->setOrder(4);
+                $child->addChildren($child2);
+                $manager->persist($menu);
+                $manager->flush();
             }
             $menuItem2 = $repo->getChildrenByCode($menu, 'saiba-mais');
             if(!$menuItem2){
@@ -138,29 +159,80 @@ class LoadMenuData extends AbstractFixture implements OrderedFixtureInterface, C
                 $menu->addChildren($child);
                 $manager->persist($menu);
                 $manager->flush();
-                    $child2 = new MenuItem();
-                    $child2->setCode('saiba-mais.faq');
-                    $child2->setName('FAQ');
-                    $child2->setUrl('/pg/faq');
+                $child2 = new MenuItem();
+                $child2->setCode('saiba-mais.faq');
+                $child2->setName('FAQ');
+                $child2->setUrl('_faq');
+                $child2->setRoute(true);
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
-                    $child2 = new MenuItem();
-                    $child2->setCode('saiba-mais.como-comprar');
-                    $child2->setName('Como Comprar');
-                    $child2->setUrl('/pg/como-comprar');
-                    $child2->setOrder(1);
+                $child2 = new MenuItem();
+                $child2->setCode('saiba-mais.como-comprar');
+                $child2->setName('Como Comprar');
+                $child2->setUrl('/pg/como-comprar');
+                $child2->setOrder(1);
                 $child->addChildren($child2);
                 $manager->persist($menu);
                 $manager->flush();
-                    $child2 = new MenuItem();
-                    $child2->setCode('saiba-mais.como-vender');
-                    $child2->setName('Como Vender');
-                    $child2->setUrl('/pg/como-vender');
-                    $child2->setOrder(2);
-                $child->addChildren($child2);
+            }
+            $menuItem3 = $repo->getChildrenByCode($menu, 'pacotes');
+            if(!$menuItem3){
+                $child = new MenuItem();
+                $child->setCode('pacotes');
+                $child->setName('Pacotes');
+                $menu->addChildren($child);
                 $manager->persist($menu);
-                $manager->flush(); 
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free1');
+                $child3->setName('Free1');
+                $child3->setUrl('/pacotes/1');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free1');
+                $child3->setName('Free 1');
+                $child3->setUrl('/pacotes/1');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free2');
+                $child3->setName('Free 2');
+                $child3->setUrl('/pacotes/2');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free3');
+                $child3->setName('Free 3');
+                $child3->setUrl('/pacotes/3');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free4');
+                $child3->setName('Free 4');
+                $child3->setUrl('/pacotes/4');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free5');
+                $child3->setName('Free 5');
+                $child3->setUrl('/pacotes/5');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
+                $child3 = new MenuItem();
+                $child3->setCode('pacotes.free6');
+                $child3->setName('Free 6');
+                $child3->setUrl('/pacotes/6');
+                $child->addChildren($child);
+                $manager->persist($menu);
+                $manager->flush();
             }
         }
     }

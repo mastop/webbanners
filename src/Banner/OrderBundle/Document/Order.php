@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  *   repositoryClass="Banner\OrderBundle\Document\OrderRepository"
  * )
  * @ODM\Indexes({
- *   @ODM\Index(keys={"user.$id"="desc", "created"="desc", "name"="desc"})
+ * @ODM\Index(keys={"id"="asc", "name"="asc"})
  * })
  */
 class Order
@@ -51,6 +51,14 @@ class Order
     protected $name;
     
     /**
+     * Textos do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $text;
+    
+    /**
      * Anotações do pedido
      * 
      * @var string
@@ -59,7 +67,15 @@ class Order
     protected $notes;
     
     /**
-     * Anotações do pedido
+     * Desgin do pedido
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $design;
+    
+    /**
+     * Link do Banner
      * 
      * @var string
      * @ODM\String
@@ -73,6 +89,22 @@ class Order
      * @ODM\String
      */
     protected $aproved;
+    
+    /**
+     * Pedido com Rush
+     * 
+     * @var string
+     * @ODM\String
+     */
+    protected $rush;
+    
+    /**
+     * Pedido com Rush
+     * 
+     * @var float
+     * @ODM\Float
+     */
+    protected $vrush;
     
     /**
      * Array com as informações sobre o pagamento
@@ -152,7 +184,7 @@ class Order
      * @var object
      * @ODM\EmbedMany(targetDocument="Banner\OrderBundle\Document\Banner")
      */
-    protected $banner;
+    protected $banner = array();
     
     /**
      * Quantidade vendida
@@ -194,12 +226,41 @@ class Order
     protected $preview = array();
     
     /**
+     * Upload do arquivo final
+     * 
+     * @var array
+     * @ODM\EmbedOne(targetDocument="Banner\OrderBundle\Document\Upload")
+     */
+    protected $final;
+    
+    /**
      * Dados do usuário, exemplo: Ip. Origem, OS, etc
      * 
      * @var array
      * @ODM\Hash
      */
     protected $userData;
+    /**
+     * Cupom de desconto do pacote
+     * 
+     * @var array
+     * @ODM\EmbedOne(targetDocument="Banner\OrderBundle\Document\Discount")
+     */
+    protected $pacote;
+    /**
+     * Cupom de desconto
+     * 
+     * @var array
+     * @ODM\EmbedOne(targetDocument="Banner\OrderBundle\Document\Discount")
+     */
+    protected $cupom;
+    /**
+     * Valor de desconto
+     * 
+     * @var float
+     * @ODM\Float
+     */
+    protected $desconto;
     
 
     /** 
@@ -558,7 +619,21 @@ class Order
      */
     public function formatUpdated()
     {
-        return date('d/m/Y',$this->updated>getTimestamp());
+        return date('d/m/Y',$this->updated->getTimestamp());
+    }
+    
+    /**
+     * Format Updated
+     *
+     * @return date $updated
+     */
+    public function formatFinal()
+    {
+        if($this->rush == "rush"){
+            return date('d/m/Y',($this->created->getTimestamp()+86400) );
+        }else{
+            return date('d/m/Y',($this->created->getTimestamp()+259200) );
+        }
     }
     
     /**
@@ -710,5 +785,165 @@ class Order
     public function getAproved()
     {
         return $this->aproved;
+    }
+
+    /**
+     * Set final
+     *
+     * @param Banner\OrderBundle\Document\Upload $final
+     */
+    public function setFinal(\Banner\OrderBundle\Document\Upload $final)
+    {
+        $this->final = $final;
+    }
+
+    /**
+     * Get final
+     *
+     * @return Banner\OrderBundle\Document\Upload $final
+     */
+    public function getFinal()
+    {
+        return $this->final;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string $text
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Set design
+     *
+     * @param string $design
+     */
+    public function setDesign($design)
+    {
+        $this->design = $design;
+    }
+
+    /**
+     * Get design
+     *
+     * @return string $design
+     */
+    public function getDesign()
+    {
+        return $this->design;
+    }
+
+    /**
+     * Set rush
+     *
+     * @param string $rush
+     */
+    public function setRush($rush)
+    {
+        $this->rush = $rush;
+    }
+
+    /**
+     * Get rush
+     *
+     * @return string $rush
+     */
+    public function getRush()
+    {
+        return $this->rush;
+    }
+
+    /**
+     * Set vrush
+     *
+     * @param float $vrush
+     */
+    public function setVrush($vrush)
+    {
+        $this->vrush = $vrush;
+    }
+
+    /**
+     * Get vrush
+     *
+     * @return float $vrush
+     */
+    public function getVrush()
+    {
+        return $this->vrush;
+    }
+
+    /**
+     * Set cupom
+     *
+     * @param Banner\OrderBundle\Document\Discount $cupom
+     */
+    public function setCupom(\Banner\OrderBundle\Document\Discount $cupom)
+    {
+        $this->cupom = $cupom;
+    }
+
+    /**
+     * Get cupom
+     *
+     * @return Banner\OrderBundle\Document\Discount $cupom
+     */
+    public function getCupom()
+    {
+        return $this->cupom;
+    }
+
+    /**
+     * Set desconto
+     *
+     * @param float $desconto
+     */
+    public function setDesconto($desconto)
+    {
+        $this->desconto = $desconto;
+    }
+
+    /**
+     * Get desconto
+     *
+     * @return float $desconto
+     */
+    public function getDesconto()
+    {
+        return $this->desconto;
+    }
+
+    /**
+     * Set pacote
+     *
+     * @param Banner\OrderBundle\Document\Discount $pacote
+     */
+    public function setPacote(\Banner\OrderBundle\Document\Discount $pacote)
+    {
+        $this->pacote = $pacote;
+    }
+
+    /**
+     * Get pacote
+     *
+     * @return Banner\OrderBundle\Document\Discount $pacote
+     */
+    public function getPacote()
+    {
+        return $this->pacote;
     }
 }

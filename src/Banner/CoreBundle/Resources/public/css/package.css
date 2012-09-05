@@ -1,0 +1,136 @@
+#titulo {
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+}
+#texto {
+    padding: 0 10px;
+    float: left;
+}
+#free1 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG1.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+#free2 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG2.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+#free3 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG3.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+#free4 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG4.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+#free5 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG5.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+#free6 {
+    float: right;
+    background: url(/bundles/bannercore/images/pack/freeG6.png)  no-repeat;
+    height: 110px;
+    text-indent: -9999em;
+    width: 210px;
+    margin-top: -80px;
+}
+.packs {
+    float: left;
+    width: 80%;
+    font-size: 22px;
+    border-bottom: 2px solid;
+    padding: 15px;
+    margin: 20px 0;
+}
+#bannerSize img{
+    float: left;
+}
+#pacoteTable{
+    border-left: 1px dotted #ccc;
+}
+#pacoteTable div{
+    height: 54px;
+    text-indent: -9999em;
+    width: 54px;
+    background-position: top center;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+#pacoteTable div a{
+    float: left;
+    height: 54px;
+    text-indent: -9999em;
+    width: 54px;
+    background-position: bottom;
+}
+#bfree1, #bfree1 a:hover {
+    background: url(/bundles/bannercore/images/pack/free01.png)  no-repeat;
+    background-position: top;
+}
+#bfree2, #bfree2 a:hover {
+    background: url(/bundles/bannercore/images/pack/free02.png)  no-repeat;
+    background-position: top;
+}
+#bfree3, #bfree3 a:hover {
+    background: url(/bundles/bannercore/images/pack/free03.png)  no-repeat;
+    background-position: top;
+}
+#bfree4, #bfree4 a:hover {
+    background: url(/bundles/bannercore/images/pack/free04.png)  no-repeat;
+    background-position: top;
+}
+#bfree5, #bfree5 a:hover {
+    background: url(/bundles/bannercore/images/pack/free05.png)  no-repeat;
+    background-position: top;
+}
+#bfree6, #bfree6 a:hover {
+    background: url(/bundles/bannercore/images/pack/free06.png)  no-repeat;
+    background-position: top;
+}
+#bfree1 a{
+    background: url(/bundles/bannercore/images/pack/free01.png)  no-repeat;
+    background-position: bottom;
+}
+#bfree2 a{
+    background: url(/bundles/bannercore/images/pack/free02.png)  no-repeat;
+    background-position: bottom;
+}
+#bfree3 a{
+    background: url(/bundles/bannercore/images/pack/free03.png)  no-repeat;
+    background-position: bottom;
+}
+#bfree4 a{
+    background: url(/bundles/bannercore/images/pack/free04.png)  no-repeat;
+    background-position: bottom;
+}
+#bfree5 a{
+    background: url(/bundles/bannercore/images/pack/free05.png)  no-repeat;
+    background-position: bottom;
+}
+#bfree6 a{
+    background: url(/bundles/bannercore/images/pack/free06.png)  no-repeat;
+    background-position: bottom;
+}

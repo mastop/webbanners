@@ -19,4 +19,20 @@ class CoreController extends BaseController
     {
         return array('Teste' => 'Teste');
     }
+    /**
+     * @Route("/pacotes/{pacote}", name="_package", defaults={"pacote"=""})
+     * @Template()
+     */
+    public function packageAction($pacote="")
+    {
+        return $this->render('BannerCoreBundle:Frontend:Package\package'.$pacote.'.html.twig');
+    }
+    /**
+     * @Route("/faq/{topico}", name="_faq", defaults={"topico"=""})
+     * @Template()
+     */
+    public function faqAction($topico="")
+    {
+        return $this->render('BannerCoreBundle:Frontend:FAQ\faq'.$topico.'.html.twig');
+    }
 }

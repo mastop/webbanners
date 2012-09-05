@@ -55,12 +55,22 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $param->addChildren($child);
 
         $child = new Children();
+        $child->setName('typeclient');
+        $child->setTitle('Tipo Cliente');
+        $child->setDesc('Tipo cliente que irá ser criado');
+        $child->setValue('ROLE_CLIENT');
+        $child->setFieldtype('choice');
+        $child->setOpts(array('choices' => array('ROLE_CLIENT' => 'Somente Cliente', 'ROLE_DESIGNER' =>'Somente Designer', 'ROLE_USER' => 'Somente Usuário', 'ROLE_ADMIN' => 'Administrador', 'ROLE_SUPERADMIN' => 'Super-Administrador')));
+        $child->setOrder(3);
+        $param->addChildren($child);
+
+        $child = new Children();
         $child->setName('selfdelete');
         $child->setTitle('Deletar Conta');
         $child->setDesc('Permitir que os usuários deletem o próprio cadastro.');
         $child->setValue('0');
         $child->setFieldtype('checkbox');
-        $child->setOrder(3);
+        $child->setOrder(4);
         $param->addChildren($child);
         
         $child = new Children();
@@ -68,7 +78,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('ID do Aplicativo Facebook');
         $child->setDesc('Código do aplicativo criado no facebook developers');
         $child->setValue('108342115933418');
-        $child->setOrder(4);
+        $child->setOrder(5);
         $param->addChildren($child);
         
         $child = new Children();
@@ -76,7 +86,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('Código Secret do App criado no Facebook');
         $child->setDesc('Código gerado no site de developers do Facebook.');
         $child->setValue('f3872f946c36c127f4effbb4e6a918b3');
-        $child->setOrder(5);
+        $child->setOrder(6);
         $param->addChildren($child);
         
         $child = new Children();
@@ -84,7 +94,7 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('ID Consumer key do Twitter');
         $child->setDesc('Código do aplicativo criado no twitter developers');
         $child->setValue('G1WitELkS2NakPjyEsuAtw');
-        $child->setOrder(6);
+        $child->setOrder(7);
         $param->addChildren($child);
         
         $child = new Children();
@@ -92,7 +102,99 @@ class LoadParametersData implements FixtureInterface, ContainerAwareInterface {
         $child->setTitle('Código Consumer secret no Twitter');
         $child->setDesc('Código gerado no site de developers do Twitter.');
         $child->setValue('mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM');
+        $child->setOrder(8);
+        $param->addChildren($child);
+        
+        $manager->persist($param);
+        $manager->flush();
+        
+        $param = new Parameters();
+        $param->setName('order');
+        $param->setTitle('Pedido');
+        $param->setDesc('Configurações para pedido no site');
+        $param->setBundle('order');
+        $param->setRole('ROLE_ADMIN');
+        $param->setOrder(2);
+
+        $child = new Children();
+        $child->setName('defaultstatus');
+        $child->setTitle('Status padrão');
+        $child->setDesc('Qual Status que o pedido virá ao ser criado.');
+        $child->setValue("1");
+        $child->setFieldtype('text');
+        $child->setOrder(0);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('payedstatus');
+        $child->setTitle('Status pago');
+        $child->setDesc('Qual Status que o pedido irá mudar quando for pago.');
+        $child->setValue("3");
+        $child->setFieldtype('text');
+        $child->setOrder(1);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('othersstatus');
+        $child->setTitle('Status Outros');
+        $child->setDesc('Qual Status que o pedido irá mudar caso não identifique.');
+        $child->setValue("8");
+        $child->setFieldtype('text');
+        $child->setOrder(2);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('BannersOrder');
+        $child->setTitle('Máximo de Banners');
+        $child->setDesc('Máximo de Banners que podem ser solicitados por pedido.');
+        $child->setValue(10);
+        $child->setFieldtype('number');
+        $child->setOrder(3);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('UploadOrder');
+        $child->setTitle('Máximo de Uploads');
+        $child->setDesc('Máximo de uploads por pedido.');
+        $child->setValue(10);
+        $child->setFieldtype('number');
+        $child->setOrder(4);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('Rush');
+        $child->setTitle('Valor para o rush');
+        $child->setDesc('Valor para o rush.');
+        $child->setFieldtype('number');
+        $child->setValue(40);
+        $child->setOrder(5);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('FirstBanner');
+        $child->setTitle('Valor para o 1º banner');
+        $child->setDesc('Valor para o 1º banner.');
+        $child->setValue(100);
+        $child->setFieldtype('number');
+        $child->setOrder(6);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('OthersBanner');
+        $child->setTitle('Valor os outros banners');
+        $child->setDesc('Valor para os outros banners.');
+        $child->setValue(80);
+        $child->setFieldtype('number');
         $child->setOrder(7);
+        $param->addChildren($child);
+
+        $child = new Children();
+        $child->setName('PSDBanner');
+        $child->setTitle('Valor para o PSD do Banner');
+        $child->setDesc('Valor para o PSD do Banner.');
+        $child->setValue(20);
+        $child->setFieldtype('number');
+        $child->setOrder(8);
         $param->addChildren($child);
         
         $manager->persist($param);

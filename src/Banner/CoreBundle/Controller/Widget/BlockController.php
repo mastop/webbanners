@@ -61,11 +61,6 @@ class BlockController extends BaseController {
             case 'deal': // Página de oferta
             case 'sell': // Página de venda
             case 'home':
-            default :
-                $ret[$c]['title'] = 'Bloco de Exemplo para a Home';
-                $ret[$c]['content'] = 'Conteúdo de Exemplo para a Home';
-                $c++;
-                break;
         }
         //$ret[$c]['content'] = '<a id="twitterBlock" href="http://twitter.com/banner" target="_blank" title="Siga o Banner no Twitter!">Siga o Banner no Twitter!</a>';
         //$c++;
