@@ -28,11 +28,11 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class BannerType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('id', 'hidden');
         $builder->add('city', 'document', array('label'=>'Cidade', 'class' => 'Banner\\CoreBundle\\Document\\City', 'property'=>'name', 'required' => false, 'empty_value' => 'Todas' ));
         $builder->add('title', 'text', array('label' => 'Título'));

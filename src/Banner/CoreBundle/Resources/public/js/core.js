@@ -19,7 +19,7 @@ window.log = function(){
 
 
 // Tooltips
-$("a[rel=tooltip]").tooltip();
+$("a[rel=tooltip]").tooltip({placement:'right'});
 // Popovers
 $("a[rel=popover]").popover({offset: 10});
 // Alerts
@@ -30,6 +30,7 @@ $(".alert-message").alert();
 
 
 $(function(){
+
     // Todos os alertas são exibidos após o carregamento da página
     $('.alert').slideDown('slow');
     $('#topNL').slideDown('slow');

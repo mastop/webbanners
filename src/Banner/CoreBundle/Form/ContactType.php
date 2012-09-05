@@ -28,21 +28,21 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ContactType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('name', 'text', array('label' => 'Nome:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('phone', 'text', array('required' => false, 'label' => 'Telefone:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('mail', 'email', array('label' => 'E-mail:', 'attr' => array('style' => 'width: 450px;')));
         $builder->add('msg', 'textarea', array('label' => 'Mensagem:', 'attr' => array('style' => 'width: 450px;', 'rows' => '8')));
-        $builder->add('email', 'text', array(
+        $builder->add('email', 'hidden', array(
             'required' => false,
             'attr' => array(
                 'class' => 'hidden'
             )));
-        $builder->add('coment', 'textarea', array(
+        $builder->add('coment', 'hidden', array(
             'required' => false,
             'attr' => array(
                 'class' => 'hidden'

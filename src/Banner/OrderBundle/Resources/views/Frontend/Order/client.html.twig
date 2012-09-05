@@ -1,5 +1,12 @@
 {% extends '::frontend.html.twig' %}
 
+{% block stylesheets %}
+  <!-- CSS Tema -->
+  {% stylesheets '@BannerOrderBundle/Resources/public/css/Frontend/*.css' filter='?yui_css' output='themes/banner/css/banner2.css' %}
+   <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+  {% endstylesheets %}
+{% endblock %}
+
 {% block javascripts%}
 {% javascripts output='static/system/js/sell.contact.js'
                    '@BannerOrderBundle/Resources/public/js/Frontend/banner.js'
@@ -9,20 +16,20 @@
 {% endblock%}
 
 {% block content %}
-
 <div class="tabbable">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#1" data-toggle="tab">Em aberto</a></li>
-        <li><a href="#2" data-toggle="tab">Finalizados</a></li>
+        <li{% if(pgatual=="aberto")%} class="active"{% endif %}><a href="#aberto" id="5" class="guide" data-toggle="tab">Em aberto</a></li>
+        <li{% if(pgatual=="finalizados")%} class="active"{% endif %}><a href="#finalizados" id="5" class="guide" data-toggle="tab">Finalizados</a></li>
     </ul>
     <div class="tab-content">
         <!-- Em aberto -->
-        <div class="tab-pane active" id="1">
+        <div class="tab-pane active" id="aberto">
             <div class="container-fluid">
                 <div class="row-fluid">
                     <table class="table table-striped">
                         <tr>
                             <th>#</th>
+                            <th></th>
                             <th>Descrição</th>
                             <th>Dt.Criação</th>
                             <th>Expira</th>
@@ -30,19 +37,26 @@
             {% for order in orders %}
                         <tr>
                             <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td>
+                                {%if (order.cunread > 0) %}
+                                <a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">
+                                    <span class="badge badge-important">{{order.cunread}}</span>
+                                </a>
+                                {% endif %}
+                            </td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'pedido'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
+            {% endfor %}
                     </table>
                 </div>
             </div>
         </div>
         <!-- Finalizados -->
-        <div class="tab-pane" id="2">
+        <div class="tab-pane" id="finalizados">
             <div class="container-fluid">
                 <div class="row-fluid">
                     <table class="table table-striped">
@@ -55,16 +69,17 @@
             {% for order in finals %}
                         <tr>
                             <td>{{order.id}}</td>
-                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name})}}">{{order.name}}</a></td>
+                            <td><a href="{{path('_order_order_edit',{'username':order.user.username, 'name':order.name, 'pgatual':'historico'})}}">{{order.name}}</a></td>
                             <td>{{order.formatCreated()}}</td>
                             <td>{{order.formatExpires()}}</td>
                         </tr>
             {% else %}
                             <tr><td colspan="5">{{ "Nenhuma página encontrada!"|trans }}</td></tr>
-            {% endfor %} 
+            {% endfor %}
                     </table>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 {% endblock %}

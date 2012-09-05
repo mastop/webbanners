@@ -3,11 +3,11 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class CityType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('id', 'hidden');
         $builder->add('name', 'text', array('label'=>'Nome'));
         $builder->add('state', 'text', array('label'=>'Estado'));

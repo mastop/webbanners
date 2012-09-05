@@ -1,0 +1,14 @@
+{# E-mail de confirmação de envio de oferta #}
+{% extends '::mail.html.twig' %}
+
+{% block content %}
+<h1 style="margin:0;font-weight:bold;font-size:16px;color:#D87D08;">
+    {{user.name}}, o pedido número: {{order.id}}, cliente: {{order.user.name}} foi escolhido para você!
+</h1><br/><br/>
+<h3>Você foi o designer escolhido para desenvolver esse banner!</h3>
+Entre no site do WebBanners e veja o pedido.<br /><br />
+<a href="{{path('_home')}}">Webbanner</a><br /><br />
+<span style="margin:0;font-size:11px;">
+Para comentários, sugestões ou reclamações, favor contatar-nos no seguinte endereço: <a href="mailto:{{mastop_param('system.site.adminmail')}}">{{mastop_param('system.site.adminmail')}}</a> 
+</span><br/><br/>
+{% endblock %}

@@ -25,11 +25,11 @@
 namespace Banner\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class CoordinatesType extends AbstractType {
 
-    public function buildForm(FormBuilder $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('latitude', 'text');
         $builder->add('longitude', 'text');
     }

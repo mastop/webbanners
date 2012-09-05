@@ -36,11 +36,40 @@ class OrderRepository extends DocumentRepository
                 ->getQuery()
                 ->execute();
     }
+    public function findByOpen(){
+        return $this->createQueryBuilder()
+                ->field('aproved')->notEqual("true")
+                ->sort('user.name', 'ASC')
+                ->getQuery()
+                ->execute();
+    }
+    public function findByDone(){
+        return $this->createQueryBuilder()
+                ->field('aproved')->equals("true")
+                ->sort('user.name', 'ASC')
+                ->getQuery()
+                ->execute();
+    }
     public function findByDesignerUser(User $designer, User $user){
         return $this->createQueryBuilder()
                 ->field('designer')->references($designer)
                 ->field('user')->references($user)
-                ->sort('expires', 'ASC')
+                ->sort('user.name', 'ASC')
+                ->getQuery()
+                ->execute();
+    }
+    public function findByDoneDesigner(User $designer){
+        return $this->createQueryBuilder()
+                ->field('designer')->references($designer)
+                ->field('aproved')->equals("true")
+                ->getQuery()
+                ->execute();
+    }
+    public function findByOpenDesigner(User $designer){
+        return $this->createQueryBuilder()
+                ->field('designer')->references($designer)
+                ->field('aproved')->notEqual("true")
+                ->sort('user.name', 'ASC')
                 ->getQuery()
                 ->execute();
     }
@@ -65,6 +94,15 @@ class OrderRepository extends DocumentRepository
         return $this->createQueryBuilder()
                 ->field('designer')->equals(null)
                 ->sort('expires', 'ASC')
+                ->field('aproved')->notEqual("true")
+                ->getQuery()
+                ->execute();
+    }
+    public function findSets(){
+        return $this->createQueryBuilder()
+                ->field('designer')->notEqual(null)
+                ->sort('expires', 'ASC')
+                ->field('aproved')->notEqual("true")
                 ->getQuery()
                 ->execute();
     }

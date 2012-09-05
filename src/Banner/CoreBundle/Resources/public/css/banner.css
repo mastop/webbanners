@@ -3,16 +3,17 @@ a.rm{
     padding: 0 5px;
 }   
 span.x{    
-    background: none repeat scroll 0 0 #EEEEEE;
+    background: none repeat scroll 0 0 #DDDDDD;
     cursor: default;
-    font-size:20px;
+    font-size:14px;
     float: left;
     font-style: normal;
-    height: 33px;
+    height: 28px;
     line-height: 36px;
-    margin: 0 2px 0 0;
-    padding: 0 5px;
-    width: 9px;
+    margin-top: 0;
+    padding: 0 10px;
+    width: 10px;
+    border: 0;
 }   
 .height{
     background: none repeat scroll 0 0 #FFFFFF;
@@ -24,9 +25,12 @@ span.x{
     padding: 7px 4px 9px 0;
     text-align: center;
     margin: 0 0 0 -3px;
-    width: 35px;    
+    width: 50px;    
     outline: medium none;
+    border-radius: 0px !important; 
     vertical-align: middle;
+    -webkit-appearance: none;
+
 }
 .width{
     background: none repeat scroll 0 0 #FFFFFF;
@@ -38,7 +42,253 @@ span.x{
     padding: 7px 4px 9px 0;
     text-align: center;
     margin: 1px 1px 1px 1px;
-    width: 35px;    
+    width: 50px;    
+    border-radius: 8px 0px 0px 8px !important; 
     outline: medium none;
     vertical-align: middle;
+}
+img.center {   display: block;   margin-left: auto;   margin-right: auto; }
+
+.margem1 {
+    position: relative;
+    left: 50px;;
+}
+.index{
+    border: 1px dotted #aaa;
+    margin: 12px;
+    padding: 20px 30px;
+    width: 330px;
+    height: 137px;
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 500;
+    float: left;
+}
+.index span{
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+}
+#index1{
+    background: url(/bundles/bannercore/images/index/01.png)  no-repeat;
+    background-position: 300px 20px;
+}
+#index2{
+    background: url(/bundles/bannercore/images/index/03.png)  no-repeat;
+    background-position: 300px 20px;
+}
+#index3{
+    background: url(/bundles/bannercore/images/index/02.png)  no-repeat;
+    background-position: 300px 20px;
+}
+#index4{
+    background: url(/bundles/bannercore/images/index/04.png)  no-repeat;
+    background-position: 300px 20px;
+}
+.index:hover{
+    box-shadow: -1px 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #EEE !important;
+}
+a#homePack1{
+    background: url(/bundles/bannercore/images/index/free01.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a#homePack2{
+    background: url(/bundles/bannercore/images/index/free02.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a#homePack3{
+    background: url(/bundles/bannercore/images/index/free03.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a#homePack4{
+    background: url(/bundles/bannercore/images/index/free04.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a#homePack5{
+    background: url(/bundles/bannercore/images/index/free05.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a#homePack6{
+    background: url(/bundles/bannercore/images/index/free06.png)  no-repeat;
+    background-position: bottom;
+    height: 98px;
+    width: 98px;
+    text-indent: -9999em;
+    float: left;
+    margin: 10px;
+}
+a:hover#homePack1{
+    background-position: top;
+}
+a:hover#homePack2{
+    background-position: top;
+}
+a:hover#homePack3{
+    background-position: top;
+}
+a:hover#homePack4{
+    background-position: top;
+}
+a:hover#homePack5{
+    background-position: top;
+}
+a:hover#homePack6{
+    background-position: top;
+}
+.homePack{
+    font-size: 14px;
+    color: #999;
+    width: 900px;
+    left:20px;
+    position: relative;
+}
+.homePack span{
+    font-size: 18px;
+    color: #555;
+}
+a.saiba{
+    float: right;
+}
+.homePack .texto{
+    margin: 20px;
+}
+span.medium{
+    font-size: 19px;
+    color: #888;
+}
+.links{
+    border-top: 1px dotted #bbb;
+    border-bottom: 1px dotted #bbb;
+    padding: 0 10px;
+}
+#monicashop{
+    background: url(/bundles/bannercore/images/index/monica.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#ajoalheria{
+    background: url(/bundles/bannercore/images/index/ajoalheria.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#leadernet{
+    background: url(/bundles/bannercore/images/index/leadernet.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#gentequedanca{
+    background: url(/bundles/bannercore/images/index/gd.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#realimoveis{
+    background: url(/bundles/bannercore/images/index/real.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#tiobeto{
+    background: url(/bundles/bannercore/images/index/tiobeto.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#turismo{
+    background: url(/bundles/bannercore/images/index/turismo.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+#clinicaatibaia{
+    background: url(/bundles/bannercore/images/index/clinica.jpg)  no-repeat;
+    height: 55px;
+    width: 100px;
+    text-indent: -9999em;
+    float: left;
+    margin: 15px 3px;
+}
+.clientes{
+    font-size: 13px;
+    color: #888;
+}
+.banner0 a#hcriar{
+    background: url(../images/header/criarbannerLaranja.png) no-repeat;
+}
+.banner0 a#hpacotes, .banner1 a#hpacotes{
+    background: url(../images/header/verpacotesAzul.png) no-repeat;
+}
+.banner1 a#hcriar, .banner2 a#hcriar{
+    background: url(../images/header/criarbannerVerde.png) no-repeat;
+}
+.banner2 a#hpacotes{
+    background: url(../images/header/verpacotesLaranja.png) no-repeat;
+}
+a#hcriar{
+    margin: 0px;
+    float: left;
+    width: 201px;
+    height: 60px;
+    text-indent: -9999em;
+    background-position: top;
+}
+a#hpacotes{
+    margin: 0px;
+    float: left;
+    width: 201px;
+    height: 60px;
+    text-indent: -9999em;
+    background-position: top;
+}
+a:hover#hcriar{
+    background-position: bottom;
+}
+a:hover#hpacotes{
+    background-position: bottom;
+}
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
 }

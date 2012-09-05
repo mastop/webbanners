@@ -1,0 +1,64 @@
+{% extends '::frontend.html.twig' %}
+
+{% block stylesheets %}
+<!-- CSS Tema -->
+{% stylesheets '@BannerCoreBundle/Resources/public/css/package.css' filter='?yui_css' output='themes/banner/css/package.css' %}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+<div id='titulo'>
+    Banners - Free 2 - Na compra de três, você ganha + dois banners!
+</div>
+<div id='texto' class='span10'>
+    Opção com cinco tamanhos de banners elaborados para uma mesma campanha. Os banners são compostos de imagens fixas que de forma simples e objetiva abordam todos os aspectos importantes relacionados a criação  da campanha solicitada.
+<br /><br />
+    Tamanhos dos banners deste pacote: 160x600 (lateral) - 728x90 (horizontal)  -  300x250 (regular)  -  468x60 (horizontal)  -  120x600 (vertical)
+<br /><br />
+    <ul>
+        <i class="icon-cog"></i> Medida em pixels<br />
+        <i class="icon-cog"></i> Tipos de arquivos: GIF, JPG, PNG<br />
+        <a class="btn btn-inverse floatR" href="{{path('_order_order_index',{'pacote':'pack2'})}}" style="margin: 0 55px;">Comprar!</a>
+        <i class="icon-cog"></i> Tamanho ideal: 100k<br />
+        <i class="icon-cog"></i> Resolução: 72 dpi<br />
+    </ul>
+</div>
+<div  id='pacoteTable' class='span1'>
+    <div id="bfree1">
+        <a href="{{path('_package',{'pacote':'1'})}}"  data-original-title="Ganhe 1 banners" href="#" data-placement='left' rel="popover" data-content="Na compra de dois, você ganha um banner! Somente R$ 160,00!" >
+            Free 1
+        </a>
+    </div>
+    <div id="bfree2">
+            Free 2
+    </div>
+    <div id="bfree3">
+        <a href="{{path('_package',{'pacote':'3'})}}" data-original-title="Ganhe 3 banners" href="#" data-placement='left' rel="popover" data-content="Na compra de quatro, você ganha três banner! Somente R$ 320,00!" >
+            Free 3
+        </a>
+    </div>
+    <div id="bfree4">
+        <a href="{{path('_package',{'pacote':'4'})}}" data-original-title="Ganhe 4 banners" href="#" data-placement='left' rel="popover" data-content="Na compra de cinco, você ganha quatro banner! Somente R$ 400,00!" >
+            Free 4
+        </a>
+    </div>
+    <div id="bfree5">
+        <a href="{{path('_package',{'pacote':'5'})}}" data-original-title="Ganhe 5 banners" href="#" data-placement='left' rel="popover" data-content="Na compra de seis, você ganha cinco banner! Somente R$ 480,00!" >
+            Free 5
+        </a>
+    </div>
+    <div id="bfree6">
+        <a href="{{path('_package',{'pacote':'6'})}}" data-original-title="Ganhe 6 banners" href="#" data-placement='left' rel="popover" data-content="Na compra de sete, você ganha seis banner! Somente R$ 560,00!" >
+            Free 6
+        </a>
+    </div>
+</div>
+<div id="bannerSize" class="span10" style="margin-top: -170px;">
+    <img src="/bundles/bannercore/images/banners/728x90.jpg" alt="728x90" id="p728x90" />
+    <img src="/bundles/bannercore/images/arranhaceu/160x600.jpg" alt="160x600" id="p160x600" />
+    <img src="/bundles/bannercore/images/banners/468x60.jpg" alt="468x60" id="p468x60" />
+    <img src="/bundles/bannercore/images/anuncios/300x250.jpg" alt="300x250" id="p300x250" />
+    <img src="/bundles/bannercore/images/arranhaceu/120x600.jpg" alt="120x600" id="p120x600" />
+</div>
+{% endblock %}

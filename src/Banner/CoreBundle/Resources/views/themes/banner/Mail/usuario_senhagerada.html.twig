@@ -5,9 +5,12 @@
 Olá <b>{{user.name}}</b>!<br />
 Foi gerada a senha automática para login no nosso site.
 <br />
-Seu usuário/email: {{user.email}}
+Seu usuário/email: {{user.email}}<br />
 Sua senha: {{password}}
 <br />
 <br />
-<b>Se não foi você quem solicitou a troca de senha, basta ignorar este email.</b>
+<a href="{{path('_home')}}">WebBanners</a>
+<br />
+<br />
+<b>Se não foi você quem solicitou a senha, basta ignorar este email.</b>
 {% endblock %}

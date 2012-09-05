@@ -36,9 +36,23 @@ class Banner
      * @ODM\Boolean
      */
     protected $psd;
-    
-   
 
+    /**
+     * Foi pago?
+     *
+     * @var boolean
+     * @ODM\Boolean
+     */
+    protected $paid;
+    
+    /**
+     * Valor
+     *
+     * @var float
+     * @ODM\Float
+     */
+    protected $value;
+    
     /**
      * Set width
      *
@@ -99,4 +113,44 @@ class Banner
         return $this->psd;
     }
 
+
+    /**
+     * Set value
+     *
+     * @param float $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * Get value
+     *
+     * @return float $value
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean $paid
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
 }

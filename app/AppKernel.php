@@ -30,7 +30,7 @@ class AppKernel extends Kernel
             
             new Banner\CoreBundle\BannerCoreBundle(),
             new Banner\UserBundle\BannerUserBundle(),
-            new Banner\OrderBundle\BannerOrderBundle(),
+            new Banner\OrderBundle\BannerOrderBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

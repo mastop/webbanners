@@ -4,7 +4,7 @@
 .noBG{background: transparent; border: 0; text-shadow:none;}
 span.arrow{float: left; background: url('../images/sprite.png') no-repeat -5px -3px; width: 30px; height: 19px; margin-top: 5px; margin-right: 10px;}
 .floatL{float: left}
-.floatR{float: right}
+.floatR{float: right !important;}
 .m0{margin: 0;}
 .m5{margin: 5px;}
 .mT5{margin-top: 5px;}
@@ -16,9 +16,21 @@ span.arrow{float: left; background: url('../images/sprite.png') no-repeat -5px -
 .aL{text-align: left;}
 .aR{text-align: right;}
 .strong{font-weight: 700;}
+a:hover{
+    text-decoration:none !important;
+}
+a{
+    overflow: hidden;
+}
 
 .loading, .ac_loading{background: #f2f2f2 url('/bundles/mastopsystem/images/load.gif') center center no-repeat !important}
-
+.login{
+    padding: 10px 20px 11px !important;
+    border: 0px !important;
+    background-color: transparent !important;
+    color: #000000 !important;
+    text-align: right;
+}
 /* Tabelas */
 table{width: 100%;}
 th{padding: 5px; font-weight: 700; border-bottom: 2px solid #878787; text-align: center; white-space: nowrap;}
@@ -28,402 +40,392 @@ td{padding: 3px;}
 
 /* Header */
 header{
-    margin-top: 10px;
+    margin-top: 0px;
 }
 #hd {/* Div que cobre o header 960 */}
+/*todas as cores*/
+#logo{ width:343px; height:123px; float: left; margin: 0px 0px 0px 0px; background: url(../images/header/logoWB.png) no-repeat; text-indent: -9999em; }
+    /*logado*/
+.logged #logo{ width:297px; height:101px; float: left; margin: 0px 0px 0px 0px; background: url(../images/header/logolog.png) no-repeat; text-indent: -9999em; }
 
-
-#logo{height: 95px; width: 170px; float: left; background: url(../images/header/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
 #login{height: 28px; text-align: right;}
 #menuTop{padding-top: 10px;}
-#search{margin-top: 18px;}
-#menuMain{background-color: #333; padding:5px; margin-bottom: 20px; color:#F00;}
+#menuMain{background-color: #FFF; padding:5px; margin-bottom: 20px; color:#F00;}
 #menuMain h1, #menuMain h1 small{color:#FFF;}
 #breadcrumbs{height: 25px; padding-top: 10px;}
 #breadcrumbs div{float: left; margin-right: 5px;}
 #breadcrumbs div span{font-weight: 700; font-size: 1.1em;}
 #breadcrumbs div a span{font-weight: 400;}
 #bannerHome{height: 335px; margin-top: 25px;}
-
 #menuTop ul{margin: 3px 0; float: right; font-size: 1.1em; font-weight: 700}
 #menuTop ul li{float: left; margin-left: 10px; list-style: none outside none;}
-#menuTop ul li a{color: #2072a5; border: 0;}
-#menuTop ul li.current a{color: #7A9D24; text-decoration: none;}
-#menuTop ul li a:hover{color: #D87D08; text-decoration: none; background: transparent;}
+#menuTop ul li a{color: #FFFFFF; border: 0;}
+#menuTop ul li.current a{color: #FFFFFF; text-decoration: none;}
 #headUser{text-align: right; margin-top: 5px; height: 32px;}
 #headUser span{margin-right: 5px}
 
 
-.twLoginBtn, .fbLoginBtn{margin-top: 5px; float: left; background: url('../images/sprite.png') no-repeat; width: 136px; height: 22px; text-indent: -9999em; overflow: hidden; line-height: 500px;}
-.twLoginBtn{background-position: -181px -31px;}
-.twLoginBtn:hover{background-position: -181px -4px;}
-.fbLoginBtn{background-position: -41px -31px; margin-left: 5px;}
-.fbLoginBtn:hover{background-position: -41px -4px;}
-
-/* Lista e Combo de Cidades */
-#cityLabel{
-    font-weight: 700;
-    font-size: 1.1em;
-    margin-top: 5px;
-    float: left;
+body.wbbody #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bghome.jpg) repeat-x;
 }
-#cityCombo{
-    font-size: 1.5em;
-    margin: 10px 0 0 10px;
-    float: left;
-    width: 270px;
+body.wbbody_azul #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bgblue.jpg) repeat-x;
 }
-#cityCombo a{
+body.wbbody_amarelo #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bgyellow.jpg) repeat-x;
+}
+body.wbbody_laranja #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bgorange.jpg) repeat-x;
+}
+body.wbbody_roxo #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bgpurple.jpg) repeat-x;
+}
+body.wbbody_verde #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bggreen.jpg) repeat-x;
+}
+body.wbbody_vermelho #hd {
+    position: relative;
+    top:0px;
+    background: url(../images/header/bgred.jpg) repeat-x;
+}
+body.logged {
+    background: url(../images/header/bglogged.jpg);
+}
+#hdC {
+    position: relative;
+    top:0px;
+    background-color: transparent;
+}
+#hd a:hover{
+    list-style: none outside none;
+    color: #FFFFFF ;
+}
+#hd ul li a{
+    color: #FFF;
+}
+#hd ul li a:hover{
+    color: #DDD;
+}
+#hdC a{
+    color: #555;
+}
+#hdC a:hover{
     color: #999;
 }
-
-
-#listCities{
-    background: #15567F;
-    box-shadow: 0 -2px 2px #0D0D0D;
-    padding: 5px 10px;
-    width: 920px;
-    float: left;
-    margin: 0 10px 10px 10px;
-    display: none;
+#Table_header {
+    color: #fff;
 }
-#listCities h2{
-    color: #FFF;
-    font-size: 1.3em;
-    margin-bottom: 0.5em;;
+#hd #Table_header {
+    position:relative;
+    margin-top: 10px;
+    padding: 5px;
+    height:330px;
+    background-color: #e4e4e4;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    text-decoration-color: #FFFFFF;
 }
-#listCities ul{
+.banner0 #hd #Table_header {
+    background-color: #77a610;
+}
+.banner1 #hd #Table_header {
+    background-color: #f78119;
+}
+.banner2 #hd #Table_header {
+    background-color: #00a6da;
+}
+#hdC #Table_header {
+    position:relative;
+    margin-top: 10px;
+    padding: 5px;
+    height:130px;
+    background-color: transparent;
+    text-decoration-color: #FFFFFF;
+}
+#hd #header-01_ {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:40px;
+    font-size: 16px;
+    padding-top: 10px;
+}
+#hdC #header-01_ {
+    position:absolute;
+    left:0px;
+    top:60px;
+    width:100%;
+    height:50px;
+}
+.banner0 #hd #header-01_ {
+    background-color: #709c0f;
+}
+.banner1 #hd #header-01_ {
+    background-color: #ed7b16;
+}
+.banner2 #hd #header-01_ {
+    background-color: #029ccc;
+}
+#header-02_{
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:542px;
+    height:375px
+}
+.banner0 #header-02_ {
+    background: url(../images/header/bonecoVerde.png) no-repeat;
+}
+.banner1 #header-02_ {
+    background: url(../images/header/bonecoLaranja.png) no-repeat;
+}
+.banner2 #header-02_ {
+    background: url(../images/header/bonecoAzul.png) no-repeat;
+}
+#header-03_ {
+    position:absolute;
+    left:15px;
+    top:30px;
+    width:427px;
+    height:155px
+}
+#hdC #header-03_ {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:50px;
+}
+#header-04_ {
+    position:absolute;
+    left:400px;
+    height:100px;
+    text-align: right;
+    width: 500px;
+    top: 80px;
+    font-size: 40px;
+}
+
+#header-05_ {
+    position:absolute;
+    left:40px;
+    height:60px;
+    width: 600px;
+    top:170px;
+    font-size: 20px;
+    text-align: left;
+}
+span.big{
+    font-size: 35px;
+}
+#header-06_{
+    position:relative;
+    left:430px;
+    top:200px;
+    height:75px;
+    width: 450px;
+}
+#header-06_ a{
+    width:201px; height:60px; float: left; margin: 0px 10px; text-indent: -9999em;
+}
+#header-06_ a#criar:hover{
+    background-position: bottom;
+}
+#header-06_ a#pacotes:hover{
+    background-position: bottom;
+}
+.banner0 a#criar{
+     background: url(../images/header/criarbannerLaranja.png) no-repeat;
+}
+.banner0 a#pacotes, .banner1 a#pacotes{
+    background: url(../images/header/verpacotesAzul.png) no-repeat;
+}
+.banner1 a#criar, .banner2 a#criar{
+    background: url(../images/header/criarbannerVerde.png) no-repeat;
+}
+.banner2 a#pacotes{
+   background: url(../images/header/verpacotesLaranja.png) no-repeat;
+}
+#header-06_1{
+    position:relative;
+    left:870px;
+    top:200px;
+    height:15px;
+    width: 50px;
+}
+#header-06_1 a{
+    width:12px; height:13px; float: left; margin: 0px 2px; text-indent: -9999em;
+}
+#abanner0{
+    background: url(../images/slides/pagination.png) no-repeat;
+    background-position: top;
+}
+#abanner1{
+    background: url(../images/slides/pagination.png) no-repeat;
+    background-position: top;
+}
+#abanner2{
+    background: url(../images/slides/pagination.png) no-repeat;
+    background-position: top;
+}
+.banner0 #abanner0{
+    background-position: bottom;
+}
+.banner1 #abanner1{
+    background-position: bottom;
+}
+.banner2 #abanner2{
+    background-position: bottom;
+}
+
+#hdC #header-07_ {
+    position:absolute;
+    left:0px;
+    top:100px;
+    width: 100%;
+    height:40px;
+    background-color: #000000
+}
+#header-07_ {
+    position:absolute;
+    left:0px;
+    top:300px;
+    width: 100%;
+    height:40px;
+    background-color: #000000
+}
+#header-07_ ul li a{
+    color: #DDDDDD;
+}
+#header-07_ ul li a:hover, #navFoot ul li a:hover{
     list-style: none outside none;
-    margin: 0;
+    color: #999;
 }
-#listCities ul li{
-    float: left;
-    width: 20%;
-    line-height: 22px;
-    margin: 0;
+.banner0 #hd #header-07_ ul li a:hover, .banner0 #navFoot ul li a:hover{
+    list-style: none outside none;
+    color: #77a610;
 }
-#listCities ul li a{
-    background: #6c9ab7;
-    color: #003454;
-    display: block;
-    border: 1px solid #71a4c5;
-    margin: 3px;
-    padding: 1px 3px;
-    font-weight: 700;
+.banner1 #hd #header-07_ ul li a:hover, .banner1 #navFoot ul li a:hover{
+    list-style: none outside none;
+    color: #f78119;
 }
-#listCities ul li a:hover{
-    background: #FFF;
-    color: #15567F;
-    border: 1px solid #2090D6;
+.banner2 #hd #header-07_ ul li a:hover, .banner2 #navFoot ul li a:hover{
+    list-style: none outside none;
+    color: #00a6da;
 }
-#listCities ul li a.selected{
-    background: #FFF;
-    color: #666;
-    border: 1px solid #333;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+#header-07_ ul li a:hover{
+    background-color: #000;
 }
-#call-to-action{font-size: 17px;}
+.dropPack {
+    left: -83px !important;
+    top: 30px !important;
+    background-color: #000 !important;
+    border-bottom: 0 !important;
+}
+.navbar .dropPack.dropdown-menu:after {
+    border-bottom: 0  !important;
+}
+
+.dropPack li a{
+    list-style: none outside none !important;
+    background-color: #000;
+}
 /* /Header */
 
 /* Body */
-#bd_wrap { /* Div que cobre todo o Body */
-  padding-bottom: 1em;
-  margin-top: 10px;
+#body {
+    margin-top: 0px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    position:relative;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
 }
-#bd {
-    /* Div que cobre o body 960 */
-    min-height: 400px;
-    background: #FFF;
+.content {
+    padding: 15px;
 }
+#body {
 
-#navbar {
-	float: right;
-	top: 60px;
-        width: 450px;
 }
-
-#navbar a {
-	border: none;
-	border-left:1px solid #DDDDDD;
-	font-size:1em;
-	padding:0.5em 1em;
-	text-decoration:none;
-	color:		#E7E5E5; 
-	background: none;
+.table tbody tr:hover td, .table tbody tr:hover th{
+    background-color: #FFF !important;
 }
-
-#navbar a.first {
-	border:0 none;
-}
-
-#navbar a:hover { text-decoration: none; }
-#navbar a:visited { text-decoration: none; }
-#navbar a:active { text-decoration: none; }
-#navbar a.active { 
-   border-bottom: 3px solid #222;
-}
-
-/*Lista de Deals*/
-.dealBox{}
-.dealBox hr{height:1px; border-width:0; background-color:#D4D4D4; width: 100%; margin: 10px auto;}
-.deal{margin:5px 0;}
-.deal .dealTitle { margin-top: 3px}
-.deal .dealTitle a{font-size: 15px; font-weight: 700; line-height: 18px;}
-.deal .dealTitle a:hover{text-decoration: none;}
-.deal .dealThumb {position: relative;}
-.deal .dealThumb a{width: 140px; height: 100px; float: left; overflow: hidden;}
-.deal .dealThumb a img{width: 140px; height: 100px;}
-
-span.discount{
-    color: #FFF;
-    font-weight: 700;
-    left: 0;
-    top:0;
-    padding: 4px 5px;
-    position: absolute;
-    -webkit-border-bottom-right-radius: 7px;
-    -moz-border-radius-bottomright: 7px;
-    border-bottom-right-radius: 7px;
-}
-span.discount.gray{background: #999;}
-span.discount.blue{background: #15567F;}
-span.discount.green{background: #587906;}
-span.discount.orange{background: #D87D08;}
-
-div.deal.gray .dealTitle a{color: #999}
-div.deal.gray .dealTitle a:hover{color: #888}
-div.deal.blue .dealTitle a{color: #15567F}
-div.deal.blue .dealTitle a:hover{color: #114566}
-div.deal.green .dealTitle a{color: #587906}
-div.deal.green .dealTitle a:hover{color: #4C6805}
-div.deal.orange .dealTitle a{color: #D87D08}
-div.deal.orange .dealTitle a:hover{color: #BF6C07}
-
-div.gray .price strong{color: #999}
-div.blue .price strong{color: #15567F}
-div.green .price strong{color: #587906}
-div.orange .price strong{color: #D87D08}
-
-div.deal.gray.over{background-color: #EDEDED;}
-div.deal.blue.over{background-color: #DEF0FC}
-div.deal.green.over{background-color: #f5fce2}
-div.deal.orange.over{background-color: #fff4e3}
-
-div.priceSource{text-align: right; margin: 3px 10px 0 0}
-div.priceSource strong{text-decoration: line-through}
-div.price{text-align: right; margin: 0 10px 0 0}
-div.price strong{font-size: 1.7em; color:#7A9D24;}
-div.expires{font-size: 0.9em;}
-div.buyNow{text-align: right; margin: 3px 10px 0 0}
-div.dealSource, div.dealCity, div.dealExpires, div.dealQtd{font-size: 11px;}
-div.dealQtd{text-align: right; margin: 0 10px 0 0}
-div.dealSource{text-align: center;}
-div.dealCity {font-weight: 700; color: #333;}
-div.dealCity span, span.brFlag{padding-left: 17px; background: url(../images/flag.png) center left no-repeat;}
-div.dealAddress {font-size: 11px}
-
-/*Blocos*/
-div.block{
-    -moz-box-shadow: 0 0 5px #D4D4D4;
-    -webkit-box-shadow: 0 0 5px #D4D4D4;
-    box-shadow: 0 0 5px #D4D4D4;
-    border:1px solid #D4D4D4;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    margin-bottom: 15px;
-}
-div.blockTitle{
-    font-weight: 700;
-    padding: 5px;
-    border-bottom: 1px solid #D4D4D4;
-    background-color: #ffffff;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e4e4e4');
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e4e4e4));
-    background-image: -moz-linear-gradient(#ffffff, #e4e4e4);
-    background-image: -o-linear-gradient(#ffffff, #e4e4e4);
-    background-image: linear-gradient(#ffffff, #e4e4e4);
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    
-}
-div.blockContent{
-    margin: 5px 3px;
-}
-div.blockContent div.deal{
-    margin: 5px;
-}
-div.blockContent div.dealThumb a{
-    margin: 0 5px 5px 0;
-}
-div.blockContent div.dealThumb a img, div.blockContent div.dealThumb a{
-    height: 60px;
-    width: 80px;
-}
-div.blockContent span.discount{
-    font-weight: 400;
-    font-size: 0.9em;
-    padding: 2px 3px;
-}
-div.blockContent div.dealTitle a{
-    font-weight: 400;
-    font-size: 0.9em;
-}
-/* Blocos Topo */
-div.blockTop{
-    -moz-box-shadow:inset 0 0 5px #D4D4D4;
-    -webkit-box-shadow:inset 0 0 5px #D4D4D4;
-    box-shadow:inset 0 0 5px #D4D4D4;
-    margin-bottom: 25px;
-    min-height: 330px;
-}
-div.blockTopTitle{
-    font-weight: 700;
-    font-size: 1.2em;
-    padding: 10px 0 3px 10px;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-div.blockTopContent{
-    margin: 5px;
-}
-div.blockTopContent div.dealTitle{
-    margin-bottom: 10px;
-}
-
-div.blockTopContent div.deal{
-    padding: 5px;
-}
-div.blockTopContent div.dealThumb a{
-    margin: 0 10px 10px 0;
-}
-div.blockTopContent div.dealInfos{
-    margin-right: 20px;
-    float: right;
-    margin-top: 10px;
-}
-div.blockTopContent div.price strong{
-    font-size: 2em;
-}
-div.blockTopContent div.price, div.blockTopContent div.priceSource{
-    text-align: center;
-}
-div.blockTopContent div.buyNow a{
-    font-size: 1.5em;
-}
-div.blockTopContent div.buyNow{margin-top: 10px}
-div.blockTopContent div.buyNow, div.blockTopContent div.buyNow, div.blockTopContent div.buyNow, div.blockTopContent div.dealQtd{
-    font-size: 1em;
-    text-align: center;
-}
-div.blockTopContent div.dealThumb a img, div.blockTopContent div.dealThumb a{
-    width: 250px;
-    height: 179px;
-}
-div.blockTopContent span.discount{
-    font-weight: 700;
-    font-size: 1.2em;
-    padding: 3px 4px;
-}
-div.blockTopContent div.dealExpires{
-    text-align: right;
-}
-
-/*Bloco Facebook*/
-#facemask {
-	background: url(../images/facemask.png) 0 -20px no-repeat;
-	height: 300px;
-        width: 300px;
-	display: block;
-	position: relative;
-        text-indent: -999em;
-	z-index: 20;
-	margin: 0 0 -300px;
-        -webkit-transition:background-color 0.15s ease-in;
-	-moz-transition:background-color 0.15s ease-in;
-	-o-transition:background-color 0.15s ease-in;
-	transition:background-color 0.15s ease-in;
-        overflow: hidden;
-}
-#facemask:hover {
-	background-color: rgba(255, 255, 255, 0.5);
-}
-/*Bloco do Twitter*/
-#twitterBlock{
-    width: 300px;
-    height: 137px;
-    display: block;
-    text-indent: -999em;
-    background: url(../images/twitter-bloco.gif) no-repeat;
-    overflow: hidden;
-}
-/* Página do Deal */
-#dealTitle{font-size: 20px; margin: 0; line-height: 1.1em;}
-#dealShare{text-align: right; margin-bottom: 15px;}
-#dealThumb{position: relative;}
-#dealThumb img{width: 380px;}
-#dealThumb span.discount{font-size: 2em;}
-#dealPrices {margin: 10px 0;}
-#dealPrices div.priceSource, #dealPrices div.price, #dealPrices div.buyNow, #dealInfos div.dealSite{text-align: center;}
-#dealPrices div.priceSource strong{font-size: 1.3em;}
-#dealPrices div.price strong{font-size: 2.5em;}
-#dealPrices div.buyNow a{font-size: 2em;}
-#dealInfos div.dealQtd, #dealInfos div.dealExpire{text-align: center; font-size: 15px;}
-#dealInfos strong{font-size: 1.2em;}
-#dealInfos div.dealSite{margin-top:10px;}
-#dealRules {
-    border-left: 1px solid #D4D4D4;
-    padding-left: 5px;
-}
-#dealRules ul{
-    list-style: square outside;
-}
-#dealRules ul li{
-    margin-left: 20px;
-}
-#dealDetails img{
-    max-width: 370px;
-}
-#dealDetails h2, #dealRules h2{
-    font-size: 16px;
-}
-#dealDetails h3{
-    font-size: 13px;
-}
-/* Cart */
-table#dealCart{
-    width: 90%;
-    margin: 0 auto;
-}
-table#dealCart td{
-    vertical-align: middle;
-}
-/* Login e Register Boxes*/
-#login_register_box{
-    border-left: 1px solid #D4D4D4;
-    padding-left: 80px;
+.table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-child(2n+1) th{
+    background-color: #FFF !important;
 }
 /* /Body */
 
 /* Footer */
-#ft_wrap { /* Div que cobre todo o Footer */
-  background: url(../images/footer/bg.png) repeat-x;
+#ft {/* Div que cobre o footer 960 */
+    background: url(../images/footer/bg.png) repeat-x;
+    margin-top: -20px; }
+#ftLogo{width:183px; height:82px; margin-bottom: 0px;}
+#ftLogo a{width:183px; height:82px; float: left; background: url(../images/footer/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
+#navFoot{text-align: left; margin-bottom: 5px; color:#FFFFFF; text-decoration:none}
+#navFoot ul{margin: 5px;}
+#navFoot ul li{list-style: none outside none; margin-left: 15px; color: #DDDDDD; text-decoration:none}
+#navFoot ul li a{list-style: none outside none;  color: #EEEEEE; text-decoration:none}
+#navFoot.row{
+    margin-top: 30px;
+    margin-left: 30px;
 }
-#ft {/* Div que cobre o footer 960 */}
-#ftLogo{height: 118px; margin-bottom: 15px;}
-#ftLogo a{width: 170px; height: 53px; float: left; background: url(../images/footer/logo.png) no-repeat; text-indent: -9999em; overflow: hidden;}
-#navFoot{text-align: left; border-bottom: 1px solid #BBB; margin-bottom: 10px;}
-#navFoot ul li{list-style: none outside none; margin-left: 15px;}
 
-#copyright {text-shadow: 1px 1px 0 #FFF;color: #999; font-family: "museo-sans-rounded",sans-serif;}
+#copyright {color: #999; font-family: "museo-sans-rounded",sans-serif;}
 #poweredBy{text-align: right;}
 #poweredBy a{width: 177px; height: 28px; float: right; background: url(../images/footer/mastop-internet-development.png) no-repeat; line-height: 999em; overflow: hidden;}
+
+#Table_footer {
+    position:relative;
+    width:940px;
+    height:300px;
+}
+
+#footer-01_ {
+    position:absolute;
+    width:940px;
+    height:50px;
+}
+
+#footer-02_ {
+    position:absolute;
+    left:0px;
+    top:50px;
+    width:183px;
+    height:82px;
+}
+
+#footer-03_ {
+    position:absolute;
+    left:180px;
+    top:50px;
+    width:760px;
+    height:150px;
+}
+#footer-06_ {
+    position:absolute;
+    left:0px;
+    top:250px;
+    width:600px;
+    height:49px;
+}
+
+#footer-07_ {
+    position:absolute;
+    left:600px;
+    top:250px;
+    width:340px;
+    height:50px;
+}
 /* /Footer */

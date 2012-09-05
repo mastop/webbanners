@@ -19,26 +19,50 @@ class LoadStatusData extends AbstractFixture implements OrderedFixtureInterface,
 
     public function load(ObjectManager $manager) {
         $status = new Status();
-        $status->setName('Em análise');
+        $status->setName('Aguardando pagamento');
         $status->setOrder(1);
         $manager->persist($status);
         $manager->flush();
         
         $status = new Status();
-        $status->setName('Aguardando Design');
+        $status->setName('Em análise');
         $status->setOrder(2);
         $manager->persist($status);
         $manager->flush();
         
         $status = new Status();
-        $status->setName('Aguardando Cliente');
+        $status->setName('Paga');
         $status->setOrder(3);
         $manager->persist($status);
         $manager->flush();
         
         $status = new Status();
-        $status->setName('Finalizado');
+        $status->setName('Disponível');
         $status->setOrder(4);
+        $manager->persist($status);
+        $manager->flush();
+        
+        $status = new Status();
+        $status->setName('Em disputa');
+        $status->setOrder(5);
+        $manager->persist($status);
+        $manager->flush();
+        
+        $status = new Status();
+        $status->setName('Devolvida');
+        $status->setOrder(6);
+        $manager->persist($status);
+        $manager->flush();
+        
+        $status = new Status();
+        $status->setName('Cancelada');
+        $status->setOrder(7);
+        $manager->persist($status);
+        $manager->flush();
+        
+        $status = new Status();
+        $status->setName('Verificar com PagSeguro');
+        $status->setOrder(8);
         $manager->persist($status);
         $manager->flush();
     }

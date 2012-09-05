@@ -16,7 +16,7 @@ class User implements UserInterface {
     /**
      * Id do usuário
      * 
-     * @ODM\Id 
+     * @ODM\Id(strategy="UUID")
      */
     protected $id;
 
