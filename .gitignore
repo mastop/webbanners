@@ -10,4 +10,5 @@ vendor/
 composer.phar
 composer.lock
 /nbproject/private/
+.idea/
 *~
