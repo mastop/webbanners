@@ -24,7 +24,6 @@ set  :use_sudo,      false
 set :update_vendors,  true
 
 set :dump_assetic_assets, true
-load 'deploy/assets'
 
 # set :git_enable_submodules, 1
 
