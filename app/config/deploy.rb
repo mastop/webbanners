@@ -1,14 +1,14 @@
 set :application, "banner"
-set :domain,      "banner.com.br"
-set :deploy_to,   "/home/nginx/domains/banner.com.br"
+set :domain,      "204.236.227.96"
+set :deploy_to,   "/usr/share/nginx/webbanner"
 
 # Deploy strategy
 # set :deploy_via,      :rsync_with_remote_cache
-set :user,        "banner"
+set :user,        "webbanner"
 
 set :app_path,    "app"
 
-set :repository,  "git@github.com:mastop/banner.git"
+set :repository,  "git@github.com:mastop/webbanners.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, `subversion` or `none`
 
@@ -29,8 +29,9 @@ set :dump_assetic_assets, true
 
 # Set some paths to be shared between versions
 set :shared_files,    ["app/config/parameters.yml"]
-set :shared_children, [app_path + "/logs", web_path + "/uploads"]
-
+set :shared_children, [app_path + "/logs", web_path + "/uploads", "vendor"]
+set :use_composer, true
+set :update_vendors, true
 #namespace :deploy do
 # desc "Atualiza vendors.sh"
 #  task :vendorssh do
