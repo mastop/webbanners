@@ -161,7 +161,6 @@ class LoadContentData implements FixtureInterface, ContainerAwareInterface {
                               <div class="offset1 span10">
                               <h3>Tercerize seu Trabalho</h3>
                               <br/>
-          ::;:wq
                               Há alguns momentos no trabalho que a demanda é tão grande que não conseguimos atender todos no prazo certo.  Caso esse seja seu problema, nós temos a solução. A nossa equipe do  WebBanner faz os banners pra você.<br/>
                               Não precisa ficar desesperado com aquele projeto que está atrasado. Temos opções que desenvolvemos seus banners em 24h úteis. Fazendo com que seu trabalho seja desenvolvido rapidamente e com qualidade.
                               </div>
