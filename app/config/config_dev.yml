@@ -22,7 +22,7 @@ monolog:
             level: info
 
 assetic:
-    use_controller: false
+    use_controller: true
 
 doctrine_mongodb:
     connections:
@@ -50,7 +50,7 @@ doctrine_mongodb:
             metadata_cache_driver: array # array, apc, xcache, memcache
 
 swiftmailer:
-    delivery_address:  leonardo@mastop.com.br
+    delivery_address:  fernando@mastop.com.br
     
 mastop_system:
     themes_dir: %themes_dir%
@@ -59,4 +59,4 @@ mastop_system:
        file: %kernel.root_dir%/../vendor/kertz/twitteroauth/twitteroauth/twitteroauth.php
        consumer_key: G1WitELkS2NakPjyEsuAtw
        consumer_secret: mEiNe46crzEhxhyQs4lUHxP8ka3WxKjNIcAn8rruAM
-       callback_url: http://banner/usuario/twitter/back   
+       callback_url: http://webbanners/usuario/twitter/back
